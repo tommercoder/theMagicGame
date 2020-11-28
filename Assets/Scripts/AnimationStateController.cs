@@ -1,17 +1,23 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimationStateController : MonoBehaviour
 {
     Animator animator;
-    public float timeRemaining = 1;
+    playerSword playerSwordController;
+    float velocity = 0.0f;
+    public float acceleration = 0.1f;
+    public float decceleration = 0.5f;
+    public float timeRemaining = 5;
     public bool timerIsRunning = false;
+    int VelocityHash;
     int isRunningHash,isWalkingBackHash,isDrawedSwordHash,isIdleSwordHash,isRunningSwordHash,isRunningBackSwordHash, isSneathedHash;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        playerSwordController = GetComponent<playerSword>();
         timerIsRunning = true;
         isRunningHash = Animator.StringToHash("isRunning");
         isWalkingBackHash = Animator.StringToHash("isWalkingBack");
@@ -20,6 +26,7 @@ public class AnimationStateController : MonoBehaviour
         isRunningSwordHash = Animator.StringToHash("isRunningSword");
         isRunningBackSwordHash = Animator.StringToHash("isRunningSwordBack");
         isSneathedHash = Animator.StringToHash("isSneathed");
+        VelocityHash = Animator.StringToHash("Velocity");
     }
 
     // Update is called once per frame
@@ -64,7 +71,7 @@ public class AnimationStateController : MonoBehaviour
             animator.SetBool(isSneathedHash, false);
             timeRemaining = 5;
             timerIsRunning = true;
-
+            playerSwordController.swordEquipMethod();
         }
         //if doesnt run and already have sword go to idle with sword
         if(!runningPressed && isDrawedSword && !takeSwordPressed)
@@ -84,8 +91,9 @@ public class AnimationStateController : MonoBehaviour
             animator.SetBool(isDrawedSwordHash, true);
             animator.SetBool(isIdleSwordHash, true);
             animator.SetBool(isSneathedHash, false);
-            timeRemaining =5;
+            timeRemaining = 5;
             timerIsRunning = true;
+            playerSwordController.swordEquipMethod();
         }
         //if walking back and pressed sword draw then run back with sword
         if(walkingBackPressed && !isDrawedSword && takeSwordPressed)
@@ -93,6 +101,7 @@ public class AnimationStateController : MonoBehaviour
             
             animator.SetBool(isDrawedSwordHash, true);
             animator.SetBool(isRunningBackSwordHash, true);
+            playerSwordController.swordEquipMethod();
         }
         //if we are not already running back then go to idle sword
         if(!walkingBackPressed && isDrawedSword && !takeSwordPressed)
@@ -124,24 +133,27 @@ public class AnimationStateController : MonoBehaviour
                         animator.SetBool(isRunningHash, true);
                         animator.SetBool("isDrawedSword", false);
                         animator.SetBool(isRunningSwordHash, false);
-                      
-
+                        playerSwordController.swordUnequipMethod();
                     }
                     if (isDrawedSword && isIdleSword)//add enemies detection and check if there are no enemies when we are going to sneathe
                     {
                         animator.SetBool(isSneathedHash, true);
                         animator.SetBool(isRunningHash, false);
                         animator.SetBool(isDrawedSwordHash, false);
-                       
+                        playerSwordController.swordUnequipMethod();
 
-                        Debug.Log("Sneathed" + isSneathedSword);
-                        Debug.Log("Drawed" + isDrawedSword);
                     }
-                    
-                    if(isSneathedSword)
+                    if(isDrawedSword && isRunningSwordBack)
                     {
-                        animator.SetBool(isSneathedHash, false);
+                       
+                        animator.SetBool(isSneathedHash, true);
+                        animator.SetBool(isRunningBackSwordHash, false);
+                        animator.SetBool(isWalkingBackHash, true);
+                        playerSwordController.swordUnequipMethod();
+
                     }
+                   
+                    
                     timeRemaining = 0;
                     timerIsRunning = false;
 
@@ -150,4 +162,5 @@ public class AnimationStateController : MonoBehaviour
         }
 
     }
-}
+    
+}*/
