@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AnimationStateController.cs" />
     <Compile Include="Assets\Scripts\StateControllerTest.cs" />
+    <Compile Include="Assets\Scripts\movement.cs" />
     <Compile Include="Assets\Scripts\playerSword.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -603,6 +604,9 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
@@ -620,6 +624,9 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
