@@ -50,8 +50,7 @@ public class StateControllerTest : MonoBehaviour
         bool diPressing = Input.GetKey("d");
         bool aPressed = Input.GetKey("a");
         bool takeSwordPressed = Input.GetKey(KeyCode.Mouse0);
-        Debug.Log("RUNNING" + isRunningSword);
-        Debug.Log("Idle" + isIdleSword);
+       
         if (!runningPressed && !walkingBackPressed && !diPressing && !aPressed)
         {
             if (isDrawedSword)
