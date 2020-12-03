@@ -20,7 +20,7 @@ public class movement : MonoBehaviour
 	private float verticalVel;
 	private Vector3 moveVector;
 	public float playerSpeed;
-	
+	bool isRunningSword;
 	// Use this for initialization
 	void Start()
 	{
@@ -35,9 +35,12 @@ public class movement : MonoBehaviour
 	{
 		
 		InputMagnitude();
-		
-		
+		isRunningSword = anim.GetBool("isRunningSword");
 
+		if (isRunningSword)
+			playerSpeed = 5;
+		else
+			playerSpeed = 4;
 		
 		
 		//If you don't need the character grounded then get rid of this part.
