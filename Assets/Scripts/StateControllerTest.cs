@@ -49,7 +49,7 @@ public class StateControllerTest : MonoBehaviour
         bool walkingBackPressed = Input.GetKey("s");
         bool diPressing = Input.GetKey("d");
         bool aPressed = Input.GetKey("a");
-        bool takeSwordPressed = Input.GetKey(KeyCode.Mouse0);
+        bool takeSwordPressed = Input.GetKey(KeyCode.Mouse2);
        
         if (!runningPressed && !walkingBackPressed && !diPressing && !aPressed)
         {
