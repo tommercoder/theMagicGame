@@ -50,7 +50,22 @@ public class StateControllerTest : MonoBehaviour
         bool diPressing = Input.GetKey("d");
         bool aPressed = Input.GetKey("a");
         bool takeSwordPressed = Input.GetKey(KeyCode.Mouse2);
-       
+        ///trail setting
+       if(isDrawedSword )
+        {
+            Transform sword = playerSwordController.sword.transform;
+            sword.GetChild(0).gameObject.SetActive(false);
+            //sword.GetChild(1).gameObject.SetActive(true);
+            //Debug.Log("sword = " + sword.gameObject.name);
+            
+        }
+       else
+        {
+            Transform sword = playerSwordController.sword.transform;
+            sword.GetChild(0).gameObject.SetActive(true);
+            sword.GetChild(1).gameObject.SetActive(false);
+
+        }
         if (!runningPressed && !walkingBackPressed && !diPressing && !aPressed)
         {
             if (isDrawedSword)
