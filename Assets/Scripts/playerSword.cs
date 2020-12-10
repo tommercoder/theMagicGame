@@ -28,7 +28,7 @@ public class playerSword : MonoBehaviour
             darkSword.SetActive(true);
             pearlSword.SetActive(false);
             modernSword.SetActive(false);
-            sword = darkSword   .transform;
+            sword = darkSword.transform;
         }
         if (Input.GetKey("2"))
         {
