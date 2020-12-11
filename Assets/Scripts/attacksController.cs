@@ -11,9 +11,12 @@ public class attacksController : MonoBehaviour
     int attackPressedSecondHash;
     int superAttackPressedHash;
     bool isEnergyAttackDone = false;
+  
+    bool isFullEnergyBar = false;
     playerSword playerSwordController;
     List<int> possibleAttacks = Enumerable.Range(1, 3).ToList();
     StateControllerTest controller;
+
   
     // Start is called before the first frame update
     void Start()
@@ -41,49 +44,91 @@ public class attacksController : MonoBehaviour
 
 
         //add energy check here
-        if (MouseattackPressed && isDrawedSword)
+        //isFullEnergyBar = true;
+
+        Debug.Log("state" + isEnergyAttackDone);
+        ////////////////
+      
+       if (MouseattackPressed && isDrawedSword)
         {
-            
-            int randAt = randomAttack();
-            Debug.Log("random attack number" + randAt);
-            
-            if (randAt==1)
-            animator.SetTrigger("attackPressedFirstTrigger");
-             if(randAt==2)
-                animator.SetTrigger("attackPressedSecondTrigger");
-           if (randAt == 3)
-            {
-                
-                
-                sword.GetChild(1).gameObject.SetActive(true);
-                animator.SetTrigger("superAttackTrigger");
-               
-            }
          
+                int randAt = randomAttack();
+            
+
+                //  Debug.Log("random attack number" + randAt);
+
+                if (randAt == 1)
+                {
+                    animator.SetTrigger("attackPressedFirstTrigger");
+                if (isFullEnergyBar)
+                {
+                    sword.GetChild(1).gameObject.SetActive(true);
+                    animator.SetTrigger("attackPressedFirstTrigger");
+                    isFullEnergyBar = false;
+                }
+                else
+                    animator.SetTrigger("attackPressedFirstTrigger");
+            }
+                if (randAt == 2)
+                {
+                    
+                if (isFullEnergyBar)
+                {
+                    
+                    sword.GetChild(1).gameObject.SetActive(true);
+                    animator.SetTrigger("attackPressedSecondTrigger");
+                    isFullEnergyBar = false;
+                }
+                else
+                    animator.SetTrigger("attackPressedSecondTrigger");
+            }
+            if (randAt == 3)
+            {
+
+
+                if (isFullEnergyBar)
+                {
+                    sword.GetChild(1).gameObject.SetActive(true);
+                    animator.SetTrigger("superAttackTrigger");
+                    isFullEnergyBar = false;
+                }
+                else
+                    animator.SetTrigger("superAttackTrigger");
+            }
+                
+           
 
             controller.timeRemaining = 5;
             controller.timerIsRunning = true;
         }
-       else if(!MouseattackPressed && isDrawedSword)
+        else if(!MouseattackPressed && isDrawedSword)
         {
-          
+            
             animator.SetBool("attackPressedFirstTrigger",false);
                 animator.SetBool("attackPressedSecondTrigger",false);
                 animator.SetBool("superAttackTrigger",false);
-
+            if (isEnergyAttackDone)
+            {
+                sword.GetChild(1).gameObject.SetActive(false);
+                isEnergyAttackDone = false;
+            }
         }
-        
+
+       
+
         if (isEnergyAttackDone)
         {
             sword.GetChild(1).gameObject.SetActive(false);
             isEnergyAttackDone = false;
         }
+        
 
     }
     public void checkEnergyAttackFunc()
     {
         isEnergyAttackDone = true;
     }
+    
     int randomAttack()
     {
         int number = 0;
@@ -116,7 +161,7 @@ public class attacksController : MonoBehaviour
             possibleAttacks.RemoveAt(index);
         }
 
-        Debug.Log("en" + number);
+       
 
 
         // int number = Random.Range(1, 4);
