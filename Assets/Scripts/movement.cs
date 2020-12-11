@@ -21,6 +21,7 @@ public class movement : MonoBehaviour
 	private Vector3 moveVector;
 	public float playerSpeed;
 	bool isRunningSword;
+	public bool canMove ;
 	// Use this for initialization
 	void Start()
 	{
@@ -28,6 +29,7 @@ public class movement : MonoBehaviour
 		anim = this.GetComponent<Animator>();
 		cam = Camera.main;
 		controller = this.GetComponent<CharacterController>();
+		canMove = true;
 	}
 
 	// Update is called once per frame
@@ -36,7 +38,7 @@ public class movement : MonoBehaviour
 		
 		InputMagnitude();
 		isRunningSword = anim.GetBool("isRunningSword");
-
+		
 		if (isRunningSword)
 			playerSpeed = 5;
 		else
@@ -63,7 +65,8 @@ public class movement : MonoBehaviour
 	{
 		InputX = Input.GetAxis("Horizontal");
 		InputZ = Input.GetAxis("Vertical");
-
+		bool MouseattackPressed = Input.GetMouseButtonDown(0);
+		bool isDrawedSword = anim.GetBool("isDrawedSword");
 		var camera = Camera.main;
 		var forward = cam.transform.forward;
 		var right = cam.transform.right;
@@ -75,11 +78,18 @@ public class movement : MonoBehaviour
 		right.Normalize();
 
 		desiredMoveDirection = forward * InputZ + right * InputX;
+		if(isDrawedSword && MouseattackPressed)
+        {
+			canMove = false;
 
-		if (blockRotationPlayer == false)
+        }
+		Debug.Log("isDrawed" + isDrawedSword);
+		if (blockRotationPlayer == false && canMove)
 		{
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
 			controller.Move(desiredMoveDirection * Time.deltaTime * playerSpeed);
+			 
+			//canMove = true;
 		}
 	}
 
@@ -91,18 +101,19 @@ public class movement : MonoBehaviour
 
 		anim.SetFloat("InputZ", InputZ, 0.0f, Time.deltaTime * 2f);
 		anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2f);
-
+		
 		//Calculate the Input Magnitude
 		Speed = new Vector2(InputX, InputZ).sqrMagnitude;
 
 		//Physically move player
 		if (Speed > allowPlayerRotation)
 		{
-			
-				//anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
-			
+
+			//anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
+
 				PlayerMoveAndRotation();
 				anim.SetBool("isRunning", true);
+			
 		}
 		else if (Speed < allowPlayerRotation)
 		{
