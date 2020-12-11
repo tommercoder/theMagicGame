@@ -11,7 +11,7 @@ public class attacksController : MonoBehaviour
     int attackPressedSecondHash;
     int superAttackPressedHash;
     bool isEnergyAttackDone = false;
-  
+    
     bool isFullEnergyBar = false;
     playerSword playerSwordController;
     List<int> possibleAttacks = Enumerable.Range(1, 3).ToList();
@@ -46,7 +46,7 @@ public class attacksController : MonoBehaviour
         //add energy check here
         //isFullEnergyBar = true;
 
-        Debug.Log("state" + isEnergyAttackDone);
+        //Debug.Log("state" + isEnergyAttackDone);
         ////////////////
       
        if (MouseattackPressed && isDrawedSword)
@@ -57,7 +57,7 @@ public class attacksController : MonoBehaviour
 
                 //  Debug.Log("random attack number" + randAt);
 
-                if (randAt == 1)
+                if (randAt == 1 )
                 {
                     animator.SetTrigger("attackPressedFirstTrigger");
                 if (isFullEnergyBar)
@@ -69,7 +69,7 @@ public class attacksController : MonoBehaviour
                 else
                     animator.SetTrigger("attackPressedFirstTrigger");
             }
-                if (randAt == 2)
+                if (randAt == 2 )
                 {
                     
                 if (isFullEnergyBar)
@@ -104,29 +104,32 @@ public class attacksController : MonoBehaviour
         else if(!MouseattackPressed && isDrawedSword)
         {
             
-            animator.SetBool("attackPressedFirstTrigger",false);
+                animator.SetBool("attackPressedFirstTrigger",false);
                 animator.SetBool("attackPressedSecondTrigger",false);
                 animator.SetBool("superAttackTrigger",false);
-            if (isEnergyAttackDone)
+           /* if (isEnergyAttackDone)
             {
                 sword.GetChild(1).gameObject.SetActive(false);
                 isEnergyAttackDone = false;
-            }
+            }*/
         }
 
        
 
-        if (isEnergyAttackDone)
+        /*if (isEnergyAttackDone)
         {
             sword.GetChild(1).gameObject.SetActive(false);
             isEnergyAttackDone = false;
-        }
+        }*/
         
 
     }
     public void checkEnergyAttackFunc()
     {
         isEnergyAttackDone = true;
+        movement movement = GetComponent<movement>();
+        movement.canMove = true;
+       
     }
     
     int randomAttack()
