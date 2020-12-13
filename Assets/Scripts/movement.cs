@@ -22,6 +22,7 @@ public class movement : MonoBehaviour
 	public float playerSpeed;
 	bool isRunningSword;
 	public bool canMove ;
+	attacksController attacks;
 	// Use this for initialization
 	void Start()
 	{
@@ -30,6 +31,7 @@ public class movement : MonoBehaviour
 		cam = Camera.main;
 		controller = this.GetComponent<CharacterController>();
 		canMove = true;
+		attacks = GetComponent<attacksController>();
 	}
 
 	// Update is called once per frame
@@ -38,11 +40,14 @@ public class movement : MonoBehaviour
 		
 		InputMagnitude();
 		isRunningSword = anim.GetBool("isRunningSword");
-		
+
 		if (isRunningSword)
 			playerSpeed = 5;
-		else
+		else if (!isRunningSword)
 			playerSpeed = 4;
+		else
+			playerSpeed = 3;
+
 		
 		
 		//If you don't need the character grounded then get rid of this part.
@@ -110,10 +115,12 @@ public class movement : MonoBehaviour
 		{
 
 			//anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
-
+			if (canMove )
+			{
 				PlayerMoveAndRotation();
+				if(!attacks.enemiesAround)
 				anim.SetBool("isRunning", true);
-			
+			}
 		}
 		else if (Speed < allowPlayerRotation)
 		{
@@ -143,6 +150,7 @@ public class movement : MonoBehaviour
 
     /*public CharacterController controller;
     public Transform cam;
+	
     public float speed = 6f;
     public float turnTime = 0.1f;
     float turnVelocity;
