@@ -83,8 +83,8 @@ public class StateControllerTest : MonoBehaviour
                 animator.SetBool(isIdleSwordHash, false);
             }
         }
+      //hide the sword
       
-
 
 
         if (runningPressed  && !isDrawedSword && takeSwordPressed)

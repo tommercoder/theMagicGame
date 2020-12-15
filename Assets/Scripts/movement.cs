@@ -9,6 +9,7 @@ public class movement : MonoBehaviour
 	public float InputX;
 	public float InputZ;
 	public Vector3 desiredMoveDirection;
+	public Vector3 desiredMoveDirectionBack;
 	public bool blockRotationPlayer;
 	public float desiredRotationSpeed;
 	public Animator anim;
@@ -48,9 +49,9 @@ public class movement : MonoBehaviour
 		else
 			playerSpeed = 3;
 
-		
-		
-		//If you don't need the character grounded then get rid of this part.
+
+		bool isDrawedSword = anim.GetBool("isDrawedSword");
+		bool sPressed = Input.GetKey("s");
 		isGrounded = controller.isGrounded;
 		if (isGrounded)
 		{
@@ -63,7 +64,36 @@ public class movement : MonoBehaviour
 		moveVector = new Vector3(0, verticalVel, 0);
 		
 		controller.Move(moveVector);
-	
+
+		//slow walking
+		if (attacks.enemiesAround && isDrawedSword && InputZ >= 0.0f)
+		{
+			anim.SetBool("walkAttack", true);
+		}
+		if (!attacks.enemiesAround && isDrawedSword && InputZ >= 0.0f)
+		{
+			anim.SetBool("walkAttack", false);
+
+		}
+		if (InputX.Equals(0.0f) && InputZ.Equals(0.0f))
+		{
+			anim.SetBool("walkAttack", false);
+			anim.SetBool("walkAttackBack", false);
+		}
+		if(isDrawedSword && attacks.enemiesAround && InputZ < 0.0f)
+        {
+			anim.SetBool("walkAttackBack", true);
+		}
+		/*if(sPressed && isDrawedSword && attacks.enemiesAround)
+        {
+			anim.SetBool("walkAttackBack", false);
+
+		}*/
+		if(InputZ < 0.0f && !attacks.enemiesAround )
+        {
+			anim.SetBool("walkAttackBack", false);
+		}
+		
 	}
 
 	void PlayerMoveAndRotation()
@@ -75,6 +105,8 @@ public class movement : MonoBehaviour
 		var camera = Camera.main;
 		var forward = cam.transform.forward;
 		var right = cam.transform.right;
+		var forwardP = transform.forward;
+		var rightP = transform.right;
 
 		forward.y = 0f;
 		right.y = 0f;
@@ -83,23 +115,45 @@ public class movement : MonoBehaviour
 		right.Normalize();
 
 		desiredMoveDirection = forward * InputZ + right * InputX;
+		desiredMoveDirectionBack = -forwardP *  -InputZ + rightP*InputX;// forward * InputZ + right * InputX;
 		if(isDrawedSword && MouseattackPressed)
         {
 			canMove = false;
 
         }
-		Debug.Log("isDrawed" + isDrawedSword);
+		
 		if (blockRotationPlayer == false && canMove)
 		{
-			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
-			controller.Move(desiredMoveDirection * Time.deltaTime * playerSpeed);
-			 
+
+			if (attacks.enemiesAround && attacks.attackState)
+			{
+				if (InputZ > 0.0f)
+				{
+					transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
+					controller.Move(desiredMoveDirection * Time.deltaTime * playerSpeed);
+					
+				}
+				else
+                {
+					//transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirectionBack), desiredRotationSpeed);
+					controller.Move(desiredMoveDirectionBack * Time.deltaTime * playerSpeed);
+				}
+			}
+			else
+			{
+				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
+				controller.Move(desiredMoveDirection * Time.deltaTime * playerSpeed);
+
+			}
 			//canMove = true;
 		}
+					
+		
 	}
 
 	void InputMagnitude()
 	{
+		bool isDrawedSword = anim.GetBool("isDrawedSword");
 		//Calculate Input Vectors
 		InputX = Input.GetAxis("Horizontal");
 		InputZ = Input.GetAxis("Vertical");
@@ -118,8 +172,9 @@ public class movement : MonoBehaviour
 			if (canMove )
 			{
 				PlayerMoveAndRotation();
-				if(!attacks.enemiesAround)
+				//if(!attacks.enemiesAround)
 				anim.SetBool("isRunning", true);
+				
 			}
 		}
 		else if (Speed < allowPlayerRotation)
