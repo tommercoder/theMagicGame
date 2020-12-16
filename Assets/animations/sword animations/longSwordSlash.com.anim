@@ -115889,3 +115889,11 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 3.5
+    functionName: checkEnergyAttackFunc
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: 73e07b33620615e43a0ed4cebe30f11a,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
