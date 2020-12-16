@@ -121,7 +121,7 @@ public class movement : MonoBehaviour
 			canMove = false;
 
         }
-		
+		Debug.Log("can move ?" + canMove);
 		if (blockRotationPlayer == false && canMove)
 		{
 
