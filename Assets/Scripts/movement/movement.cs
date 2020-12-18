@@ -121,11 +121,11 @@ public class movement : MonoBehaviour
 			canMove = false;
 
         }
-		Debug.Log("can move ?" + canMove);
+		//Debug.Log("can move ?" + canMove);
 		if (blockRotationPlayer == false && canMove)
 		{
 
-			if (attacks.enemiesAround && attacks.attackState)
+			if (attacks.enemiesAround && attacks.attackState && isDrawedSword)
 			{
 				if (InputZ > 0.0f)
 				{

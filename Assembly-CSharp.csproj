@@ -65,9 +65,12 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AnimationStateController.cs" />
     <Compile Include="Assets\Scripts\attacks\attacksController.cs" />
+    <Compile Include="Assets\Scripts\effects\fireballScript.cs" />
     <Compile Include="Assets\Scripts\movement\StateControllerTest.cs" />
     <Compile Include="Assets\Scripts\movement\movement.cs" />
     <Compile Include="Assets\Scripts\sword things\playerSword.cs" />
+    <Compile Include="Assets\destroing.cs" />
+    <Compile Include="Assets\mouseCursorController.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
