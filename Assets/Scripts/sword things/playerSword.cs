@@ -6,7 +6,7 @@ public class playerSword : MonoBehaviour
 {
     public  Transform sword, swordEquiped, swordUnequiped;
     
-    public GameObject pearlSword, modernSword, darkSword;
+    public GameObject pearlSword, modernSword, swordBeg;
     public bool isEquipedSword = false;
     
     private void Start()
@@ -16,30 +16,30 @@ public class playerSword : MonoBehaviour
         
         pearlSword = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/PearlSword");
         pearlSword.SetActive(false);
-        
-        darkSword = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/DarkSword");
-        darkSword.SetActive(true);
+
+        swordBeg = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/swordBeg");
+        swordBeg.SetActive(true);
         
     }
     private void Update()
     {
         if (Input.GetKey("1"))
         {
-            darkSword.SetActive(true);
+            swordBeg.SetActive(true);
             pearlSword.SetActive(false);
             modernSword.SetActive(false);
-            sword = darkSword.transform;
+            sword = swordBeg.transform;
         }
         if (Input.GetKey("2"))
         {
-            darkSword.SetActive(false);
+            swordBeg.SetActive(false);
             pearlSword.SetActive(false);
             modernSword.SetActive(true);
             sword = modernSword.transform;
         }
         if(Input.GetKey("3"))
         {
-            darkSword.SetActive(false);
+            swordBeg.SetActive(false);
             modernSword.SetActive(false);
             pearlSword.SetActive(true);
             sword = pearlSword.transform;
@@ -55,6 +55,7 @@ public class playerSword : MonoBehaviour
             sword.rotation = swordUnequiped.rotation;
         }
     }
+    //setting sword to hand
     public void swordEquipMethod()
     {
         isEquipedSword = true;

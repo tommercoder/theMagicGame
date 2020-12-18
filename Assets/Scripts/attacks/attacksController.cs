@@ -20,15 +20,15 @@ public class attacksController : MonoBehaviour
     public bool enemiesAround = false;
     bool firstPlayed;
     bool secondPlayed;
-    
-    
+   
     bool canClick;
     bool canClickSec;
     int noOfClick;
     int noOfClickSecond;
-    string[] trigger = { "attackPressedFirstTrigger", "attackPressedSecondTrigger", "superAttackTrigger" };
+    //string[] trigger = { "attackPressedFirstTrigger", "attackPressedSecondTrigger", "superAttackTrigger" };
     Transform sword;
     int swordEnergy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,8 +39,6 @@ public class attacksController : MonoBehaviour
         canClickSec = true;
         firstPlayed = false;
         secondPlayed = false;
-        
-       
         playerSwordController = GetComponent<playerSword>();
         controller = GetComponent<StateControllerTest>();
         animator = GetComponent<Animator>();
@@ -167,7 +165,7 @@ public class attacksController : MonoBehaviour
             ComboStarter();
             controller.timeRemaining = 5;
             controller.timerIsRunning = true;
-            
+            //sword.GetChild(1).gameObject.SetActive(true);
         }
         if(firstPlayed && Input.GetMouseButtonDown(0) && isDrawedSword)
         {
@@ -177,16 +175,16 @@ public class attacksController : MonoBehaviour
             ComboStarterSecond();
             controller.timeRemaining = 10;
             controller.timerIsRunning = true;
-            
+            ///sword.GetChild(1).gameObject.SetActive(true);
         }
+       
         if(firstPlayed && secondPlayed)
         {
             firstPlayed = false;
             secondPlayed = false;
-           // noOfClick = 0;
-            //noOfClickSecond = 0;    
+            
         }
-
+       
 
         /*if (MouseattackPressed && isDrawedSword)
         {
@@ -257,7 +255,7 @@ public class attacksController : MonoBehaviour
             isEnergyAttackDone = false;
         }*/
         //check if any animation stoped
-        
+
 
         Debug.Log("can move " + movement.canMove);
 
@@ -277,13 +275,13 @@ public class attacksController : MonoBehaviour
                 || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
                 && Input.GetKey(KeyCode.LeftShift))
             {
-
-                animator.SetInteger("attackAnimation", 4);
-                movement.canMove = true;
                 canClickSec = true;
                 noOfClickSecond = 0;
+                animator.SetInteger("attackAnimation", 4);
+                movement.canMove = true;
+                
             }
-        
+        Debug.Log(noOfClickSecond);
     }
     public void castedEvent()
     {
@@ -315,6 +313,7 @@ public class attacksController : MonoBehaviour
     public void secondCombatCheck()
     {
         canClickSec = false;
+        
         if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing") && noOfClickSecond == 1)
         {
 
@@ -339,6 +338,7 @@ public class attacksController : MonoBehaviour
         }
         else if (animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing") && noOfClickSecond >= 3)
         {
+            Debug.Log("ENTERED");
             animator.SetInteger("attackAnimation", 13);
             canClickSec = true;
             //noOfClickSecond = 0;
@@ -346,6 +346,13 @@ public class attacksController : MonoBehaviour
         else if (animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
         {
 
+            animator.SetInteger("attackAnimation", 4);
+            noOfClickSecond = 0;
+            canClickSec = true;
+            movement.canMove = true;
+        }
+        else
+        {
             animator.SetInteger("attackAnimation", 4);
             noOfClickSecond = 0;
             canClickSec = true;
@@ -387,13 +394,14 @@ public class attacksController : MonoBehaviour
         }
         else if(animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack") && noOfClick >= 3)
         {
+           
             animator.SetInteger("attackAnimation", 3);
             canClick = true;
             //noOfClick = 0;
         }
         else if(animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack"))
         {
-            Debug.Log("ENTERED");
+           
             animator.SetInteger("attackAnimation", 4);
            
             canClick = true;
@@ -417,6 +425,7 @@ public class attacksController : MonoBehaviour
     }*/
     public void checkEnergyAttackFunc()
     {
+         
         isEnergyAttackDone = true;
        
         movement.canMove = true;
