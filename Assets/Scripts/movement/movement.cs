@@ -125,7 +125,7 @@ public class movement : MonoBehaviour
 		if (blockRotationPlayer == false && canMove)
 		{
 
-			if (attacks.enemiesAround && attacks.attackState && isDrawedSword)
+			/*if (attacks.enemiesAround && attacks.attackState && isDrawedSword)
 			{
 				if (InputZ > 0.0f)
 				{
@@ -138,14 +138,14 @@ public class movement : MonoBehaviour
 					//transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirectionBack), desiredRotationSpeed);
 					controller.Move(desiredMoveDirectionBack * Time.deltaTime * playerSpeed);
 				}
-			}
-			else
-			{
+			}*/
+			//else
+			//{
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
 				controller.Move(desiredMoveDirection * Time.deltaTime * playerSpeed);
 
-			}
-			//canMove = true;
+			//}
+			
 		}
 					
 		

@@ -13,11 +13,17 @@ public class destroing : MonoBehaviour
             Destroy(gameObject);
         }
         else
-            Destroy(gameObject, 2f);
+            StartCoroutine(destruction());
+            //Destroy(gameObject, 2f);
         
         
         //Instantiate(explosion, transform.position, transform.rotation);
           
 
+    }
+    IEnumerator destruction()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
     }
 }

@@ -60387,7 +60387,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.083333336
+  - time: 0.16666667
     functionName: startFireballEvent
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 77d129ab80578d643a97a7b390f8d89d,

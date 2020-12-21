@@ -36,8 +36,9 @@ public class fireballScript : MonoBehaviour
     }
     public void fireball()
     {
+       
         projectile.transform.position = hand.transform.position;
-        GameObject fireball = Instantiate(projectile, projectile.transform) as GameObject;
+        GameObject fireball = Instantiate(projectile, projectile.transform.position,Quaternion.identity) as GameObject;
         Rigidbody rb = fireball.GetComponent<Rigidbody>();
         rb.velocity = transform.forward * speed;
 
