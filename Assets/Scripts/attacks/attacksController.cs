@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using DG.Tweening;
 public class attacksController : MonoBehaviour
 {
+    protected static attacksController s_Instance;
+    public static attacksController instance { get { return s_Instance; } }
     public Animator animator;
     int isDrawedSwordHash;
     int attackPressedFirstHash;
@@ -17,10 +19,11 @@ public class attacksController : MonoBehaviour
     List<int> possibleAttacks = Enumerable.Range(1, 3).ToList();
     StateControllerTest controller;
     movement movement;
+
     public bool enemiesAround = false;
     bool firstPlayed;
     bool secondPlayed;
-   
+    public AbilityMain [] Abilities;
     bool canClick;
     bool canClickSec;
     int noOfClick;
@@ -28,10 +31,18 @@ public class attacksController : MonoBehaviour
     //string[] trigger = { "attackPressedFirstTrigger", "attackPressedSecondTrigger", "superAttackTrigger" };
     Transform sword;
     int swordEnergy;
-
+    public bool canCast;
+    public CharacterController CharacterController;
+    [SerializeField] private ParticleSystem dashParticle = default;
+    private void Awake()
+    {
+        Abilities = GetComponents<AbilityMain>();
+        s_Instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
+        canCast = false;
         swordEnergy = 0;
         noOfClick = 0;
         noOfClickSecond = 0;
@@ -43,6 +54,7 @@ public class attacksController : MonoBehaviour
         controller = GetComponent<StateControllerTest>();
         animator = GetComponent<Animator>();
          movement = GetComponent<movement>();
+        CharacterController = GetComponent<CharacterController>();
         sword = playerSwordController.sword.transform;
         isDrawedSwordHash = Animator.StringToHash("isDrawedSword");
         attackPressedFirstHash = Animator.StringToHash("attackPressedFirstTrigger");
@@ -65,6 +77,7 @@ public class attacksController : MonoBehaviour
             enemiesAround = false;
         }
     }
+    
     // Update is called once per frame
     void Update()
     {
@@ -81,32 +94,64 @@ public class attacksController : MonoBehaviour
         bool aPressed = Input.GetKey("a");
         bool castPressed = Input.GetKey("c");
         bool ballCastPressed = Input.GetKey("x");
+        bool swordSlashAbilityPressed = Input.GetKey("q");
         //add energy check here
         //isFullEnergyBar = true;
 
         //Debug.Log("state" + isEnergyAttackDone);
         ////////////////
-        
+       
         
         if (isDrawedSword)
         {
 
-            if(castPressed)
+            if(castPressed && Abilities[1].canUse)
             {
-                movement.canMove = false;
-                animator.SetInteger("attackAnimation", 20);
+
+
+
+                //CharacterController.Move(transform.position + (transform.forward * 1));
+                dashParticle.Play();
+                Abilities[1].TriggerAbility();
+                //movement.canMove = false;
+
+                //animator.SetInteger("attackAnimation", 20);
                 controller.timeRemaining = 5;
                 controller.timerIsRunning = true;
                 //random damage and effects here
             }
-            if(ballCastPressed)
+
+           
+                if (ballCastPressed && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast") && Abilities[0].canUse)
+                {
+                    movement.canMove = false;
+                    animator.SetInteger("attackAnimation", 21);
+               // if (canCast)
+               // {
+                    Abilities[0].TriggerAbility();
+                    canCast = false;
+               // }
+               // }
+                    controller.timeRemaining = 5;
+                    controller.timerIsRunning = true;
+                    //yield return new WaitForSeconds(5);
+
+            }
+            if(swordSlashAbilityPressed && Abilities[2].canUse)
             {
+                Abilities[2].TriggerAbility();
+
+                controller.timeRemaining = 10;
+                controller.timerIsRunning = true;
+            }
+            /*{
                 movement.canMove = false;
                 animator.SetInteger("attackAnimation", 21);
                 controller.timeRemaining = 5;
                 controller.timerIsRunning = true;
 
-            }
+            }*/
+
             /*if (enemiesAround && wPressed )
             {
                 // animator.SetBool("walkAttack", true);
@@ -257,7 +302,7 @@ public class attacksController : MonoBehaviour
         //check if any animation stoped
 
 
-        Debug.Log("can move " + movement.canMove);
+        //Debug.Log("can move " + movement.canMove);
 
             if ((animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
                 || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
@@ -281,12 +326,23 @@ public class attacksController : MonoBehaviour
                 movement.canMove = true;
                 
             }
-        Debug.Log(noOfClickSecond);
+        //Debug.Log(noOfClickSecond);
+    }
+    public void startFireballEvent()
+    {
+        canCast = true;
+    }
+    public void dashEndedEvent()
+    {
+        animator.SetInteger("attackAnimation", 4);
+        movement.canMove = true;
+        dashParticle.Stop();
     }
     public void castedEvent()
     {
         movement.canMove = true;
         animator.SetInteger("attackAnimation", 4);
+        canCast = false;
     }
     void ComboStarterSecond()
     {
