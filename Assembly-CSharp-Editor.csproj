@@ -63,8 +63,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Bonehead\Scripts\Utils\ButtonAttribute\Editor\BehaviourButtonsEditor.cs" />
     <Compile Include="Assets\Dias Games\Foot Solutions\Footstep System\Scripts\Editor\AddFootstepSystem.cs" />
     <Compile Include="Assets\Dias Games\Foot Solutions\Footstep System\Scripts\Editor\FootstepInspector.cs" />
+    <Compile Include="Assets\Unity\Info\Scripts\Editor\ReadmeEditor.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -274,6 +276,9 @@
     </Reference>
     <Reference Include="ICSharpCode.NRefactory">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/PackageCache/com.unity.render-pipelines.core@7.5.2/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>D:/UNITY GAMES/theMagicGame/Library/PackageCache/com.unity.burst@1.1.1/Unity.Burst.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
@@ -706,6 +711,24 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Editor">
+      <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Animation.Rigging">
+      <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.Animation.Rigging.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Animation.Rigging.Editor">
+      <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.Animation.Rigging.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DiasGames.FootPlacementIK
-{
+
     public class FootIK : MonoBehaviour
     {
         #region Exposed parameters
@@ -149,7 +148,7 @@ namespace DiasGames.FootPlacementIK
         /// <param name="startCastPos">Position to start cast</param>
         /// <param name="footIkPos">IK position parameter to get value</param>
         /// <param name="footIkRot">IK rotation parameter to get value</param>
-        private void CastFoot(Vector3 startCastPos, ref Vector3 footIkPos, ref Quaternion footIkRot, ref Vector3 groundNormal, HumanBodyBones foot)
+        public void CastFoot(Vector3 startCastPos, ref Vector3 footIkPos, ref Quaternion footIkRot, ref Vector3 groundNormal, HumanBodyBones foot)
         {
             RaycastHit footHit; // Get hit from ground and from foot
 
@@ -202,7 +201,7 @@ namespace DiasGames.FootPlacementIK
         /// <param name="foot">Target foot</param>
         /// <param name="ikPos">Ik position parameter calculated on Cast</param>
         /// <param name="ikRot">Ik rotation parameter calculated on Cast</param>
-        void PlaceFootOnIk(AvatarIKGoal foot, Vector3 ikPos, Quaternion ikRot)
+        public void PlaceFootOnIk(AvatarIKGoal foot, Vector3 ikPos, Quaternion ikRot)
         {
             Vector3 desiredPos = m_Animator.GetIKPosition(foot); // Get initial foot pos
 
@@ -219,5 +218,4 @@ namespace DiasGames.FootPlacementIK
 
             m_Animator.SetIKPosition(foot, desiredPos); // Set position
         }
-    }
-}
+   }
