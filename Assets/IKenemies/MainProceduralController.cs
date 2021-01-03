@@ -2,139 +2,126 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-public class ikController : MonoBehaviour
+public class MainProceduralController : MonoBehaviour
 {
     [Header("OBJECTS")]
-    public Transform target = null;
-    
+    public Transform targetRight = null;
+    public Transform targetLeft = null;
     public Transform baksBot = null;
 
-    public DontMoveWithParent dontMoveWithParentClass;
+    
     public LayerMask mask;
     [Header("STEP SETTINGS")]
     public bool Moving;
-    public Transform stepTarget;
+    public Transform stepTargetLeft;
+    public Transform stepTargetRight;
     public List<Transform> stepTargets = new List<Transform>(2);
     public float wantStepAtDistance = 0.45f;
     public float timeToMakeStep = 0.125f;
-    public bool grounded;
-
+    public bool rightStepped;
+    public bool leftStepped;
+    public bool waited = false;
     [SerializeField, Range(0, 1)] float stepOvershootFraction = 0.8f;
     public float standardBodyOffset;
     public Transform offsetObject;
-    
-    private Vector3 bodyPosOffset;
-    private Vector3 defaultBodyPosOffset;
+    public DontMoveWithParent dontMoveWithParentRight;
+    public DontMoveWithParent dontMoveWithParentLeft;
+    public Transform target;
     private List<Transform> footIKTargets = new List<Transform>(2);
-    
+
     public TwoBoneIKConstraint twoBoneIKConstraint;
     private void Start()
     {
-        footIKTargets.Add(target);
-        stepTargets.Add(stepTarget);
+        footIKTargets.Add(targetLeft);
+        footIKTargets.Add(targetRight);
 
-        
+        stepTargets.Add(stepTargetLeft);
+        stepTargets.Add(stepTargetRight);
+        rightStepped = false;
+        leftStepped = false;
+
+        }
+
+
+    IEnumerator wait()
+    {
+        waited = false;
+        yield return new WaitForSeconds(timeToMakeStep);
+        waited = true;
     }
-
-
-
+    void moveForward()
+    {
+        baksBot.Translate(Vector3.right * Time.deltaTime*2f);
+        //baksBot.position = Vector3.MoveTowards(baksBot.position, offsetObject.position, Time.deltaTime*2f);
+    }
+  
     void Update()
     {
-        //check for ik target(not step through objects)
-        stepTargetIk();
-
-        float distance = Vector3.Distance(footIKTargets[0].position, stepTargets[0].position);
-        if (distance > wantStepAtDistance)
+        if(Moving)
         {
-            if (GetGroundedEndPosition(out Vector3 endPos, out Vector3 endNormal,0))
+            dontMoveWithParentLeft.dontMoveWithParent = false;
+            dontMoveWithParentRight.dontMoveWithParent = false;
+        }
+        else
+        {
+            dontMoveWithParentLeft.dontMoveWithParent = true;
+            dontMoveWithParentRight.dontMoveWithParent = true;
+        }
+        Debug.Log("waited" + waited);
+        moveForward();
+       stepTargetIk(0);
+       stepTargetIk(1);
+        Debug.Log(rightStepped);
+        bool rightGrounded = Physics.Raycast(footIKTargets[0].position, Vector3.down,mask);
+        bool leftGrounded = Physics.Raycast(footIKTargets[1].position, Vector3.down,mask);
+
+        float distanceRight = Vector3.Distance(footIKTargets[0].position, stepTargets[0].position);
+        float distanceLeft = Vector3.Distance(footIKTargets[1].position, stepTargets[1].position);
+        if (distanceRight > wantStepAtDistance)
+        {
+               
+            if (GetGroundedEndPosition(out Vector3 endPos, out Vector3 endNormal, 0))
             {
-                // Get rotation facing in the home forward direction but aligned with the normal plane
+                
                 Quaternion endRot = Quaternion.LookRotation(
                     Vector3.ProjectOnPlane(stepTargets[0].forward, endNormal),
                     endNormal
                 );
-
-
-                /*StartCoroutine(
-                    MoveToPointCoroutine(
-                        endPos,
-                        //stepTarget.rotation,
-                        endRot,
-                        timeToMakeStep
-                    )
-                );*/
                 StartCoroutine(
-                    MoveToPoint(endPos, endRot, timeToMakeStep,0));
-
-                //StartCoroutine(
-                //    MoveToPointSecondLeg(endPos, endRot, timeToMakeStep));
-
+                    MoveToPoint(endPos, endRot, timeToMakeStep, 0));
+                
+                StartCoroutine(wait());
+                
+                
             }
         }
-        else
-            dontMoveWithParentClass.dontMoveWithParent = true;
-    }
-    void offsetCheck()
-    {
-        Vector3 feetPos = Vector3.zero;
-        feetPos += target.position;
-        Vector3 averagePos = feetPos / 2;
+        
+        if (distanceLeft > wantStepAtDistance &&waited)
+        {
+            
+            if (GetGroundedEndPosition(out Vector3 endPos, out Vector3 endNormal, 1))
+            {
+
+                Quaternion endRot = Quaternion.LookRotation(
+                    Vector3.ProjectOnPlane(stepTargets[1].forward, endNormal),
+                    endNormal
+                );
+
+                StartCoroutine(
+                    MoveToPoint(endPos, endRot, timeToMakeStep, 1));
+                StartCoroutine(wait());
+            }
+        }
+      
+
+
+
 
     }
     
-    void GetBodyOffset() // called at the beginning to get both the positional and the rotational offset between the body and the feet.
-    {
-        Vector3 cummulativeStableFeetPos = Vector3.zero;
+    
 
-
-        for (int i = 0; i < footIKTargets.Count; i++)
-        {
-            cummulativeStableFeetPos += footIKTargets[i].localPosition;
-        }
-
-
-        Vector3 averageStableFeetPos = cummulativeStableFeetPos / (footIKTargets.Count);
-
-        defaultBodyPosOffset = baksBot.position - averageStableFeetPos;
-
-        bodyPosOffset = defaultBodyPosOffset;
-
-        
-        
-    }
-
-
-    private void BodyControl() // Simply updates the position and rotation of the body based on the new feet positions
-    {
-        //Store all foot target positions before moving their parent, which is this transform
-        Vector3[] tempTargetPositions = new Vector3[footIKTargets.Count];
-
-        //Calculate the average stable feet position
-        Vector3 cummulativeStableFeetPos = Vector3.zero;
-
-        // Calculating the averages
-        for (int i = 0; i < footIKTargets.Count; i++)
-        {
-            tempTargetPositions[i] = footIKTargets[i].localPosition;
-
-            cummulativeStableFeetPos += footIKTargets[i].localPosition;
-        }
-
-        Vector3 averageStableFeetPos = cummulativeStableFeetPos / (footIKTargets.Count);
-        Debug.Log("c" + cummulativeStableFeetPos);
-        //The position of the body is the average stable feet positions + the body offset
-        baksBot.position = bodyPosOffset + averageStableFeetPos;
-        Debug.Log("pos posle" + averageStableFeetPos);
-        //Restore foot target positions to cancel out parent's movement
-        for (int i = 0; i < footIKTargets.Count; i++)
-        {
-            footIKTargets[i].localPosition = tempTargetPositions[i];
-        }
-        Debug.Log("body controll end");
-        //RotationControl(); // updates the rotation of the body
-    }
-
-    bool GetGroundedEndPosition(out Vector3 position, out Vector3 normal,int index)
+    bool GetGroundedEndPosition(out Vector3 position, out Vector3 normal, int index)
     {
         Vector3 towardHome = (stepTargets[index].position - footIKTargets[index].position).normalized;
 
@@ -161,31 +148,31 @@ public class ikController : MonoBehaviour
         normal = Vector3.zero;
         return false;
     }
-    void stepTargetIk()
+    void stepTargetIk(int index)
     {
 
         float distance = 100f;
-        Ray ray = new Ray(stepTarget.position, -stepTarget.up);
+        Ray ray = new Ray(stepTargets[index].position, -stepTargets[index].up);
         //works
         RaycastHit hit;
 
         // Debug.DrawRay(stepTarget.position, Vector3.down, Color.red);
-        if (Physics.Raycast(stepTarget.position, Vector3.down, out hit, distance, mask))
+        if (Physics.Raycast(stepTargets[index].position, Vector3.down, out hit, distance, mask))
         {
 
             Vector3 targetLocation = hit.point;
-            var slopeRotation = Quaternion.FromToRotation(stepTarget.up, hit.normal);
+            var slopeRotation = Quaternion.FromToRotation(stepTargets[index].up, hit.normal);
 
-            stepTarget.rotation = Quaternion.Slerp(stepTarget.rotation, slopeRotation * stepTarget.rotation, 10 * Time.deltaTime);
+            stepTargets[index].rotation = Quaternion.Slerp(stepTargets[index].rotation, slopeRotation * stepTargets[index].rotation, 10 * Time.deltaTime);
 
-            targetLocation += new Vector3(0, stepTarget.localScale.y / 2, 0);
+            targetLocation += new Vector3(0, stepTargets[index].localScale.y / 2, 0);
 
-            stepTarget.position = targetLocation;
+            stepTargets[index].position = targetLocation;
         }
+   
+    } 
 
-    }
-
-    IEnumerator MoveToPoint(Vector3 endPoint,Quaternion endRot,float moveTime,int index)
+    IEnumerator MoveToPoint(Vector3 endPoint, Quaternion endRot, float moveTime, int index)
     {
         Moving = true;
         Vector3 startPoint = footIKTargets[index].position;//target.position;
@@ -275,7 +262,7 @@ public class ikController : MonoBehaviour
         //BodyControl();
         Moving = false;
     }
-    IEnumerator MoveToPointCoroutine(Vector3 endPoint, Quaternion endRot, float moveTime)
+    /*IEnumerator MoveToPointCoroutine(Vector3 endPoint, Quaternion endRot, float moveTime)
     {
         Moving = true;
         Vector3 startPoint = target.position;
@@ -312,26 +299,15 @@ public class ikController : MonoBehaviour
 
             target.rotation = Quaternion.Slerp(startRot, endRot, normalizedTime);
             //target.position = tip.position;
-            
+
             // Wait for one frame
             yield return null;
         }
         while (timeElapsed < moveTime);
         //BodyControl();
         Moving = false;
-    }
-    public Transform tip
-    {
-        get
-        {
-            if (twoBoneIKConstraint) return twoBoneIKConstraint.data.tip;
-            else
-            {
-                Debug.LogWarning("Tip transform is not yet ready.");
-                return null;
-            }
-        }
-    }
+    }*/
+    
     /*void Update()
     {
         //works

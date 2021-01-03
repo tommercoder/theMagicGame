@@ -7,6 +7,7 @@ TagManager:
   - enemy
   - walkable
   - Walkable
+  - IgnoreBoneDraw
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - 
   - 
   - player
-  - 
+  - ground layer
   - 
   - 
   - 

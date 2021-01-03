@@ -77,7 +77,7 @@ public class LegStepper_Full : MonoBehaviour
         Vector3 overshootVector = towardHome * overshootDistance;
 
         Vector3 raycastOrigin = homeTransform.position + overshootVector + homeTransform.up * 2f;
-
+       
         if (Physics.Raycast(
             raycastOrigin,
             -homeTransform.up,

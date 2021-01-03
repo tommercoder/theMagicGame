@@ -6,6 +6,7 @@ public class FootIKTarget : MonoBehaviour
 {
     [HideInInspector]
     public Vector3 position { get { return transform.position; } set { transform.position = value; } }
+    public Vector3 localPosition { get { return transform.localPosition; } set { transform.localPosition = value; } }
     [HideInInspector]
     public Quaternion rotation { get { return transform.rotation; } set { transform.rotation = value; } }
     [HideInInspector]
