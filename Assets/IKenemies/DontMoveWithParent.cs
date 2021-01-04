@@ -6,7 +6,7 @@ using UnityEngine;
 [ExecuteAlways]
 public class DontMoveWithParent : MonoBehaviour
 {
-    Vector3 savedPosition;
+    public Vector3 savedPosition;
 
     [Tooltip("When DontMoveWithParent is on, Ctrl+Z doesn't work for movement changes on this GameObject.")]
     public bool dontMoveWithParent = true;
@@ -16,9 +16,10 @@ public class DontMoveWithParent : MonoBehaviour
 
     private void Update()
     {
-        if (transform.hasChanged && !transform.parent.hasChanged && savedPosition != transform.position)
+        
+        if (transform.hasChanged  && savedPosition != transform.position)
         {
-            Debug.Log("CHANGED");
+            
             savedPosition = transform.position;
             transform.hasChanged = false;
         }
