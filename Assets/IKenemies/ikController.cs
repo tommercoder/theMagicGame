@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Animations.Rigging;
 public class ikController : MonoBehaviour
 {
-    [Header("OBJECTS")]
+    /*[Header("OBJECTS")]
     public Transform target = null;
     
     public Transform baksBot = null;
@@ -55,14 +55,14 @@ public class ikController : MonoBehaviour
                 );
 
 
-                /*StartCoroutine(
+                StartCoroutine(
                     MoveToPointCoroutine(
                         endPos,
                         //stepTarget.rotation,
                         endRot,
                         timeToMakeStep
                     )
-                );*/
+                );
                 StartCoroutine(
                     MoveToPoint(endPos, endRot, timeToMakeStep,0));
 
@@ -331,7 +331,7 @@ public class ikController : MonoBehaviour
                 return null;
             }
         }
-    }
+    }*/
     /*void Update()
     {
         //works

@@ -28,6 +28,8 @@ public class MainProceduralController : MonoBehaviour
     public DontMoveWithParent dontMoveWithParentLeft;
     public Transform target;
     private List<Transform> footIKTargets = new List<Transform>(2);
+    Vector3 savedPositionRight;
+    Vector3 savedPositionLeft;
 
     public TwoBoneIKConstraint twoBoneIKConstraint;
     private void Start()
@@ -40,7 +42,9 @@ public class MainProceduralController : MonoBehaviour
         rightStepped = false;
         leftStepped = false;
 
-        }
+        savedPositionLeft = footIKTargets[0].position;
+        savedPositionRight = footIKTargets[1].position;
+    }
 
 
     IEnumerator wait()
@@ -52,26 +56,17 @@ public class MainProceduralController : MonoBehaviour
     void moveForward()
     {
         baksBot.Translate(Vector3.right * Time.deltaTime*2f);
-        //baksBot.position = Vector3.MoveTowards(baksBot.position, offsetObject.position, Time.deltaTime*2f);
+        //baksBot.localPosition = Vector3.MoveTowards(baksBot.position, offsetObject.position, Time.deltaTime*2f);
     }
-  
+   
     void Update()
     {
-        if(Moving)
-        {
-            dontMoveWithParentLeft.dontMoveWithParent = false;
-            dontMoveWithParentRight.dontMoveWithParent = false;
-        }
-        else
-        {
-            dontMoveWithParentLeft.dontMoveWithParent = true;
-            dontMoveWithParentRight.dontMoveWithParent = true;
-        }
-        Debug.Log("waited" + waited);
-        moveForward();
-       stepTargetIk(0);
-       stepTargetIk(1);
-        Debug.Log(rightStepped);
+        
+        
+        
+        stepTargetIk(0);
+        stepTargetIk(1);
+        
         bool rightGrounded = Physics.Raycast(footIKTargets[0].position, Vector3.down,mask);
         bool leftGrounded = Physics.Raycast(footIKTargets[1].position, Vector3.down,mask);
 
@@ -79,7 +74,7 @@ public class MainProceduralController : MonoBehaviour
         float distanceLeft = Vector3.Distance(footIKTargets[1].position, stepTargets[1].position);
         if (distanceRight > wantStepAtDistance)
         {
-               
+            dontMoveWithParentRight.dontMoveWithParent = false;
             if (GetGroundedEndPosition(out Vector3 endPos, out Vector3 endNormal, 0))
             {
                 
@@ -95,10 +90,12 @@ public class MainProceduralController : MonoBehaviour
                 
             }
         }
-        
-        if (distanceLeft > wantStepAtDistance &&waited)
+        else
+            dontMoveWithParentRight.dontMoveWithParent = true;
+
+        if (distanceLeft > wantStepAtDistance && waited)
         {
-            
+            dontMoveWithParentLeft.dontMoveWithParent = false;
             if (GetGroundedEndPosition(out Vector3 endPos, out Vector3 endNormal, 1))
             {
 
@@ -112,14 +109,31 @@ public class MainProceduralController : MonoBehaviour
                 StartCoroutine(wait());
             }
         }
-      
+        else
+            dontMoveWithParentLeft.dontMoveWithParent = true;
 
 
+        moveForward();
 
 
     }
-    
-    
+
+    private void LateUpdate()
+    {
+        if(!Moving)
+        {
+            
+               
+            
+               
+        }
+        if(Moving)
+        {
+           
+               
+               
+        }
+    }
 
     bool GetGroundedEndPosition(out Vector3 position, out Vector3 normal, int index)
     {
@@ -175,11 +189,13 @@ public class MainProceduralController : MonoBehaviour
     IEnumerator MoveToPoint(Vector3 endPoint, Quaternion endRot, float moveTime, int index)
     {
         Moving = true;
+        
+        
         Vector3 startPoint = footIKTargets[index].position;//target.position;
         Quaternion startRot = footIKTargets[index].rotation;
 
         endPoint += footIKTargets[index].up * 0.2f;
-
+        Debug.Log("END POINT" + endPoint);
 
         Vector3 centerPoint = (startPoint + endPoint) / 2;
 
@@ -208,7 +224,7 @@ public class MainProceduralController : MonoBehaviour
                 );
 
             footIKTargets[0].rotation = Quaternion.Slerp(startRot, endRot, normalizedTime);
-            //target.position = tip.position;
+            
 
             // Wait for one frame
             yield return null;
@@ -216,52 +232,9 @@ public class MainProceduralController : MonoBehaviour
         while (timeElapsed < moveTime);
         //BodyControl();
         Moving = false;
+       
     }
-    IEnumerator MoveToPointSecondLeg(Vector3 endPoint, Quaternion endRot, float moveTime)
-    {
-        Moving = true;
-        Vector3 startPoint = footIKTargets[1].position;//target.position;
-        Quaternion startRot = footIKTargets[1].rotation;
-
-        endPoint += footIKTargets[1].up * 0.2f;
-
-
-        Vector3 centerPoint = (startPoint + endPoint) / 2;
-
-        centerPoint += footIKTargets[1].up * Vector3.Distance(startPoint, endPoint) / 2f;
-
-
-        float timeElapsed = 0;
-
-        // Here we use a do-while loop so normalized time goes past 1.0 on the last iteration,
-        // placing us at the end position before exiting.
-        do
-        {
-            timeElapsed += Time.deltaTime;
-
-
-            float normalizedTime = timeElapsed / moveTime;
-
-
-            normalizedTime = Easing.EaseInOutCubic(normalizedTime);
-
-            footIKTargets[1].position =
-                Vector3.Lerp(
-                    Vector3.Lerp(startPoint, centerPoint, normalizedTime),
-                    Vector3.Lerp(centerPoint, endPoint, normalizedTime),
-                    normalizedTime
-                );
-
-            footIKTargets[1].rotation = Quaternion.Slerp(startRot, endRot, normalizedTime);
-            //target.position = tip.position;
-
-            // Wait for one frame
-            yield return null;
-        }
-        while (timeElapsed < moveTime);
-        //BodyControl();
-        Moving = false;
-    }
+   
     /*IEnumerator MoveToPointCoroutine(Vector3 endPoint, Quaternion endRot, float moveTime)
     {
         Moving = true;
