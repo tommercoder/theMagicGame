@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//[ExecuteAlways]
+[ExecuteAlways]
 public class DontMoveWithParent : MonoBehaviour
 {
     Vector3 savedPosition;
 
-    //[Tooltip("When DontMoveWithParent is on, Ctrl+Z doesn't work for movement changes on this GameObject.")]
+    [Tooltip("When DontMoveWithParent is on, Ctrl+Z doesn't work for movement changes on this GameObject.")]
     public bool dontMoveWithParent = true;
     bool lastDontMoveWithParent = true;
 
@@ -18,6 +18,7 @@ public class DontMoveWithParent : MonoBehaviour
     {
         if (transform.hasChanged && !transform.parent.hasChanged && savedPosition != transform.position)
         {
+            Debug.Log("CHANGED");
             savedPosition = transform.position;
             transform.hasChanged = false;
         }
