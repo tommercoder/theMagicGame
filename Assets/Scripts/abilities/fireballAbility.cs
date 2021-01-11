@@ -15,6 +15,7 @@ public class fireballAbility : AbilityMain
     private bool one;
     public float speed = 12f;
     public AbilityUI AbilityUI;
+    bool triggered = false;
     private void Start()
     {
         movement = GetComponent<movement>();
@@ -55,9 +56,24 @@ public class fireballAbility : AbilityMain
         Rigidbody rb = fireball.GetComponent<Rigidbody>();
         rb.velocity = transform.forward * speed;
 
-        Destroy(fireball,2f);
+        if (triggered)
+        {
+            Destroy(fireball);
+            triggered = false;
+        }
+        else
+            Destroy(fireball, 2f);
 
 
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            triggered = true;
+        
+         
+        }
     }
     public void startFireballEvent()
     {

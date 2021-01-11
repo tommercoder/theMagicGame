@@ -63,10 +63,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Bonehead\Scripts\Utils\ButtonAttribute\Editor\BehaviourButtonsEditor.cs" />
-    <Compile Include="Assets\Dias Games\Foot Solutions\Footstep System\Scripts\Editor\AddFootstepSystem.cs" />
-    <Compile Include="Assets\Dias Games\Foot Solutions\Footstep System\Scripts\Editor\FootstepInspector.cs" />
     <Compile Include="Assets\Unity\Info\Scripts\Editor\ReadmeEditor.cs" />
+    <Compile Include="Assets\another\Bonehead\Scripts\Utils\ButtonAttribute\Editor\BehaviourButtonsEditor.cs" />
+    <Compile Include="Assets\another\Dias Games\Foot Solutions\Footstep System\Scripts\Editor\AddFootstepSystem.cs" />
+    <Compile Include="Assets\another\Dias Games\Foot Solutions\Footstep System\Scripts\Editor\FootstepInspector.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
