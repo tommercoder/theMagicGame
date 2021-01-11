@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+/// <summary>
+/// this script is in UI/ui manager/health bar
+/// </summary>
 public class healthBarController : MonoBehaviour
 {
     public Slider slider;

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// this script is attached to player
+/// </summary>
 public class PlayerInteraction : MonoBehaviour
 {
    

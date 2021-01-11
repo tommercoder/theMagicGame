@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+/// <summary>
+/// just for ovverite interaction
+/// </summary>
 public class Interact : MonoBehaviour
 {
     public string InteractedText ;
