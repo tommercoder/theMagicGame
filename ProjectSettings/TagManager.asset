@@ -8,6 +8,8 @@ TagManager:
   - walkable
   - Walkable
   - IgnoreBoneDraw
+  - Enemy
+  - interactable object
   layers:
   - Default
   - TransparentFX
