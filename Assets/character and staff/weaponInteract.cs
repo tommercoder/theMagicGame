@@ -12,6 +12,6 @@ public class weaponInteract : Interact
         InteractedText += "pick up weapon";
 
    
-        
+        //pickup weapon
     }
 }

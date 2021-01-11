@@ -77,7 +77,7 @@
     <Compile Include="Assets\Scripts\player\healthBarController.cs" />
     <Compile Include="Assets\Scripts\player\playerHealth.cs" />
     <Compile Include="Assets\Scripts\sword things\playerSword.cs" />
-    <Compile Include="Assets\Scripts\ui\AbilityUI.cs" />
+    <Compile Include="Assets\Scripts\ui scripts\AbilityUI.cs" />
     <Compile Include="Assets\Unity\ConstraintSamples\Scripts\mParent.cs" />
     <Compile Include="Assets\Unity\Info\Scripts\Readme.cs" />
     <Compile Include="Assets\another\AlignInEditor\AlignInEditor.cs" />
@@ -101,6 +101,7 @@
     <Compile Include="Assets\another\FastIK\Scripts\Sample\SampleProcedualAnimation.cs" />
     <Compile Include="Assets\another\FastIK\Scripts\Sample\SampleRotator.cs" />
     <Compile Include="Assets\another\FastIK\Scripts\Sample\SampleSinMover.cs" />
+    <Compile Include="Assets\character and staff\FloatingItem.cs" />
     <Compile Include="Assets\character and staff\Interact.cs" />
     <Compile Include="Assets\character and staff\PlayerInteraction.cs" />
     <Compile Include="Assets\character and staff\inventory\Inventory.cs" />

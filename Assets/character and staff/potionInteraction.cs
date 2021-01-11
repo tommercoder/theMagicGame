@@ -11,7 +11,7 @@ public class potionInteraction : Interact
         resetText();
         InteractedText += "pick up potion";
 
-
+        //pickup potion
 
     }
 }
