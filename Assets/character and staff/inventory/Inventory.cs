@@ -6,16 +6,50 @@ using UnityEngine;
 /// </summary>
 public class Inventory : MonoBehaviour
 {
+    #region Singleton
+    public static Inventory instance;
 
-    // Start is called before the first frame update
-    void Start()
+     void Awake()
     {
-        
+        if(instance!=null)
+        {
+            Debug.LogWarning("instance inventory.cs");
+            return;
+        }
+
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    #endregion
+
+    public delegate void onItemChanged();
+    public onItemChanged onItemChangedCalled;    
+    public List<Item> items = new List<Item>();
+    public List<GameObject> itemsGameObjects = new List<GameObject>();
+    public int size = 16;
+    public bool add(Item item)
     {
+        if(items.Count >= size)
+        {
+            Debug.Log("dont have enough space in inventory");
+            return false;
+        }
         
+        items.Add(item);
+
+        if(onItemChangedCalled != null)
+        onItemChangedCalled.Invoke();
+        return true;
+    }
+    public void removeGOitem(GameObject item)
+    {
+        itemsGameObjects.Remove(item);
+    }
+    public void removeItem(Item item)
+    {
+        items.Remove(item);
+        if (onItemChangedCalled != null)
+            onItemChangedCalled.Invoke();
+        //remove functionality
     }
 }

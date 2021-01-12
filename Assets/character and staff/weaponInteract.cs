@@ -4,14 +4,49 @@ using UnityEngine;
 
 public class weaponInteract : Interact
 {
+    public inventoryManager manager;
+    public Item item;
     public override void InteractWith()
     {
        
-        Debug.Log("was called weapon interact");
+       
         resetText();
         InteractedText += "pick up weapon";
-
+        interacting = true;
    
         //pickup weapon
+        
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && interacting)
+        {
+            Debug.Log("picking up " + item.name) ;
+
+
+            pickUp();
+            
+        }
+    }
+    void pickUp()
+    {
+
+
+        //add to inventory
+        bool added = Inventory.instance.add(item);
+        if (added)
+        {
+            gameObject.SetActive(false);
+            Inventory.instance.itemsGameObjects.Add(gameObject);
+            //Destroy(gameObject);
+            manager.hidePanel();
+            interacting = false;
+
+            if (gameObject.GetComponent<FloatingItem>() != null)
+            {
+                gameObject.GetComponent<FloatingItem>().Rotating = true;
+            }
+        }
     }
 }

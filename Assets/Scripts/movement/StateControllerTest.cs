@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class StateControllerTest : MonoBehaviour
 {
@@ -37,8 +38,7 @@ public class StateControllerTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
+       
         bool isRunning = animator.GetBool(isRunningHash);
        
         bool isIdleSword = animator.GetBool(isIdleSwordHash);
@@ -52,8 +52,25 @@ public class StateControllerTest : MonoBehaviour
         bool diPressing = Input.GetKey("d");
         bool aPressed = Input.GetKey("a");
         bool takeSwordPressed = Input.GetKey(KeyCode.Mouse2);
+
+        //stopping player when inventory is opened and mouse is in invenotry tab
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            if(isRunning)
+            {
+                animator.SetBool(isRunningHash, false);
+            }
+            else if(isDrawedSword && isRunningSword)
+            {
+                animator.SetBool(isRunningSwordHash, false);
+                animator.SetBool(isRunningHash, false);
+            }
+            return;
+        }
+
+
         ///trail setting
-       if(isDrawedSword )
+        if (isDrawedSword )
         {
             Transform sword = playerSwordController.sword.transform;
             sword.GetChild(0).gameObject.SetActive(false);

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FloatingItem : MonoBehaviour
 {
+    public bool Rotating = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +14,7 @@ public class FloatingItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Rotating)
         transform.Rotate(new Vector3(0, Time.deltaTime *30, 0));
     }
 }
