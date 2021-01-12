@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 
 public class movement : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class movement : MonoBehaviour
 	bool isRunningSword;
 	public bool canMove ;
 	attacksController attacks;
+	
 	// Use this for initialization
 	void Start()
 	{
@@ -38,6 +40,17 @@ public class movement : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		//stop camera when inventory is open;
+		if (EventSystem.current.IsPointerOverGameObject())
+		{
+			//cam.GetComponent<CinemachineBrain>().enabled = false;
+			return;
+
+		}
+		else
+        {
+			//cam.GetComponent<CinemachineBrain>().enabled = true;
+		}
 		
 		InputMagnitude();
 		isRunningSword = anim.GetBool("isRunningSword");

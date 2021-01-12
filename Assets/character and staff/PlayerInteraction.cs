@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 /// <summary>
 /// this script is attached to player
 /// </summary>
@@ -8,16 +9,20 @@ public class PlayerInteraction : MonoBehaviour
 {
    
     public inventoryManager panelShow;
-    public bool interacted = false;
    
+    
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
         if(other.tag=="interactable object" && other.GetComponent<Interact>()!=null)
         {
             other.GetComponent<Interact>().InteractWith();
             panelShow.showPanel("Press E to " + other.GetComponent<Interact>().InteractedText);
-            interacted = true;
+            
+            //stopping rotating object
+            if(other.GetComponent<FloatingItem>()!=null)
+            other.GetComponent<FloatingItem>().Rotating = false;
         }
 
     }
@@ -26,7 +31,11 @@ public class PlayerInteraction : MonoBehaviour
         if(other.tag=="interactable object")
         { 
             panelShow.hidePanel();
-            interacted = false;
+            
+            if (other.GetComponent<FloatingItem>() != null)
+                other.GetComponent<FloatingItem>().Rotating = true;
         }
     }
+
+  
 }

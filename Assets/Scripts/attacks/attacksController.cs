@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using DG.Tweening;
+using UnityEngine.EventSystems;
 public class attacksController : MonoBehaviour
 {
     protected static attacksController s_Instance;
@@ -81,7 +81,8 @@ public class attacksController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
         bool isDrawedSword = animator.GetBool(isDrawedSwordHash);
         bool attackPressedFirst = animator.GetBool(attackPressedFirstHash);
         bool attackPressedSecond = animator.GetBool(attackPressedSecondHash);
