@@ -22,7 +22,7 @@ public class weaponInteract : Interact
     {
         if (Input.GetKeyDown(KeyCode.E) && interacting)
         {
-            Debug.Log("picking up " + item.name) ;
+            //Debug.Log("picking up " + item.name) ;
 
 
             pickUp();
@@ -35,11 +35,13 @@ public class weaponInteract : Interact
 
         //add to inventory
         bool added = Inventory.instance.add(item);
+        
         if (added)
         {
-            gameObject.SetActive(false);
+            Debug.Log("added weapon");
+            
             Inventory.instance.itemsGameObjects.Add(gameObject);
-            //Destroy(gameObject);
+            
             manager.hidePanel();
             interacting = false;
 
@@ -47,6 +49,8 @@ public class weaponInteract : Interact
             {
                 gameObject.GetComponent<FloatingItem>().Rotating = true;
             }
+            gameObject.SetActive(false);
+            //Destroy(gameObject);
         }
     }
 }

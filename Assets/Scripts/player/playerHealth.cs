@@ -4,6 +4,21 @@ using UnityEngine;
 
 public class playerHealth : MonoBehaviour
 {
+    #region Singleton
+    public static playerHealth instance;
+
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("instance playerHealth.cs");
+            return;
+        }
+
+        instance = this;
+    }
+
+    #endregion
     public int health = 100;
     public int currentHealth;
     public healthBarController healthBar;
@@ -17,6 +32,10 @@ public class playerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        healthBar.setHealth(currentHealth);
+        //testing
+
         if(Input.GetKeyDown(KeyCode.P))
         {
             //test

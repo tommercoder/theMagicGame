@@ -9,8 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 467cd354d6aaa8c4bbc3dd7749ad88b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f54cc25ceca825458ea637f22367af8, type: 3}
   m_Name: health potion
   m_EditorClassIdentifier: 
-  name: health potion
-  icon: {fileID: 21300000, guid: 44b99679f401bf34299192befc67191e, type: 3}
+  name: 'health potion '
+  icon: {fileID: 21300000, guid: df646550bafb34bbc8544dc1cb378d6e, type: 3}
+  maxStack: 4
+  currentStack: 1
+  description: makes you live longer
+  option: increase your health by 20
+  type: 0
+  speedPotionUsing: 0

@@ -7,15 +7,25 @@ using UnityEngine.UI;
 /// </summary>
 public class inventoryManager : MonoBehaviour
 {
+    #region Singleton
+    public static inventoryManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+    #endregion
     public bool inventoryOpened = false;
     public GameObject inventoryUi;
     public Text textPanel;
     Inventory inventory;
     public Transform itemsParent;
+    public tooltipManager tooltipManager;
     Slot[] slots;
     private void Start()
     {
         inventory = Inventory.instance;
+        //updating ui
         inventory.onItemChangedCalled += updateUI;
 
         slots = itemsParent.GetComponentsInChildren<Slot>();
@@ -33,23 +43,38 @@ public class inventoryManager : MonoBehaviour
 
     void updateUI()
     {
-        Debug.Log("Updating UI");
-        for(int i = 0; i < slots.Length;i++)
-        {
-            if(i < inventory.items.Count)
+        //Debug.Log("Updating UI");
+       
+            for (int i = 0; i < slots.Length; i++)
             {
-                slots[i].add(inventory.items[i]);
-            }
-            else
-            {
-                slots[i].clearSlot();
+                if (i < inventory.items.Count)
+                {
+                    slots[i].add(inventory.items[i]);
+                    ///
+                    
+                    
+                    //slots[i].countText.text = slots[i].itemsInSlot.Count.ToString();
+                }
+                else
+                {
+                    slots[i].clearSlot();
+                }
             }
         }
-    }
+        
     public void openInventory()
     {
         inventoryUi.SetActive(!inventoryUi.activeSelf);
-        inventoryOpened = true;
+        if (inventoryOpened)
+        {
+            inventoryOpened = false;
+            tooltipManager.hideTooltip();
+        }
+        else if (!inventoryOpened)
+        {
+            inventoryOpened = true;
+
+        }
     }
     //showing pickup panel
     public void showPanel(string text)
