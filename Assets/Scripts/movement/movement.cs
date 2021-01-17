@@ -6,7 +6,21 @@ using UnityEngine.EventSystems;
 
 public class movement : MonoBehaviour
 {
+	#region Singleton
+	public static movement instance;
 
+	void Awake()
+	{
+		if (instance != null)
+		{
+			Debug.LogWarning("instance movement.cs");
+			return;
+		}
+
+		instance = this;
+	}
+
+	#endregion
 	public float InputX;
 	public float InputZ;
 	public Vector3 desiredMoveDirection;
@@ -41,27 +55,32 @@ public class movement : MonoBehaviour
 	void Update()
 	{
 		//stop camera when inventory is open;
-		if (EventSystem.current.IsPointerOverGameObject())
+		if (EventSystem.current.IsPointerOverGameObject() &&
+				EventSystem.current.currentSelectedGameObject != null &&
+					EventSystem.current.currentSelectedGameObject.CompareTag("inventoryTAG"))
 		{
-			//cam.GetComponent<CinemachineBrain>().enabled = false;
+			Debug.Log("entered");
+			cam.GetComponent<CinemachineBrain>().enabled = false;
 			return;
-
 		}
 		else
         {
-			//cam.GetComponent<CinemachineBrain>().enabled = true;
+			cam.GetComponent<CinemachineBrain>().enabled = true;
 		}
 		
 		InputMagnitude();
 		isRunningSword = anim.GetBool("isRunningSword");
 
-		if (isRunningSword)
-			playerSpeed = 5;
-		else if (!isRunningSword)
-			playerSpeed = 4;
-		else
-			playerSpeed = 3;
-
+		if (!potionUse.instance.speedPotionUsing)
+		{
+			if (isRunningSword)
+				playerSpeed = 5;
+			else if (!isRunningSword)
+				playerSpeed = 4;
+			else
+				playerSpeed = 3;
+		}
+		
 
 		bool isDrawedSword = anim.GetBool("isDrawedSword");
 		bool sPressed = Input.GetKey("s");

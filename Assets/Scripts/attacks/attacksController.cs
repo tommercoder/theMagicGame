@@ -81,8 +81,8 @@ public class attacksController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
+        /*if (EventSystem.current.IsPointerOverGameObject())
+            return;*/
         bool isDrawedSword = animator.GetBool(isDrawedSwordHash);
         bool attackPressedFirst = animator.GetBool(attackPressedFirstHash);
         bool attackPressedSecond = animator.GetBool(attackPressedSecondHash);

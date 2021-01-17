@@ -15,7 +15,14 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (EventSystem.current.IsPointerOverGameObject())
             return;
-        if(other.tag=="interactable object" && other.GetComponent<Interact>()!=null)
+        //dlatego zeby nie wyswietlac pick up panel kiedy mam sword u siebie wziety
+        if(other.GetComponent<weaponInteract>()!= null)
+        {
+            if (playerSword.instance.currentSwordGameObject == other.GetComponent<weaponInteract>().gameObject)
+                return;
+        }
+       
+        if(other.tag=="interactable object" && other.GetComponent<Interact>()!=null )
         {
             other.GetComponent<Interact>().InteractWith();
             panelShow.showPanel("Press E to " + other.GetComponent<Interact>().InteractedText);

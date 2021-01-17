@@ -54,7 +54,7 @@ public class StateControllerTest : MonoBehaviour
         bool takeSwordPressed = Input.GetKey(KeyCode.Mouse2);
 
         //stopping player when inventory is opened and mouse is in invenotry tab
-        if (EventSystem.current.IsPointerOverGameObject())
+        /*if (EventSystem.current.IsPointerOverGameObject())
         {
             if(isRunning)
             {
@@ -66,14 +66,15 @@ public class StateControllerTest : MonoBehaviour
                 animator.SetBool(isRunningHash, false);
             }
             return;
-        }
+        }*/
 
 
         ///trail setting
         if (isDrawedSword )
         {
             Transform sword = playerSwordController.sword.transform;
-            sword.GetChild(0).gameObject.SetActive(false);
+            if (sword.gameObject.transform.childCount>0)
+                sword.GetChild(0).gameObject.SetActive(false);
             //sword.GetChild(1).gameObject.SetActive(true);
             //Debug.Log("sword = " + sword.gameObject.name);
             
@@ -81,8 +82,11 @@ public class StateControllerTest : MonoBehaviour
        else
         {
             Transform sword = playerSwordController.sword.transform;
-            sword.GetChild(0).gameObject.SetActive(true);
-            sword.GetChild(1).gameObject.SetActive(false);
+            if (sword.gameObject.transform.childCount > 0)
+            {
+                sword.GetChild(0).gameObject.SetActive(true);
+                sword.GetChild(1).gameObject.SetActive(false);
+            }
             movement movement = GetComponent<movement>();
             movement.canMove = true;
 

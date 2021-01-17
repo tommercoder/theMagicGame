@@ -15,7 +15,7 @@ public class dashAbility : AbilityMain
     [Header("Visuals")]
     [SerializeField] private Renderer skinnedMesh = default;
     [SerializeField] private ParticleSystem dashParticle = default;
-    [SerializeField] private Volume dashVolume = default;
+ 
     public CharacterController controller;
     attacksController attacksController;
     public AbilityUI AbilityUI;
@@ -31,7 +31,7 @@ public class dashAbility : AbilityMain
         //DOTween.Init();
 
 
-        //dashParticle.Play();
+        dashParticle.Play();
         if (!attacksController.enemiesAround)
         {
             controller.enabled = false;
@@ -39,8 +39,8 @@ public class dashAbility : AbilityMain
             transform.DOMove(transform.position + (transform.forward * 5), .2f);
             //.AppendCallback(() => dashParticle.Stop());
             //transform.DOMove(transform.position + (transform.forward * 5), .2f);
-            DOVirtual.Float(0, 1, .1f, SetDashVolumeWeight)
-           .OnComplete(() => DOVirtual.Float(1, 0, .5f, SetDashVolumeWeight));
+           // DOVirtual.Float(0, 1, .1f, SetDashVolumeWeight)
+          // .OnComplete(() => DOVirtual.Float(1, 0, .5f, SetDashVolumeWeight));
 
             DOVirtual.Float(40, 50, .1f, SetCameraFOV)
                 .OnComplete(() => DOVirtual.Float(50, 40, .5f, SetCameraFOV));
@@ -54,7 +54,7 @@ public class dashAbility : AbilityMain
         }
 
         AbilityUI.ShowCoolDown(cooldownTime);
-
+        dashParticle.Stop();
 
 
 
@@ -66,16 +66,13 @@ public class dashAbility : AbilityMain
         yield return new WaitForSeconds(0.5f);
         controller.enabled = true; 
     }
-    public void dashEndedEvent()
+    public void dashEndedEvent()//animation event
     {
         controller.enabled = true;
         
         
     }
-    void SetDashVolumeWeight(float weight)
-    {
-        dashVolume.weight = weight;
-    }
+    
 
     void SetCameraFOV(float fov)
     {
