@@ -20,7 +20,7 @@ public class swordEquipping : Item
 
     #endregion
     public int swordDamage;
-   
+    public Vector3 savedPosition;
     public override void useFromInventory()
     {
         base.useFromInventory();
@@ -32,6 +32,9 @@ public class swordEquipping : Item
         {
             if(Inventory.instance.items[i].Equals(this))
             {
+
+                savedPosition = Inventory.instance.itemsGameObjects[i].transform.position;
+                Debug.Log(savedPosition);
                 playerSword.instance.sword = Inventory.instance.itemsGameObjects[i].transform;
                 playerSword.instance.currentSwordGameObject = Inventory.instance.itemsGameObjects[i];
                 

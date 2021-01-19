@@ -39,6 +39,7 @@ public class movement : MonoBehaviour
 	bool isRunningSword;
 	public bool canMove ;
 	attacksController attacks;
+	public bool MouseOverInventoryB;
 	
 	// Use this for initialization
 	void Start()
@@ -50,23 +51,41 @@ public class movement : MonoBehaviour
 		canMove = true;
 		attacks = GetComponent<attacksController>();
 	}
+	//EVENT FOR MOUSE ENTERING INVENTORY UI
+	public void MouseOverInventory()
+    {
+		cam.GetComponent<CinemachineBrain>().enabled = false;
+		MouseOverInventoryB = true;
+    }
+	//EVENT FOR MOUSE EXIT INVENTORY UI
+	public void MouseOutInventory()
+    {
 
+		cam.GetComponent<CinemachineBrain>().enabled = true;
+		MouseOverInventoryB = false;
+
+	}
 	// Update is called once per frame
 	void Update()
 	{
-		//stop camera when inventory is open;
-		if (EventSystem.current.IsPointerOverGameObject() &&
-				EventSystem.current.currentSelectedGameObject != null &&
-					EventSystem.current.currentSelectedGameObject.CompareTag("inventoryTAG"))
-		{
-			Debug.Log("entered");
-			cam.GetComponent<CinemachineBrain>().enabled = false;
+		
+		if (MouseOverInventoryB && inventoryManager.instance.inventoryOpened)
 			return;
-		}
-		else
+		if(!inventoryManager.instance.inventoryOpened)
         {
-			cam.GetComponent<CinemachineBrain>().enabled = true;
-		}
+			MouseOutInventory();
+        }
+		//stop camera when inventory is open;
+		//if (EventSystem.current.IsPointerOverGameObject())
+		//{
+		//	Debug.Log("entered");
+		//	cam.GetComponent<CinemachineBrain>().enabled = false;
+		//	return;
+		//}
+		//else
+  //      {
+		//	cam.GetComponent<CinemachineBrain>().enabled = true;
+		//}
 		
 		InputMagnitude();
 		isRunningSword = anim.GetBool("isRunningSword");

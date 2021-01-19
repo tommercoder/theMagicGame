@@ -13,8 +13,8 @@ public class PlayerInteraction : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
+        Debug.Log("interacting with" + other.name);
+        
         //dlatego zeby nie wyswietlac pick up panel kiedy mam sword u siebie wziety
         if(other.GetComponent<weaponInteract>()!= null)
         {
@@ -41,6 +41,8 @@ public class PlayerInteraction : MonoBehaviour
             
             if (other.GetComponent<FloatingItem>() != null)
                 other.GetComponent<FloatingItem>().Rotating = true;
+
+            other.GetComponent<Interact>().interacting = false;
         }
     }
 
