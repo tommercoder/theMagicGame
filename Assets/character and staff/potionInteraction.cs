@@ -37,8 +37,7 @@ public class potionInteraction : Interact
         bool addedGO = Inventory.instance.addGOforPotions(gameObject);
         if (added && addedGO)
         {
-            Debug.Log("added & addedGO");
-           
+            
             //Inventory.instance.itemsGameObjects.Add(gameObject);
 
             manager.hidePanel();

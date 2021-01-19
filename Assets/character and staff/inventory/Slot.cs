@@ -65,13 +65,21 @@ public class Slot : MonoBehaviour
             if(Inventory.instance.items[i]==item)
             {
                 Vector3 dropPosition = new Vector3(character.position.x, Inventory.instance.itemsGameObjects[i].transform.position.y, character.position.z);
+                //Vector3 position = Inventory.instance.itemsGameObjects[i].transform.position;
+                Inventory.instance.itemsGameObjects[i].transform.rotation = Quaternion.identity;
+                //position.y = swordEquipping.instance.savedPosition.y;
+                //Inventory.instance.itemsGameObjects[i].transform.position = position;
+
+
+                
                 Inventory.instance.itemsGameObjects[i].transform.position = dropPosition+(-(transform.forward*2));
                 Inventory.instance.itemsGameObjects[i].SetActive(true);
-               
+                Inventory.instance.itemsGameObjects[i].GetComponent<FloatingItem>().Rotating = true;
                 Inventory.instance.removeGOitem(Inventory.instance.itemsGameObjects[i]);
             }
         }
         Inventory.instance.removeItem(item);
+
     }
 
 }

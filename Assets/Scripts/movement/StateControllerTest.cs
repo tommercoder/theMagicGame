@@ -38,7 +38,7 @@ public class StateControllerTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        
         bool isRunning = animator.GetBool(isRunningHash);
        
         bool isIdleSword = animator.GetBool(isIdleSwordHash);
@@ -54,7 +54,7 @@ public class StateControllerTest : MonoBehaviour
         bool takeSwordPressed = Input.GetKey(KeyCode.Mouse2);
 
         //stopping player when inventory is opened and mouse is in invenotry tab
-        /*if (EventSystem.current.IsPointerOverGameObject())
+        if (movement.instance.MouseOverInventoryB && inventoryManager.instance.inventoryOpened)
         {
             if(isRunning)
             {
@@ -66,7 +66,8 @@ public class StateControllerTest : MonoBehaviour
                 animator.SetBool(isRunningHash, false);
             }
             return;
-        }*/
+        }
+        
 
 
         ///trail setting

@@ -14,12 +14,13 @@ public class weaponInteract : Interact
         InteractedText += "pick up weapon";
         interacting = true;
    
-        //pickup weapon
+       
         
     }
 
     private void Update()
     {
+         //pickup weapon
         if (Input.GetKeyDown(KeyCode.E) && interacting)
         {
             //Debug.Log("picking up " + item.name) ;
