@@ -13,6 +13,13 @@ public class mouseCursorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(inventoryManager.instance.inventoryOpened)
+        {
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.visible = false;
+        }
     }
 }

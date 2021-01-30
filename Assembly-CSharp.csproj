@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\attacks\attacksController.cs" />
     <Compile Include="Assets\Scripts\effects\fireballScript.cs" />
     <Compile Include="Assets\Scripts\mainElementControlling\mouseCursorController.cs" />
+    <Compile Include="Assets\Scripts\mainElementControlling\resetScriptableObjects.cs" />
     <Compile Include="Assets\Scripts\movement\StateControllerTest.cs" />
     <Compile Include="Assets\Scripts\movement\movement.cs" />
     <Compile Include="Assets\Scripts\player\healthBarController.cs" />
@@ -119,17 +120,12 @@
     <Compile Include="Assets\character and staff\tooltip\tooltipManager.cs" />
     <Compile Include="Assets\character and staff\tooltip\tooltipTrigger.cs" />
     <Compile Include="Assets\character and staff\weaponInteract.cs" />
-    <Compile Include="Assets\collisionTargetChecker.cs" />
     <Compile Include="Assets\effects\destroing.cs" />
+    <Compile Include="Assets\effects\triggerFireBallScript.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\DontMoveWithParent.cs" />
-    <Compile Include="Assets\enemiesFull\IKenemies\FootIKTarget.cs" />
-    <Compile Include="Assets\enemiesFull\IKenemies\IKInsectController.cs" />
-    <Compile Include="Assets\enemiesFull\IKenemies\LimbSide.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\MainProceduralController.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\PlayerMovement.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\PlayerRotation.cs" />
-    <Compile Include="Assets\enemiesFull\IKenemies\ikController.cs" />
-    <Compile Include="Assets\resetScriptableObjects.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\another\FastIK\Documentation.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -785,6 +781,12 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Runtime">
+      <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.VisualEffectGraph.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Editor">
+      <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.VisualEffectGraph.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

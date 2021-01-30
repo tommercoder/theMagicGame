@@ -117,33 +117,29 @@ public class movement : MonoBehaviour
 		controller.Move(moveVector);
 
 		//slow walking
-		if (attacks.enemiesAround && isDrawedSword && InputZ >= 0.0f)
-		{
-			anim.SetBool("walkAttack", true);
-		}
-		if (!attacks.enemiesAround && isDrawedSword && InputZ >= 0.0f)
-		{
-			anim.SetBool("walkAttack", false);
+		//if (attacks.enemiesAround && isDrawedSword && InputZ >= 0.0f)
+		//{
+		//	anim.SetBool("walkAttack", true);
+		//}
+		//if (!attacks.enemiesAround && isDrawedSword && InputZ >= 0.0f)
+		//{
+		//	anim.SetBool("walkAttack", false);
 
-		}
-		if (InputX.Equals(0.0f) && InputZ.Equals(0.0f))
-		{
-			anim.SetBool("walkAttack", false);
-			anim.SetBool("walkAttackBack", false);
-		}
-		if(isDrawedSword && attacks.enemiesAround && InputZ < 0.0f)
-        {
-			anim.SetBool("walkAttackBack", true);
-		}
-		/*if(sPressed && isDrawedSword && attacks.enemiesAround)
-        {
-			anim.SetBool("walkAttackBack", false);
-
-		}*/
-		if(InputZ < 0.0f && !attacks.enemiesAround )
-        {
-			anim.SetBool("walkAttackBack", false);
-		}
+		//}
+		//if (InputX.Equals(0.0f) && InputZ.Equals(0.0f))
+		//{
+		//	anim.SetBool("walkAttack", false);
+		//	anim.SetBool("walkAttackBack", false);
+		//}
+		//if(isDrawedSword && attacks.enemiesAround && InputZ < 0.0f)
+  //      {
+		//	anim.SetBool("walkAttackBack", true);
+		//}
+		
+		//if(InputZ < 0.0f && !attacks.enemiesAround )
+  //      {
+		//	anim.SetBool("walkAttackBack", false);
+		//}
 		
 	}
 
