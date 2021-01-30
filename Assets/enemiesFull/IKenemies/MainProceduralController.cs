@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Animations.Rigging;
 public class MainProceduralController : MonoBehaviour
 {
+    //with this script also using dontmovewithparent.cs
     [Header("OBJECTS")]
     public Transform targetRight = null;
     public Transform targetLeft = null;
@@ -27,13 +28,14 @@ public class MainProceduralController : MonoBehaviour
     public Transform target;
     private List<Transform> footIKTargets = new List<Transform>(2);
 
-
+    //enable when collide
     private void OnCollisionEnter(Collision collision)
     {
         //when collide they are visible
         stepTargetLeft.gameObject.GetComponent<Renderer>().enabled = true;
         stepTargetRight.gameObject.GetComponent<Renderer>().enabled = true;
     }
+    //hide in game steptargets
     private void Awake()
     {
         //for not to see target spheres on game menu
@@ -42,6 +44,7 @@ public class MainProceduralController : MonoBehaviour
     }
     private void Start()
     {
+        //adding targets and targets to lists;
         footIKTargets.Add(targetLeft);
         footIKTargets.Add(targetRight);
 
@@ -52,7 +55,7 @@ public class MainProceduralController : MonoBehaviour
         
     }
 
-
+    //time to make step
     IEnumerator wait()
     {
         //czekam krok
@@ -72,12 +75,13 @@ public class MainProceduralController : MonoBehaviour
     {
         
         
-        
+        //function to check ground for targets
         stepTargetIk(0);
         stepTargetIk(1);
-        
+        //distance between target and step target
         float distanceRight = Vector3.Distance(footIKTargets[0].position, stepTargets[0].position);
         float distanceLeft = Vector3.Distance(footIKTargets[1].position, stepTargets[1].position);
+        //make step with right foot
         if (distanceRight > wantStepAtDistance)
         {
            
@@ -96,7 +100,7 @@ public class MainProceduralController : MonoBehaviour
                 
             }
         }
-     
+        //make step with left foot
         if (distanceLeft > wantStepAtDistance && waited)
         {
             
@@ -119,7 +123,7 @@ public class MainProceduralController : MonoBehaviour
     }
 
     
-
+    //where i can stand after step
     bool GetGroundedEndPosition(out Vector3 position, out Vector3 normal, int index)
     {
         Vector3 towardHome = (stepTargets[index].position - footIKTargets[index].position).normalized;
@@ -147,6 +151,7 @@ public class MainProceduralController : MonoBehaviour
         normal = Vector3.zero;
         return false;
     }
+    //check when moving target for ground
     void stepTargetIk(int index)
     {
 
@@ -160,17 +165,18 @@ public class MainProceduralController : MonoBehaviour
         {
 
             Vector3 targetLocation = hit.point;
+            //move upper steptarget to groud
             var slopeRotation = Quaternion.FromToRotation(stepTargets[index].up, hit.normal);
-
+            //rotate steptarget to ground
             stepTargets[index].rotation = Quaternion.Slerp(stepTargets[index].rotation, slopeRotation * stepTargets[index].rotation, 10 * Time.deltaTime);
-
+            //change position to ground
             targetLocation += new Vector3(0, stepTargets[index].localScale.y / 2, 0);
 
             stepTargets[index].position = targetLocation;
         }
    
     } 
-
+    //change position of target to position of step target slowly and move leg up
     IEnumerator MoveToPoint(Vector3 endPoint, Quaternion endRot, float moveTime, int index)
     {
         Moving = true;

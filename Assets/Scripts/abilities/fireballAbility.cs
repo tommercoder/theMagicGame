@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class fireballAbility : AbilityMain
 {
+    #region Singleton
+    public static fireballAbility instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+
+    #endregion
     movement movement;
     Animator animator;
     StateControllerTest controller;
@@ -15,7 +25,8 @@ public class fireballAbility : AbilityMain
     private bool one;
     public float speed = 12f;
     public AbilityUI AbilityUI;
-    bool triggered = false;
+    public bool triggered = false;
+    GameObject fireballGO;
     private void Start()
     {
         movement = GetComponent<movement>();
@@ -34,10 +45,10 @@ public class fireballAbility : AbilityMain
                 
                 fireball();
                 canCast = false;
-        AbilityUI.ShowCoolDown(cooldownTime);
+                AbilityUI.ShowCoolDown(cooldownTime);
 
-       // }
-        
+        // }
+        abilityDone = true;
     }
     IEnumerator destruction()
     {
@@ -46,34 +57,31 @@ public class fireballAbility : AbilityMain
     }
     public void fireball()
     {
+
         Debug.Log("FIREBALL FUNC");
         projectile.transform.position = hand.transform.position;
         
-        GameObject fireball = Instantiate(projectile, projectile.transform.position,Quaternion.identity) as GameObject;
+         fireballGO = Instantiate(projectile, projectile.transform.position,Quaternion.identity);
         
         //fireball.transform.position = hand.transform.position;
         
-        Rigidbody rb = fireball.GetComponent<Rigidbody>();
+        Rigidbody rb = fireballGO.GetComponent<Rigidbody>();
         rb.velocity = transform.forward * speed;
 
-        if (triggered)
-        {
-            Destroy(fireball);
-            triggered = false;
-        }
-        else
-            Destroy(fireball, 2f);
+        
 
 
     }
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (other.CompareTag("Enemy"))
+        if (triggered)
         {
-            triggered = true;
-        
-         
+            Destroy(fireballGO);
+            Debug.Log("destroyed fireball and damage done");
+            triggered = false;
         }
+        else
+            Destroy(fireballGO, 2f);
     }
     public void startFireballEvent()
     {
