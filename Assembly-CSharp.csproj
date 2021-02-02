@@ -63,6 +63,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Ciconia Studio\_Shared Files\Scripts\Demo\FreeCam.cs" />
+    <Compile Include="Assets\Ciconia Studio\_Shared Files\Scripts\Demo\FreeCamera.cs" />
+    <Compile Include="Assets\Ciconia Studio\_Shared Files\Scripts\Demo\SuperCamera.cs" />
+    <Compile Include="Assets\Ciconia Studio\_Shared Files\Scripts\Demo\UIButton_ShowNext.cs" />
     <Compile Include="Assets\Scripts\AnimationStateController.cs" />
     <Compile Include="Assets\Scripts\IK systems\FootIK.cs" />
     <Compile Include="Assets\Scripts\abilities\AbilityMain.cs" />
@@ -73,6 +77,7 @@
     <Compile Include="Assets\Scripts\effects\fireballScript.cs" />
     <Compile Include="Assets\Scripts\mainElementControlling\mouseCursorController.cs" />
     <Compile Include="Assets\Scripts\mainElementControlling\resetScriptableObjects.cs" />
+    <Compile Include="Assets\Scripts\mainElementControlling\targetFrame.cs" />
     <Compile Include="Assets\Scripts\movement\StateControllerTest.cs" />
     <Compile Include="Assets\Scripts\movement\movement.cs" />
     <Compile Include="Assets\Scripts\player\healthBarController.cs" />
@@ -130,6 +135,7 @@
     <None Include="Assets\another\FastIK\Documentation.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\Ciconia Studio\Shaders\Standard Shaders\BuiltIn\CS_Standard (Specular setup) Opaque.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
@@ -141,16 +147,22 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\Ciconia Studio\Shaders\Standard Shaders\BuiltIn\CS_Standard (Specular setup) Transparent.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\another\Bonehead\Scripts\LICENSE.txt" />
+    <None Include="Assets\Ciconia Studio\Shaders\Standard Shaders\BuiltIn\CS_Lite Standard (Specular setup) Transparent.shader" />
     <None Include="Assets\another\Bonehead\ArtAssets\Misc\StandardVertexColor.shader" />
+    <None Include="Assets\Ciconia Studio\Shaders\Standard Shaders\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\Ciconia Studio\Shaders\Standard Shaders\BuiltIn\CS_Lite Standard (Specular setup) Opaque.shader" />
+    <None Include="Assets\Ciconia Studio\Shaders\Standard Shaders\BuiltIn\CS_Lite Standard (Specular setup) Cutout.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\Ciconia Studio\Shaders\Standard Shaders\BuiltIn\CS_Standard (Specular setup) Cutout.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -728,6 +740,9 @@
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Runtime">
+      <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.VisualEffectGraph.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -767,6 +782,9 @@
     <Reference Include="com.unity.cinemachine.editor">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Editor">
+      <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.VisualEffectGraph.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
@@ -781,12 +799,6 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualEffectGraph.Runtime">
-      <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.VisualEffectGraph.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualEffectGraph.Editor">
-      <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.VisualEffectGraph.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
