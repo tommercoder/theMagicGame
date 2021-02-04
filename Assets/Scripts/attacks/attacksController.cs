@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 public class attacksController : MonoBehaviour
 {
+    //public static attacksController instanceA;
+    
     protected static attacksController s_Instance;
     public static attacksController instance { get { return s_Instance; } }
     public Animator animator;
@@ -33,10 +35,11 @@ public class attacksController : MonoBehaviour
     int swordEnergy;
     public bool canCast;
     public CharacterController CharacterController;
-    [SerializeField] private ParticleSystem dashParticle = default;
+    [SerializeField] public ParticleSystem dashParticle = default;
     private void Awake()
     {
         Abilities = GetComponents<AbilityMain>();//mozna dodac jeszcze abilities ille chcę
+        //instanceA = this;
         s_Instance = this;
     }
     // Start is called before the first frame update

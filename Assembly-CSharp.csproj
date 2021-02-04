@@ -131,6 +131,7 @@
     <Compile Include="Assets\enemiesFull\IKenemies\MainProceduralController.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\PlayerMovement.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\PlayerRotation.cs" />
+    <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\another\FastIK\Documentation.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -719,6 +720,9 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.TerrainTools">
+      <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.TerrainTools.dll</HintPath>
+    </Reference>
     <Reference Include="Cinemachine">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>
@@ -796,6 +800,9 @@
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TerrainTools.Editor">
+      <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/Unity.TerrainTools.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:/UNITY GAMES/theMagicGame/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>

@@ -63,7 +63,7 @@ public class dashAbility : AbilityMain
         Debug.Log("checkIfDashCanBeCasted(); " + checkIfDashCanBeCasted());
         if (checkIfDashCanBeCasted())
         {
-            dashParticle.Play();
+            //dashParticle.Play();
             //if (!StateControllerTest.instance.enemiesAround)
             //{
             controller.enabled = false;
@@ -89,7 +89,8 @@ public class dashAbility : AbilityMain
         else
         {
             abilityDone = false;
-            dashParticle.Stop();
+            //attacksController.instanceA.dashParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            //dashParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             Debug.Log("RETURN");
            
            // return;//should i keep it????
