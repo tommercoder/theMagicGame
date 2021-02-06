@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6c239776007aeb14ca5ee47517e13100
+guid: b333b924f79d44a4a80aa94b15333b91
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -7,20 +7,10 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material.001
-    second: {fileID: 2100000, guid: 3a5e46e90dfcd98418595691e9933f33, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: No Name
-    second: {fileID: 2100000, guid: 33c2080088a781e45bc2b26c5767af9f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: bark
-    second: {fileID: 2100000, guid: 68a82308287f20d4b8a246a9651f70cd, type: 2}
+      name: color matt
+    second: {fileID: 2100000, guid: 43f9e19d75713bf41a2cf739c049a815, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -52,7 +42,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    useSRGBMaterialColor: 0
+    useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1

@@ -79,7 +79,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_23BAAC46: 10
-    - Vector1_457AEBEE: 5
+    - Vector1_457AEBEE: 2
     - Vector1_84C964C9: 0.1
     - _AlphaClip: 0
     - _BillboardKwToggle: 0
@@ -111,7 +111,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Vector2_C8EC0197: {r: 14, g: 26, b: 5, a: 14}
+    - Vector2_C8EC0197: {r: 1, g: 2, b: 1, a: 2}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 0.25943398, b: 0.61204743, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

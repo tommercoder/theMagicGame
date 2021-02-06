@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Unity\Info\Scripts\Editor\ReadmeEditor.cs" />
+    <Compile Include="Assets\VertexColorToAlpha\Scripts\Editor\VertexColorToAlpha.cs" />
     <Compile Include="Assets\another\Bonehead\Scripts\Utils\ButtonAttribute\Editor\BehaviourButtonsEditor.cs" />
     <Compile Include="Assets\another\Dias Games\Foot Solutions\Footstep System\Scripts\Editor\AddFootstepSystem.cs" />
     <Compile Include="Assets\another\Dias Games\Foot Solutions\Footstep System\Scripts\Editor\FootstepInspector.cs" />

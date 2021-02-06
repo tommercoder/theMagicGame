@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 784f2f7c7a8316b48847b13fb80f3efc
+guid: a8c9f5dd6cacbe64cae59ba47c39b3a9
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -7,17 +7,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: bark
-    second: {fileID: 2100000, guid: 6933b0a68c1e21b448ae26290c861282, type: 2}
+      name: bark.001
+    second: {fileID: 2100000, guid: 3c8165d92de659f4e8f184c6918c14a0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: leaves
-    second: {fileID: 2100000, guid: 2f7ed9b2fdb042645957c1e29c54e93f, type: 2}
+      name: leaves.001
+    second: {fileID: 2100000, guid: 2daba9471fa77224f83f8a709ab8a625, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
-    materialSearch: 0
+    materialSearch: 1
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
@@ -71,7 +71,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 59
+    normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
