@@ -131,6 +131,7 @@
     <Compile Include="Assets\enemiesFull\IKenemies\MainProceduralController.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\PlayerMovement.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\PlayerRotation.cs" />
+    <Compile Include="Assets\treeColliders.cs" />
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\another\FastIK\Documentation.txt" />
