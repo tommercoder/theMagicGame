@@ -63,6 +63,7 @@ public class dashAbility : AbilityMain
         Debug.Log("checkIfDashCanBeCasted(); " + checkIfDashCanBeCasted());
         if (checkIfDashCanBeCasted())
         {
+            dashStarted = true;
             //dashParticle.Play();
             //if (!StateControllerTest.instance.enemiesAround)
             //{
@@ -88,10 +89,12 @@ public class dashAbility : AbilityMain
         }
         else
         {
+            dashStarted = false;
             abilityDone = false;
-            //attacksController.instanceA.dashParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            //attacksController.instanceA.dashParticle.Stop();
+            
             //dashParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            Debug.Log("RETURN");
+            Debug.Log("RETURN" + attacksController.instanceA.dashParticle.isStopped);
            
            // return;//should i keep it????
         }

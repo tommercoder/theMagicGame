@@ -19,6 +19,7 @@ public abstract class AbilityMain : MonoBehaviour
     public Sprite icon;
     public float cooldownTime = 1;
     public bool canUse = true;
+    public bool dashStarted;
     public bool abilityDone;
     public void TriggerAbility()
     {
