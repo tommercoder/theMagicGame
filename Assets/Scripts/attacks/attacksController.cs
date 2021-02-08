@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 public class attacksController : MonoBehaviour
 {
-    //public static attacksController instanceA;
+    public static attacksController instanceA;
     
     protected static attacksController s_Instance;
     public static attacksController instance { get { return s_Instance; } }
@@ -21,7 +22,7 @@ public class attacksController : MonoBehaviour
     List<int> possibleAttacks = Enumerable.Range(1, 3).ToList();
     StateControllerTest controller;
     movement movement;
-
+    public Text errorText;
    // public bool enemiesAround = false;
     bool firstPlayed;
     bool secondPlayed;
@@ -39,7 +40,7 @@ public class attacksController : MonoBehaviour
     private void Awake()
     {
         Abilities = GetComponents<AbilityMain>();//mozna dodac jeszcze abilities ille chcę
-        //instanceA = this;
+        instanceA = this;
         s_Instance = this;
     }
     // Start is called before the first frame update
@@ -65,7 +66,11 @@ public class attacksController : MonoBehaviour
         attackPressedSecondHash = Animator.StringToHash("attackPressedSecondTrigger");
     }
   
-    
+    IEnumerator waitErrorText()
+    {
+        yield return new WaitForSeconds(3);
+        errorText.gameObject.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -91,14 +96,26 @@ public class attacksController : MonoBehaviour
         if (isDrawedSword)
         {
 
+            float time = 3f;
             if(castPressed && Abilities[1].canUse && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast") && noOfClick==0 && noOfClickSecond==0)
             {
-                    Abilities[1].TriggerAbility();   
+                Abilities[1].TriggerAbility();
+                if (!Abilities[1].dashStarted)
+                {
+                    errorText.gameObject.SetActive(true);
+                    errorText.text = "you can't use dash here";
+                    Debug.Log("aaa");
+                    StartCoroutine(waitErrorText());
+                    
+                    return;
+                }
+                 
                     dashParticle.Play();
                     controller.timeRemaining = 5;
                     controller.timerIsRunning = true;
                     //random damage and effects here
             }
+            
             if (ballCastPressed && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast")  && Abilities[0].canUse && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && noOfClick== 0 && noOfClickSecond== 0)
             {
                     movement.canMove = false;

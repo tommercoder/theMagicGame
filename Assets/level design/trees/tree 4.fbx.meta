@@ -13,7 +13,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: leaves.001
-    second: {fileID: 2100000, guid: 374bcf3f2e96fff4b84a838e1d71f060, type: 2}
+    second: {fileID: 2100000, guid: 2f7ed9b2fdb042645957c1e29c54e93f, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
