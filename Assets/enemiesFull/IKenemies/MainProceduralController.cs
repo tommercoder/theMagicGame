@@ -27,7 +27,8 @@ public class MainProceduralController : MonoBehaviour
     public DontMoveWithParent dontMoveWithParentLeft;
     public Transform target;
     private List<Transform> footIKTargets = new List<Transform>(2);
-
+    public Transform head;
+    Vector3 headPosition;
     //enable when collide
     private void OnCollisionEnter(Collision collision)
     {
@@ -51,6 +52,7 @@ public class MainProceduralController : MonoBehaviour
         stepTargets.Add(stepTargetLeft);
         stepTargets.Add(stepTargetRight);
 
+         headPosition = head.position;
         
         
     }
@@ -73,8 +75,22 @@ public class MainProceduralController : MonoBehaviour
    
     void Update()
     {
+        Vector3 down = transform.TransformDirection(Vector3.down) * 3;
         
-        
+        RaycastHit hit;
+        if(Physics.Raycast(head.position+Vector3.down/2, down, out hit,10, mask))
+        {
+            //Debug.Log(Vector3.Distance(head.position, hit.point));
+            if (Vector3.Distance(head.position,hit.point) < 3.0f)
+            {
+                //Vector3 temp = transform.position;
+                //temp.y = headPosition.y-2;
+                //transform.position = temp;
+                
+            }
+            //transform.position = Vector3.zero;
+        }
+        Debug.DrawRay(head.position + Vector3.down/2, down, Color.red);
         //function to check ground for targets
         stepTargetIk(0);
         stepTargetIk(1);
@@ -87,7 +103,17 @@ public class MainProceduralController : MonoBehaviour
            
             if (GetGroundedEndPosition(out Vector3 endPos, out Vector3 endNormal, 0))
             {
-                
+                if (endPos.y >= transform.position.y)
+                {
+                    //Vector3 temp = transform.position;
+                    //temp.y = transform.position.y+0.3f ;
+                    //transform.position = temp;
+                    transform.Translate(Vector3.up * Time.deltaTime);
+                }
+                else if(endPos.y <= transform.position.y)
+                {
+                    transform.Translate(Vector3.down * Time.deltaTime);
+                }
                 Quaternion endRot = Quaternion.LookRotation(
                     Vector3.ProjectOnPlane(stepTargets[0].forward, endNormal),
                     endNormal
@@ -106,7 +132,17 @@ public class MainProceduralController : MonoBehaviour
             
             if (GetGroundedEndPosition(out Vector3 endPos, out Vector3 endNormal, 1))
             {
-
+                if (endPos.y >= transform.position.y)
+                {
+                    //Vector3 temp = transform.position;
+                    //temp.y = transform.position.y+0.3f ;
+                    //transform.position = temp;
+                    transform.Translate(Vector3.up * Time.deltaTime);
+                }
+                else if (endPos.y <= transform.position.y)
+                {
+                    transform.Translate(Vector3.down * Time.deltaTime);
+                }
                 Quaternion endRot = Quaternion.LookRotation(
                     Vector3.ProjectOnPlane(stepTargets[1].forward, endNormal),
                     endNormal
@@ -144,6 +180,7 @@ public class MainProceduralController : MonoBehaviour
         ))
         {
             position = hit.point;
+           
             normal = hit.normal;
             return true;
         }
