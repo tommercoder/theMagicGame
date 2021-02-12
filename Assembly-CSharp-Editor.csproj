@@ -47,6 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
+    <UnityProjectGeneratorVersion>4.8.2.0</UnityProjectGeneratorVersion>
     <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>2019.4.14f1</UnityVersion>
@@ -64,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Unity\Info\Scripts\Editor\ReadmeEditor.cs" />
-    <Compile Include="Assets\VertexColorToAlpha\Scripts\Editor\VertexColorToAlpha.cs" />
     <Compile Include="Assets\another\Bonehead\Scripts\Utils\ButtonAttribute\Editor\BehaviourButtonsEditor.cs" />
     <Compile Include="Assets\another\Dias Games\Foot Solutions\Footstep System\Scripts\Editor\AddFootstepSystem.cs" />
     <Compile Include="Assets\another\Dias Games\Foot Solutions\Footstep System\Scripts\Editor\FootstepInspector.cs" />
