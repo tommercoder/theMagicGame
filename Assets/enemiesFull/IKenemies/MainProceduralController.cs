@@ -108,11 +108,11 @@ public class MainProceduralController : MonoBehaviour
                     //Vector3 temp = transform.position;
                     //temp.y = transform.position.y+0.3f ;
                     //transform.position = temp;
-                    transform.Translate(Vector3.up * Time.deltaTime);
+                    transform.Translate(Vector3.up * 2 * Time.deltaTime);
                 }
                 else if(endPos.y <= transform.position.y)
                 {
-                    transform.Translate(Vector3.down * Time.deltaTime);
+                    transform.Translate(Vector3.down * 2 * Time.deltaTime);
                 }
                 Quaternion endRot = Quaternion.LookRotation(
                     Vector3.ProjectOnPlane(stepTargets[0].forward, endNormal),
@@ -137,11 +137,11 @@ public class MainProceduralController : MonoBehaviour
                     //Vector3 temp = transform.position;
                     //temp.y = transform.position.y+0.3f ;
                     //transform.position = temp;
-                    transform.Translate(Vector3.up * Time.deltaTime);
+                    transform.Translate(Vector3.up*2 * Time.deltaTime);
                 }
                 else if (endPos.y <= transform.position.y)
                 {
-                    transform.Translate(Vector3.down * Time.deltaTime);
+                    transform.Translate(Vector3.down * 2 * Time.deltaTime);
                 }
                 Quaternion endRot = Quaternion.LookRotation(
                     Vector3.ProjectOnPlane(stepTargets[1].forward, endNormal),
