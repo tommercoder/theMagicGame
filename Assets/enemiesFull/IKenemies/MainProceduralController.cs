@@ -103,11 +103,14 @@ public class MainProceduralController : MonoBehaviour
            
             if (GetGroundedEndPosition(out Vector3 endPos, out Vector3 endNormal, 0))
             {
+                Debug.Log("end pos " + endPos.y);
+                Debug.Log("trans pos " + transform.position.y);
                 if (endPos.y >= transform.position.y)
                 {
                     //Vector3 temp = transform.position;
                     //temp.y = transform.position.y+0.3f ;
                     //transform.position = temp;
+                    
                     transform.Translate(Vector3.up * 2 * Time.deltaTime);
                 }
                 else if(endPos.y <= transform.position.y)
@@ -137,7 +140,7 @@ public class MainProceduralController : MonoBehaviour
                     //Vector3 temp = transform.position;
                     //temp.y = transform.position.y+0.3f ;
                     //transform.position = temp;
-                    transform.Translate(Vector3.up*2 * Time.deltaTime);
+                    transform.Translate(Vector3.up* 2* Time.deltaTime);
                 }
                 else if (endPos.y <= transform.position.y)
                 {

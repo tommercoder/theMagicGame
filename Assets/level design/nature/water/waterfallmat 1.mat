@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: foam
+  m_Name: waterfallmat 1
   m_Shader: {fileID: -6465566751694194690, guid: d40b80f32d775274ab29051519f7ac59,
     type: 3}
   m_ShaderKeywords: 
@@ -21,13 +21,13 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - Vector1_2933CE67: 13.26
-    - Vector1_2D53F65C: 2.6
+    - Vector1_2933CE67: 2
+    - Vector1_2D53F65C: 3
     - Vector1_59CEFA96: 0
-    - Vector1_85EB1029: 13.36
-    - Vector1_96B84AB: -0.25
-    - Vector1_B45F2354: 2.4
-    - Vector1_FD1C770C: 0.748
+    - Vector1_85EB1029: 12
+    - Vector1_96B84AB: 0
+    - Vector1_B45F2354: -1.9
+    - Vector1_FD1C770C: 0.447
     m_Colors:
-    - Color_77EF7DA5: {r: 2.270603, g: 2.270603, b: 2.270603, a: 0}
+    - Color_77EF7DA5: {r: 0.1621692, g: 0.6396674, b: 1.7207954, a: 1}
     - Vector2_153EBBFF: {r: 0, g: 0.31, b: 0, a: 0}
