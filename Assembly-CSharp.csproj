@@ -128,6 +128,7 @@
     <Compile Include="Assets\enemiesFull\IKenemies\MainProceduralController.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\PlayerMovement.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\PlayerRotation.cs" />
+    <Compile Include="Assets\enemiesFull\IKenemies\navmeshPatrol.cs" />
     <Compile Include="Assets\treeColliders.cs" />
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -155,6 +156,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\NavMeshComponents-master\ProjectSettings\ProjectVersion.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -803,6 +805,22 @@
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{D1EBF7FC-F6B9-C5C8-9A1E-8EE77604B76B}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsExamplesEditor.csproj">
+      <Project>{F69D3C92-2EEC-1562-EAA8-2AD3F04033A4}</Project>
+      <Name>NavMeshComponentsExamplesEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsEditor.csproj">
+      <Project>{A04599F8-43A2-4AD4-E482-2D06756CCE7D}</Project>
+      <Name>NavMeshComponentsEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponents.csproj">
+      <Project>{5A89C100-E9FA-2CB1-29FA-03A7739DA62D}</Project>
+      <Name>NavMeshComponents</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsExamples.csproj">
+      <Project>{E69844FB-FDEB-103F-24D9-EB4981515FB2}</Project>
+      <Name>NavMeshComponentsExamples</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
