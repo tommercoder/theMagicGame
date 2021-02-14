@@ -68,9 +68,9 @@ public class MainProceduralController : MonoBehaviour
     //test moving
     void moveForward()
     {
-        //baksBot.localPosition += Vector3.right * Time.deltaTime;
-        baksBot.Translate(Vector3.right * Time.deltaTime*2f);
-        //baksBot.localPosition = Vector3.MoveTowards(baksBot.position, offsetObject.position, Time.deltaTime*2f);
+       // transform.position = Vector3.MoveTowards(transform.position, transform.right, Time.deltaTime * 2f);
+      //  baksBot.Translate(Vector3.right * Time.deltaTime*2f);
+       
     }
    
     void Update()
@@ -103,8 +103,8 @@ public class MainProceduralController : MonoBehaviour
            
             if (GetGroundedEndPosition(out Vector3 endPos, out Vector3 endNormal, 0))
             {
-                Debug.Log("end pos " + endPos.y);
-                Debug.Log("trans pos " + transform.position.y);
+                //Debug.Log("end pos " + endPos.y);
+               // Debug.Log("trans pos " + transform.position.y);
                 if (endPos.y >= transform.position.y)
                 {
                     //Vector3 temp = transform.position;

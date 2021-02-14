@@ -20,9 +20,9 @@ TagManager:
   - 
   - player
   - ground layer
-  - 
-  - 
-  - 
+  - procedural enemy
+  - enemy
+  - npc
   - 
   - 
   - 
