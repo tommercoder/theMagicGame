@@ -2,31 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-public class MainProceduralController : MonoBehaviour
+public class ProceduralLeg : MonoBehaviour
 {
     //with this script also using dontmovewithparent.cs
     [Header("OBJECTS")]
-    public Transform targetRight = null;
+    
     public Transform targetLeft = null;
-    public Transform baksBot = null;
 
+    public GameObject player;
     
     public LayerMask mask;
     [Header("STEP SETTINGS")]
     public bool Moving;
     public Transform stepTargetLeft;
-    public Transform stepTargetRight;
-    public List<Transform> stepTargets = new List<Transform>(2);
+   
+    public List<Transform> stepTargets = new List<Transform>(1);
     public float wantStepAtDistance = 0.45f;
     public float timeToMakeStep = 0.125f;
     
     public bool waited = false;
     [SerializeField, Range(0, 1)] float stepOvershootFraction = 0.8f;
     
-    public DontMoveWithParent dontMoveWithParentRight;
+    
     public DontMoveWithParent dontMoveWithParentLeft;
     public Transform target;
-    private List<Transform> footIKTargets = new List<Transform>(2);
+    private List<Transform> footIKTargets = new List<Transform>(1);
     public Transform head;
     Vector3 headPosition;
     //enable when collide
@@ -34,25 +34,26 @@ public class MainProceduralController : MonoBehaviour
     {
         //when collide they are visible
         stepTargetLeft.gameObject.GetComponent<Renderer>().enabled = true;
-        stepTargetRight.gameObject.GetComponent<Renderer>().enabled = true;
+        
     }
     //hide in game steptargets
     private void Awake()
     {
         //for not to see target spheres on game menu
         stepTargetLeft.gameObject.GetComponent<Renderer>().enabled = false;
-        stepTargetRight.gameObject.GetComponent<Renderer>().enabled = false;
+        
     }
     private void Start()
     {
+        player = GameObject.Find("character");
         //GetComponent<navmeshPatrol>().enabled = false;
         //GetComponent<navmeshPatrol>().enabled = true;
         //adding targets and targets to lists;
         footIKTargets.Add(targetLeft);
-        footIKTargets.Add(targetRight);
+        
 
         stepTargets.Add(stepTargetLeft);
-        stepTargets.Add(stepTargetRight);
+        
 
          headPosition = head.position;
         
@@ -70,78 +71,37 @@ public class MainProceduralController : MonoBehaviour
     //test moving
     void moveForward()
     {
-       // transform.position = Vector3.MoveTowards(transform.position, transform.right, Time.deltaTime * 2f);
-      //  baksBot.Translate(Vector3.right * Time.deltaTime*2f);
-       
+        // transform.position = Vector3.MoveTowards(transform.position, transform.right, Time.deltaTime * 2f);
+        //transform.Translate(Vector3.right * Time.deltaTime*2f);
+        if (Vector3.Distance(player.transform.position, transform.position) < 4f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime * 2f);
+            Vector3 relativePos = player.transform.position - transform.position;
+            Quaternion toRotation = Quaternion.LookRotation(relativePos);
+            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, Time.deltaTime);
+        }
+
     }
-   
+
     void Update()
     {
-        Vector3 down = transform.TransformDirection(Vector3.down) * 3;
-        
-        RaycastHit hit;
-        if(Physics.Raycast(head.position+Vector3.down/2, down, out hit,10, mask))
-        {
-            //Debug.Log(Vector3.Distance(head.position, hit.point));
-            if (Vector3.Distance(head.position,hit.point) < 3.0f)
-            {
-                //Vector3 temp = transform.position;
-                //temp.y = headPosition.y-2;
-                //transform.position = temp;
-                
-            }
-            //transform.position = Vector3.zero;
-        }
-        Debug.DrawRay(head.position + Vector3.down/2, down, Color.red);
+       
         //function to check ground for targets
         stepTargetIk(0);
-        stepTargetIk(1);
+        
         //distance between target and step target
-        float distanceRight = Vector3.Distance(footIKTargets[0].position, stepTargets[0].position);
-        float distanceLeft = Vector3.Distance(footIKTargets[1].position, stepTargets[1].position);
+       
+        float distanceLeft = Vector3.Distance(footIKTargets[0].position, stepTargets[0].position);
         //make step with right foot
-        if (distanceRight > wantStepAtDistance)
-        {
-           
-            if (GetGroundedEndPosition(out Vector3 endPos, out Vector3 endNormal, 0))
-            {
-                //Debug.Log("end pos " + endPos.y);
-               // Debug.Log("trans pos " + transform.position.y);
-                if (endPos.y >= transform.position.y)
-                {
-                    //Vector3 temp = transform.position;
-                    //temp.y = transform.position.y+0.3f ;
-                    //transform.position = temp;
-                    
-                    transform.Translate(Vector3.up * 2 * Time.deltaTime);
-                }
-                else if(endPos.y <= transform.position.y)
-                {
-                    transform.Translate(Vector3.down * 2 * Time.deltaTime);
-                }
-                Quaternion endRot = Quaternion.LookRotation(
-                    Vector3.ProjectOnPlane(stepTargets[0].forward, endNormal),
-                    endNormal
-                );
-                StartCoroutine(
-                    MoveToPoint(endPos, endRot, timeToMakeStep, 0));
-                
-                StartCoroutine(wait());
-                
-                
-            }
-        }
+       
         //make step with left foot
-        if (distanceLeft > wantStepAtDistance && waited)
+        if (distanceLeft > wantStepAtDistance )
         {
             
-            if (GetGroundedEndPosition(out Vector3 endPos, out Vector3 endNormal, 1))
+            if (GetGroundedEndPosition(out Vector3 endPos, out Vector3 endNormal, 0))
             {
                 if (endPos.y >= transform.position.y)
                 {
-                    //Vector3 temp = transform.position;
-                    //temp.y = transform.position.y+0.3f ;
-                    //transform.position = temp;
                     transform.Translate(Vector3.up* 2* Time.deltaTime);
                 }
                 else if (endPos.y <= transform.position.y)
@@ -149,16 +109,16 @@ public class MainProceduralController : MonoBehaviour
                     transform.Translate(Vector3.down * 2 * Time.deltaTime);
                 }
                 Quaternion endRot = Quaternion.LookRotation(
-                    Vector3.ProjectOnPlane(stepTargets[1].forward, endNormal),
+                    Vector3.ProjectOnPlane(stepTargets[0].forward, endNormal),
                     endNormal
                 );
 
                 StartCoroutine(
-                    MoveToPoint(endPos, endRot, timeToMakeStep, 1));
+                    MoveToPoint(endPos, endRot, timeToMakeStep, 0));
                 StartCoroutine(wait());
             }
         }
-      
+        Debug.Log("KURWA");
         moveForward();
 
     }
@@ -224,8 +184,7 @@ public class MainProceduralController : MonoBehaviour
         Moving = true;
         if(index == 0)
             dontMoveWithParentLeft.dontMoveWithParent = false;
-        if (index == 1)
-            dontMoveWithParentRight.dontMoveWithParent = false ;
+       
 
         Vector3 startPoint = footIKTargets[index].position;//target.position;
         Quaternion startRot = footIKTargets[index].rotation;
@@ -273,12 +232,7 @@ public class MainProceduralController : MonoBehaviour
             dontMoveWithParentLeft.dontMoveWithParent = true;
 
         }
-        if (index == 1)
-        {
-            dontMoveWithParentRight.savedPosition = endPoint;//stepTargets[1].position;
-            dontMoveWithParentRight.dontMoveWithParent = true;
-
-        }
+        
     }
    
     
