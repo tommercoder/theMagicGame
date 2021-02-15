@@ -45,6 +45,8 @@ public class MainProceduralController : MonoBehaviour
     }
     private void Start()
     {
+        //GetComponent<navmeshPatrol>().enabled = false;
+        //GetComponent<navmeshPatrol>().enabled = true;
         //adding targets and targets to lists;
         footIKTargets.Add(targetLeft);
         footIKTargets.Add(targetRight);
