@@ -74,6 +74,9 @@ public class attacksController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("attackanimation" + animator.GetInteger("attackAnimation"));
+        //Debug.Log("canclick" + canClick + canClickSec);
+        //Debug.Log("noOfClick" + noOfClick + noOfClickSecond);
         if (movement.instance.MouseOverInventoryB && inventoryManager.instance.inventoryOpened)
             return;
         bool isDrawedSword = animator.GetBool(isDrawedSwordHash);
@@ -238,7 +241,7 @@ public class attacksController : MonoBehaviour
             animator.SetInteger("attackAnimation", 1);
         }
     }    
-    public void secondCombatCheck()
+    public void secondCombatCheck()//animation event
     {
         canClickSec = false;
         
@@ -311,7 +314,6 @@ public class attacksController : MonoBehaviour
         }
         else if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack") && noOfClick >= 2)
         {
-            
             animator.SetInteger("attackAnimation", 2);
             canClick = true;
         }

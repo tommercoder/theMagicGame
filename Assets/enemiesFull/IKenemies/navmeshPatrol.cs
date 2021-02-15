@@ -25,17 +25,20 @@ public class navmeshPatrol : MonoBehaviour
     void AttackPlayer()
     {
         attackingPlayer = true;
-        Quaternion rotation = Quaternion.LookRotation(player.transform.position - transform.position);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime);
+        //Quaternion rotation = Quaternion.LookRotation(player.transform.position - transform.position);
+        //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime);
 
+        Vector3 relativePos = player.transform.position - transform.position;
+        Quaternion toRotation = Quaternion.LookRotation(relativePos);
+        transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 1 * Time.deltaTime);
 
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, player.transform.rotation, Time.deltaTime* 1);
-        Debug.Log("player attacked");
+        // Debug.Log("player attacked");
     }
     private void Update()
     {
 
-        Debug.Log("distance to player is " + Vector3.Distance(transform.position, player.transform.position));
+       // Debug.Log("distance to player is " + Vector3.Distance(transform.position, player.transform.position));
         if(Vector3.Distance(transform.position,player.transform.position) < 20)
         {
             attackingPlayer = true;
