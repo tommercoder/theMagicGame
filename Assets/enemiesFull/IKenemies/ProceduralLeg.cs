@@ -73,7 +73,7 @@ public class ProceduralLeg : MonoBehaviour
     {
         // transform.position = Vector3.MoveTowards(transform.position, transform.right, Time.deltaTime * 2f);
         //transform.Translate(Vector3.right * Time.deltaTime*2f);
-        if (Vector3.Distance(player.transform.position, transform.position) < 4f)
+        if (Vector3.Distance(player.transform.position, transform.position) > 4f && Vector3.Distance(player.transform.position, transform.position) < 25f)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime * 2f);
             Vector3 relativePos = player.transform.position - transform.position;
@@ -91,22 +91,22 @@ public class ProceduralLeg : MonoBehaviour
         
         //distance between target and step target
        
-        float distanceLeft = Vector3.Distance(footIKTargets[0].position, stepTargets[0].position);
+        float distance = Vector3.Distance(footIKTargets[0].position, stepTargets[0].position);
         //make step with right foot
        
         //make step with left foot
-        if (distanceLeft > wantStepAtDistance )
+        if (distance > wantStepAtDistance )
         {
             
             if (GetGroundedEndPosition(out Vector3 endPos, out Vector3 endNormal, 0))
             {
                 if (endPos.y >= transform.position.y)
                 {
-                    transform.Translate(Vector3.up* 2* Time.deltaTime);
+                    transform.Translate(Vector3.up* 3* Time.deltaTime);
                 }
                 else if (endPos.y <= transform.position.y)
                 {
-                    transform.Translate(Vector3.down * 2 * Time.deltaTime);
+                    transform.Translate(Vector3.down * 3 * Time.deltaTime);
                 }
                 Quaternion endRot = Quaternion.LookRotation(
                     Vector3.ProjectOnPlane(stepTargets[0].forward, endNormal),
@@ -118,7 +118,7 @@ public class ProceduralLeg : MonoBehaviour
                 StartCoroutine(wait());
             }
         }
-        Debug.Log("KURWA");
+       
         moveForward();
 
     }

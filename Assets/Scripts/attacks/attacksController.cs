@@ -100,7 +100,14 @@ public class attacksController : MonoBehaviour
         {
 
             float time = 3f;
-            if(castPressed && Abilities[1].canUse && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast") && noOfClick==0 && noOfClickSecond==0)
+            if(castPressed && Abilities[1].canUse && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast") && noOfClick==0 && noOfClickSecond==0
+               &&  !animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
+                && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
+                && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack")
+               
+              && !animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
+                    && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
+                    && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
             {
                 Abilities[1].TriggerAbility();
                 if (!Abilities[1].dashStarted)
@@ -152,7 +159,7 @@ public class attacksController : MonoBehaviour
 
         
         //attacks
-        if(Input.GetMouseButtonDown(0) && isDrawedSword && !firstPlayed)
+        if(Input.GetMouseButtonDown(0) && isDrawedSword && !firstPlayed )
         {
             
             ComboStarter();
@@ -221,22 +228,22 @@ public class attacksController : MonoBehaviour
     }
     void ComboStarterSecond()
     {
-        if(canClickSec)
+        if(canClickSec && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash"))
         {
             noOfClickSecond++;
         }
-        if(noOfClickSecond == 1)
+        if(noOfClickSecond == 1 && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash"))
         {
             animator.SetInteger("attackAnimation", 11);
         }
     }
     void ComboStarter()
     {
-        if(canClick)
+        if(canClick && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash"))
         {
             noOfClick++;
         }
-        if(noOfClick == 1)
+        if(noOfClick == 1 && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash"))
         {
             animator.SetInteger("attackAnimation", 1);
         }
