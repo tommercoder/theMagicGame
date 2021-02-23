@@ -27,8 +27,7 @@ public class ProceduralLeg : MonoBehaviour
     public DontMoveWithParent dontMoveWithParentLeft;
     public Transform target;
     private List<Transform> footIKTargets = new List<Transform>(1);
-    public Transform head;
-    Vector3 headPosition;
+    
     //enable when collide
     private void OnCollisionEnter(Collision collision)
     {
@@ -55,7 +54,7 @@ public class ProceduralLeg : MonoBehaviour
         stepTargets.Add(stepTargetLeft);
         
 
-         headPosition = head.position;
+      
         
         
     }

@@ -37,6 +37,7 @@ public class attacksController : MonoBehaviour
     public bool canCast;
     public CharacterController CharacterController;
     [SerializeField] public ParticleSystem dashParticle = default;
+    public bool isDrawedSword;
     private void Awake()
     {
         Abilities = GetComponents<AbilityMain>();//mozna dodac jeszcze abilities ille chcę
@@ -79,16 +80,16 @@ public class attacksController : MonoBehaviour
         //Debug.Log("noOfClick" + noOfClick + noOfClickSecond);
         if (movement.instance.MouseOverInventoryB && inventoryManager.instance.inventoryOpened)
             return;
-        bool isDrawedSword = animator.GetBool(isDrawedSwordHash);
-        bool attackPressedFirst = animator.GetBool(attackPressedFirstHash);
-        bool attackPressedSecond = animator.GetBool(attackPressedSecondHash);
-        bool superAttackPressed = animator.GetBool(superAttackPressedHash);
+       isDrawedSword = animator.GetBool(isDrawedSwordHash);
+        //bool attackPressedFirst = animator.GetBool(attackPressedFirstHash);
+       // bool attackPressedSecond = animator.GetBool(attackPressedSecondHash);
+       // bool superAttackPressed = animator.GetBool(superAttackPressedHash);
 
-        bool MouseattackPressed = Input.GetMouseButtonDown(0);
-        bool wPressed = Input.GetKey("w");
-        bool sPressed = Input.GetKey("s");
-        bool diPressing = Input.GetKey("d");
-        bool aPressed = Input.GetKey("a");
+      //  bool MouseattackPressed = Input.GetMouseButtonDown(0);
+      //  bool wPressed = Input.GetKey("w");
+      //  bool sPressed = Input.GetKey("s");
+      //  bool diPressing = Input.GetKey("d");
+      //  bool aPressed = Input.GetKey("a");
         bool castPressed = Input.GetKey("c");
         bool ballCastPressed = Input.GetKey("x");
         bool swordSlashAbilityPressed = Input.GetKey("q");

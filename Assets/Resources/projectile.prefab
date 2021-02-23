@@ -125,3 +125,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToDestroy: 4
   damage: 1
+  playerMeshColliderForDamage:
+  - {fileID: 0}

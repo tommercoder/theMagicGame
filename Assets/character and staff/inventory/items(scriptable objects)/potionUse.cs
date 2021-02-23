@@ -12,7 +12,7 @@ public class potionUse : Item
     }
     #endregion
     public typeOfItem type;
-    public bool speedPotionUsing;
+    public bool speedPotionUsing = false;
     //public ParticleSystem healthParticle;
     //public ParticleSystem speedParticle;
     //public ParticleSystem damageParticle;
@@ -106,7 +106,8 @@ public class potionUse : Item
                     }
                 }
                 //this bool is for movement script to stop changing speed
-                speedPotionUsing = true;
+                //speedPotionUsing = true;
+                movement.instance.speedPotionUsingNow = true;
                 potionParticle.instance.turn(type);
                 potionParticle.instance.startTimer(120.0f, type);
             }

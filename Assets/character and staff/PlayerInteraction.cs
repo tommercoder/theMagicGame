@@ -13,7 +13,7 @@ public class PlayerInteraction : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("interacting with" + other.name);
+        
         
         //dlatego zeby nie wyswietlac pick up panel kiedy mam sword u siebie wziety
         if(other.GetComponent<weaponInteract>()!= null)
@@ -24,6 +24,7 @@ public class PlayerInteraction : MonoBehaviour
        
         if(other.tag=="interactable object" && other.GetComponent<Interact>()!=null )
         {
+            Debug.Log("interacting with" + other.name);
             other.GetComponent<Interact>().InteractWith();
             panelShow.showPanel("Press E to " + other.GetComponent<Interact>().InteractedText);
             

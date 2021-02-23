@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - interactable object
   - inventoryTAG
+  - ENEMY
   layers:
   - Default
   - TransparentFX
