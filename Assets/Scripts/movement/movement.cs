@@ -40,7 +40,7 @@ public class movement : MonoBehaviour
 	public bool canMove ;
 	attacksController attacks;
 	public bool MouseOverInventoryB;
-	
+	public bool speedPotionUsingNow = false;
 	// Use this for initialization
 	void Start()
 	{
@@ -90,7 +90,7 @@ public class movement : MonoBehaviour
 		InputMagnitude();
 		isRunningSword = anim.GetBool("isRunningSword");
 
-		if (!potionUse.instance.speedPotionUsing)
+		if (!speedPotionUsingNow)
 		{
 			if (isRunningSword)
 				playerSpeed = 5;

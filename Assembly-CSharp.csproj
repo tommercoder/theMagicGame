@@ -132,6 +132,7 @@
     <Compile Include="Assets\enemiesFull\IKenemies\ProceduralStats.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\destroyProjectile.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\navmeshPatrol.cs" />
+    <Compile Include="Assets\swordDamage.cs" />
     <Compile Include="Assets\treeColliders.cs" />
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

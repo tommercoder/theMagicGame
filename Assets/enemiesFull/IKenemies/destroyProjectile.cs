@@ -6,11 +6,12 @@ public class destroyProjectile : MonoBehaviour
 {
     public float timeToDestroy;
     public int damage;
-   
+    public CapsuleCollider playerMeshColliderForDamage;
     // Start is called before the first frame update
     void Start()
     {
         Destroy(gameObject, timeToDestroy);
+        
     }
     private void OnTriggerEnter(Collider other)
     {

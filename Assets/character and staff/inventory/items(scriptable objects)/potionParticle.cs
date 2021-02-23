@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//turn on particles and turn off and on timers for potions
 public class potionParticle : MonoBehaviour
 {
     public static potionParticle instance;
@@ -57,6 +57,7 @@ public class potionParticle : MonoBehaviour
         {
             yield return new WaitForSeconds(time);
             movement.instance.playerSpeed -= 2;
+            movement.instance.speedPotionUsingNow = false;
         }
     }
     public void potionTimer(float givenTime)

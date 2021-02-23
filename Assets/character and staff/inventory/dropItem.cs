@@ -45,10 +45,12 @@ public class dropItem : MonoBehaviour, IDropHandler
 
                 hit.point = new Vector3(hit.point.x,inventory.itemsGameObjects[index].transform.position.y, hit.point.z);//zmieniam hit point zeby otzymac "y" position objektu
                 inventory.itemsGameObjects[index].SetActive(true);//robie objekt ponownie aktywnym
+                Inventory.instance.itemsGameObjects[index].GetComponent<FloatingItem>().Rotating = true;
                 inventory.itemsGameObjects[index].transform.position = hit.point;//wstawiam go na scene
                 inventory.removeGOitem(inventory.itemsGameObjects[index]);//usuwam z pierwszej listy 
                 inventory.removeItem(gameObject.GetComponentInParent<Slot>().item);//usuwam z drugiej listy
-                Inventory.instance.itemsGameObjects[index].GetComponent<FloatingItem>().Rotating = true;
+                    
+                
                 
 
                 index = 0;

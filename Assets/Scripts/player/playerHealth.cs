@@ -35,13 +35,16 @@ public class playerHealth : MonoBehaviour
         
         healthBar.setHealth(currentHealth);
         //testing
-
-        if(Input.GetKeyDown(KeyCode.P))
+        if(currentHealth <= 0)
         {
-            //test
-            takeDamage(20);
-            
+            Die();
         }
+        //if(Input.GetKeyDown(KeyCode.P))
+        //{
+        //    //test
+        //    takeDamage(20);
+            
+        //}
     }
     void takeDamage(int damage)
     {

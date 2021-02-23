@@ -34,10 +34,17 @@ public class inventoryManager : MonoBehaviour
     void Update()
     {
         //opening inventory
-        if (Input.GetKeyDown(KeyCode.I)) {
+        //if (inventoryOpened)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Escape))
+        //    {
+        //        openInventory();
+        //    }
+        //}
+        if (Input.GetKeyDown(KeyCode.I) ) {
             openInventory();
         }
-
+       
         
     }
 
