@@ -7,6 +7,8 @@ public class weaponInteract : Interact
     
     public inventoryManager manager;
     public swordEquipping item;
+    public Animator animator;
+    public bool isColliding;
     public override void InteractWith()
     {
        
@@ -55,13 +57,23 @@ public class weaponInteract : Interact
             //Destroy(gameObject);
         }
     }
+    //damage 
     private void OnTriggerEnter(Collider other)
     {
-        if (attacksController.instance.isDrawedSword && Input.GetMouseButtonDown(0))//today this
+        if (isColliding)
+            return;
+        if ((animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
+                || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
+                || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack") || 
+                animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
+                || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
+                || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing")))
         {
+            
             if (other.gameObject.CompareTag("ENEMY"))
             {
-                Debug.Log("KICKED PROCEDURAL");
+                isColliding = true;
+                
                 if (other.gameObject.GetComponent<ProceduralStats>() != null)
                 {
 
@@ -69,7 +81,14 @@ public class weaponInteract : Interact
 
                 }
             }
+            StartCoroutine(Reset());
         }
+        
+    }
+    IEnumerator Reset()
+    {
+        yield return new WaitForSeconds(1.3f);
+        isColliding = false;
     }
 
 
