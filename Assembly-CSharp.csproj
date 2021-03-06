@@ -108,6 +108,7 @@
     <Compile Include="Assets\character and staff\Interact.cs" />
     <Compile Include="Assets\character and staff\NPCinteraction.cs" />
     <Compile Include="Assets\character and staff\PlayerInteraction.cs" />
+    <Compile Include="Assets\character and staff\characterStats.cs" />
     <Compile Include="Assets\character and staff\inventory\Inventory.cs" />
     <Compile Include="Assets\character and staff\inventory\ItemDrag.cs" />
     <Compile Include="Assets\character and staff\inventory\Slot.cs" />

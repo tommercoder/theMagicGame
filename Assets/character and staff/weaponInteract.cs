@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class weaponInteract : Interact
 {
     
@@ -79,12 +79,17 @@ public class weaponInteract : Interact
 
                     other.gameObject.GetComponent<ProceduralStats>().currentHealth -= item.swordDamage;//this.gameObject.GetComponent<weaponInteract>().item.swordDamage;
 
+
+                    other.gameObject.transform.DOMove(other.gameObject.transform.position + (-other.gameObject.transform.forward * 4), 0.2f);//moving enemy back after hit
+                    Debug.Log("isKinematic = false;");
+                    
                 }
             }
             StartCoroutine(Reset());
         }
         
     }
+   
     IEnumerator Reset()
     {
         yield return new WaitForSeconds(1.3f);

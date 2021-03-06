@@ -7,10 +7,11 @@ public class swordSlashAbility : AbilityMain
     public AbilityUI AbilityUI;
     public playerSword swordController;
     public Transform sword;
-    public int waitToTurnOffSlash = 5;
+    public float waitToTurnOffSlash;
     // Start is called before the first frame update
     void Start()
     {
+        waitToTurnOffSlash = characterStats.instance.timeOfSwordAbility;
         swordController = GetComponent<playerSword>();
         //sword = swordController.sword.transform;
     }
