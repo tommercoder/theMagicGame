@@ -81,7 +81,7 @@ public class weaponInteract : Interact
 
 
                     other.gameObject.transform.DOMove(other.gameObject.transform.position + (-other.gameObject.transform.forward * 4), 0.2f);//moving enemy back after hit
-                    Debug.Log("isKinematic = false;");
+                    
                     
                 }
             }

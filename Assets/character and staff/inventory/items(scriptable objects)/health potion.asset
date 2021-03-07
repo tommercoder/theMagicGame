@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: health potion
   m_EditorClassIdentifier: 
   name: 'health potion '
-  icon: {fileID: 21300000, guid: df646550bafb34bbc8544dc1cb378d6e, type: 3}
+  icon: {fileID: 21300000, guid: 923f8896ffcac2d43b849327d63be602, type: 3}
   maxStack: 4
   currentStack: 1
   description: makes you live longer

@@ -26,7 +26,7 @@ public class triggerFireBallScript : MonoBehaviour
             other.gameObject.GetComponent<ProceduralStats>().currentHealth -= characterStats.instance.damageFromFireball;//this.gameObject.GetComponent<weaponInteract>().item.swordDamage;
 
 
-            other.gameObject.transform.DOMove(other.gameObject.transform.position + (-other.gameObject.transform.forward * 2), 0.2f);
+            other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.forward * 2), 0.2f);
         }
     }
 }
