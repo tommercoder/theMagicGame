@@ -19,3 +19,5 @@ MonoBehaviour:
   description: green sword description
   option: damage is 2
   swordDamage: 2
+  oldDamage: 2
+  savedPosition: {x: 86.33539, y: 3.9639788, z: 300.8418}

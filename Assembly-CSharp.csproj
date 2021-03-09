@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\ui scripts\AbilityUI.cs" />
     <Compile Include="Assets\Unity\ConstraintSamples\Scripts\mParent.cs" />
     <Compile Include="Assets\Unity\Info\Scripts\Readme.cs" />
+    <Compile Include="Assets\allSwordReset.cs" />
     <Compile Include="Assets\another\AlignInEditor\AlignInEditor.cs" />
     <Compile Include="Assets\another\Bonehead\ArrowGizmo.cs" />
     <Compile Include="Assets\another\Bonehead\Scripts\Gecko\GeckoController_Full.cs" />

@@ -45,6 +45,11 @@ public class MainProceduralController : MonoBehaviour
     }
     private void Start()
     {
+        if (GetComponentInParent<navmeshPatrol>() != null)
+        {
+            GetComponentInParent<navmeshPatrol>().enabled = false;
+            GetComponentInParent<navmeshPatrol>().enabled = true;
+        }
         //GetComponent<navmeshPatrol>().enabled = false;
         //GetComponent<navmeshPatrol>().enabled = true;
         //adding targets and targets to lists;

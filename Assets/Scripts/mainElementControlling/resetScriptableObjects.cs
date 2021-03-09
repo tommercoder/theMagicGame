@@ -13,7 +13,7 @@ public class resetScriptableObjects : MonoBehaviour
             scriptableObjects[i].currentStack = 1;
         }
     }
-
+   
     // Update is called once per frame
     void Update()
     {

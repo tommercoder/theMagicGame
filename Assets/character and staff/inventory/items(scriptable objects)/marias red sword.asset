@@ -18,4 +18,6 @@ MonoBehaviour:
   currentStack: 1
   description: 'Red Sword for blood of your enemies '
   option: damage is 4
-  swordDamage: 4
+  swordDamage: 6
+  oldDamage: 6
+  savedPosition: {x: 76.20914, y: 3.9787712, z: 303.0144}

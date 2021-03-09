@@ -16,8 +16,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 2052e230f6c94b74cb55b52830091f34, type: 3}
   maxStack: 4
   currentStack: 1
-  description: this potion was made by the best witches of adventure land,works for
-    1 minute.
+  description: you have 1 minute of power(but only with sword you've used it for)
   option: increase your damage + 20%
   type: 2
   speedPotionUsing: 0

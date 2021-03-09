@@ -21,6 +21,8 @@ public class navmeshPatrol : MonoBehaviour
     public float projectileSpeed;
     private void Start()
     {
+        
+        this.enabled = true;
         projectileSpeed = 60f;
         fireRate = 2f;
         nextFire = Time.time;   

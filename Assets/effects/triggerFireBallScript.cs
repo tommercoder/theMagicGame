@@ -27,6 +27,7 @@ public class triggerFireBallScript : MonoBehaviour
 
 
             other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.forward * 2), 0.2f);
+            Debug.Log("fireball hitttin " + other.name);
         }
     }
 }

@@ -4,11 +4,22 @@ using UnityEngine;
 using DG.Tweening;
 public class weaponInteract : Interact
 {
-    
+    #region singleton
+    public static weaponInteract instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+    #endregion
     public inventoryManager manager;
     public swordEquipping item;
     public Animator animator;
+    public int damage;
     public bool isColliding;
+    private void Start()
+    {
+        damage = item.swordDamage;
+    }
     public override void InteractWith()
     {
        
@@ -81,7 +92,7 @@ public class weaponInteract : Interact
 
 
                     other.gameObject.transform.DOMove(other.gameObject.transform.position + (-other.gameObject.transform.forward * 4), 0.2f);//moving enemy back after hit
-                    
+                    Debug.Log("interact weapon with " + other.name);
                     
                 }
             }
