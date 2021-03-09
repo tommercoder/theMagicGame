@@ -9,9 +9,13 @@ public class swordSlashAbility : AbilityMain
     public Transform sword;
     public float waitToTurnOffSlash;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        
+    }
     void Start()
     {
-        waitToTurnOffSlash = characterStats.instance.timeOfSwordAbility;
+        
         swordController = GetComponent<playerSword>();
         //sword = swordController.sword.transform;
     }
@@ -34,6 +38,6 @@ public class swordSlashAbility : AbilityMain
         // Update is called once per frame
     void Update()
     {
-        
+        waitToTurnOffSlash = characterStats.instance.timeOfSwordAbility;
     }
 }

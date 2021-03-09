@@ -8,6 +8,7 @@ public class potionParticle : MonoBehaviour
     public ParticleSystem healthParticle;
     public ParticleSystem speedParticle;
     public ParticleSystem damageParticle;
+    public bool usingDamagePotionNow;
     private void Awake()
     {
         instance = this;
@@ -49,7 +50,12 @@ public class potionParticle : MonoBehaviour
     {
         if (type == typeOfItem.damagePotion)
         {
+            usingDamagePotionNow = true;
+            Debug.Log("weapon damage now " + weaponInteract.instance.damage);
             yield return new WaitForSeconds(time);
+            usingDamagePotionNow = false;
+            playerSword.instance.currentSword.swordDamage -= playerSword.instance.currentSword.swordDamage * 20 / 100;
+
             //set damage back
         }
 

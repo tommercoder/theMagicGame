@@ -51,6 +51,7 @@ public class Slot : MonoBehaviour
     {
         if(item!=null)
         {
+            
             item.useFromInventory();
             if (onSlotChangedCalled != null)
                 onSlotChangedCalled.Invoke();
@@ -64,11 +65,12 @@ public class Slot : MonoBehaviour
         {
             if(Inventory.instance.items[i]==item)
             {
-                Vector3 dropPosition = new Vector3(character.position.x, Inventory.instance.itemsGameObjects[i].transform.position.y, character.position.z);
-                //Vector3 position = Inventory.instance.itemsGameObjects[i].transform.position;
+
+                Vector3 dropPosition = character.position + Vector3.up * 3;//new Vector3(character.position.x, character.position.y+Vector3.up/*Inventory.instance.itemsGameObjects[i].transform.position.y*/, character.position.z);
+                ////Vector3 position = Inventory.instance.itemsGameObjects[i].transform.position;
                 Inventory.instance.itemsGameObjects[i].transform.rotation = Quaternion.identity;
-                //position.y = swordEquipping.instance.savedPosition.y;
-                //Inventory.instance.itemsGameObjects[i].transform.position = position;
+                //////position.y = swordEquipping.instance.savedPosition.y;
+                ////Inventory.instance.itemsGameObjects[i].transform.position = position;
 
 
                 

@@ -19,7 +19,7 @@ public class characterStats : MonoBehaviour
     {
         lvl = 1;
         damageFromFireball = lvl * 7;
-        timeOfSwordAbility = lvl * 1.5f;
+        timeOfSwordAbility = lvl * 3;
     }
 
     // Update is called once per frame

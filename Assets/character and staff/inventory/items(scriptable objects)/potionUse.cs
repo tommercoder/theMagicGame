@@ -30,6 +30,24 @@ public class potionUse : Item
                 if(playerHealth.instance.currentHealth > 80 )
                 {
                     playerHealth.instance.currentHealth = 100;
+                    #region deleting
+                    if (this.currentStack > 1)
+                    {
+                        this.currentStack -= 1;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < Inventory.instance.items.Count; i++)
+                        {
+                            if (Inventory.instance.items[i] == this)
+                            {
+                                Inventory.instance.removeItem(this);
+                                Inventory.instance.removeGOitem(Inventory.instance.itemsGameObjects[i]);
+                            }
+                        }
+                    }
+                    potionParticle.instance.turn(type);
+                    #endregion
                     return;
                 }
              //delete from inventory if only one remain
@@ -59,36 +77,39 @@ public class potionUse : Item
         if (type == typeOfItem.damagePotion)
         {
 
-            //if(//damage is in some range then use and delete it from inventory;)
-            //{
-
-            //if (this.currentStack > 1)
-            //{
-            //    this.currentStack -= 1;
-            //}
-            //else
-            //{
-            //    for (int i = 0; i < Inventory.instance.items.Count; i++)
-            //    {
-            //        if (Inventory.instance.items[i] == this)
-            //        {
-            //            Inventory.instance.removeItem(this);
-            //            Inventory.instance.removeGOitem(Inventory.instance.itemsGameObjects[i]);
-            //        }
-            //    }
-            //}
-            //}
+            if (!potionParticle.instance.usingDamagePotionNow)
+            {
+                playerSword.instance.currentSword.swordDamage += playerSword.instance.currentSword.swordDamage * 20 / 100;
+                Debug.Log("name " + playerSword.instance.currentSword.name);
+                if (this.currentStack > 1)
+                {
+                    this.currentStack -= 1;
+                }
+                else
+                {
+                    for (int i = 0; i < Inventory.instance.items.Count; i++)
+                    {
+                        if (Inventory.instance.items[i] == this)
+                        {
+                            Inventory.instance.removeItem(this);
+                            Inventory.instance.removeGOitem(Inventory.instance.itemsGameObjects[i]);
+                        }
+                    }
+                }
+                potionParticle.instance.turn(type);
+                potionParticle.instance.startTimer(60.0f, type);
+            }
             //move it to if above
-            potionParticle.instance.turn(type);
-            potionParticle.instance.startTimer(60.0f, type);
+           
             //set the damage plus for player for given amount of time;
             Debug.Log("using damagePotion" + name);
         }
         if (type == typeOfItem.speedPotion)
         {
             
-            if (movement.instance.playerSpeed == 4)
+            if (movement.instance.playerSpeed == 4 && !movement.instance.speedPotionUsingNow)
             {
+                waitAfterSpeed();
                 movement.instance.playerSpeed += 2;
                 if (this.currentStack > 1)
                 {
@@ -117,8 +138,11 @@ public class potionUse : Item
         }
      
     }
-
+    IEnumerator waitAfterSpeed()
+    {
+        yield return new WaitForSeconds(5f);
+    }
     
-
+    
 }
 public enum typeOfItem { healthPotion, speedPotion, damagePotion}//etc

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProceduralStats : MonoBehaviour
 {
-
+    public GameObject[] stepTargets;
     public Rigidbody rigidbody;
     public CapsuleCollider collider;
     public bool isDead;
@@ -16,7 +16,9 @@ public class ProceduralStats : MonoBehaviour
     public Rigidbody[] rigidbodies;
 
     public ProceduralLeg legScript;
+    public MainProceduralController mainScript;
     public navmeshPatrol patrolScript;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -24,8 +26,13 @@ public class ProceduralStats : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<CapsuleCollider>();
+        if(GetComponent<ProceduralLeg>()!=null)
         legScript = GetComponent<ProceduralLeg>();
+        if (GetComponentInChildren<MainProceduralController>() != null)
+            mainScript = GetComponentInChildren<MainProceduralController>();
+
         patrolScript = GetComponent<navmeshPatrol>();
+
 
         colliders = GetComponentsInChildren<Collider>();
         rigidbodies = GetComponentsInChildren<Rigidbody>();
@@ -37,7 +44,12 @@ public class ProceduralStats : MonoBehaviour
     }
     private void Update()
     {
-        if(currentHealth<=0)
+        //for (int i = 0; i < stepTargets.Length; i++)
+        //{
+        //    stepTargets[i].GetComponent<SphereCollider>().enabled = true;
+        //    stepTargets[i].GetComponent<MeshRenderer>().enabled = true;
+        //}
+        if (currentHealth<=0)
         {
             Die();
         }
@@ -55,6 +67,9 @@ public class ProceduralStats : MonoBehaviour
     }
     public void RagdollActive(bool active)
     {
+
+        
+
         //children
         foreach (var collider in colliders)
             collider.enabled = active;
@@ -67,7 +82,10 @@ public class ProceduralStats : MonoBehaviour
         //root
         this.enabled = !active;
         patrolScript.enabled = !active;
+        if(GetComponent<ProceduralLeg>()!=null)
         legScript.enabled = !active;
+        if(GetComponentInChildren<MainProceduralController>()!=null)
+        mainScript.enabled = !active;
 
         animator.enabled = !active;
         rigidbody.detectCollisions = !active;

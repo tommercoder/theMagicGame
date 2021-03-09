@@ -19,3 +19,5 @@ MonoBehaviour:
   description: first sword
   option: damage is 6
   swordDamage: 6
+  oldDamage: 6
+  savedPosition: {x: 76.261795, y: 3.9761987, z: 303.09985}

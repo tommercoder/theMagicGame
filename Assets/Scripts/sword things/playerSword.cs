@@ -22,6 +22,7 @@ public class playerSword : MonoBehaviour
 
     public Transform sword, swordEquiped, swordUnequiped;
     public swordEquipping currentSword;
+
     public GameObject currentSwordGameObject,temp;
     public bool isEquipedSword = false;
     public Transform spine;
@@ -29,6 +30,7 @@ public class playerSword : MonoBehaviour
     public Item item = null;
     private void Start()
     {
+        currentSword = currentSwordGameObject.GetComponent<weaponInteract>().item;
         //modernSword = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/ModernSword");
         //modernSword.SetActive(false);
 
@@ -39,8 +41,8 @@ public class playerSword : MonoBehaviour
     private void Update()
     {
        
-             temp = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/" + currentSwordGameObject.name);
-        
+            temp = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/" + currentSwordGameObject.name);
+
             currentSwordGameObject = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/" + currentSwordGameObject.name);
 
             currentSwordGameObject.SetActive(true);
@@ -48,6 +50,7 @@ public class playerSword : MonoBehaviour
             currentSwordGameObject.GetComponent<FloatingItem>().Rotating = false;
 
             sword = currentSwordGameObject.transform;
+          
         
         //if (Input.GetKey("1"))
         //{

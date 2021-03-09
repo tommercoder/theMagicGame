@@ -20,11 +20,13 @@ public class swordEquipping : Item
 
     #endregion
     public int swordDamage;
+    public int oldDamage;
     public Vector3 savedPosition;
+    
     public override void useFromInventory()
     {
         base.useFromInventory();
-
+        
         
        Debug.Log("clicked on sword" + name);
         playerSword.instance.currentSword = this;//dodaje ten item do scriptu playersword

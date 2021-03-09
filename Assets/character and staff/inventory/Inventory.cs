@@ -21,7 +21,7 @@ public class Inventory : MonoBehaviour
     }
 
     #endregion
-
+   
     public delegate void onItemChanged();
     public onItemChanged onItemChangedCalled;    
     public List<Item> items = new List<Item>();
