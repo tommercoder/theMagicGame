@@ -49,6 +49,7 @@ public class MainProceduralController : MonoBehaviour
         {
             GetComponentInParent<navmeshPatrol>().enabled = false;
             GetComponentInParent<navmeshPatrol>().enabled = true;
+            Debug.Log("reset for" + transform.parent.name);
         }
         //GetComponent<navmeshPatrol>().enabled = false;
         //GetComponent<navmeshPatrol>().enabled = true;

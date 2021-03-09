@@ -19,6 +19,7 @@ public class navmeshPatrol : MonoBehaviour
     public float fireRate;
     Vector3 projectileDirection;
     public float projectileSpeed;
+    public Transform gun;
     private void Start()
     {
         
@@ -39,7 +40,7 @@ public class navmeshPatrol : MonoBehaviour
         {
             prefab = Resources.Load("projectileOneLegSmall") as GameObject;
         }
-        projectilePoint = gameObject.transform.Find("projectile point");   
+        //projectilePoint = gameObject.transform.Find("projectile point");   
         current = 0;
         rotation = transform.rotation;
     }
@@ -47,10 +48,16 @@ public class navmeshPatrol : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
     }
+    void RotateGun()
+    {
+        Vector3 relativePos = player.transform.position - transform.position;
+        Quaternion toRotation = Quaternion.LookRotation(relativePos);
+        gun.rotation = Quaternion.Lerp(gun.rotation, toRotation, Time.deltaTime);
+    }
     void AttackPlayer()
     {
         attackingPlayer = true;
-       
+        RotateGun();
 
         Vector3 relativePos = player.transform.position - transform.position;
         Quaternion toRotation = Quaternion.LookRotation(relativePos);
