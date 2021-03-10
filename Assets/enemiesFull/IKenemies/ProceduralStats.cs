@@ -6,7 +6,7 @@ public class ProceduralStats : MonoBehaviour
 {
     public GameObject[] stepTargets;
     public Rigidbody rigidbody;
-    public CapsuleCollider collider;
+    public CapsuleCollider[] collider;
     public bool isDead;
     //public int damage;
     public int health = 10;
@@ -25,7 +25,7 @@ public class ProceduralStats : MonoBehaviour
         currentHealth = health;
         animator = GetComponentInChildren<Animator>();
         rigidbody = GetComponent<Rigidbody>();
-        collider = GetComponent<CapsuleCollider>();
+        collider = GetComponents<CapsuleCollider>();
         if(GetComponent<ProceduralLeg>()!=null)
         legScript = GetComponent<ProceduralLeg>();
         if (GetComponentInChildren<MainProceduralController>() != null)
@@ -60,8 +60,10 @@ public class ProceduralStats : MonoBehaviour
         isDead = true;
         //ragdoll physics (using character joints and rigidbodies)
         RagdollActive(true);
-        collider.isTrigger = false;
-        collider.enabled = true;
+        for (int i = 0;i < collider.Length; i++) {
+            collider[i].isTrigger = false;
+            collider[i].enabled = true;
+        }
         
         Destroy(this.gameObject, 4f);
     }
@@ -90,7 +92,10 @@ public class ProceduralStats : MonoBehaviour
         animator.enabled = !active;
         rigidbody.detectCollisions = !active;
         rigidbody.isKinematic = !active;
-        collider.enabled = !active;
+        for (int i = 0; i < collider.Length; i++)
+        {
+            collider[i].enabled = !active;
+        }
        
     }
 }
