@@ -26,6 +26,7 @@ public class swordSlashAbility : AbilityMain
         AbilityUI.ShowCoolDown(cooldownTime);
         abilityDone = true;
         //set damage of current sword higher
+        playerSword.instance.currentSword.swordDamage += playerSword.instance.currentSword.swordDamage * 20 / 100;
         StartCoroutine(waitOff());
     }
 
@@ -33,6 +34,7 @@ public class swordSlashAbility : AbilityMain
     {
         yield return new WaitForSeconds(waitToTurnOffSlash);
         playerSword.instance.sword.GetChild(1).gameObject.SetActive(false);
+        playerSword.instance.currentSword.swordDamage -= playerSword.instance.currentSword.swordDamage * 20 / 100;
     }
 
         // Update is called once per frame

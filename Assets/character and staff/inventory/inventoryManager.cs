@@ -33,15 +33,21 @@ public class inventoryManager : MonoBehaviour
     }
     void Update()
     {
-        //opening inventory
+        //if(Input.GetKeyDown(KeyCode.Escape))
+        //{
+           
+        //}
+        ////opening inventory
         //if (inventoryOpened)
         //{
         //    if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Escape))
         //    {
         //        openInventory();
+                
         //    }
         //}
-        if (Input.GetKeyDown(KeyCode.I) ) {
+        //else
+        if (Input.GetKeyDown(KeyCode.I)) {
             openInventory();
         }
        
@@ -74,8 +80,11 @@ public class inventoryManager : MonoBehaviour
         inventoryUi.SetActive(!inventoryUi.activeSelf);
         if (inventoryOpened)
         {
+                
             inventoryOpened = false;
             tooltipManager.hideTooltip();
+            
+            
         }
         else if (!inventoryOpened)
         {

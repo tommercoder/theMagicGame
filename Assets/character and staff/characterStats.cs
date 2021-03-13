@@ -14,17 +14,23 @@ public class characterStats : MonoBehaviour
     public int damageFromFireball;
     public float timeOfSwordAbility;
     public int lvl;
+
+    public int XP = 100;
     // Start is called before the first frame update
     void Start()
     {
-        lvl = 1;
-        damageFromFireball = lvl * 7;
-        timeOfSwordAbility = lvl * 3;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(XP%100==0)
+        {
+
+            lvl = XP / 100;
+            damageFromFireball = lvl * 3;
+            timeOfSwordAbility = lvl * 3;
+        }
     }
 }

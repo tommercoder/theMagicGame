@@ -38,7 +38,7 @@ public class dashAbility : AbilityMain
     {
         RaycastHit hit;
         Vector3 forward = transform.TransformDirection(Vector3.forward) * 5;
-        if (Physics.Raycast(transform.position+Vector3.up*2,forward,out hit,5,groundMask))
+        if (Physics.Raycast(transform.position+Vector3.up,forward,out hit,5,groundMask) || Physics.Raycast(transform.position + Vector3.up*2, forward, out hit, 5, groundMask))
         {
             if (hit.collider != null)
             {
@@ -55,6 +55,7 @@ public class dashAbility : AbilityMain
     {
         Vector3 forward = transform.TransformDirection(Vector3.forward) * 3;
         Debug.DrawRay(transform.position + Vector3.up * 2, forward, Color.red);
+        Debug.DrawRay(transform.position + Vector3.up , forward, Color.red);
     }
     //[SerializeField] private Volume dashVolume = default;
     public override void Ability()

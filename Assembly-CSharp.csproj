@@ -47,7 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>4.8.2.0</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>4.9.1.0</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>2019.4.14f1</UnityVersion>
@@ -64,6 +64,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\EnemyPatrol.cs" />
+    <Compile Include="Assets\EnemyStats.cs" />
     <Compile Include="Assets\Scripts\AnimationStateController.cs" />
     <Compile Include="Assets\Scripts\IK systems\FootIK.cs" />
     <Compile Include="Assets\Scripts\abilities\AbilityMain.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="Assets\Scripts\allSwordReset.cs" />
     <Compile Include="Assets\Scripts\attacks\attacksController.cs" />
     <Compile Include="Assets\Scripts\effects\fireballScript.cs" />
+    <Compile Include="Assets\Scripts\jumpScript.cs" />
     <Compile Include="Assets\Scripts\mainElementControlling\mouseCursorController.cs" />
     <Compile Include="Assets\Scripts\mainElementControlling\resetScriptableObjects.cs" />
     <Compile Include="Assets\Scripts\mainElementControlling\targetFrame.cs" />
@@ -135,7 +138,6 @@
     <Compile Include="Assets\enemiesFull\IKenemies\ProceduralStats.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\destroyProjectile.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\navmeshPatrol.cs" />
-    <Compile Include="Assets\swordDamage.cs" />
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\another\FastIK\Documentation.txt" />
