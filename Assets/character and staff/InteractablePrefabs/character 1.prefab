@@ -35762,7 +35762,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3959396586506629158}
   - component: {fileID: 3564637910005972121}
-  - component: {fileID: 3564637910005972116}
   - component: {fileID: 3564637910005972125}
   - component: {fileID: 3564637910005972127}
   - component: {fileID: 3564637910005972120}
@@ -35820,19 +35819,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 2.05, z: 0}
---- !u!65 &3564637910005972116
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4447668137343543964}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.98, y: 2.92, z: 1.99}
-  m_Center: {x: -0.09, y: 1.52, z: 0.33}
 --- !u!95 &3564637910005972125
 Animator:
   serializedVersion: 3
@@ -35921,6 +35907,10 @@ MonoBehaviour:
   playerSpeed: 4
   canMove: 0
   MouseOverInventoryB: 0
+  speedPotionUsingNow: 0
+  jumpSpeed: 8
+  gravity: 20
+  rb: {fileID: 0}
 --- !u!114 &3564637910005972123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35935,10 +35925,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3564637910005972125}
   attackState: 0
+  errorText: {fileID: 0}
   Abilities: []
   canCast: 0
   CharacterController: {fileID: 3564637910005972121}
   dashParticle: {fileID: 3564637908554208156}
+  isDrawedSword: 0
 --- !u!114 &3564637910005972117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35995,6 +35987,8 @@ MonoBehaviour:
   icon: {fileID: 0}
   cooldownTime: 3
   canUse: 1
+  dashStarted: 0
+  abilityDone: 0
   canCast: 0
   projectile: {fileID: 3917852474424828299, guid: d01aed929cc7a8041bb8f241c8fa8be7,
     type: 3}
@@ -36020,13 +36014,19 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 1d79a528a70bd1840b34ccbf6ee914b9, type: 3}
   cooldownTime: 2
   canUse: 1
+  dashStarted: 0
+  abilityDone: 0
   animator: {fileID: 3564637910005972125}
+  player: {fileID: 0}
   originalCam: {fileID: 0}
-  skinnedMesh: {fileID: 5752534128396938324}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
   dashParticle: {fileID: 5946976703477523979, guid: a00e72664ff485046bef7430cc820472,
     type: 3}
   controller: {fileID: 3564637910005972121}
   AbilityUI: {fileID: 0}
+  hitHitted: 0
 --- !u!114 &3564637910005972114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36043,9 +36043,12 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 45ff76d9bdbd4cd4eb4264f1cd436845, type: 3}
   cooldownTime: 10
   canUse: 1
+  dashStarted: 0
+  abilityDone: 0
   AbilityUI: {fileID: 0}
   swordController: {fileID: 3564637910005972127}
   sword: {fileID: 0}
+  waitToTurnOffSlash: 0
 --- !u!114 &3564637910005972115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36207,6 +36210,9 @@ MonoBehaviour:
   interacting: 0
   manager: {fileID: 0}
   item: {fileID: 11400000, guid: 69b45abb4c90e774baaa95effc55f7aa, type: 2}
+  animator: {fileID: 0}
+  damage: 0
+  isColliding: 0
 --- !u!114 &3564637909223672635
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -37,14 +37,22 @@ public class movement : MonoBehaviour
 	private Vector3 moveVector;
 	public float playerSpeed;
 	bool isRunningSword;
-	public bool canMove ;
+	public bool canMove;
 	attacksController attacks;
 	public bool MouseOverInventoryB;
 	public bool speedPotionUsingNow = false;
+	public float jumpSpeed = 8.0F;
+	public float gravity = 20.0F;
+	private Vector3 moveDirection = Vector3.zero;
+	private Vector3 playerVelocity;
+	private float jumpHeight = 10.0f;
+	private float gravityValue = -9.81f;
+	public Rigidbody rb;
+
 	// Use this for initialization
 	void Start()
 	{
-		
+		rb = GetComponent<Rigidbody>();
 		anim = this.GetComponent<Animator>();
 		cam = Camera.main;
 		controller = this.GetComponent<CharacterController>();
@@ -65,6 +73,22 @@ public class movement : MonoBehaviour
 		MouseOverInventoryB = false;
 
 	}
+	public void StopJumpEvent()
+    {
+		//desiredMoveDirection.y = 3f;
+		//Debug.Log("move" + desiredMoveDirection);
+		
+		//controller.Move(desiredMoveDirection);
+
+		//anim.ResetTrigger("isJumpingTrigger");
+		
+	}
+	public void StartJumpEvent()
+    {
+		
+		
+		
+    }
 	// Update is called once per frame
 	void Update()
 	{
@@ -83,10 +107,27 @@ public class movement : MonoBehaviour
 		//	return;
 		//}
 		//else
-  //      {
+		//      {
 		//	cam.GetComponent<CinemachineBrain>().enabled = true;
 		//}
+
+		//if (controller.isGrounded && Input.GetKey(KeyCode.Space))
+		//{
+		//	anim.SetTrigger("isJumpingTrigger");
+		//	controller.enabled = false;
+		//	GetComponent<CapsuleCollider>().enabled = true;
+
+		//	rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+
+		//	Debug.Log("fLying away");
+
+		//}
+
 		
+		
+
+
+
 		InputMagnitude();
 		isRunningSword = anim.GetBool("isRunningSword");
 
@@ -104,45 +145,42 @@ public class movement : MonoBehaviour
 		bool isDrawedSword = anim.GetBool("isDrawedSword");
 		bool sPressed = Input.GetKey("s");
 		isGrounded = controller.isGrounded;
+		//gravity applying below
 		if (isGrounded)
 		{
-			verticalVel -= 0;
+			desiredMoveDirection += Physics.gravity * Time.deltaTime;
+			//verticalVel -= 0;
 		}
 		else
 		{
-			verticalVel -= 2;
+			desiredMoveDirection += Physics.gravity * Time.deltaTime;
+			//verticalVel -= 2;
 		}
-		moveVector = new Vector3(0, verticalVel, 0);
 		
-		controller.Move(moveVector);
-
-		//slow walking
-		//if (attacks.enemiesAround && isDrawedSword && InputZ >= 0.0f)
-		//{
-		//	anim.SetBool("walkAttack", true);
-		//}
-		//if (!attacks.enemiesAround && isDrawedSword && InputZ >= 0.0f)
-		//{
-		//	anim.SetBool("walkAttack", false);
-
-		//}
-		//if (InputX.Equals(0.0f) && InputZ.Equals(0.0f))
-		//{
-		//	anim.SetBool("walkAttack", false);
-		//	anim.SetBool("walkAttackBack", false);
-		//}
-		//if(isDrawedSword && attacks.enemiesAround && InputZ < 0.0f)
+		//moveVector = new Vector3(0, verticalVel, 0);
+		
+		
+		//controller.Move(moveVector);
+		//jumping part
+		//if (controller.isGrounded && Input.GetKey(KeyCode.Space))
   //      {
-		//	anim.SetBool("walkAttackBack", true);
+		//	//GetComponent<movement>().enabled = false;
+		//	if (!anim.GetBool("isRunning"))
+		//	{
+		//		anim.SetTrigger("isJumpingTrigger");
+		//	}
+		//	else if(anim.GetBool("isRunning"))
+  //          {
+		//		anim.SetBool("isRunning", false);
+		//		anim.SetTrigger("isJumpingTrigger");
+		//	}
+			
+			
 		//}
-		
-		//if(InputZ < 0.0f && !attacks.enemiesAround )
-  //      {
-		//	anim.SetBool("walkAttackBack", false);
-		//}
-		
+	
+
 	}
-
+	
 	void PlayerMoveAndRotation()
 	{
 		InputX = Input.GetAxis("Horizontal");
@@ -160,10 +198,16 @@ public class movement : MonoBehaviour
 
 		forward.Normalize();
 		right.Normalize();
-
+		//if (Input.GetKey(KeyCode.Space) && isGrounded)
+		//{
+		//	desiredMoveDirection.y += jumpHeight * Time.deltaTime;
+		//	Debug.Log("desired =" + desiredMoveDirection.y);
+		//}
+		//moveDirection.y -= gravity * Time.deltaTime;
 		desiredMoveDirection = forward * InputZ + right * InputX;
 		desiredMoveDirectionBack = -forwardP *  -InputZ + rightP*InputX;// forward * InputZ + right * InputX;
-		if(isDrawedSword && MouseattackPressed)
+		
+		if (isDrawedSword && MouseattackPressed)
         {
 			canMove = false;
 
@@ -171,7 +215,9 @@ public class movement : MonoBehaviour
 		//Debug.Log("can move ?" + canMove);
 		if (blockRotationPlayer == false && canMove)
 		{
-
+			
+			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
+			controller.Move(desiredMoveDirection * Time.deltaTime * playerSpeed);
 			/*if (attacks.enemiesAround && attacks.attackState && isDrawedSword)
 			{
 				if (InputZ > 0.0f)
@@ -188,11 +234,10 @@ public class movement : MonoBehaviour
 			}*/
 			//else
 			//{
-				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
-				controller.Move(desiredMoveDirection * Time.deltaTime * playerSpeed);
+
 
 			//}
-			
+
 		}
 					
 		
@@ -210,7 +255,7 @@ public class movement : MonoBehaviour
 		
 		//Calculate the Input Magnitude
 		Speed = new Vector2(InputX, InputZ).sqrMagnitude;
-
+		
 		//Physically move player
 		if (Speed > allowPlayerRotation)
 		{
@@ -218,6 +263,7 @@ public class movement : MonoBehaviour
 			//anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
 			if (canMove )
 			{
+				
 				PlayerMoveAndRotation();
 				//if(!attacks.enemiesAround)
 				anim.SetBool("isRunning", true);

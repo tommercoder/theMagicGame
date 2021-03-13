@@ -8,6 +8,7 @@ public class mouseCursorController : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -16,10 +17,12 @@ public class mouseCursorController : MonoBehaviour
         if(inventoryManager.instance.inventoryOpened)
         {
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
         else
         {
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 }

@@ -89,10 +89,10 @@ public class weaponInteract : Interact
                 {
 
                     other.gameObject.GetComponent<ProceduralStats>().currentHealth -= item.swordDamage;//this.gameObject.GetComponent<weaponInteract>().item.swordDamage;
-
-
-                    other.gameObject.transform.DOMove(other.gameObject.transform.position + (-other.gameObject.transform.forward * 4), 0.2f);//moving enemy back after hit
                     Debug.Log("interact weapon with " + other.name);
+
+                    other.gameObject.transform.DOMove(other.gameObject.transform.position + ( transform.root.forward * 4), 0.2f);//moving enemy back after hit
+                    
                     
                 }
             }

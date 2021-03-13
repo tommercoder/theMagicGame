@@ -127,7 +127,14 @@ public class attacksController : MonoBehaviour
                     //random damage and effects here
             }
             
-            if (ballCastPressed && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast")  && Abilities[0].canUse && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && noOfClick== 0 && noOfClickSecond== 0)
+            if (ballCastPressed && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast")  && Abilities[0].canUse && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && noOfClick== 0 && noOfClickSecond== 0
+                &&  !animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
+                && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
+                && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack")
+               
+              && !animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
+                    && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
+                    && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
             {
                     movement.canMove = false;
                     animator.SetInteger("attackAnimation", 21);
