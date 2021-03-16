@@ -56,6 +56,7 @@ public class navmeshPatrol : MonoBehaviour
     }
     void AttackPlayer()
     {
+        //chasing player part is in procedural Leg script
         attackingPlayer = true;
         RotateGun();
 
