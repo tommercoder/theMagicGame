@@ -16,6 +16,9 @@ public class weaponInteract : Interact
     public Animator animator;
     public int damage;
     public bool isColliding;
+
+     public CharacterController otherController;
+    public Animator otherAnimator;
     private void Start()
     {
         damage = item.swordDamage;
@@ -95,12 +98,36 @@ public class weaponInteract : Interact
                     
                     
                 }
+                else if (other.gameObject.GetComponent<EnemyStats>() != null)
+                {
+
+                    //damage
+                    other.gameObject.GetComponent<EnemyStats>().currentHP -= item.swordDamage;
+                    //logic
+                    Debug.Log("interact weapon with " + other.name);
+                    otherController = other.GetComponent<CharacterController>();
+                    otherAnimator = other.GetComponent<Animator>();
+                    otherAnimator.SetBool("isWalkingEnemy", false);
+                    otherAnimator.SetBool("isRunningEnemy", false);
+                    otherAnimator.SetInteger("enemyAttackInteger", 4);
+                    EnemyPatrol.instance.canMove = false;
+                    otherController.enabled = false;
+                    other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);
+                  
+                    //otherAnimator.SetTrigger("hitEnemy");
+                    StartCoroutine(waitForSec());   
+                }
             }
             StartCoroutine(Reset());
         }
         
     }
-   
+    IEnumerator waitForSec()
+    {
+        yield return new WaitForSeconds(1.2f);
+        otherController.enabled = true;
+        EnemyPatrol.instance.canMove = true;
+    }
     IEnumerator Reset()
     {
         yield return new WaitForSeconds(1.3f);

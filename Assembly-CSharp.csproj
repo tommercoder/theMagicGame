@@ -64,8 +64,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\EnemyPatrol.cs" />
-    <Compile Include="Assets\EnemyStats.cs" />
     <Compile Include="Assets\Scripts\AnimationStateController.cs" />
     <Compile Include="Assets\Scripts\IK systems\FootIK.cs" />
     <Compile Include="Assets\Scripts\abilities\AbilityMain.cs" />
@@ -138,6 +136,10 @@
     <Compile Include="Assets\enemiesFull\IKenemies\ProceduralStats.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\destroyProjectile.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\navmeshPatrol.cs" />
+    <Compile Include="Assets\enemiesFull\enemies\EnemyPatrol.cs" />
+    <Compile Include="Assets\enemiesFull\enemies\EnemyStats.cs" />
+    <Compile Include="Assets\enemiesFull\enemies\enemySwordInteract.cs" />
+    <Compile Include="Assets\respawnScript.cs" />
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\another\FastIK\Documentation.txt" />
