@@ -17,11 +17,12 @@ public class weaponInteract : Interact
     public int damage;
     public bool isColliding;
 
-     public CharacterController otherController;
+    public CharacterController otherController;
     public Animator otherAnimator;
     private void Start()
     {
         damage = item.swordDamage;
+        animator = GetComponentInParent<Animator>();
     }
     public override void InteractWith()
     {
@@ -72,10 +73,13 @@ public class weaponInteract : Interact
         }
     }
     //damage 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
+      
         if (isColliding)
             return;
+
+        
         if ((animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
                 || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
                 || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack") || 
@@ -83,28 +87,28 @@ public class weaponInteract : Interact
                 || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
                 || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing")))
         {
-            
+           
             if (other.gameObject.CompareTag("ENEMY"))
             {
                 isColliding = true;
-                
+              
                 if (other.gameObject.GetComponent<ProceduralStats>() != null)
                 {
 
                     other.gameObject.GetComponent<ProceduralStats>().currentHealth -= item.swordDamage;//this.gameObject.GetComponent<weaponInteract>().item.swordDamage;
-                    Debug.Log("interact weapon with " + other.name);
+                    //Debug.Log("interact weapon with " + other.name);
 
                     other.gameObject.transform.DOMove(other.gameObject.transform.position + ( transform.root.forward * 4), 0.2f);//moving enemy back after hit
-                    
+                    //Debug.Log(transform.root.name);
                     
                 }
                 else if (other.gameObject.GetComponent<EnemyStats>() != null)
                 {
-
+                   // Debug.Log("hittinhg" + other.name);
                     //damage
                     other.gameObject.GetComponent<EnemyStats>().currentHP -= item.swordDamage;
                     //logic
-                    Debug.Log("interact weapon with " + other.name);
+                   // Debug.Log("interact weapon with " + other.name);
                     otherController = other.GetComponent<CharacterController>();
                     otherAnimator = other.GetComponent<Animator>();
                     otherAnimator.SetBool("isWalkingEnemy", false);

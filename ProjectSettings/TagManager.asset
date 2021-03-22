@@ -10,6 +10,7 @@ TagManager:
   - interactable object
   - inventoryTAG
   - ENEMY
+  - Sword
   layers:
   - Default
   - TransparentFX

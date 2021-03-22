@@ -7,6 +7,11 @@ public class respawnScript : MonoBehaviour
 {
     public GameObject checkPoint;
     public GameObject player;
+    public Text text;
+ 
+    public CanvasGroup canvas;
+    public GameObject abilitiesUI;
+    public GameObject healthbarUI;
     void Awake()
     {
         
@@ -16,14 +21,40 @@ public class respawnScript : MonoBehaviour
     void Update()
     {
         
-        if(playerHealth.instance.isPlayerDead)
-        {
-            
-            
-        }
+        
        
     }
+    public void respawn()
+    {
+        if (playerHealth.instance.isPlayerDead)
+        {
+            playerHealth.instance.currentHealth = playerHealth.instance.health;
+            playerHealth.instance.isPlayerDead = false;
+           
 
-  
+
+            
+            while (canvas.alpha != 0)
+            {
+                
+                canvas.alpha -= Time.deltaTime / 5;
+                text.text = " ";
+                playerHealth.instance.textSTR = " ";
+                if (canvas.alpha < 0.3f)
+                {
+                    //canvas.enabled = false;
+                    abilitiesUI.SetActive(true);
+                    healthbarUI.SetActive(true);
+                 
+                }
+
+            }
+            player.transform.position = checkPoint.transform.position;
+            playerHealth.instance.RagdollActive(false);
+            
+        }
+    }
+    
+
 }
 

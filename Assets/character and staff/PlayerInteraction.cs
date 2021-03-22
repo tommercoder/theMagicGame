@@ -39,11 +39,16 @@ public class PlayerInteraction : MonoBehaviour
         if(other.tag=="interactable object")
         { 
             panelShow.hidePanel();
-            
-            if (other.GetComponent<FloatingItem>() != null)
-                other.GetComponent<FloatingItem>().Rotating = true;
 
-            other.GetComponent<Interact>().interacting = false;
+            if (other.GetComponent<FloatingItem>() != null)
+            {
+                other.GetComponent<FloatingItem>().Rotating = true;
+            }
+
+            if (other.GetComponent<Interact>() != null)
+            {
+                other.GetComponent<Interact>().interacting = false;
+            }
         }
     }
 

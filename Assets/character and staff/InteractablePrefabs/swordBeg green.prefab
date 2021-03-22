@@ -11,10 +11,6 @@ GameObject:
   - component: {fileID: 6777966167875554960}
   - component: {fileID: 7620081518972076341}
   - component: {fileID: 5646107164164060671}
-  - component: {fileID: 6456637034429333803}
-  - component: {fileID: 6456637034429333807}
-  - component: {fileID: 6456637034429333800}
-  - component: {fileID: 6456637034429333805}
   m_Layer: 0
   m_Name: swordBeg green
   m_TagString: interactable object
@@ -90,62 +86,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &6456637034429333803
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6150787880154747946}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8680372295329905869, guid: bc7b367b2f4f0fb40ba18e10e2424d5d, type: 3}
---- !u!65 &6456637034429333807
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6150787880154747946}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.12, z: 0.030958407}
-  m_Center: {x: -0.000000056810677, y: 0, z: 0.0023804891}
---- !u!114 &6456637034429333800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6150787880154747946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9e67808363f57046b64c8f0c51de39b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InteractedText: 
-  interacting: 0
-  manager: {fileID: 0}
-  item: {fileID: 11400000, guid: 01099dc6b93a3754da6dde7234a28b78, type: 2}
---- !u!114 &6456637034429333805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6150787880154747946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0d97096638f28f47a00c88b71a5338a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Rotating: 1
 --- !u!1 &6164627888038382320
 GameObject:
   m_ObjectHideFlags: 0

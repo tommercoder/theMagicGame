@@ -36061,9 +36061,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96820092b490e134f88352204a20915d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  text: {fileID: 0}
   health: 100
   currentHealth: 0
   healthBar: {fileID: 0}
+  isPlayerDead: 0
+  colliders: []
+  rigidbodies: []
+  legScript: {fileID: 0}
+  animator: {fileID: 0}
+  controller: {fileID: 0}
 --- !u!114 &4447668137343543965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36088,7 +36096,6 @@ GameObject:
   - component: {fileID: 3959396587103798406}
   - component: {fileID: 98306933550238499}
   - component: {fileID: 2790462566565461993}
-  - component: {fileID: 3564637909223672637}
   - component: {fileID: 3564637909223672633}
   - component: {fileID: 3564637909223672638}
   - component: {fileID: 3564637909223672635}
@@ -36167,20 +36174,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &3564637909223672637
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4447668137684835900}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8680372295329905869, guid: bc7b367b2f4f0fb40ba18e10e2424d5d, type: 3}
 --- !u!65 &3564637909223672633
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36213,6 +36206,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   damage: 0
   isColliding: 0
+  otherController: {fileID: 0}
+  otherAnimator: {fileID: 0}
 --- !u!114 &3564637909223672635
 MonoBehaviour:
   m_ObjectHideFlags: 0

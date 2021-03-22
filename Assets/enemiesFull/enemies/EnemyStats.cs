@@ -13,8 +13,11 @@ public class EnemyStats : MonoBehaviour
     public CapsuleCollider collider;
     public EnemyPatrol patrolScript;
     public FootIK footScript;
-
+    public GameObject[] swordRigidbody;
     public CharacterController controller;
+    public int XPforDeath;
+    public GameObject player;
+    bool addedXP = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +25,16 @@ public class EnemyStats : MonoBehaviour
 
 
         RagdollActive(false);
-    }
+        //setting rigiddbodies collision for swords
+        foreach (GameObject b in swordRigidbody){
+            if (b.GetComponent<Rigidbody>() != null)
+            {
+                Rigidbody rb = b.GetComponent<Rigidbody>();
+                rb.detectCollisions = true;
+            }
+                
+            }
+        }
     private void Awake()
     {
         currentHP = maxHP;
@@ -30,9 +42,13 @@ public class EnemyStats : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         colliders = GetComponentsInChildren<CapsuleCollider>();
         rigidbodies = GetComponentsInChildren<Rigidbody>();
-
+        controller = GetComponent<CharacterController>();
+        footScript = GetComponent<FootIK>();
         collider = GetComponent<CapsuleCollider>();
         rigidbody = GetComponent<Rigidbody>();
+
+        swordRigidbody = GameObject.FindGameObjectsWithTag("interactable object");
+        player = GameObject.Find("character");
     }
     // Update is called once per frame
     void Update()
@@ -40,17 +56,30 @@ public class EnemyStats : MonoBehaviour
         if(currentHP <= 0)
         {
             Die();
+            if(!addedXP)
+            {
+                player.GetComponent<characterStats>().XP += XPforDeath;
+                addedXP = true;
+            }
         }
     }
     void Die()
     {
+        Debug.Log("DIE");
         RagdollActive(true);
-        Destroy(this.gameObject, 3f);
+        StartCoroutine(waitDeath());
+        //Destroy(this.gameObject, 4f);
 
+    }
+    IEnumerator waitDeath()
+    {
+        yield return new WaitForSeconds(4f);
+        addedXP = false;
+        Destroy(this.gameObject);
     }
     public void RagdollActive(bool active)
     {
-
+        
 
 
         //children

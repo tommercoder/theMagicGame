@@ -18,7 +18,9 @@ public class ProceduralStats : MonoBehaviour
     public ProceduralLeg legScript;
     public MainProceduralController mainScript;
     public navmeshPatrol patrolScript;
-
+    public GameObject player;
+    public int XPforDeath;
+    bool addedXP = false;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -36,6 +38,7 @@ public class ProceduralStats : MonoBehaviour
 
         colliders = GetComponentsInChildren<Collider>();
         rigidbodies = GetComponentsInChildren<Rigidbody>();
+        player = GameObject.Find("character");
     }
     void Start()
     {
@@ -52,26 +55,37 @@ public class ProceduralStats : MonoBehaviour
         if (currentHealth<=0)
         {
             Die();
+            if (!addedXP)
+            {
+                player.GetComponent<characterStats>().XP += XPforDeath;
+                addedXP = true;
+                Debug.Log("added xp");
+            }
         }
     }
     
     void Die()
     {
         isDead = true;
+        
         //ragdoll physics (using character joints and rigidbodies)
         RagdollActive(true);
+        StartCoroutine(waitDeath());
         for (int i = 0;i < collider.Length; i++) {
             collider[i].isTrigger = false;
             collider[i].enabled = true;
         }
         
-        Destroy(this.gameObject, 4f);
+        //Destroy(this.gameObject, 4f);
+    }
+    IEnumerator waitDeath()
+    {
+        yield return new WaitForSeconds(4f);
+        addedXP = false;
+        Destroy(this.gameObject);
     }
     public void RagdollActive(bool active)
     {
-
-        
-
         //children
         foreach (var collider in colliders)
             collider.enabled = active;

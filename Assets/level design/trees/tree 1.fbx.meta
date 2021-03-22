@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Bark
-    second: {fileID: 2100000, guid: b0327d23e34dfe547ac147ed5b7123db, type: 2}
+    second: {fileID: 2100000, guid: 8f45bdbffa1bb0d488f093d6ffe88851, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
