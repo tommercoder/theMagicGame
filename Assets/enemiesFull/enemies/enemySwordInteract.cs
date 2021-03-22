@@ -5,24 +5,34 @@ using DG.Tweening;
 public class enemySwordInteract : MonoBehaviour
 {
     public CharacterController otherController;
-    public int damage;
-    private void OnTriggerEnter(Collider other)
+    public Animator animator;
+    private void Awake()
     {
-        if (other.CompareTag("Player"))
+        animator = GetComponentInParent<Animator>();
+    }
+    public int damage;
+    public void OnTriggerEnter(Collider other)
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("swordCast") || animator.GetCurrentAnimatorStateInfo(0).IsName("fastSwordSlash")
+            || animator.GetCurrentAnimatorStateInfo(0).IsName("bottomSwordSlash"))
         {
-            otherController = other.GetComponent<CharacterController>();
-            otherController.enabled = false;
-            other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);
-            playerHealth.instance.currentHealth -= damage;
-            Debug.Log("other name" + other.name);
-            Debug.Log("root" + transform.root.name);
-            StartCoroutine(turnOffCharacter());
+            if (other.CompareTag("Player"))
+            {
+
+                Debug.Log("Hitting player");
+                otherController = other.GetComponent<CharacterController>();
+                otherController.enabled = false;
+                other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);
+                playerHealth.instance.currentHealth -= damage;
+
+                StartCoroutine(turnOffCharacter());
+            }
         }
     }
 
     IEnumerator turnOffCharacter()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         otherController.enabled = true;
     }
 }

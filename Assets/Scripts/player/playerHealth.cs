@@ -19,18 +19,19 @@ public class playerHealth : MonoBehaviour
         rigidbodies = GetComponentsInChildren<Rigidbody>();
         legScript = GetComponent<FootIK>();
         animator = GetComponent<Animator>();
-        collider = GetComponent<CapsuleCollider>();
-        rigidbody = GetComponent<Rigidbody>();
+        //collider = GetComponent<CapsuleCollider>();
+        //rigidbody = GetComponent<Rigidbody>();
         controller = GetComponent<CharacterController>();
         instance = this;
         textSTR = text.text;
         text.text = "";
+       // swordRigidbody = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/" + playerSword.instance.currentSwordGameObject.name).GetComponent<Rigidbody>();
     }
 
     #endregion
     public CanvasGroup canvas;
     public Text text;
-    string textSTR;
+    public string textSTR;
     public int health = 100;
     public int currentHealth;
     public healthBarController healthBar;
@@ -40,15 +41,23 @@ public class playerHealth : MonoBehaviour
     public Rigidbody[] rigidbodies;
     public FootIK legScript;
     public Animator animator;
-    public CapsuleCollider collider;
-    public Rigidbody rigidbody;
+   // public CapsuleCollider collider;
+   // public Rigidbody rigidbody;
     public CharacterController controller;
+
+    public GameObject abilitiesUI;
+    public GameObject healthbarUI;
+   // public Rigidbody swordRigidbody;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = health;
         healthBar.setMaxHealth(health);
         RagdollActive(false);
+
+        
+        //swordRigidbody.detectCollisions = true;
+        
         
     }
    
@@ -62,7 +71,7 @@ public class playerHealth : MonoBehaviour
         {
             Die();
         }
-        if(currentHealth > 0)
+        else if(currentHealth > 0)
         {
             isPlayerDead = false;
         }
@@ -78,10 +87,20 @@ public class playerHealth : MonoBehaviour
     {
         Debug.Log("player is dead");
         isPlayerDead = true;
+        
+       // canvas.enabled = true;
+        abilitiesUI.SetActive(false);
+        healthbarUI.SetActive(false);
         canvas.alpha += Time.deltaTime / 2;
-        if (canvas.alpha > 0.9)
-            StartCoroutine(PlayText());
         RagdollActive(true);
+        if (canvas.alpha ==1 && isPlayerDead)
+            StartCoroutine(PlayText());
+        else {
+            StopCoroutine(PlayText());
+                
+            text.text = " ";
+        }
+       
         
     }
 
@@ -105,10 +124,8 @@ public class playerHealth : MonoBehaviour
         
 
         animator.enabled = !active;
-        rigidbody.detectCollisions = !active;
-        rigidbody.isKinematic = !active;
-        
-            collider.enabled = !active;
+        //rigidbody.detectCollisions = !active;
+       
         
 
 

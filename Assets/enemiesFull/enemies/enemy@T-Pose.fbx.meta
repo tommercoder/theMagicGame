@@ -1,19 +1,24 @@
 fileFormatVersion: 2
-guid: ffd67c516a397e841a11e850dda17e24
+guid: 34e3d21b34c2c2f4993cb62d38c95666
 ModelImporter:
   serializedVersion: 19301
-  internalIDToNameTable: []
-  externalObjects:
+  internalIDToNameTable:
   - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Bark
-    second: {fileID: 2100000, guid: 8f45bdbffa1bb0d488f093d6ffe88851, type: 2}
+      74: -8491579832614942484
+    second: body|body.003Action
   - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Leaves
-    second: {fileID: 2100000, guid: 2f7ed9b2fdb042645957c1e29c54e93f, type: 2}
+      74: 2897990074100923566
+    second: body.002|body.003Action
+  - first:
+      74: -1608604908363756942
+    second: body.003|body.003Action
+  - first:
+      74: 2530131739328362957
+    second: body.004|body.003Action
+  - first:
+      74: -203655887218126122
+    second: mixamo.com
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -33,7 +38,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -94,13 +99,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 2
+  animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

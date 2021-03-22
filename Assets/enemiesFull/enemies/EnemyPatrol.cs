@@ -61,7 +61,7 @@ public class EnemyPatrol : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime);
 
             Vector3 moveVector = player.transform.position - transform.position;
-            controller.Move(moveVector * Time.deltaTime);
+            controller.Move(moveVector * Time.deltaTime/2);
         }
         //Debug.Log(moveVector * Time.deltaTime);
 
@@ -70,12 +70,12 @@ public class EnemyPatrol : MonoBehaviour
 
 
 
-        if (Time.time > nextFire)
-        {
+        //if (Time.time > nextFire)
+        //{
 
 
-            nextFire = Time.time + fireRate;
-        }
+        //    nextFire = Time.time + fireRate;
+        //}
 
 
     }
@@ -93,7 +93,7 @@ public class EnemyPatrol : MonoBehaviour
         {
             //transform.LookAt(points[current].position);
             rotation = Quaternion.LookRotation(points[current].position - transform.position);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime / 2f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime);
             rotated = true;
             //  Debug.Log("rotated" + rotated);
             attackingPlayer = false;
@@ -134,13 +134,13 @@ public class EnemyPatrol : MonoBehaviour
         }
         else
         {
-            if (distance < 20f && distance > 2f 
+            if (distance < 20f && distance > 3f 
                 && !animator.GetCurrentAnimatorStateInfo(0).IsName("bottomSwordSlash") && !animator.GetCurrentAnimatorStateInfo(0).IsName("fastSwordSlash")
                 &&!animator.GetCurrentAnimatorStateInfo(0).IsName("swordCast"))
             {
                 chasePlayer();
             }
-            if(distance < 2f)
+            if(distance < 3f)
             {
                 startAttack();
             }
