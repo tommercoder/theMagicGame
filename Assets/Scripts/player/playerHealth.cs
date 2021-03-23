@@ -25,7 +25,7 @@ public class playerHealth : MonoBehaviour
         instance = this;
         textSTR = text.text;
         text.text = "";
-       // swordRigidbody = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/" + playerSword.instance.currentSwordGameObject.name).GetComponent<Rigidbody>();
+        swordRigidbody = GameObject.FindGameObjectsWithTag("interactable object");//GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/" + playerSword.instance.currentSwordGameObject.name).GetComponent<Rigidbody>();
     }
 
     #endregion
@@ -47,7 +47,7 @@ public class playerHealth : MonoBehaviour
 
     public GameObject abilitiesUI;
     public GameObject healthbarUI;
-   // public Rigidbody swordRigidbody;
+    public GameObject[] swordRigidbody;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,10 +55,18 @@ public class playerHealth : MonoBehaviour
         healthBar.setMaxHealth(health);
         RagdollActive(false);
 
-        
+
         //swordRigidbody.detectCollisions = true;
-        
-        
+        foreach (GameObject b in swordRigidbody)
+        {
+            if (b.GetComponent<Rigidbody>() != null)
+            {
+                Rigidbody rb = b.GetComponent<Rigidbody>();
+                rb.detectCollisions = true;
+            }
+
+        }
+
     }
    
     // Update is called once per frame

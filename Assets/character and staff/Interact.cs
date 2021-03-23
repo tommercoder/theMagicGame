@@ -14,7 +14,7 @@ public class Interact : MonoBehaviour
     {
         if(instance!=null)
         {
-            Debug.LogWarning("instance error interact.cs");
+            //Debug.LogWarning("instance error interact.cs");
             return;
         }
 

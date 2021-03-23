@@ -35,7 +35,8 @@ public class triggerFireBallScript : MonoBehaviour
             {
                 fireballAbility.instance.triggered = true;
                 other.gameObject.GetComponent<EnemyStats>().currentHP -= characterStats.instance.damageFromFireball;
-                other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.forward * 2), 0.2f);
+                other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.forward * 4), 0.2f);
+                Debug.Log("triggerFireBallScript");
 
             }
         }

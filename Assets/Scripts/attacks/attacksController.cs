@@ -26,8 +26,8 @@ public class attacksController : MonoBehaviour
     public AbilityMain [] Abilities;
     bool canClick;
     bool canClickSec;
-    int noOfClick;
-    int noOfClickSecond;
+   public int noOfClick;
+    public int noOfClickSecond;
    
     
     public bool canCast;

@@ -48,12 +48,12 @@ public class EnemyPatrol : MonoBehaviour
 
     void chasePlayer()
     {
+        Debug.Log("chasePlayer called");
         //attackingPlayer = true;
         if (canMove)
         {
             if (!animator.GetBool("isRunningEnemy"))
             {
-
                 animator.SetBool("isRunningEnemy", true);
             }
             Vector3 relativePos = (player.transform.position - transform.position).normalized;
@@ -61,7 +61,8 @@ public class EnemyPatrol : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime);
 
             Vector3 moveVector = player.transform.position - transform.position;
-            controller.Move(moveVector * Time.deltaTime/2);
+            if(controller.enabled)
+            controller.Move(moveVector * Time.deltaTime);
         }
         //Debug.Log(moveVector * Time.deltaTime);
 
@@ -83,19 +84,21 @@ public class EnemyPatrol : MonoBehaviour
     private void Update()
     {
         float distance = Vector3.Distance(transform.position, player.transform.position);
-
-
+        //Debug.Log("distance " + distance);
+        
         if (Vector3.Distance(transform.position, player.transform.position) < 20)
         {
             attackingPlayer = true;
         }
         else
         {
-            //transform.LookAt(points[current].position);
-            rotation = Quaternion.LookRotation(points[current].position - transform.position);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime);
+            Vector3 relativePos = (points[current].transform.position- transform.position).normalized;
+            Quaternion toRotation = Quaternion.LookRotation(new Vector3(relativePos.x, 0, relativePos.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime);
+            //rotation = Quaternion.LookRotation(points[current].position - transform.position);
+            //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime);
             rotated = true;
-            //  Debug.Log("rotated" + rotated);
+            
             attackingPlayer = false;
             
         }
@@ -134,13 +137,13 @@ public class EnemyPatrol : MonoBehaviour
         }
         else
         {
-            if (distance < 20f && distance > 3f 
+            if (distance < 20f && distance > 4f 
                 && !animator.GetCurrentAnimatorStateInfo(0).IsName("bottomSwordSlash") && !animator.GetCurrentAnimatorStateInfo(0).IsName("fastSwordSlash")
                 &&!animator.GetCurrentAnimatorStateInfo(0).IsName("swordCast"))
             {
                 chasePlayer();
             }
-            if(distance < 3f)
+             if(distance < 4f)
             {
                 startAttack();
             }
@@ -148,7 +151,7 @@ public class EnemyPatrol : MonoBehaviour
     }
     void startAttack()
     {
-        
+        Debug.Log("start attack called");
         animator.SetBool("isRunningEnemy", false);
         animator.SetBool("isWalkingEnemy", false);
         Vector3 relativePos = (player.transform.position - transform.position).normalized;
