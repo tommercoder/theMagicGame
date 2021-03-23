@@ -217,6 +217,7 @@ public class movement : MonoBehaviour
 		{
 			
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
+			if(controller.enabled)
 			controller.Move(desiredMoveDirection * Time.deltaTime * playerSpeed);
 			/*if (attacks.enemiesAround && attacks.attackState && isDrawedSword)
 			{

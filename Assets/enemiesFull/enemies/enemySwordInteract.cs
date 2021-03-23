@@ -5,6 +5,7 @@ using DG.Tweening;
 public class enemySwordInteract : MonoBehaviour
 {
     public CharacterController otherController;
+    public Animator otherAnimator;
     public Animator animator;
     private void Awake()
     {
@@ -21,6 +22,16 @@ public class enemySwordInteract : MonoBehaviour
 
                 Debug.Log("Hitting player");
                 otherController = other.GetComponent<CharacterController>();
+                otherAnimator = other.GetComponent<Animator>();
+                if (attacksController.instance.isDrawedSword)
+                {
+                    
+                    otherAnimator.SetTrigger("hitByEnemy");
+                    attacksController.instance.noOfClick = 0;
+                    attacksController.instance.noOfClickSecond = 0;
+
+                }
+
                 otherController.enabled = false;
                 other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);
                 playerHealth.instance.currentHealth -= damage;

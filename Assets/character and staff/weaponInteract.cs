@@ -113,7 +113,8 @@ public class weaponInteract : Interact
                     otherAnimator = other.GetComponent<Animator>();
                     otherAnimator.SetBool("isWalkingEnemy", false);
                     otherAnimator.SetBool("isRunningEnemy", false);
-                    otherAnimator.SetInteger("enemyAttackInteger", 4);
+                    otherAnimator.SetTrigger("hitEnemy");
+                    //otherAnimator.SetInteger("enemyAttackInteger", 4);
                     EnemyPatrol.instance.canMove = false;
                     otherController.enabled = false;
                     other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);
@@ -128,7 +129,7 @@ public class weaponInteract : Interact
     }
     IEnumerator waitForSec()
     {
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1f);
         otherController.enabled = true;
         EnemyPatrol.instance.canMove = true;
     }

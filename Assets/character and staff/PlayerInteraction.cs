@@ -9,8 +9,13 @@ public class PlayerInteraction : MonoBehaviour
 {
    
     public inventoryManager panelShow;
-   
-    
+
+    public respawnScript respawnScript;
+    private void Awake()
+    {
+        respawnScript = GameObject.Find("MainElements").GetComponent<respawnScript>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         
@@ -21,8 +26,12 @@ public class PlayerInteraction : MonoBehaviour
             if (playerSword.instance.currentSwordGameObject == other.GetComponent<weaponInteract>().gameObject)
                 return;
         }
-       
-        if(other.tag=="interactable object" && other.GetComponent<Interact>()!=null )
+        else if(other.gameObject==respawnScript.checkPoint)
+        {
+            Debug.Log(other.gameObject + " " + respawnScript.checkPoint);
+            return;
+        }
+        else if(other.tag=="interactable object" && other.GetComponent<Interact>()!=null )
         {
             Debug.Log("interacting with" + other.name);
             other.GetComponent<Interact>().InteractWith();

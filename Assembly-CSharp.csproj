@@ -122,6 +122,8 @@
     <Compile Include="Assets\character and staff\inventory\items(scriptable objects)\potionUse.cs" />
     <Compile Include="Assets\character and staff\inventory\items(scriptable objects)\swordEquipping.cs" />
     <Compile Include="Assets\character and staff\potionInteraction.cs" />
+    <Compile Include="Assets\character and staff\respawn\checkPointInteract.cs" />
+    <Compile Include="Assets\character and staff\respawn\respawnScript.cs" />
     <Compile Include="Assets\character and staff\tooltip\tooltip.cs" />
     <Compile Include="Assets\character and staff\tooltip\tooltipManager.cs" />
     <Compile Include="Assets\character and staff\tooltip\tooltipTrigger.cs" />
@@ -139,7 +141,6 @@
     <Compile Include="Assets\enemiesFull\enemies\EnemyPatrol.cs" />
     <Compile Include="Assets\enemiesFull\enemies\EnemyStats.cs" />
     <Compile Include="Assets\enemiesFull\enemies\enemySwordInteract.cs" />
-    <Compile Include="Assets\respawnScript.cs" />
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\another\FastIK\Documentation.txt" />

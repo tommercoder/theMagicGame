@@ -5,6 +5,14 @@ using UnityEngine.UI;
 using TMPro;
 public class respawnScript : MonoBehaviour
 {
+    #region singleton
+    public static respawnScript instance;
+
+    void Awake()
+    {
+        instance = this;
+    }
+    #endregion
     public GameObject checkPoint;
     public GameObject player;
     public Text text;
@@ -12,10 +20,7 @@ public class respawnScript : MonoBehaviour
     public CanvasGroup canvas;
     public GameObject abilitiesUI;
     public GameObject healthbarUI;
-    void Awake()
-    {
-        
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -51,7 +56,17 @@ public class respawnScript : MonoBehaviour
             }
             player.transform.position = checkPoint.transform.position;
             playerHealth.instance.RagdollActive(false);
-            
+
+
+            foreach (GameObject b in playerHealth.instance.swordRigidbody)
+            {
+                if (b.GetComponent<Rigidbody>() != null)
+                {
+                    Rigidbody rb = b.GetComponent<Rigidbody>();
+                    rb.detectCollisions = true;
+                }
+
+            }
         }
     }
     
