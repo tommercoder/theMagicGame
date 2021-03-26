@@ -39,14 +39,14 @@ public class movement : MonoBehaviour
 	bool isRunningSword;
 	public bool canMove;
 	attacksController attacks;
-	public bool MouseOverInventoryB;
+	public bool MouseOverInventoryB;//setting in event of entering ui
 	public bool speedPotionUsingNow = false;
 	public float jumpSpeed = 8.0F;
 	public float gravity = 20.0F;
-	private Vector3 moveDirection = Vector3.zero;
-	private Vector3 playerVelocity;
-	private float jumpHeight = 10.0f;
-	private float gravityValue = -9.81f;
+	//private Vector3 moveDirection = Vector3.zero;
+	//private Vector3 playerVelocity;
+	//private float jumpHeight = 10.0f;
+	//private float gravityValue = -9.81f;
 	public Rigidbody rb;
 
 	// Use this for initialization
@@ -93,9 +93,9 @@ public class movement : MonoBehaviour
 	void Update()
 	{
 		
-		if (MouseOverInventoryB && inventoryManager.instance.inventoryOpened)
+		if ((MouseOverInventoryB && inventoryManager.instance.inventoryOpened) || NPCinteraction.instance.dialogHappening)
 			return;
-		if(!inventoryManager.instance.inventoryOpened)
+		if(!inventoryManager.instance.inventoryOpened && !NPCinteraction.instance.dialogHappening)
         {
 			MouseOutInventory();
         }

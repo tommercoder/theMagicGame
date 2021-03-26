@@ -69,7 +69,9 @@ public class potionUse : Item
                         }
                     }
                 }
+                logShow.instance.showText("increased 20hp \n your hp now:"+playerHealth.instance.currentHealth);
                 potionParticle.instance.turn(type);
+                
             }
            
             Debug.Log("using healthPotion" + name);
@@ -96,6 +98,7 @@ public class potionUse : Item
                         }
                     }
                 }
+                logShow.instance.showText("increased damage by " + playerSword.instance.currentSword.swordDamage * 20 / 100);
                 potionParticle.instance.turn(type);
                 potionParticle.instance.startTimer(60.0f, type);
             }
@@ -128,6 +131,7 @@ public class potionUse : Item
                 }
                 //this bool is for movement script to stop changing speed
                 //speedPotionUsing = true;
+                logShow.instance.showText("increased speed by 2");
                 movement.instance.speedPotionUsingNow = true;
                 potionParticle.instance.turn(type);
                 potionParticle.instance.startTimer(120.0f, type);

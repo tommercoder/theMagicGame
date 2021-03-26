@@ -18,6 +18,7 @@ public class inventoryManager : MonoBehaviour
     public bool inventoryOpened = false;
     public GameObject inventoryUi;
     public Text textPanel;
+    public Text damageText;
     Inventory inventory;
     public Transform itemsParent;
     public tooltipManager tooltipManager;
@@ -57,8 +58,9 @@ public class inventoryManager : MonoBehaviour
     void updateUI()
     {
         //Debug.Log("Updating UI");
-       
-            for (int i = 0; i < slots.Length; i++)
+        damageText.text = "";
+        damageText.text = "current damage is: " + weaponInteract.instance.damage;
+        for (int i = 0; i < slots.Length; i++)
             {
                 if (i < inventory.items.Count)
                 {
@@ -77,6 +79,8 @@ public class inventoryManager : MonoBehaviour
         
     public void openInventory()
     {
+        damageText.text = "";
+        damageText.text = "current damage is: " + weaponInteract.instance.damage;
         inventoryUi.SetActive(!inventoryUi.activeSelf);
         if (inventoryOpened)
         {
