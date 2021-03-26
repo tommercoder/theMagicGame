@@ -25,10 +25,13 @@ public class enemySwordInteract : MonoBehaviour
                 otherAnimator = other.GetComponent<Animator>();
                 if (attacksController.instance.isDrawedSword)
                 {
-                    
+                    //other.GetComponent<attacksController>().noOfClick = 0;
+                    //other.GetComponent<attacksController>().noOfClickSecond = 0;
+                    //other.GetComponent<attacksController>().canClick = false;
+                    //other.GetComponent<attacksController>().canClickSec = false;
+                    //herAnimator.SetInteger("attackAnimation",4);
                     otherAnimator.SetTrigger("hitByEnemy");
-                    attacksController.instance.noOfClick = 0;
-                    attacksController.instance.noOfClickSecond = 0;
+                    
 
                 }
 
@@ -45,5 +48,6 @@ public class enemySwordInteract : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         otherController.enabled = true;
+        
     }
 }

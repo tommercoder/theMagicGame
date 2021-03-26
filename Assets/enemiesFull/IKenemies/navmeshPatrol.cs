@@ -113,11 +113,14 @@ public class navmeshPatrol : MonoBehaviour
         }
         else
         {
-            //transform.LookAt(points[current].position);
-             rotation = Quaternion.LookRotation(points[current].position - transform.position);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime / 3f);
+            Vector3 relativePos = (points[current].transform.position - transform.position).normalized;
+            Quaternion toRotation = Quaternion.LookRotation(new Vector3(relativePos.x, 0, relativePos.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime);
+            // rotation = Quaternion.LookRotation((points[current].position - transform.position).nm);
+            //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime / 3f);
+
             rotated = true;
-          //  Debug.Log("rotated" + rotated);
+          
             attackingPlayer = false;
         }
         float dot = Vector3.Dot(transform.right, (points[current].position - transform.position).normalized);

@@ -107,10 +107,13 @@
     <Compile Include="Assets\another\FastIK\Scripts\Sample\SampleProcedualAnimation.cs" />
     <Compile Include="Assets\another\FastIK\Scripts\Sample\SampleRotator.cs" />
     <Compile Include="Assets\another\FastIK\Scripts\Sample\SampleSinMover.cs" />
+    <Compile Include="Assets\character and staff\Dialogue.cs" />
+    <Compile Include="Assets\character and staff\DialogueManager.cs" />
     <Compile Include="Assets\character and staff\FloatingItem.cs" />
     <Compile Include="Assets\character and staff\Interact.cs" />
     <Compile Include="Assets\character and staff\NPCinteraction.cs" />
     <Compile Include="Assets\character and staff\PlayerInteraction.cs" />
+    <Compile Include="Assets\character and staff\UIelements\logShow.cs" />
     <Compile Include="Assets\character and staff\characterStats.cs" />
     <Compile Include="Assets\character and staff\inventory\Inventory.cs" />
     <Compile Include="Assets\character and staff\inventory\ItemDrag.cs" />
@@ -141,6 +144,7 @@
     <Compile Include="Assets\enemiesFull\enemies\EnemyPatrol.cs" />
     <Compile Include="Assets\enemiesFull\enemies\EnemyStats.cs" />
     <Compile Include="Assets\enemiesFull\enemies\enemySwordInteract.cs" />
+    <Compile Include="Assets\level design\floatingStone.cs" />
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\another\FastIK\Documentation.txt" />

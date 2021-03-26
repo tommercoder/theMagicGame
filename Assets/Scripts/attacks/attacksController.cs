@@ -14,9 +14,9 @@ public class attacksController : MonoBehaviour
     int isDrawedSwordHash;
   
     public bool attackState = false;
-    bool isFullEnergyBar = false;
-    playerSword playerSwordController;
-    List<int> possibleAttacks = Enumerable.Range(1, 3).ToList();
+    //bool isFullEnergyBar = false;
+    //playerSword playerSwordController;
+    //List<int> possibleAttacks = Enumerable.Range(1, 3).ToList();
     StateControllerTest controller;
     movement movement;
     public Text errorText;
@@ -24,8 +24,8 @@ public class attacksController : MonoBehaviour
     bool firstPlayed;
     bool secondPlayed;
     public AbilityMain [] Abilities;
-    bool canClick;
-    bool canClickSec;
+    public bool canClick;
+    public bool canClickSec;
    public int noOfClick;
     public int noOfClickSecond;
    
@@ -51,7 +51,7 @@ public class attacksController : MonoBehaviour
         canClickSec = true;
         firstPlayed = false;
         secondPlayed = false;
-        playerSwordController = GetComponent<playerSword>();
+        //playerSwordController = GetComponent<playerSword>();
         controller = GetComponent<StateControllerTest>();
         animator = GetComponent<Animator>();
          movement = GetComponent<movement>();
@@ -71,7 +71,7 @@ public class attacksController : MonoBehaviour
     void Update()
     {
        
-        if (movement.instance.MouseOverInventoryB && inventoryManager.instance.inventoryOpened)
+        if ((movement.instance.MouseOverInventoryB && inventoryManager.instance.inventoryOpened) || NPCinteraction.instance.dialogHappening)
             return;
         isDrawedSword = animator.GetBool(isDrawedSwordHash);
     
@@ -99,10 +99,10 @@ public class attacksController : MonoBehaviour
                 canClickSec = false;
                 if (!Abilities[1].dashStarted)
                 {
-                    errorText.gameObject.SetActive(true);
-                    errorText.text = "you can't use dash here";
-                    
-                    StartCoroutine(waitErrorText());
+                    //errorText.gameObject.SetActive(true);
+                    // errorText.text = "you can't use dash here";
+                    logShow.instance.showText("you can't use dash here");
+                    //StartCoroutine(waitErrorText());
                     
                     return;
                 }
@@ -196,6 +196,20 @@ public class attacksController : MonoBehaviour
                 
             }
         #endregion
+        Debug.Log(noOfClick + " " + noOfClickSecond);
+        if(animator.GetCurrentAnimatorStateInfo(3).IsName("Great Sword Impact"))
+        {
+            //noOfClick = 0;
+           // noOfClickSecond = 0;
+            //canClick = false;
+            //canClickSec = false;
+        }
+    }
+    public void endImpactEvent()
+    {
+        //canClick = true;
+        //canClickSec = true;
+        Debug.Log("impact event called");
     }
     public void startFireballEvent()
     {

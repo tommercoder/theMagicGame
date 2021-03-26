@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyStats : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class EnemyStats : MonoBehaviour
     public int XPforDeath;
     public GameObject player;
     bool addedXP = false;
+    public GameObject log;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +51,8 @@ public class EnemyStats : MonoBehaviour
 
         swordRigidbody = GameObject.FindGameObjectsWithTag("interactable object");
         player = GameObject.Find("character");
+        log = GameObject.Find("error text");
+        log.GetComponent<Text>().text = " ";
     }
     // Update is called once per frame
     void Update()
@@ -58,6 +62,9 @@ public class EnemyStats : MonoBehaviour
             Die();
             if(!addedXP)
             {
+                // log.gameObject.SetActive(true);
+                // log.GetComponent<Text>().text = "+" + " " + XPforDeath + "xp";
+                logShow.instance.showText("+" + " " + XPforDeath + "xp");
                 player.GetComponent<characterStats>().XP += XPforDeath;
                 addedXP = true;
             }
@@ -75,6 +82,8 @@ public class EnemyStats : MonoBehaviour
     {
         yield return new WaitForSeconds(4f);
         addedXP = false;
+        //log.GetComponent<Text>().text = " ";
+       // log.gameObject.SetActive(false);
         Destroy(this.gameObject);
     }
     public void RagdollActive(bool active)

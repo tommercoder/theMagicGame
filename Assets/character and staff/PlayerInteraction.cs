@@ -7,13 +7,15 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class PlayerInteraction : MonoBehaviour
 {
-   
+    public static PlayerInteraction instance;
+    
     public inventoryManager panelShow;
 
     public respawnScript respawnScript;
     private void Awake()
     {
         respawnScript = GameObject.Find("MainElements").GetComponent<respawnScript>();
+        instance = this;
     }
 
     private void OnTriggerEnter(Collider other)

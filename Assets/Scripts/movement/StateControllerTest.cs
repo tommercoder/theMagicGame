@@ -78,7 +78,7 @@ public class StateControllerTest : MonoBehaviour
         bool takeSwordPressed = Input.GetKey(KeyCode.Mouse2);
 
         //stopping player when inventory is opened and mouse is in invenotry tab
-        if (movement.instance.MouseOverInventoryB && inventoryManager.instance.inventoryOpened)
+        if ((movement.instance.MouseOverInventoryB && inventoryManager.instance.inventoryOpened) ||NPCinteraction.instance.dialogHappening)
         {
             if (isRunning)
             {

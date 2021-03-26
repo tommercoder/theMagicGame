@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class ProceduralStats : MonoBehaviour
 {
@@ -21,6 +23,7 @@ public class ProceduralStats : MonoBehaviour
     public GameObject player;
     public int XPforDeath;
     bool addedXP = false;
+   // public GameObject log;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -39,6 +42,8 @@ public class ProceduralStats : MonoBehaviour
         colliders = GetComponentsInChildren<Collider>();
         rigidbodies = GetComponentsInChildren<Rigidbody>();
         player = GameObject.Find("character");
+       // log = GameObject.Find("error text");
+       ///log.GetComponent<Text>().text = " ";
     }
     void Start()
     {
@@ -57,6 +62,9 @@ public class ProceduralStats : MonoBehaviour
             Die();
             if (!addedXP)
             {
+                // log.gameObject.SetActive(true);
+                // log.GetComponent<Text>().text = "+" + " " + XPforDeath + "xp";
+                logShow.instance.showText("+" + " " + XPforDeath + "xp");
                 player.GetComponent<characterStats>().XP += XPforDeath;
                 addedXP = true;
                 Debug.Log("added xp");
@@ -82,6 +90,8 @@ public class ProceduralStats : MonoBehaviour
     {
         yield return new WaitForSeconds(4f);
         addedXP = false;
+       // log.GetComponent<Text>().text = " ";
+       // log.gameObject.SetActive(false);
         Destroy(this.gameObject);
     }
     public void RagdollActive(bool active)
