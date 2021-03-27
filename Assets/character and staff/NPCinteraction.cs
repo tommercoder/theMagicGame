@@ -11,37 +11,34 @@ public class NPCinteraction : Interact
         instance = this;
     }
     public Camera camera;
-     bool dialogEnded;
+    
     public bool dialogHappening;
+    public GameObject textName;
+    private GameObject player;
 
- 
-
-
-
-
-   
     public Dialogue dialogue;
 
     private void Start()
     {
-        
+        player = GameObject.Find("character");
         camera = Camera.main;
-        dialogEnded = false;
+        
         dialogHappening = false;
+
     }
     public override void InteractWith()
     {
 
-        ///Debug.Log("was called npc interact");
+        
         resetText();
         InteractedText += "speak with " + dialogue.name;
         interacting = true;
-        //start dialog
+        
 
     }
     private void Update()
     {
-        if(Input.GetKey(KeyCode.E) && interacting) //&& !dialogEnded)
+        if (Input.GetKey(KeyCode.E) && (interacting || DialogueManager.instance.dialogBOX.activeSelf)) //&& !dialogEnded)
         {
             if (!dialogHappening)
             {
@@ -52,24 +49,38 @@ public class NPCinteraction : Interact
                 //dialogue
                 FindObjectOfType<DialogueManager>().StartDialog(dialogue);
             }
+
             
-            //dialogEnded = false;
             dialogHappening = true;
+            textName.GetComponent<TextMesh>().text = dialogue.name;
         }
+
         //for movement enabling camera brain
-        if(!interacting)
+        if (!interacting && !DialogueManager.instance.dialogBOX.activeSelf)
         {
             dialogHappening = false;
-           // dialogEnded = false;
-        }
-        //if(!dialogHappening && interacting)
-        //{
-        //    InteractWith();
-        //    PlayerInteraction.panelShow.showPanel(InteractedText);
             
-        //}
-        
+        }
+       
+
+        if (Vector3.Distance(transform.position, player.transform.position) < 5)
+        {
+            if(!dialogHappening)
+            textName.GetComponent<TextMesh>().text = dialogue.uiText;
+            else
+                textName.GetComponent<TextMesh>().text = dialogue.name;
+        }
+        else
+        {
+            textName.GetComponent<TextMesh>().text = dialogue.name;
+        }
+
+        if (textName != null)
+        {
+            textName.transform.LookAt(Camera.main.transform.position);
+            textName.transform.Rotate(0, 180, 0);
+        }
     }
 
-   
+
 }
