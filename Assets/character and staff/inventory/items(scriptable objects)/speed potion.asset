@@ -15,8 +15,8 @@ MonoBehaviour:
   name: speed potion
   icon: {fileID: 21300000, guid: 185608cdd2074b74daa4394f4b50f622, type: 3}
   maxStack: 4
-  currentStack: 1
+  currentStack: 0
   description: with this potion,you will run faster,works for 2 minutes.
   option: increase your speed + 2
   type: 1
-  speedPotionUsing: 1
+  speedPotionUsing: 0

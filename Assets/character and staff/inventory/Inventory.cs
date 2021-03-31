@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// this script is attached to GameManager
 /// </summary>
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour,ISaveable
 {
     #region Singleton
     public static Inventory instance;
@@ -25,8 +25,9 @@ public class Inventory : MonoBehaviour
     public delegate void onItemChanged();
     public onItemChanged onItemChangedCalled;    
     public List<Item> items = new List<Item>();
-
+    [Header("SWORDS CANT BE SAME DURING GAME")]
     public List<GameObject> itemsGameObjects = new List<GameObject>();
+
     public int size = 16;
     public bool add(Item item)
     {
@@ -61,25 +62,35 @@ public class Inventory : MonoBehaviour
     }
     public bool addGOforPotions(GameObject item)
     {
+
+        //for (int i = 0; i < item.GetComponent<potionInteraction>().item.currentStack; i++)
+        //{
+        //    Debug.Log("stackI" + item.GetComponent<potionInteraction>().item.currentStack);
+        //}
+        //characterStats.instance.allAddedToInventoryGO.Add(item);
         //check if i can add a potion GO
-        if(item.GetComponent<potionInteraction>()!=null)
-        for (int i = 0; i < itemsGameObjects.Count; i++)
-        {
+        if (item.GetComponent<potionInteraction>() != null) {
+            
+            for (int i = 0; i < itemsGameObjects.Count; i++)
+            {
                 //if (itemsGameObjects[i].name == item.name)
                 // {
+                //this handle adding only potions
+
                 if (itemsGameObjects[i].GetComponent<potionInteraction>() != null)
                 {
                     Debug.Log("game object item :" + itemsGameObjects[i].GetComponent<potionInteraction>().item.name + "\nitem name " + item.GetComponent<potionInteraction>().item.name);
 
                     if (itemsGameObjects[i].GetComponent<potionInteraction>().item.name == item.GetComponent<potionInteraction>().item.name)
                     {
-
-
+                       
+                        
                         return true;
                     }
                 }
-            //}
-        }
+                //}
+            }
+    }
 
         if (itemsGameObjects.Count >= size)
         {
@@ -88,6 +99,7 @@ public class Inventory : MonoBehaviour
         }
 
         itemsGameObjects.Add(item);
+        
         if (onItemChangedCalled != null)
             onItemChangedCalled.Invoke();
         return true;
@@ -103,5 +115,41 @@ public class Inventory : MonoBehaviour
             onItemChangedCalled.Invoke();
         //remove functionality
     }
+    public void PopulateSaveData(SaveData sd)
+    {
+        sd.s_inventory = items;
+        sd.s_inventoryGO = itemsGameObjects;
 
+
+        //sd.s_allGameObjectInventory = characterStats.instance.allAddedToInventoryGO;
+    }
+    public void LoadFromSaveData(SaveData sd)
+    {
+       
+        for (int i = 0; i < sd.s_inventory.Count; i++)
+        {
+            if (sd.s_inventory[i] != null)
+            {
+                add(sd.s_inventory[i]);
+                
+            }
+        }
+        for (int i = 0; i < sd.s_inventoryGO.Count; i++)
+        {
+            addGOforPotions(sd.s_inventoryGO[i]);
+            sd.s_inventoryGO[i].SetActive(false);
+        }
+        //characterStats.instance.allAddedToInventoryGO = sd.s_allGameObjectInventory;
+        //for(int i = 0;i < sd.s_allGameObjectInventory.Count;i++)
+        //{
+        //    sd.s_allGameObjectInventory[i].SetActive(false);
+        //}
+        //resetting object that are not in inventory
+        //for (int i = 0; i < resetScriptableObjects.instance.scriptableObjects.Count; i++)
+        //    if (!sd.s_inventory.Contains(resetScriptableObjects.instance.scriptableObjects[i]))
+        //    {
+
+        //        resetScriptableObjects.instance.scriptableObjects[i].currentStack = 1;
+        //    }
+    }
 }

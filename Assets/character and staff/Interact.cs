@@ -24,7 +24,7 @@ public class Interact : MonoBehaviour
     #endregion
     public string InteractedText ;
     public bool interacting = false;
-    
+    public bool isUsed = false;
     
     public virtual void InteractWith()
     {

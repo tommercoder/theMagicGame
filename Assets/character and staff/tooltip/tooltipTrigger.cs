@@ -26,7 +26,7 @@ public class tooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 description = gameObject.GetComponent<Slot>().item.description;
             }
             icon = gameObject.GetComponent<Slot>().item.icon;
-            Debug.Log("item.icon " + gameObject.GetComponent<Slot>().item.icon);
+            //Debug.Log("item.icon " + gameObject.GetComponent<Slot>().item.icon);
             //}
         }
         

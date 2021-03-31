@@ -28,12 +28,13 @@ public class PlayerInteraction : MonoBehaviour
             if (playerSword.instance.currentSwordGameObject == other.GetComponent<weaponInteract>().gameObject)
                 return;
         }
+        //zeby nie wyswitliac w juz ustalonym checkpoint tekstu interakcji
         else if(other.gameObject==respawnScript.checkPoint)
         {
             Debug.Log(other.gameObject + " " + respawnScript.checkPoint);
             return;
         }
-        else if(other.tag=="interactable object" && other.GetComponent<Interact>()!=null )
+         if(other.CompareTag("interactable object") && other.GetComponent<Interact>()!=null )
         {
             Debug.Log("interacting with" + other.name);
             other.GetComponent<Interact>().InteractWith();

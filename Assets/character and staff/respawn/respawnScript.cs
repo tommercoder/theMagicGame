@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class respawnScript : MonoBehaviour
+public class respawnScript : MonoBehaviour,ISaveable
 {
     #region singleton
     public static respawnScript instance;
@@ -33,6 +33,8 @@ public class respawnScript : MonoBehaviour
     {
         if (playerHealth.instance.isPlayerDead)
         {
+            
+            //characterStats.instance.LoadJsonData(characterStats.instance);
             playerHealth.instance.currentHealth = playerHealth.instance.health;
             playerHealth.instance.isPlayerDead = false;
            
@@ -69,7 +71,15 @@ public class respawnScript : MonoBehaviour
             }
         }
     }
-    
+    public void PopulateSaveData(SaveData sd)
+    {
+        sd.s_respawnObject = checkPoint;
+    }
+    //interface method
+    public void LoadFromSaveData(SaveData sd)
+    {
+        checkPoint = sd.s_respawnObject;
+    }
 
 }
 

@@ -122,7 +122,10 @@ public class attacksController : MonoBehaviour
                     && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
                     && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
             {
-               
+               if(characterStats.instance.damageFromFireball==0)
+                {
+                    logShow.instance.showText("now your fireball damage is 0(get some XP)");
+                }
                 movement.canMove = false;
                     animator.SetInteger("attackAnimation", 21);
                 canClick = false;
@@ -196,7 +199,7 @@ public class attacksController : MonoBehaviour
                 
             }
         #endregion
-        Debug.Log(noOfClick + " " + noOfClickSecond);
+       // Debug.Log(noOfClick + " " + noOfClickSecond);
         if(animator.GetCurrentAnimatorStateInfo(3).IsName("Great Sword Impact"))
         {
             //noOfClick = 0;

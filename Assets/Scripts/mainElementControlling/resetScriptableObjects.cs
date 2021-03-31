@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class resetScriptableObjects : MonoBehaviour
 {
+    #region singleton
+    public static resetScriptableObjects instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+    #endregion
     public List<Item> scriptableObjects = new List<Item>();
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        for(int i =0;i< scriptableObjects.Count;i++)
-        {
-            scriptableObjects[i].currentStack = 1;
-        }
+        
+        //for(int i = 0;i< scriptableObjects.Count;i++)
+        //{
+        //    
+        //}
     }
    
     // Update is called once per frame

@@ -4,8 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class ProceduralStats : MonoBehaviour
+public class ProceduralStats : MonoBehaviour,ISaveable
 {
+    [Header("PROCEDURAL ID")]
+    public string id;
+
+
     public GameObject[] stepTargets;
     public Rigidbody rigidbody;
     public CapsuleCollider[] collider;
@@ -78,13 +82,13 @@ public class ProceduralStats : MonoBehaviour
         
         //ragdoll physics (using character joints and rigidbodies)
         RagdollActive(true);
-        StartCoroutine(waitDeath());
+        //StartCoroutine(waitDeath());
         for (int i = 0;i < collider.Length; i++) {
             collider[i].isTrigger = false;
             collider[i].enabled = true;
         }
         
-        //Destroy(this.gameObject, 4f);
+        Destroy(this.gameObject, 1f);
     }
     IEnumerator waitDeath()
     {
@@ -121,5 +125,30 @@ public class ProceduralStats : MonoBehaviour
             collider[i].enabled = !active;
         }
        
+    }
+
+    public void PopulateSaveData(SaveData sd)
+    {
+        SaveData.ProceduralEnemyData enemyData = new SaveData.ProceduralEnemyData();
+        enemyData.e_ProcHealth = currentHealth;
+        enemyData.e_ProcId = id;
+        sd.proceduralEnemyData.Add(enemyData);
+    }
+    public void LoadFromSaveData(SaveData sd)
+    {
+        foreach (SaveData.ProceduralEnemyData enemyData in sd.proceduralEnemyData)
+        {
+            if (enemyData.e_ProcId == id)
+            {
+                currentHealth = enemyData.e_ProcHealth;
+                break;
+            }
+        }
+        if (currentHealth <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+
+
     }
 }

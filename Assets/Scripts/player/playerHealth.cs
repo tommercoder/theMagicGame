@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class playerHealth : MonoBehaviour
+public class playerHealth : MonoBehaviour,ISaveable
 {
     #region Singleton
     public static playerHealth instance;
@@ -150,5 +150,14 @@ public class playerHealth : MonoBehaviour
 
 
         }
+    }
+
+    public void PopulateSaveData(SaveData sd)
+    {
+        sd.s_HP = currentHealth;
+    }
+    public void LoadFromSaveData(SaveData sd)
+    {
+        currentHealth = sd.s_HP;
     }
 }

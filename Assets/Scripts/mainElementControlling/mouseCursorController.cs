@@ -14,7 +14,9 @@ public class mouseCursorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(inventoryManager.instance.inventoryOpened || NPCinteraction.instance.dialogHappening)
+        if(inventoryManager.instance.inventoryOpened 
+            || NPCinteraction.instance.dialogHappening 
+            || playerHealth.instance.currentHealth <= 0)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
