@@ -47,6 +47,10 @@ public class dropItem : MonoBehaviour, IDropHandler
                 inventory.itemsGameObjects[index].SetActive(true);//robie objekt ponownie aktywnym
                 Inventory.instance.itemsGameObjects[index].GetComponent<FloatingItem>().Rotating = true;
                 inventory.itemsGameObjects[index].transform.position = hit.point;//wstawiam go na scene
+                //saving lists
+                characterStats.instance.allPotionInteractionO[index].isUsed = false;
+                characterStats.instance.allPotionsIsUsed[index] = false;
+                ////
                 inventory.removeGOitem(inventory.itemsGameObjects[index]);//usuwam z pierwszej listy 
                 inventory.removeItem(gameObject.GetComponentInParent<Slot>().item);//usuwam z drugiej listy
                     

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class potionInteraction : Interact
 {
+    [Header("ITEM ID")]
+    public string id;
     public inventoryManager manager;
     public Item item;
     public override void InteractWith()
@@ -48,9 +50,22 @@ public class potionInteraction : Interact
                 gameObject.GetComponent<FloatingItem>().Rotating = true;
             }
             gameObject.SetActive(false);
+            isUsed = true;
+            //for(int i =0;i < characterStats.instance.allPotionsIsUsed.Count;i++)
+            //{
+            //    if(characterStats.instance.allPotionsIsUsed[i]==false)
+            //    {
+            //        if (gameObject == characterStats.instance.allPotionInteractionO[i])
+            //        {
+            //            characterStats.instance.allPotionsIsUsed[i] = true;
+            //            break;
+            //        }
+            //    }
+            //}
+            
             //Destroy(gameObject);
         }
         else
-            Debug.Log("not added");
+            Debug.Log("not added" + item.name);
     }
 }

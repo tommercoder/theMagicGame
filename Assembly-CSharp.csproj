@@ -64,6 +64,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CinemachineTerrainHugger.cs" />
+    <Compile Include="Assets\FileManager.cs" />
+    <Compile Include="Assets\SaveData.cs" />
     <Compile Include="Assets\Scripts\AnimationStateController.cs" />
     <Compile Include="Assets\Scripts\IK systems\FootIK.cs" />
     <Compile Include="Assets\Scripts\abilities\AbilityMain.cs" />

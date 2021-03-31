@@ -38,8 +38,10 @@ public class swordEquipping : Item
                 savedPosition = Inventory.instance.itemsGameObjects[i].transform.position;
                 Debug.Log(savedPosition);
                 playerSword.instance.sword = Inventory.instance.itemsGameObjects[i].transform;
+                
                 playerSword.instance.currentSwordGameObject = Inventory.instance.itemsGameObjects[i];
                 
+
                 Inventory.instance.itemsGameObjects.Remove(Inventory.instance.itemsGameObjects[i]);
                 Inventory.instance.removeItem(Inventory.instance.items[i]);
                
@@ -49,11 +51,12 @@ public class swordEquipping : Item
                 playerSword.instance.sword.SetParent(playerSword.instance.spine.transform);
                 playerSword.instance.temp.transform.SetParent(playerSword.instance.itemsOnScene.transform);
                 playerSword.instance.temp.SetActive(false);
-                //put old object to inventory back;
+              
+                //put saved temp object to inventory back;
                 Inventory.instance.itemsGameObjects.Add(playerSword.instance.temp);
                 Inventory.instance.add(playerSword.instance.temp.GetComponent<weaponInteract>().item);
                 
-               
+
                 //setting back values everytime
                 //playerSword.instance.temp= GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/" + Inventory.instance.itemsGameObjects[i].name);
                 //playerSword.instance.currentSwordGameObject= GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/" + Inventory.instance.itemsGameObjects[i].name);

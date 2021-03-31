@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerSword : MonoBehaviour
+public class playerSword : MonoBehaviour,ISaveable
 {
     #region Singleton
     public static playerSword instance;
@@ -27,52 +27,59 @@ public class playerSword : MonoBehaviour
     public bool isEquipedSword = false;
     public Transform spine;
     public Transform itemsOnScene;
-    public Item item = null;
+    //public Item item = null;
+
+    public void PopulateSaveData(SaveData sd)
+    {
+        sd.s_sword = sword;
+        sd.s_currentSword = currentSword;
+        sd.s_currentSwordGO = currentSwordGameObject;
+        sd.s_temp = temp;
+        
+
+
+
+    }
+    public void LoadFromSaveData(SaveData sd)
+    {
+
+        
+        temp.transform.SetParent(itemsOnScene.transform);
+        temp.SetActive(false);
+        //Debug.Log(sd.s_sword);
+        //Debug.Log(sd.s_currentSword);
+        //Debug.Log(sd.s_currentSwordGO);
+        //Debug.Log(sd.s_temp);
+        sword = sd.s_sword;
+        temp = sd.s_temp;
+        currentSwordGameObject = sd.s_currentSwordGO;
+        
+        currentSword = sd.s_currentSword;
+        sword.SetParent(spine.transform);
+
+
+
+    }
+ 
     private void Start()
     {
-        currentSword = currentSwordGameObject.GetComponent<weaponInteract>().item;
-        //modernSword = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/ModernSword");
-        //modernSword.SetActive(false);
 
-        //pearlSword = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/PearlSword");
-        //pearlSword.SetActive(false);
+        currentSword = currentSwordGameObject.GetComponent<weaponInteract>().item;
+        
         
     }
     private void Update()
     {
-       
-            temp = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/" + currentSwordGameObject.name);
 
-            currentSwordGameObject = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/" + currentSwordGameObject.name);
-
+        //temp = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/" + currentSwordGameObject.name);
+            temp = currentSwordGameObject;
             currentSwordGameObject.SetActive(true);
             currentSwordGameObject.GetComponent<weaponInteract>().interacting = false;
             currentSwordGameObject.GetComponent<FloatingItem>().Rotating = false;
 
             sword = currentSwordGameObject.transform;
           
-        
-        //if (Input.GetKey("1"))
-        //{
-        //    swordBeg.SetActive(true);
-        //    pearlSword.SetActive(false);
-        //    modernSword.SetActive(false);
-        //    sword = swordBeg.transform;
-        //}
-        //if (Input.GetKey("2"))
-        //{
-        //    swordBeg.SetActive(false);
-        //    pearlSword.SetActive(false);
-        //    modernSword.SetActive(true);
-        //    sword = modernSword.transform;
-        //}
-        //if(Input.GetKey("3"))
-        //{
-        //    swordBeg.SetActive(false);
-        //    modernSword.SetActive(false);
-        //    pearlSword.SetActive(true);
-        //    sword = pearlSword.transform;
-        //}
+       
         if (isEquipedSword)
         {
             sword.position = swordEquiped.position;

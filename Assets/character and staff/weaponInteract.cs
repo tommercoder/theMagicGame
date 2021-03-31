@@ -22,7 +22,10 @@ public class weaponInteract : Interact
     private void Start()
     {
         damage = item.swordDamage;
-        animator = GetComponentInParent<Animator>();
+        if (transform.parent.name == "character")
+            animator = GetComponentInParent<Animator>();
+        else
+            animator = GameObject.Find("character").GetComponent<Animator>();
     }
     public override void InteractWith()
     {
@@ -60,7 +63,7 @@ public class weaponInteract : Interact
             Debug.Log("added weapon");
             
             Inventory.instance.itemsGameObjects.Add(gameObject);
-            
+            //characterStats.instance.allAddedToInventoryGO.Add(gameObject);
             manager.hidePanel();
             interacting = false;
 
@@ -75,57 +78,63 @@ public class weaponInteract : Interact
     //damage 
     public void OnTriggerEnter(Collider other)
     {
-      
-        if (isColliding)
-            return;
-
-        
-        if ((animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
-                || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
-                || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack") || 
-                animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
-                || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
-                || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing")))
+        if (gameObject.GetComponent<FloatingItem>() != null)
         {
-           
-            if (other.gameObject.CompareTag("ENEMY"))
+            if (!gameObject.GetComponent<FloatingItem>().Rotating)
             {
-                isColliding = true;
-              
-                if (other.gameObject.GetComponent<ProceduralStats>() != null)
+
+                if (isColliding)
+                    return;
+
+
+                if ((animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
+                        || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
+                        || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack") ||
+                        animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
+                        || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
+                        || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing")))
                 {
 
-                    other.gameObject.GetComponent<ProceduralStats>().currentHealth -= item.swordDamage;//this.gameObject.GetComponent<weaponInteract>().item.swordDamage;
-                    //Debug.Log("interact weapon with " + other.name);
+                    if (other.gameObject.CompareTag("ENEMY"))
+                    {
+                        isColliding = true;
 
-                    other.gameObject.transform.DOMove(other.gameObject.transform.position + ( transform.root.forward * 4), 0.2f);//moving enemy back after hit
-                    //Debug.Log(transform.root.name);
-                    
-                }
-                else if (other.gameObject.GetComponent<EnemyStats>() != null)
-                {
-                   // Debug.Log("hittinhg" + other.name);
-                    //damage
-                    other.gameObject.GetComponent<EnemyStats>().currentHP -= item.swordDamage;
-                    //logic
-                   // Debug.Log("interact weapon with " + other.name);
-                    otherController = other.GetComponent<CharacterController>();
-                    otherAnimator = other.GetComponent<Animator>();
-                    otherAnimator.SetBool("isWalkingEnemy", false);
-                    otherAnimator.SetBool("isRunningEnemy", false);
-                    otherAnimator.SetTrigger("hitEnemy");
-                    //otherAnimator.SetInteger("enemyAttackInteger", 4);
-                    EnemyPatrol.instance.canMove = false;
-                    otherController.enabled = false;
-                    other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);
-                  
-                    //otherAnimator.SetTrigger("hitEnemy");
-                    StartCoroutine(waitForSec());   
+                        if (other.gameObject.GetComponent<ProceduralStats>() != null)
+                        {
+
+                            other.gameObject.GetComponent<ProceduralStats>().currentHealth -= item.swordDamage;//this.gameObject.GetComponent<weaponInteract>().item.swordDamage;
+                                                                                                               //Debug.Log("interact weapon with " + other.name);
+
+                            other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);//moving enemy back after hit
+                                                                                                                                        //Debug.Log(transform.root.name);
+
+                        }
+                        else if (other.gameObject.GetComponent<EnemyStats>() != null)
+                        {
+                            // Debug.Log("hittinhg" + other.name);
+                            //damage
+                            other.gameObject.GetComponent<EnemyStats>().currentHP -= item.swordDamage;
+                            //logic
+                            // Debug.Log("interact weapon with " + other.name);
+                            otherController = other.GetComponent<CharacterController>();
+                            otherAnimator = other.GetComponent<Animator>();
+                            otherAnimator.SetBool("isWalkingEnemy", false);
+                            otherAnimator.SetBool("isRunningEnemy", false);
+                            otherAnimator.SetTrigger("hitEnemy");
+                            //otherAnimator.SetInteger("enemyAttackInteger", 4);
+                            EnemyPatrol.instance.canMove = false;
+                            otherController.enabled = false;
+                            other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);
+
+                            //otherAnimator.SetTrigger("hitEnemy");
+                            StartCoroutine(waitForSec());
+                        }
+                    }
+                    StartCoroutine(Reset());
                 }
             }
-            StartCoroutine(Reset());
         }
-        
+
     }
     IEnumerator waitForSec()
     {

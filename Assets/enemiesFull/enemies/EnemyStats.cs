@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyStats : MonoBehaviour
+public class EnemyStats : MonoBehaviour,ISaveable
 {
+    [Header("ENEMY ID")]
+    public string id;
+
+
     public int currentHP;
     public int maxHP;
     public Animator animator;
@@ -24,7 +28,7 @@ public class EnemyStats : MonoBehaviour
     void Start()
     {
        
-
+      
 
         RagdollActive(false);
         //setting rigiddbodies collision for swords
@@ -62,8 +66,7 @@ public class EnemyStats : MonoBehaviour
             Die();
             if(!addedXP)
             {
-                // log.gameObject.SetActive(true);
-                // log.GetComponent<Text>().text = "+" + " " + XPforDeath + "xp";
+                characterStats.instance.dead_enemies_ids.Add(id);
                 logShow.instance.showText("+" + " " + XPforDeath + "xp");
                 player.GetComponent<characterStats>().XP += XPforDeath;
                 addedXP = true;
@@ -72,10 +75,11 @@ public class EnemyStats : MonoBehaviour
     }
     void Die()
     {
+        
         Debug.Log("DIE");
         RagdollActive(true);
-        StartCoroutine(waitDeath());
-        //Destroy(this.gameObject, 4f);
+        //StartCoroutine(waitDeath());
+       Destroy(this.gameObject, 1f);
 
     }
     IEnumerator waitDeath()
@@ -110,6 +114,31 @@ public class EnemyStats : MonoBehaviour
         rigidbody.detectCollisions = !active;
         rigidbody.isKinematic = !active;
         collider.enabled = !active;
+
+    }
+
+    public void PopulateSaveData(SaveData sd)
+    {
+        SaveData.EnemyData enemyData = new SaveData.EnemyData();
+        enemyData.e_Health = currentHP;
+        enemyData.e_id = id;
+        sd.enemyData.Add(enemyData);
+    }
+    public void LoadFromSaveData(SaveData sd)
+    {
+        foreach(SaveData.EnemyData enemyData in sd.enemyData)
+        {
+            if(enemyData.e_id == id)
+            {
+                currentHP = enemyData.e_Health;
+                break;
+            }
+        }
+        if(currentHP <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+
 
     }
 }
