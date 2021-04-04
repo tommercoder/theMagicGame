@@ -139,7 +139,11 @@ public class attacksController : MonoBehaviour
             }
             if(swordSlashAbilityPressed && Abilities[2].canUse)
             {
-                
+                //because at start we have 0 time of ability
+                if(characterStats.instance.timeOfSwordAbility==0)
+                {
+                    logShow.instance.showText("get min 100XP to use this ability");
+                }
                 Abilities[2].TriggerAbility();
                 controller.timeRemaining = 10;
                 controller.timerIsRunning = true;
