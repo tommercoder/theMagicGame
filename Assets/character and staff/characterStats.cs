@@ -45,7 +45,7 @@ public class characterStats : MonoBehaviour,ISaveable
     public List<Vector3> allItemsPositions = new List<Vector3>();
     void Start()
     {
-
+        Debug.Log(Application.persistentDataPath);
         XP = 50;
         //setting all
         all_enemies = FindObjectsOfType<EnemyStats>().ToList();
@@ -139,7 +139,7 @@ public class characterStats : MonoBehaviour,ISaveable
             sd.s_allSwordsPositions.Add(all_swordsGO[i].transform.position);
            
         }
-       for(int i =0;i < allPotionInteractionO.Count;i++)
+       for(int i = 0;i < allPotionInteractionO.Count;i++)
         {
             sd.s_allPotionsPositions.Add(allPotionInteractionO[i].transform.position);
         }
@@ -210,7 +210,7 @@ public class characterStats : MonoBehaviour,ISaveable
             allPotionsIsUsed = sd.s_allPotionsIsUsed;
         }
        
-        if (sd.s_allPotionInteractions.Count > 0)
+        if (sd.s_allPotionInteractions.Count > 0 && sd.s_allPotionsIsUsed.Count>0)//second pattern in if is changed(FOR REMEMBER)
         {
             allPotionInteractionO = sd.s_allPotionInteractions;
             for (int b = 0; b < allPotionInteractionO.Count; b++)
