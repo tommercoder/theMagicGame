@@ -65,10 +65,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CinemachineTerrainHugger.cs" />
-    <Compile Include="Assets\FileManager.cs" />
-    <Compile Include="Assets\SaveData.cs" />
     <Compile Include="Assets\Scripts\AnimationStateController.cs" />
+    <Compile Include="Assets\Scripts\FileManager.cs" />
     <Compile Include="Assets\Scripts\IK systems\FootIK.cs" />
+    <Compile Include="Assets\Scripts\SaveData.cs" />
     <Compile Include="Assets\Scripts\abilities\AbilityMain.cs" />
     <Compile Include="Assets\Scripts\abilities\dashAbility.cs" />
     <Compile Include="Assets\Scripts\abilities\fireballAbility.cs" />
@@ -148,6 +148,7 @@
     <Compile Include="Assets\enemiesFull\enemies\EnemyStats.cs" />
     <Compile Include="Assets\enemiesFull\enemies\enemySwordInteract.cs" />
     <Compile Include="Assets\level design\floatingStone.cs" />
+    <Compile Include="Assets\level design\nature\SCRIPTS\HealthWaterInteract.cs" />
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\another\FastIK\Documentation.txt" />
