@@ -66,6 +66,17 @@ public class EnemyStats : MonoBehaviour,ISaveable
             Die();
             if(!addedXP)
             {
+                Quest quest = MarieleQuest.instance.currentMarieleQuest;
+                if (quest.isActive)
+                {
+                    quest.goal.EnemyKilled();
+                    if (quest.goal.isReached())
+                    {
+                        //add reward to inventory
+                        characterStats.instance.XP += quest.XP;
+                        quest.complete();
+                    }
+                }
                 characterStats.instance.dead_enemies_ids.Add(id);
                 logShow.instance.showText("+" + " " + XPforDeath + "xp");
                 player.GetComponent<characterStats>().XP += XPforDeath;
@@ -75,7 +86,7 @@ public class EnemyStats : MonoBehaviour,ISaveable
     }
     void Die()
     {
-        
+       
         Debug.Log("DIE");
         RagdollActive(true);
         //StartCoroutine(waitDeath());

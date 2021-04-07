@@ -11,16 +11,28 @@ public class logShow : MonoBehaviour
         instance = this;
     }
     public Text text;
+    public Text questBigText;
 
-
+    public void showQuestText(string text)
+    {
+        questBigText.text = text;
+        StartCoroutine(waitToHide1());
+    }
     public void showText(string textSTR)
     {
         text.text = textSTR;
         StartCoroutine(waitToHide());
     }
+    IEnumerator waitToHide1()
+    {
+        yield return new WaitForSeconds(2f);
+        questBigText.text = " ";
+
+    }
     IEnumerator waitToHide()
     {
         yield return new WaitForSeconds(2f);
         text.text = " ";
+
     }
 }

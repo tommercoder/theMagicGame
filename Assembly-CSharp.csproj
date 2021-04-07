@@ -66,15 +66,15 @@
   <ItemGroup>
     <Compile Include="Assets\CinemachineTerrainHugger.cs" />
     <Compile Include="Assets\Scripts\AnimationStateController.cs" />
-    <Compile Include="Assets\Scripts\FileManager.cs" />
     <Compile Include="Assets\Scripts\IK systems\FootIK.cs" />
-    <Compile Include="Assets\Scripts\SaveData.cs" />
     <Compile Include="Assets\Scripts\abilities\AbilityMain.cs" />
     <Compile Include="Assets\Scripts\abilities\dashAbility.cs" />
     <Compile Include="Assets\Scripts\abilities\fireballAbility.cs" />
     <Compile Include="Assets\Scripts\abilities\swordSlashAbility.cs" />
     <Compile Include="Assets\Scripts\allSwordReset.cs" />
     <Compile Include="Assets\Scripts\attacks\attacksController.cs" />
+    <Compile Include="Assets\Scripts\dialogues\Dialogue.cs" />
+    <Compile Include="Assets\Scripts\dialogues\DialogueManager.cs" />
     <Compile Include="Assets\Scripts\effects\fireballScript.cs" />
     <Compile Include="Assets\Scripts\jumpScript.cs" />
     <Compile Include="Assets\Scripts\mainElementControlling\mouseCursorController.cs" />
@@ -84,6 +84,11 @@
     <Compile Include="Assets\Scripts\movement\movement.cs" />
     <Compile Include="Assets\Scripts\player\healthBarController.cs" />
     <Compile Include="Assets\Scripts\player\playerHealth.cs" />
+    <Compile Include="Assets\Scripts\questing staff\MarieleQuest.cs" />
+    <Compile Include="Assets\Scripts\questing staff\Quest.cs" />
+    <Compile Include="Assets\Scripts\questing staff\QuestGoal.cs" />
+    <Compile Include="Assets\Scripts\saving\FileManager.cs" />
+    <Compile Include="Assets\Scripts\saving\SaveData.cs" />
     <Compile Include="Assets\Scripts\sword things\playerSword.cs" />
     <Compile Include="Assets\Scripts\treeColliders.cs" />
     <Compile Include="Assets\Scripts\ui scripts\AbilityUI.cs" />
@@ -110,8 +115,6 @@
     <Compile Include="Assets\another\FastIK\Scripts\Sample\SampleProcedualAnimation.cs" />
     <Compile Include="Assets\another\FastIK\Scripts\Sample\SampleRotator.cs" />
     <Compile Include="Assets\another\FastIK\Scripts\Sample\SampleSinMover.cs" />
-    <Compile Include="Assets\character and staff\Dialogue.cs" />
-    <Compile Include="Assets\character and staff\DialogueManager.cs" />
     <Compile Include="Assets\character and staff\FloatingItem.cs" />
     <Compile Include="Assets\character and staff\Interact.cs" />
     <Compile Include="Assets\character and staff\NPCinteraction.cs" />

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Cinemachine;
+
 public class NPCinteraction : Interact
 {
 
@@ -18,6 +20,8 @@ public class NPCinteraction : Interact
 
     public Dialogue dialogue;
 
+
+    public Quest quest;
     private void Start()
     {
         player = GameObject.Find("character");
@@ -25,6 +29,8 @@ public class NPCinteraction : Interact
         
         dialogHappening = false;
 
+        
+     
     }
     public override void InteractWith()
     {
@@ -50,11 +56,35 @@ public class NPCinteraction : Interact
                 FindObjectOfType<DialogueManager>().StartDialog(dialogue);
             }
 
-            
+            if(quest!=null && characterStats.instance.loadCompleted && quest.title!="")
+            {
+                Debug.Log("QUEST NOT EQUAL TO NULL");
+                FindObjectOfType<DialogueManager>().questBool = true;
+                logShow.instance.showText("before ending of dialog you will be able to get quest");
+            }
             dialogHappening = true;
             textName.GetComponent<TextMesh>().text = dialogue.name;
-        }
 
+            
+
+
+        }
+        if (quest != null)
+        {
+            if (FindObjectOfType<DialogueManager>().questUI.activeSelf)
+            {
+                FindObjectOfType<DialogueManager>().handleQuest(quest);
+                
+            }
+        }
+        //if i already got quest from this npc then i need to clear it
+        if (quest != null)
+        {
+            if (quest.isActive)
+            {
+                quest = null;
+            }
+        }
         //for movement enabling camera brain
         if (!interacting && !DialogueManager.instance.dialogBOX.activeSelf)
         {
@@ -62,7 +92,7 @@ public class NPCinteraction : Interact
             
         }
        
-
+        //floating name and text
         if (Vector3.Distance(transform.position, player.transform.position) < 5)
         {
             if(!dialogHappening)
@@ -81,6 +111,14 @@ public class NPCinteraction : Interact
             textName.transform.Rotate(0, 180, 0);
         }
     }
+
+
+    //questing
+    
+    
+    
+
+  
 
 
 }

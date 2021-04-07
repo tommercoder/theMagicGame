@@ -25,6 +25,9 @@ public class SaveData : MonoBehaviour
     public List<Vector3> s_allSwordsPositions = new List<Vector3>();
     public List<Vector3> s_allPotionsPositions = new List<Vector3>();
     public List<bool> s_allPotionsIsUsed = new List<bool>();
+    public List<Quest> s_allQuests = new List<Quest>();
+
+    public Quest s_currentQuest;
     public int s_HP;
     [System.Serializable]
     public struct SlotsData

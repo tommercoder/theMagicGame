@@ -27,8 +27,10 @@ public class DialogueManager : MonoBehaviour
     public GameObject answer1G;
     public GameObject answer2G;
     public GameObject answerByeG;
-    
+    public GameObject questButton;
+    public bool questBool;
 
+    
     private void Start()
     {
         sentences = new Queue<string>();
@@ -38,15 +40,26 @@ public class DialogueManager : MonoBehaviour
         answer2G.SetActive(false);
         answerByeG.SetActive(false);
 
+        
 
-     
 
     }
 
+    private void Update()
+    {
+        if (questBool)
+        {
+            if (dialogBOX.activeSelf && answer1G.activeSelf == false && answer2G.activeSelf == false)
+            {
 
+                questButton.SetActive(true);
+                questBool = false;
+            }
+        }
+    }
     public void StartDialog(Dialogue dialogue)
     {
-        dialogBOX.SetActive(true);  
+        dialogBOX.SetActive(true);
         anim.SetBool("dialogOpen", true);
         nameText.text = dialogue.name;
         sentences.Clear();
@@ -78,7 +91,7 @@ public class DialogueManager : MonoBehaviour
         {
             answerByeG.transform.position = answer2G.transform.position;
         }
-        
+
 
         greeting = dialogue.greeting;
         goodbye = dialogue.goodbye;
@@ -98,7 +111,7 @@ public class DialogueManager : MonoBehaviour
         //    EndDialogue();
         //    return;
         //}
-        
+
         string sentence = sentences.Dequeue();
 
         StopAllCoroutines();
@@ -130,6 +143,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void answerByeClick()
     {
+
         StopAllCoroutines();
         StartCoroutine(type(goodbye));
         StartCoroutine(waitEnd());
@@ -146,6 +160,8 @@ public class DialogueManager : MonoBehaviour
     }
     IEnumerator waitEnd()
     {
+        answer1G.SetActive(false);
+        answer2G.SetActive(false);
         yield return new WaitForSeconds(1f);
         EndDialogue();
     }
@@ -153,8 +169,55 @@ public class DialogueManager : MonoBehaviour
     {
         anim.SetBool("dialogOpen", false);
         NPCinteraction.instance.dialogHappening = false;
-       
+
         //NPCinteraction.instance.dialogEnded = true;
 
+    }
+
+    public GameObject questUI;
+    public Text questTitle;
+    public Text questDesc;
+    public Text questReward;
+    Quest forHandle;
+    public  void openQuestWindow()
+    {
+        questUI.SetActive(true);
+       
+    }
+    public void handleQuest(Quest quest)
+    {
+        questTitle.text = quest.title;
+        questDesc.text = quest.description;
+        questReward.text = quest.rewardText;
+        forHandle = quest;
+    }
+    public void acceptQuest()
+    {
+        if (MarieleQuest.instance.currentMarieleQuest.isActive == false )
+        {
+            questUI.SetActive(false);
+            questButton.SetActive(false);
+
+            EndDialogue();
+            logShow.instance.showText("you got new quest,for details press P");
+            forHandle.isActive = true;
+
+            MarieleQuest.instance.currentMarieleQuest = forHandle;
+            questBool = false;
+            forHandle = null;
+        }
+        else
+        {
+            logShow.instance.showText("You can have one quest at time only");
+            
+        }
+    }
+    public void declineQuest()
+    {
+        questUI.SetActive(false);
+        questButton.SetActive(false);
+        logShow.instance.showText("you can accept it later");
+        questBool = false;
+        EndDialogue();
     }
 }

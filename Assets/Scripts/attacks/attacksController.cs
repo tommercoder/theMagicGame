@@ -95,8 +95,7 @@ public class attacksController : MonoBehaviour
                     && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
             {
                 Abilities[1].TriggerAbility();
-                canClick = false;
-                canClickSec = false;
+                
                 if (!Abilities[1].dashStarted)
                 {
                     //errorText.gameObject.SetActive(true);
@@ -106,7 +105,8 @@ public class attacksController : MonoBehaviour
                     
                     return;
                 }
-         
+                canClick = false;
+                canClickSec = false;
                 dashParticle.Play();
                     controller.timeRemaining = 5;
                     controller.timerIsRunning = true;
