@@ -152,6 +152,8 @@
     <Compile Include="Assets\enemiesFull\enemies\enemySwordInteract.cs" />
     <Compile Include="Assets\level design\floatingStone.cs" />
     <Compile Include="Assets\level design\nature\SCRIPTS\HealthWaterInteract.cs" />
+    <Compile Include="Assets\mouseOverButton.cs" />
+    <Compile Include="Assets\pauseMenu.cs" />
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\another\FastIK\Documentation.txt" />

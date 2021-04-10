@@ -119,13 +119,16 @@ public class Inventory : MonoBehaviour,ISaveable
     {
         sd.s_inventory = items;
         sd.s_inventoryGO = itemsGameObjects;
-
+        //foreach(GameObject g in sd.s_inventoryGO)
+        //{
+        //    Debug.Log("POP INV" + g.name);
+        //}
 
         //sd.s_allGameObjectInventory = characterStats.instance.allAddedToInventoryGO;
     }
     public void LoadFromSaveData(SaveData sd)
     {
-       
+        
         for (int i = 0; i < sd.s_inventory.Count; i++)
         {
             if (sd.s_inventory[i] != null)
@@ -136,8 +139,40 @@ public class Inventory : MonoBehaviour,ISaveable
         }
         for (int i = 0; i < sd.s_inventoryGO.Count; i++)
         {
-            addGOforPotions(sd.s_inventoryGO[i]);
-            sd.s_inventoryGO[i].SetActive(false);
+            if (sd.s_inventoryGO[i] != null)
+            {
+              //  Debug.Log("INVENTORY" + sd.s_inventoryGO[i]);
+                addGOforPotions(sd.s_inventoryGO[i]);
+                sd.s_inventoryGO[i].SetActive(false);
+            }
+            else
+            {
+                GameObject temp;
+                for(int t = 0;t < characterStats.instance.allInteractableGameObjects.Count;t++)
+                {
+
+                    if (characterStats.instance.allInteractableGameObjects[t].GetComponent<potionInteraction>() != null)
+                    {
+                        if (sd.s_inventory[i] == characterStats.instance.allInteractableGameObjects[t].GetComponent<potionInteraction>().item)
+
+                        {
+                            addGOforPotions(characterStats.instance.allInteractableGameObjects[t]);
+                            characterStats.instance.allInteractableGameObjects[t].SetActive(false);
+                        }
+                    }
+                    else if (characterStats.instance.allInteractableGameObjects[t].GetComponent<weaponInteract>() != null)
+                    {
+                       // Debug.Log("A" + sd.s_inventory[i]);
+                       // Debug.Log("B" + characterStats.instance.allInteractableGameObjects[t].GetComponent<weaponInteract>().item);
+                        if (sd.s_inventory[i] ==  characterStats.instance.allInteractableGameObjects[t].GetComponent<weaponInteract>().item)
+                        {
+                            addGOforPotions(characterStats.instance.allInteractableGameObjects[t]);
+                            characterStats.instance.allInteractableGameObjects[t].SetActive(false);
+                        }
+                    }
+                }
+
+            }
         }
         //characterStats.instance.allAddedToInventoryGO = sd.s_allGameObjectInventory;
         //for(int i = 0;i < sd.s_allGameObjectInventory.Count;i++)

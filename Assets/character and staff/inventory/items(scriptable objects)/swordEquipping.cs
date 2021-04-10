@@ -44,15 +44,17 @@ public class swordEquipping : Item
 
                 Inventory.instance.itemsGameObjects.Remove(Inventory.instance.itemsGameObjects[i]);
                 Inventory.instance.removeItem(Inventory.instance.items[i]);
-               
+
                 //Inventory.instance.removeGOitem(Inventory.instance.itemsGameObjects[i]);    
-                
+
                 //put new game object instead of old
+                playerSword.instance.currentSwordGameObject.GetComponent<weaponInteract>().isCurrentSword = true;
                 playerSword.instance.sword.SetParent(playerSword.instance.spine.transform);
                 playerSword.instance.temp.transform.SetParent(playerSword.instance.itemsOnScene.transform);
                 playerSword.instance.temp.SetActive(false);
-              
+
                 //put saved temp object to inventory back;
+                playerSword.instance.temp.GetComponent<weaponInteract>().isCurrentSword = false;
                 Inventory.instance.itemsGameObjects.Add(playerSword.instance.temp);
                 Inventory.instance.add(playerSword.instance.temp.GetComponent<weaponInteract>().item);
                 

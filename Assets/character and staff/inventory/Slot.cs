@@ -9,7 +9,7 @@ public class Slot : MonoBehaviour, ISaveable
         SaveData.SlotsData slotsData = new SaveData.SlotsData();
         slotsData.s_slotItem = item;
         slotsData.s_id = id;
-
+        Debug.Log("slots data" + slotsData.s_slotItem);
         //foreach (Sprite s in characterStats.instance.s_icons)
         //{
         //    if (id == slotsData.s_id)
@@ -169,8 +169,19 @@ public class Slot : MonoBehaviour, ISaveable
                 //        characterStats.instance.allAddedToInventoryGO.Remove(g);
                 //}
 
-                characterStats.instance.allPotionInteractionO[i].isUsed = false;
-                characterStats.instance.allPotionsIsUsed[i] = false;
+                for(int k = 0;k < characterStats.instance.allPotionInteractionO.Count;k++ )
+                {
+                    if(characterStats.instance.allPotionInteractionO[k].gameObject == Inventory.instance.itemsGameObjects[i])
+                    {
+                        characterStats.instance.allPotionInteractionO[k].isUsed = false;
+                        Debug.Log("LOG" + Inventory.instance.itemsGameObjects[i]);
+                    }
+                }
+                
+
+                //characterStats.instance.allPotionInteractionO[i].isUsed = false;
+                //characterStats.instance.allPotionsIsUsed[i] = false;
+                
                 //for(int a = 0;a < characterStats.instance.allPotionInteractionO.Count;a++)
                 //{
                 //    if(characterStats.instance.allPotionInteractionO[i].GetComponent<potionInteraction>()!=null)

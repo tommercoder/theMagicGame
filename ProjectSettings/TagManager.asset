@@ -12,6 +12,8 @@ TagManager:
   - ENEMY
   - Sword
   - checkpoint
+  - MainElements
+  - itemsOnSceneTag
   layers:
   - Default
   - TransparentFX

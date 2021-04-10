@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class SaveData : MonoBehaviour
+public class SaveData
 {
+   
     //character saving
     public int s_XP;
     public GameObject s_respawnObject;
@@ -25,10 +26,12 @@ public class SaveData : MonoBehaviour
     public List<Vector3> s_allSwordsPositions = new List<Vector3>();
     public List<Vector3> s_allPotionsPositions = new List<Vector3>();
     public List<bool> s_allPotionsIsUsed = new List<bool>();
+    public List<bool> s_currentSwordBool = new List<bool>();
     public List<Quest> s_allQuests = new List<Quest>();
 
     public Quest s_currentQuest;
     public int s_HP;
+    //slots
     [System.Serializable]
     public struct SlotsData
     {
@@ -65,6 +68,7 @@ public class SaveData : MonoBehaviour
     }
     public void LoadFromJson(string json)
     {
+
         JsonUtility.FromJsonOverwrite(json, this);
     }
 

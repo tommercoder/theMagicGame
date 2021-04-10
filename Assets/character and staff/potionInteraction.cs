@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class potionInteraction : Interact
 {
+    private void Awake()
+    {
+
+        //GameObject[] objs = GameObject.FindGameObjectsWithTag("interactable object");
+
+        //if (objs.Length > 1)
+        //{
+        //    Destroy(this.gameObject);
+        //}
+
+        //DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(gameObject);
+    }
     [Header("ITEM ID")]
     public string id;
     public inventoryManager manager;

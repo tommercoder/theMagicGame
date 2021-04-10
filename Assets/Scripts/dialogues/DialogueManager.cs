@@ -160,14 +160,20 @@ public class DialogueManager : MonoBehaviour
     }
     IEnumerator waitEnd()
     {
+        questBool = false;
+        questButton.SetActive(false);
+        if (answer1G.activeSelf)
         answer1G.SetActive(false);
+        if(answer2G.activeSelf)
         answer2G.SetActive(false);
+
         yield return new WaitForSeconds(1f);
         EndDialogue();
     }
     public void EndDialogue()
     {
         anim.SetBool("dialogOpen", false);
+        
         NPCinteraction.instance.dialogHappening = false;
 
         //NPCinteraction.instance.dialogEnded = true;
@@ -193,7 +199,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void acceptQuest()
     {
-        if (MarieleQuest.instance.currentMarieleQuest.isActive == false )
+        if (MarieleQuest.instance.currentMarieleQuest.isActive == false)
         {
             questUI.SetActive(false);
             questButton.SetActive(false);
@@ -209,7 +215,6 @@ public class DialogueManager : MonoBehaviour
         else
         {
             logShow.instance.showText("You can have one quest at time only");
-            
         }
     }
     public void declineQuest()

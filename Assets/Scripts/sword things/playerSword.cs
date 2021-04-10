@@ -65,7 +65,7 @@ public class playerSword : MonoBehaviour,ISaveable
     {
 
         currentSword = currentSwordGameObject.GetComponent<weaponInteract>().item;
-        
+        currentSwordGameObject.GetComponent<weaponInteract>().isCurrentSword = true;
         
     }
     private void Update()

@@ -16,7 +16,7 @@ public class weaponInteract : Interact
     public Animator animator;
     public int damage;
     public bool isColliding;
-
+    public bool isCurrentSword;
     public CharacterController otherController;
     public Animator otherAnimator;
     private void Start()
