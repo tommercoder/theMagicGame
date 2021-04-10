@@ -72,7 +72,7 @@ Material:
     - _Reflectivity: 10
     - _ScaleRatioA: 0.9
     - _ScaleRatioB: 1.2146314
-    - _ScaleRatioC: 0.65025
+    - _ScaleRatioC: 1.63125
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0

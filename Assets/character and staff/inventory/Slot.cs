@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 public class Slot : MonoBehaviour, ISaveable
@@ -120,6 +121,7 @@ public class Slot : MonoBehaviour, ISaveable
                 onSlotChangedCalled.Invoke();
         }
     }
+    public List<potionInteraction> temp = new List<potionInteraction>();
     public void DropButton()//set to onclick
     {
 
@@ -168,13 +170,15 @@ public class Slot : MonoBehaviour, ISaveable
                 //    if (g.GetComponent<potionInteraction>().item == Inventory.instance.itemsGameObjects[i].GetComponent<potionInteraction>().item)
                 //        characterStats.instance.allAddedToInventoryGO.Remove(g);
                 //}
+                
+                 temp = GameObject.FindObjectsOfType<potionInteraction>().ToList();
 
-                for(int k = 0;k < characterStats.instance.allPotionInteractionO.Count;k++ )
+                for (int k = 0;k < temp.Count;k++ )
                 {
-                    if(characterStats.instance.allPotionInteractionO[k].gameObject == Inventory.instance.itemsGameObjects[i])
+                    if(temp[k].gameObject == Inventory.instance.itemsGameObjects[i])
                     {
-                        characterStats.instance.allPotionInteractionO[k].isUsed = false;
-                        Debug.Log("LOG" + Inventory.instance.itemsGameObjects[i]);
+                        temp[k].isUsed = false;
+                        //Debug.Log("LOG" + temp);
                     }
                 }
                 

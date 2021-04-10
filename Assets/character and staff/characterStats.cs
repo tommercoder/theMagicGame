@@ -363,7 +363,11 @@ public class characterStats : MonoBehaviour, ISaveable
                 {
                     //Debug.Log(sd.s_allItemsPositions[j] + " " + allInteractableGameObjects[j].name);
                     all_swordsGO[j].transform.position = sd.s_allSwordsPositions[j];
-                    allPotionInteractionO[j].transform.position = sd.s_allPotionsPositions[j];
+                    
+                }
+                for(int a = 0;a< sd.s_allPotionsPositions.Count;a++)
+                {
+                    allPotionInteractionO[a].transform.position = sd.s_allPotionsPositions[a];
                 }
             }
 

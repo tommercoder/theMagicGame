@@ -15,7 +15,9 @@ public class pauseMenu : MonoBehaviour
     public GameObject ui;
     public Camera cameraMenu;
     public Camera cameraGame;
-    public GameObject menuCanvas;
+    public GameObject menuCanvas; 
+    public GameObject mainCanvas;
+    public GameObject pauseCanvas;
     private void Start()
     {
         cameraGame.enabled = false;
@@ -59,8 +61,14 @@ public class pauseMenu : MonoBehaviour
         //#else
         //        Application.Quit();
         //#endif
+        mainCanvas.SetActive(false);
         menuCanvas.SetActive(true);
         cameraMenu.enabled = true;
+
+        if(pauseCanvas.activeSelf)
+        {
+            pauseCanvas.SetActive(false);
+        }
         //SceneManager.LoadScene("main menu");
         //characterStats.instance.SaveJsonData(characterStats.instance);
     }

@@ -40,6 +40,12 @@ public class mouseOverButton : MonoBehaviour
     public Camera cameraMenu;
     public Camera cameraGame;
     public GameObject menuCanvas;
+    public GameObject mainCanvas;
+    private void Start()
+    {
+        mainCanvas.SetActive(false);
+        menuCanvas.SetActive(true);
+    }
     private void Update()
     {
         //timeElapsed += Time.deltaTime;
@@ -63,16 +69,18 @@ public class mouseOverButton : MonoBehaviour
         //}
         //show loading
         yield return null;
-        menuCanvas.SetActive(true);
-        cameraMenu.enabled = false;
-        cameraGame.enabled = true;
+        
     }
     public void openGame()
     {
-        StartCoroutine(loadingBar());
-        
+        menuCanvas.SetActive(false);
+        mainCanvas.SetActive(true);
+        cameraMenu.enabled = false;
+        cameraGame.enabled = true;
+        //StartCoroutine(loadingBar());
+
         //LoadingGame = true;
-       /// SceneManager.LoadScene("game");
+        /// SceneManager.LoadScene("game");
         //LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //characterStats.instance.LoadJsonData(characterStats.instance);
     }

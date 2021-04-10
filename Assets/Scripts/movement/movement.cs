@@ -54,7 +54,8 @@ public class movement : MonoBehaviour
 	{
 		rb = GetComponent<Rigidbody>();
 		anim = this.GetComponent<Animator>();
-		cam = Camera.main;
+		//cam = Camera.main;
+		cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 		controller = this.GetComponent<CharacterController>();
 		canMove = true;
 		attacks = GetComponent<attacksController>();

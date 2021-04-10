@@ -107,7 +107,7 @@ public class NPCinteraction : Interact
 
         if (textName != null)
         {
-            textName.transform.LookAt(Camera.main.transform.position);
+            textName.transform.LookAt(GameObject.FindGameObjectWithTag("MainCamera").transform.position);
             textName.transform.Rotate(0, 180, 0);
         }
     }

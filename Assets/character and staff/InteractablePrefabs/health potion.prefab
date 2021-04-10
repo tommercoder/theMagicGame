@@ -50,6 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InteractedText: 
   interacting: 0
+  isUsed: 0
+  id: 
   manager: {fileID: 0}
   item: {fileID: 11400000, guid: aeccd20f471e03846a706dd830cff5ca, type: 2}
 --- !u!135 &1982524751729626892
@@ -89,7 +91,6 @@ GameObject:
   - component: {fileID: 1982524752678480607}
   - component: {fileID: 1982524752678480605}
   - component: {fileID: 1982524752678480606}
-  - component: {fileID: 1982524752678480604}
   m_Layer: 0
   m_Name: Icosphere
   m_TagString: Untagged
@@ -158,22 +159,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &1982524752678480604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982524752678480592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6e1498ca774bc5499d9a7210528234a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InteractedText: 
-  interacting: 0
-  manager: {fileID: 0}
-  item: {fileID: 0}
 --- !u!1 &1982524752683627164
 GameObject:
   m_ObjectHideFlags: 0
