@@ -64,7 +64,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CinemachineTerrainHugger.cs" />
     <Compile Include="Assets\Scripts\AnimationStateController.cs" />
     <Compile Include="Assets\Scripts\IK systems\FootIK.cs" />
     <Compile Include="Assets\Scripts\abilities\AbilityMain.cs" />
@@ -87,11 +86,15 @@
     <Compile Include="Assets\Scripts\questing staff\MarieleQuest.cs" />
     <Compile Include="Assets\Scripts\questing staff\Quest.cs" />
     <Compile Include="Assets\Scripts\questing staff\QuestGoal.cs" />
+    <Compile Include="Assets\Scripts\questing staff\questPointer.cs" />
     <Compile Include="Assets\Scripts\saving\FileManager.cs" />
     <Compile Include="Assets\Scripts\saving\SaveData.cs" />
     <Compile Include="Assets\Scripts\sword things\playerSword.cs" />
     <Compile Include="Assets\Scripts\treeColliders.cs" />
     <Compile Include="Assets\Scripts\ui scripts\AbilityUI.cs" />
+    <Compile Include="Assets\Scripts\ui scripts\mouseOverButton.cs" />
+    <Compile Include="Assets\Scripts\ui scripts\pauseMenu.cs" />
+    <Compile Include="Assets\TERRAIN\CinemachineTerrainHugger.cs" />
     <Compile Include="Assets\Unity\ConstraintSamples\Scripts\mParent.cs" />
     <Compile Include="Assets\Unity\Info\Scripts\Readme.cs" />
     <Compile Include="Assets\another\AlignInEditor\AlignInEditor.cs" />
@@ -115,6 +118,9 @@
     <Compile Include="Assets\another\FastIK\Scripts\Sample\SampleProcedualAnimation.cs" />
     <Compile Include="Assets\another\FastIK\Scripts\Sample\SampleRotator.cs" />
     <Compile Include="Assets\another\FastIK\Scripts\Sample\SampleSinMover.cs" />
+    <Compile Include="Assets\audio\Sound.cs" />
+    <Compile Include="Assets\audio\audioManager.cs" />
+    <Compile Include="Assets\audio\notPlayInMenu.cs" />
     <Compile Include="Assets\character and staff\FloatingItem.cs" />
     <Compile Include="Assets\character and staff\Interact.cs" />
     <Compile Include="Assets\character and staff\NPCinteraction.cs" />
@@ -152,9 +158,6 @@
     <Compile Include="Assets\enemiesFull\enemies\enemySwordInteract.cs" />
     <Compile Include="Assets\level design\floatingStone.cs" />
     <Compile Include="Assets\level design\nature\SCRIPTS\HealthWaterInteract.cs" />
-    <Compile Include="Assets\mouseOverButton.cs" />
-    <Compile Include="Assets\pauseMenu.cs" />
-    <Compile Include="Assets\questPointer.cs" />
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\another\FastIK\Documentation.txt" />

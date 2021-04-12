@@ -44,6 +44,7 @@ public class movement : MonoBehaviour
 	public float jumpSpeed = 8.0F;
 	public float gravity = 20.0F;
 	public GameObject dialogBox;
+	public audioManager am;
 	//private Vector3 moveDirection = Vector3.zero;
 	//private Vector3 playerVelocity;
 	//private float jumpHeight = 10.0f;
@@ -222,6 +223,7 @@ public class movement : MonoBehaviour
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
 			if(controller.enabled)
 			controller.Move(desiredMoveDirection * Time.deltaTime * playerSpeed);
+			
 			/*if (attacks.enemiesAround && attacks.attackState && isDrawedSword)
 			{
 				if (InputZ > 0.0f)
@@ -246,7 +248,10 @@ public class movement : MonoBehaviour
 					
 		
 	}
-
+	public void runningAudioEvent()//animation event
+    {
+		am.Play("walk");
+    }
 	void InputMagnitude()
 	{
 		bool isDrawedSword = anim.GetBool("isDrawedSword");
@@ -263,7 +268,7 @@ public class movement : MonoBehaviour
 		//Physically move player
 		if (Speed > allowPlayerRotation)
 		{
-
+			
 			//anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
 			if (canMove )
 			{

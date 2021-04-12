@@ -48,6 +48,8 @@ public class EnemyPatrol : MonoBehaviour
 
     void chasePlayer()
     {
+        if (pauseMenu.instance.menuIsOpened)
+            return;
         Debug.Log("chasePlayer called");
         //attackingPlayer = true;
         if (canMove)
@@ -113,10 +115,11 @@ public class EnemyPatrol : MonoBehaviour
             {
                 if (rotated && !WaitOnPoint)
                 {
-
+                    if (pauseMenu.instance.menuIsOpened)
+                        return;
                     ////transform.position = Vector3.MoveTowards(transform.position, points[current].position, Time.deltaTime * speed);
                     ///
-                     Vector3 moveVector = points[current].position - transform.position;
+                    Vector3 moveVector = points[current].position - transform.position;
                     controller.Move(moveVector * Time.deltaTime * speed); 
                    
                     //Debug.Log("speed " + moveVector * Time.deltaTime * speed); 
@@ -153,6 +156,8 @@ public class EnemyPatrol : MonoBehaviour
     }
     void startAttack()
     {
+        if (pauseMenu.instance.menuIsOpened)
+            return;
         Debug.Log("start attack called");
         animator.SetBool("isRunningEnemy", false);
         animator.SetBool("isWalkingEnemy", false);

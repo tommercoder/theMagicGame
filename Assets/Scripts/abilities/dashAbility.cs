@@ -37,11 +37,12 @@ public class dashAbility : AbilityMain
     bool checkIfDashCanBeCasted()
     {
         RaycastHit hit;
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * 5;
-        if (Physics.Raycast(transform.position+Vector3.up,forward,out hit,5,groundMask) || Physics.Raycast(transform.position + Vector3.up*2, forward, out hit, 5, groundMask)
-            || Physics.Raycast(transform.position, forward, out hit, 5, groundMask)
-            || Physics.Raycast(transform.position + Vector3.up * 1.5f, forward, out hit, 5, groundMask)
-            || Physics.Raycast(transform.position + Vector3.up * 2.5f, forward, out hit, 5, groundMask))
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 8;
+        if (Physics.Raycast(transform.position+Vector3.up,forward,out hit,8,groundMask) 
+            || Physics.Raycast(transform.position + Vector3.up*2, forward, out hit, 8, groundMask)
+            || Physics.Raycast(transform.position, forward, out hit, 8, groundMask)
+            || Physics.Raycast(transform.position + Vector3.up * 1.5f, forward, out hit, 8, groundMask)
+            || Physics.Raycast(transform.position + Vector3.up * 2.5f, forward, out hit, 8, groundMask))
         {
             if (hit.collider != null)
             {
@@ -56,7 +57,7 @@ public class dashAbility : AbilityMain
     }
     private void Update()
     {
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * 5;
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 8;
         Debug.DrawRay(transform.position + Vector3.up * 2, forward, Color.red);
         Debug.DrawRay(transform.position + Vector3.up , forward, Color.red);
         Debug.DrawRay(transform.position, forward, Color.red);

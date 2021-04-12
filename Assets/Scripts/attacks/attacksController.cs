@@ -108,6 +108,7 @@ public class attacksController : MonoBehaviour
                 }
                 canClick = false;
                 canClickSec = false;
+                FindObjectOfType<audioManager>().Play("dashSound");
                 dashParticle.Play();
                     controller.timeRemaining = 5;
                     controller.timerIsRunning = true;
@@ -267,7 +268,7 @@ public class attacksController : MonoBehaviour
         
         if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing") && noOfClickSecond == 1)
         {
-
+            
             animator.SetInteger("attackAnimation", 4);
             canClickSec = true;
             noOfClickSecond = 0; 
@@ -320,6 +321,11 @@ public class attacksController : MonoBehaviour
         movement.canMove = true;
      
     }
+    public void firstAttackSoundEffectEvent()
+    {
+        FindObjectOfType<audioManager>().Play("attack1");
+        FindObjectOfType<audioManager>().Play("swish1");
+    }
     public void CombatCheck()
     {
         canClick = false;
@@ -327,7 +333,7 @@ public class attacksController : MonoBehaviour
         
         if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack") && noOfClick == 1)
         {
-           
+            
             animator.SetInteger("attackAnimation", 4);
             canClick = true;
             noOfClick = 0; 
@@ -337,6 +343,7 @@ public class attacksController : MonoBehaviour
         }
         else if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack") && noOfClick >= 2)
         {
+           
             animator.SetInteger("attackAnimation", 2);
             canClick = true;
         }
