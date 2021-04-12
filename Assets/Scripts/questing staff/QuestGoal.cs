@@ -11,13 +11,19 @@ public class QuestGoal
 
     public bool isReached()
     {
+        questPointer.instance.target = null;
+        MarieleQuest.instance.questPointer.SetActive(false);
         return (currentAmount >= requiredAmount);
     }
 
     public void EnemyKilled()
     {
         if (goalType == goalType.killEnemyQuest)
+        {
+
             currentAmount++;
+
+        }
     }
     public void ProceduralEnemyKilled()
     {

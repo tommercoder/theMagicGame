@@ -139,6 +139,7 @@ public class weaponInteract : Interact
     IEnumerator waitForSec()
     {
         yield return new WaitForSeconds(1f);
+        if(otherController !=null)
         otherController.enabled = true;
         EnemyPatrol.instance.canMove = true;
     }
