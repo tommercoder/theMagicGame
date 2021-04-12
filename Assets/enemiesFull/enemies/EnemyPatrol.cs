@@ -83,6 +83,8 @@ public class EnemyPatrol : MonoBehaviour
    
     private void Update()
     {
+        if (pauseMenu.instance.menuIsOpened)
+            return;
         float distance = Vector3.Distance(transform.position, player.transform.position);
         //Debug.Log("distance " + distance);
         

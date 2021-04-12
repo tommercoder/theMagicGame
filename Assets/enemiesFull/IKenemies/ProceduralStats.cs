@@ -66,6 +66,17 @@ public class ProceduralStats : MonoBehaviour,ISaveable
             Die();
             if (!addedXP)
             {
+                Quest quest = MarieleQuest.instance.currentMarieleQuest;
+                if (quest.isActive)
+                {
+                    quest.goal.ProceduralEnemyKilled();
+                    if (quest.goal.isReached())
+                    {
+                        //add reward to inventory
+                        characterStats.instance.XP += quest.XP;
+                        quest.complete();
+                    }
+                }
                 // log.gameObject.SetActive(true);
                 // log.GetComponent<Text>().text = "+" + " " + XPforDeath + "xp";
                 logShow.instance.showText("+" + " " + XPforDeath + "xp");

@@ -28,8 +28,8 @@ public class attacksController : MonoBehaviour
     public bool canClickSec;
    public int noOfClick;
     public int noOfClickSecond;
-   
-    
+
+    public GameObject dialogBox;
     public bool canCast;
     public CharacterController CharacterController;
     [SerializeField] public ParticleSystem dashParticle = default;
@@ -71,7 +71,8 @@ public class attacksController : MonoBehaviour
     void Update()
     {
        
-        if ((movement.instance.MouseOverInventoryB && inventoryManager.instance.inventoryOpened) || NPCinteraction.instance.dialogHappening)
+        if ((movement.instance.MouseOverInventoryB && inventoryManager.instance.inventoryOpened) || dialogBox.activeSelf
+            || pauseMenu.instance.menuIsOpened)
             return;
         isDrawedSword = animator.GetBool(isDrawedSwordHash);
     

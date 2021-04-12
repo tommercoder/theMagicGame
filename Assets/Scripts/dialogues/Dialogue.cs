@@ -20,6 +20,7 @@ public class Dialogue
     public string answerBye;//character bye
 
     public string uiText;
-    
 
+    public npcName npcEnumName;
+    public enum npcName { magicElf,Keeper }
 }

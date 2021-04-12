@@ -73,11 +73,13 @@ public class respawnScript : MonoBehaviour,ISaveable
     }
     public void PopulateSaveData(SaveData sd)
     {
+        if(checkPoint!=null)
         sd.s_respawnObject = checkPoint;
     }
     //interface method
     public void LoadFromSaveData(SaveData sd)
     {
+        if(sd.s_respawnObject!=null)
         checkPoint = sd.s_respawnObject;
     }
 

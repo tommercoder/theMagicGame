@@ -84,7 +84,8 @@ public class ProceduralLeg : MonoBehaviour
 
     void Update()
     {
-       
+        if (pauseMenu.instance.menuIsOpened)
+            return;
         //function to check ground for targets
         stepTargetIk(0);
         

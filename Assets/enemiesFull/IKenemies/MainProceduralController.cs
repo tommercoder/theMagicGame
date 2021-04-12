@@ -83,6 +83,8 @@ public class MainProceduralController : MonoBehaviour
    
     void Update()
     {
+        if (pauseMenu.instance.menuIsOpened)
+            return;
         Vector3 down = transform.TransformDirection(Vector3.down) * 3;
         
         RaycastHit hit;

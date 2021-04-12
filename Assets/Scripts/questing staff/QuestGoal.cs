@@ -5,7 +5,7 @@ using UnityEngine;
 public class QuestGoal 
 {
     public goalType goalType;
-
+    
     public int requiredAmount;
     public int currentAmount;
 
@@ -28,6 +28,8 @@ public class QuestGoal
     {
         if(goalType==goalType.speakQuest)
         {
+            questPointer.instance.target = null;
+            MarieleQuest.instance.questPointer.SetActive(false);
             currentAmount++;
         }
     }
@@ -40,4 +42,5 @@ public class QuestGoal
     }
 }
 
-public enum goalType { killEnemyQuest,killPEnemyQuest, gatheringQuest , speakQuest};
+public enum goalType {None, killEnemyQuest,killPEnemyQuest, gatheringQuest , speakQuest};
+

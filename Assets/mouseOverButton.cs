@@ -77,6 +77,7 @@ public class mouseOverButton : MonoBehaviour
         mainCanvas.SetActive(true);
         cameraMenu.enabled = false;
         cameraGame.enabled = true;
+        pauseMenu.instance.menuIsOpened = false;
         //StartCoroutine(loadingBar());
 
         //LoadingGame = true;

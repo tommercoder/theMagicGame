@@ -105,8 +105,9 @@ public class navmeshPatrol : MonoBehaviour
 
     private void Update()
     {
+        if (pauseMenu.instance.menuIsOpened)
+            return;
 
-       
         if (Vector3.Distance(transform.position,player.transform.position) < 20)
         {
             attackingPlayer = true;

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +30,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject answerByeG;
     public GameObject questButton;
     public bool questBool;
-
+    public NPCinteraction npcWhoSpeaking;
     
     private void Start()
     {
@@ -51,14 +52,24 @@ public class DialogueManager : MonoBehaviour
         {
             if (dialogBOX.activeSelf && answer1G.activeSelf == false && answer2G.activeSelf == false)
             {
-
-                questButton.SetActive(true);
-                questBool = false;
+                if (npcWhoSpeaking.quest!=null && npcWhoSpeaking.quest.title!="" )
+                {
+                    questButton.SetActive(true);
+                    questBool = false;
+                }
             }
         }
+
+        
+
+
     }
-    public void StartDialog(Dialogue dialogue)
+    Dialogue forhandleD;
+    public void StartDialog(Dialogue dialogue,NPCinteraction temp)
     {
+        npcWhoSpeaking = temp;
+        forhandleD = dialogue;
+        Debug.Log("forhandleD" + forhandleD.npcEnumName);
         dialogBOX.SetActive(true);
         anim.SetBool("dialogOpen", true);
         nameText.text = dialogue.name;
@@ -143,11 +154,26 @@ public class DialogueManager : MonoBehaviour
     }
     public void answerByeClick()
     {
-
+        
         StopAllCoroutines();
+        Quest quest = MarieleQuest.instance.currentMarieleQuest;
+        //Debug.Log("A" + forhandleD.npcEnumName.ToString());
+        // Debug.Log("B" + quest.npcEnumName.ToString());
+        if(quest!=null)
+        if (quest.isActive && forhandleD.npcEnumName.ToString() == quest.npcEnumName.ToString())
+        {
+            quest.goal.SpokeToAnotherNPC();
+            if (quest.goal.isReached())
+            {
+                //add reward to inventory
+                characterStats.instance.XP += quest.XP;
+                quest.complete();
+            }
+        }
         StartCoroutine(type(goodbye));
         StartCoroutine(waitEnd());
         answerByeG.SetActive(false);
+        questUI.SetActive(false);
     }
     IEnumerator type(string sentence)
     {
@@ -173,6 +199,16 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         anim.SetBool("dialogOpen", false);
+        dialogBOX.SetActive(false);
+        List<NPCinteraction> temp = new List<NPCinteraction>();
+        temp = GameObject.FindObjectsOfType<NPCinteraction>().ToList();
+        //for(int i = 0;i < temp.Count;i++)
+        //{
+        //    if(temp[i].interacting==true)
+        //    {
+        //        temp[i].dialogHappening = false;
+        //    }    
+        //}
         
         NPCinteraction.instance.dialogHappening = false;
 
@@ -211,6 +247,13 @@ public class DialogueManager : MonoBehaviour
             MarieleQuest.instance.currentMarieleQuest = forHandle;
             questBool = false;
             forHandle = null;
+
+
+
+           
+
+
+
         }
         else
         {

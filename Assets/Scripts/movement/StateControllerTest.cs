@@ -26,6 +26,7 @@ public class StateControllerTest : MonoBehaviour
     public float decceleration = 0.5f;
     int isRunningHash, isDrawedSwordHash, isIdleSwordHash, isRunningSwordHash, isSneathedHash;
     public bool enemiesAround = false;
+    public GameObject dialogBox;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
@@ -78,7 +79,7 @@ public class StateControllerTest : MonoBehaviour
         bool takeSwordPressed = Input.GetKey(KeyCode.Mouse2);
 
         //stopping player when inventory is opened and mouse is in invenotry tab
-        if ((movement.instance.MouseOverInventoryB && inventoryManager.instance.inventoryOpened) ||NPCinteraction.instance.dialogHappening)
+        if ((movement.instance.MouseOverInventoryB && inventoryManager.instance.inventoryOpened) ||dialogBox.activeSelf || pauseMenu.instance.menuIsOpened)
         {
             if (isRunning)
             {

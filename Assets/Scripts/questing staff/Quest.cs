@@ -17,7 +17,7 @@ public class Quest
     public GameObject potionGameObjectReward;
 
     public QuestGoal goal;
-
+    public npcName npcEnumName;
     public void complete()
     {
         isActive = false;
@@ -43,3 +43,4 @@ public class Quest
 
     }
 }
+public enum npcName {None, magicElf,Keeper }

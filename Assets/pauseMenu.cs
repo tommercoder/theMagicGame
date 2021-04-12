@@ -18,10 +18,13 @@ public class pauseMenu : MonoBehaviour
     public GameObject menuCanvas; 
     public GameObject mainCanvas;
     public GameObject pauseCanvas;
+    public bool menuIsOpened;
+    public CanvasGroup canvas;
     private void Start()
     {
         cameraGame.enabled = false;
         cameraMenu.enabled = true;
+        menuIsOpened = true;
     }
     // Update is called once per frame
     void Update()
@@ -53,6 +56,7 @@ public class pauseMenu : MonoBehaviour
     public void loadMenu()
     {
         Time.timeScale = 1f;
+        menuIsOpened = true;
         pauseOpened = false;
         //SceneManager.UnloadSceneAsync("game");'
 
@@ -65,6 +69,16 @@ public class pauseMenu : MonoBehaviour
         menuCanvas.SetActive(true);
         cameraMenu.enabled = true;
 
+
+
+       // canvas.alpha = 0;
+       // playerHealth.instance.currentHealth = playerHealth.instance.health;
+        //playerHealth.instance.isPlayerDead = false;
+        if (inventoryManager.instance.inventoryOpened)
+        {
+
+            inventoryManager.instance.openInventory();
+        }
         if(pauseCanvas.activeSelf)
         {
             pauseCanvas.SetActive(false);

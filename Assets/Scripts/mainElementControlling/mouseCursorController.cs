@@ -11,12 +11,14 @@ public class mouseCursorController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
     public GameObject menuUI;
+    public GameObject dialogBox;
     // Update is called once per frame
     void Update()
     {
+        
         if(inventoryManager.instance.inventoryOpened 
-            || NPCinteraction.instance.dialogHappening 
-            || playerHealth.instance.currentHealth <= 0 || menuUI.activeSelf)
+            || dialogBox.activeSelf
+            || playerHealth.instance.currentHealth <= 0 || menuUI.activeSelf || pauseMenu.instance.pauseOpened)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;

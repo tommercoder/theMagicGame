@@ -167,6 +167,7 @@ public class characterStats : MonoBehaviour, ISaveable
     {
         //character
         sd.s_XP = XP;
+
         respawnScript.instance.PopulateSaveData(sd);
         sd.s_x = gameObject.transform.position.x;
         sd.s_y = gameObject.transform.position.y;
