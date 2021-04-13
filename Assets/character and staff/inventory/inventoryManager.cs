@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 /// <summary>
 /// this is script is attached to UI/ui manager
 /// </summary>
@@ -94,6 +95,7 @@ public class inventoryManager : MonoBehaviour//,ISaveable
         }
         else if (!inventoryOpened)
         {
+            //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>().enabled = false;
             inventoryOpened = true;
 
         }

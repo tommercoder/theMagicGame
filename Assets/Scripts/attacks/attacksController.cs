@@ -12,7 +12,7 @@ public class attacksController : MonoBehaviour
     public static attacksController instance { get { return s_Instance; } }
     public Animator animator;
     int isDrawedSwordHash;
-  
+    public audioManager am;
     public bool attackState = false;
     //bool isFullEnergyBar = false;
     //playerSword playerSwordController;
@@ -133,6 +133,7 @@ public class attacksController : MonoBehaviour
                 canClick = false;
                 canClickSec = false;
                 Abilities[0].TriggerAbility();
+                am.Play("fireball");
                     canCast = false;
                     controller.timeRemaining = 5;
                     controller.timerIsRunning = true;
@@ -321,10 +322,42 @@ public class attacksController : MonoBehaviour
         movement.canMove = true;
      
     }
+    //sound effects
     public void firstAttackSoundEffectEvent()
     {
-        FindObjectOfType<audioManager>().Play("attack1");
-        FindObjectOfType<audioManager>().Play("swish1");
+        //FindObjectOfType<audioManager>().Play("attack1");
+       am.Play("swish1");
+    }
+    public void secondAttackSoundEffectEvent()
+    {
+        am.Stop("walk");
+        am.Stop("swordRun");
+        am.Play("swish2");
+    }
+    public void thirdAttackSoundEffectEvent()
+    {
+        // FindObjectOfType<audioManager>().Play("attack2");
+        am.Stop("walk");
+        am.Stop("swordRun");
+        am.Play("swish5");
+    }
+    public void firstAttackSecondThingAudioEvent()
+    {
+        am.Stop("walk");
+        am.Stop("swordRun");
+        am.Play("swish2");
+    }
+    public void secondAttackSecondThingAudioEvent()
+    {
+        am.Stop("walk");
+        am.Stop("swordRun");
+        am.Play("swish3");
+    }
+    public void thirdAttackSecondThingAudioEvent()
+    {
+        am.Stop("walk");
+        am.Stop("swordRun");
+        am.Play("swish4");
     }
     public void CombatCheck()
     {

@@ -70,6 +70,7 @@ public class MainProceduralController : MonoBehaviour
     {
         //czekam krok
         waited = false;
+        //FindObjectOfType<audioManager>().Play("bigProceduralSound");
         yield return new WaitForSeconds(timeToMakeStep);
         waited = true;
     }
@@ -265,14 +266,15 @@ public class MainProceduralController : MonoBehaviour
                     Vector3.Lerp(centerPoint, endPoint, normalizedTime),
                     normalizedTime
                 );
-
-            footIKTargets[0].rotation = Quaternion.Slerp(startRot, endRot, normalizedTime);
             
+            footIKTargets[0].rotation = Quaternion.Slerp(startRot, endRot, normalizedTime);
 
+            
             // Wait for one frame
             yield return null;
         }
         while (timeElapsed < moveTime);
+
         //BodyControl();
         Moving = false;
         if (index == 0)

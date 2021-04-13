@@ -68,6 +68,7 @@ public class navmeshPatrol : MonoBehaviour
             GameObject bullet = Instantiate(prefab, projectilePoint.position, Quaternion.identity) as GameObject;
             projectileDirection = (player.transform.position + Vector3.up*2 - projectilePoint.transform.position).normalized * projectileSpeed;
             bullet.GetComponent<Rigidbody>().velocity = new Vector3(projectileDirection.x, projectileDirection.y, projectileDirection.z);
+            FindObjectOfType<audioManager>().Play("proceduralShooting");
             //if (bullet.GetComponent<destroyProjectile>() != null && gameObject.GetComponent<ProceduralStats>() != null)
             //{
             //    Debug.Log("@2@@@" + bullet.GetComponent<destroyProjectile>().triggered);

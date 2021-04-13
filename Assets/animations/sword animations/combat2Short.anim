@@ -44160,6 +44160,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0.36666667
+    functionName: secondAttackSoundEffectEvent
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: 73e07b33620615e43a0ed4cebe30f11a,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.6666667
     functionName: CombatCheck
     data: 

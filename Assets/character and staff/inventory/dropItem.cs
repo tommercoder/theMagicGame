@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,6 +10,7 @@ public class dropItem : MonoBehaviour, IDropHandler
     public Inventory inventory;
     int index = 0;
     public RectTransform panel;
+    public List<potionInteraction> temp = new List<potionInteraction>();
     public void OnDrop(PointerEventData eventData)
     {
        // RectTransform panel = transform as RectTransform;
@@ -48,8 +50,18 @@ public class dropItem : MonoBehaviour, IDropHandler
                 Inventory.instance.itemsGameObjects[index].GetComponent<FloatingItem>().Rotating = true;
                 inventory.itemsGameObjects[index].transform.position = hit.point;//wstawiam go na scene
                 //saving lists
-                characterStats.instance.allPotionInteractionO[index].isUsed = false;
-                characterStats.instance.allPotionsIsUsed[index] = false;
+                temp = GameObject.FindObjectsOfType<potionInteraction>().ToList();
+
+                for (int k = 0; k < temp.Count; k++)
+                {
+                    if (temp[k].gameObject == Inventory.instance.itemsGameObjects[index])
+                    {
+                        temp[k].isUsed = false;
+                        //Debug.Log("LOG" + temp);
+                    }
+                }
+                //characterStats.instance.allPotionInteractionO[index].isUsed = false;
+                // characterStats.instance.allPotionsIsUsed[index] = false;
                 ////
                 inventory.removeGOitem(inventory.itemsGameObjects[index]);//usuwam z pierwszej listy 
                 inventory.removeItem(gameObject.GetComponentInParent<Slot>().item);//usuwam z drugiej listy

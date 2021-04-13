@@ -65,13 +65,15 @@ public class movement : MonoBehaviour
 	//EVENT FOR MOUSE ENTERING INVENTORY UI
 	public void MouseOverInventory()
     {
+		
 		cam.GetComponent<CinemachineBrain>().enabled = false;
 		MouseOverInventoryB = true;
+		
     }
 	//EVENT FOR MOUSE EXIT INVENTORY UI
 	public void MouseOutInventory()
     {
-
+		
 		cam.GetComponent<CinemachineBrain>().enabled = true;
 		MouseOverInventoryB = false;
 
@@ -250,8 +252,25 @@ public class movement : MonoBehaviour
 	}
 	public void runningAudioEvent()//animation event
     {
+	if( !anim.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
+				&& !anim.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
+				&& !anim.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack")
+			  && !anim.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
+					&& !anim.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
+					&& !anim.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
 		am.Play("walk");
     }
+	public void swordRunningAudioEvent()//animation event
+	{
+		if (!anim.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
+				&& !anim.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
+				&& !anim.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack")
+			  && !anim.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
+					&& !anim.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
+					&& !anim.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
+			am.Play("swordRun");
+    }
+	
 	void InputMagnitude()
 	{
 		bool isDrawedSword = anim.GetBool("isDrawedSword");

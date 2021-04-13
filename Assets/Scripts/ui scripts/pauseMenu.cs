@@ -33,7 +33,7 @@ public class pauseMenu : MonoBehaviour
         {
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>().enabled = false;
         }
-        else
+        else if(!menuIsOpened && !inventoryManager.instance.inventoryOpened)
         {
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>().enabled = true;
         }

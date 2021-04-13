@@ -29,9 +29,11 @@ public class EnemyPatrol : MonoBehaviour
     public float fireRate;
     public bool nearPlayer;
     public bool canMove;
+    public audioManager am;
     private void Start()
     {
         nearPlayer = false;
+        am = FindObjectOfType<audioManager>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("character");
         controller = GetComponent<CharacterController>();
@@ -183,7 +185,7 @@ public class EnemyPatrol : MonoBehaviour
         int attackNumber = 0;
 
         System.Random r = new System.Random();
-        attackNumber = r.Next(1, 3);
+        attackNumber = r.Next(0, 3);
         
         return attackNumber;
     }
@@ -193,5 +195,24 @@ public class EnemyPatrol : MonoBehaviour
         animator.SetBool("isWalkingEnemy", false);
         yield return new WaitForSeconds(5f);
         WaitOnPoint = false;
+    }
+    public void enemyFitstAttackEvent()
+    {
+        am.Play("swish5");
+        //FindObjectOfType<audioManager>().Play("enemyGr1");
+
+    }
+    public void secondAttackEvent()
+    {
+        am.Play("swish2");
+    }
+    public void thirdEnemyAttackEvent()
+    {
+        am.Play("swish3");
+        //FindObjectOfType<audioManager>().Play("enemyGr2");
+    }
+    public void enemyRunSoundEvent()
+    {
+        am.Play("swordRun");
     }
 }

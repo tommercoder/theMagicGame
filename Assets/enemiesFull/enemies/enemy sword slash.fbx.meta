@@ -111,7 +111,15 @@ ModelImporter:
           preInfinity: 3
           postInfinity: 3
           rotationOrder: 4
-      events: []
+      events:
+      - time: 0.50714284
+        functionName: thirdEnemyAttackEvent
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 90e9cdfe0e961e848aa9cda8afcd91eb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
