@@ -49,4 +49,19 @@ public class FileManager : MonoBehaviour
         }
         
     }
+    public static bool ClearSaveData(string name)
+    {
+        
+        var fullPath = Path.Combine(Application.persistentDataPath, name);
+        if (File.Exists(fullPath))
+        {
+            File.WriteAllText(fullPath, "");
+            return true;
+        }
+        else
+        {
+            logShow.instance.showText("you are now on start,there is no any savings yet");
+        }
+        return false;
+    }
 }

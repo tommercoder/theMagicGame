@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using System.IO;
 public class characterStats : MonoBehaviour, ISaveable
 {
     #region 
@@ -149,7 +150,11 @@ public class characterStats : MonoBehaviour, ISaveable
             damageFromFireball = lvl * 3;
             timeOfSwordAbility = lvl * 3;
         }
-
+        //if(mouseOverButton.instance.startedNewGame)
+        //{
+        //    LoadJsonData(this);
+        //    mouseOverButton.instance.startedNewGame = false;
+        //}
         //if (pauseMenu.instance.pauseOpened)
         //{
         //    SaveJsonData(this);
@@ -244,6 +249,19 @@ public class characterStats : MonoBehaviour, ISaveable
         if(MarieleQuest.instance.currentMarieleQuest!=null)
         {
             sd.s_currentQuest = MarieleQuest.instance.currentMarieleQuest;
+        }
+        //if we ended the game then we write standard data to save file
+        if (plot.instance.endedGame)
+        {
+            var fullPath = Path.Combine(Application.persistentDataPath, "SaveData.dat");
+            var fullPath2 = Path.Combine(Application.persistentDataPath, "newGame.dat");
+            if (File.Exists(fullPath))
+                if (File.ReadAllText(fullPath) != "")
+                    if (FileManager.ClearSaveData("SaveData.dat"))
+                    {
+                        File.WriteAllText(fullPath, File.ReadAllText(fullPath2));
+                    }
+
         }
        
     }

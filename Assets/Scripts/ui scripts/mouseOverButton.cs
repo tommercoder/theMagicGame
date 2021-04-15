@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using System.IO;
 public class mouseOverButton : MonoBehaviour
 {
+    public static mouseOverButton instance;
+    private void Awake()
+    {
+        instance = this;
+    }
     public Button a;
     public Button b;
     public Button c;
+    public Button d;
    public void changeColorTextA()
     {
         a.GetComponentInChildren<Text>().color = Color.blue;
@@ -16,6 +22,14 @@ public class mouseOverButton : MonoBehaviour
     public void changeColorTextAback()
     {
         a.GetComponentInChildren<Text>().color = Color.white;
+    }
+    public void changeColorTextD()
+    {
+        d.GetComponentInChildren<Text>().color = Color.blue;
+    }
+    public void changeColorTextDback()
+    {
+        d.GetComponentInChildren<Text>().color = Color.white;
     }
     public void changeColorTextB()
     {
@@ -33,10 +47,11 @@ public class mouseOverButton : MonoBehaviour
     {
         c.GetComponentInChildren<Text>().color = Color.white;
     }
-    public float delayBeforeLoading = 10f;
+    //public float delayBeforeLoading = 10f;
     public bool LoadingGame = false;
-    public string name = "game";
-    public float timeElapsed;
+    public bool startedNewGame = false;
+    //public string name = "game";
+   // public float timeElapsed;
     public Camera cameraMenu;
     public Camera cameraGame;
     public GameObject menuCanvas;
@@ -89,4 +104,30 @@ public class mouseOverButton : MonoBehaviour
     {
         Application.Quit();
     }
+    //public void newGame()
+    //{
+    //    var fullPath = Path.Combine(Application.persistentDataPath, "SaveData.dat");
+    //    var fullPath2= Path.Combine(Application.persistentDataPath, "newGame.dat");
+    //    if (File.Exists(fullPath))
+    //    if(File.ReadAllText(fullPath)!="")
+    //    if (FileManager.ClearSaveData("SaveData.dat"))
+    //    {
+    //                File.WriteAllText(fullPath, File.ReadAllText(fullPath2));
+    //                Debug.Log(File.ReadAllText(fullPath2));
+    //                //if (FileManager.LoadFromFile("newGame.dat", out var json))
+    //                //{
+    //                //    SaveData sd = new SaveData();
+
+    //                //    sd.LoadFromJson(json);
+
+    //                //    characterStats.instance.LoadFromSaveData(sd);
+    //                //    Debug.Log("Load complete");
+    //                //    characterStats.instance.loadCompleted = true;
+    //                //}
+    //                //Application.Quit();
+    //                //startedNewGame = true;
+                    
+    //    }
+
+    //}
 }
