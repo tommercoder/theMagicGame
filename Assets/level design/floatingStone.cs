@@ -11,6 +11,7 @@ public class floatingStone : MonoBehaviour
     private float _percent = 0.0f;
     public float _speed = 0.3f;
     private Direction _direction;
+    public bool rotating = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,10 @@ public class floatingStone : MonoBehaviour
     void Update()
     {
         ApplyFloatingEffect();
-        ApplyRotationEffect();
+        if (rotating)
+        {
+            ApplyRotationEffect();
+        }
     }
     void ApplyFloatingEffect()
     {

@@ -20,6 +20,7 @@ public class pauseMenu : MonoBehaviour
     public GameObject pauseCanvas;
     public bool menuIsOpened;
     public CanvasGroup canvas;
+    public GameObject dialogBox;
     private void Start()
     {
         cameraGame.enabled = false;
@@ -33,7 +34,7 @@ public class pauseMenu : MonoBehaviour
         {
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>().enabled = false;
         }
-        else if(!menuIsOpened && !inventoryManager.instance.inventoryOpened)
+        else if(!menuIsOpened && !inventoryManager.instance.inventoryOpened && !dialogBox.activeSelf)
         {
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>().enabled = true;
         }

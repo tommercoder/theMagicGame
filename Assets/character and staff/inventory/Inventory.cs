@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour,ISaveable
     {
         for(int i = 0;i < items.Count;i++)
         {
-            if(items[i].name==item.name)
+            if(items[i]==item)//check
             {
                
                // if(items[i].currentStack < items[i].maxStack)

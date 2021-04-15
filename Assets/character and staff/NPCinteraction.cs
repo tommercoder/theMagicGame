@@ -68,9 +68,9 @@ public class NPCinteraction : Interact
 
             if (quest != null && characterStats.instance.loadCompleted && quest.title != "")
             {
-                Debug.Log("QUEST NOT EQUAL TO NULL");
+               // Debug.Log("QUEST NOT EQUAL TO NULL");
                 FindObjectOfType<DialogueManager>().questBool = true;
-                logShow.instance.showText("before ending of dialog you will be able to get quest");
+                logShow.instance.showText("before ending of dialog you will be able to get the quest");
             }
             // dialogHappening = true;
             textName.GetComponent<TextMesh>().text = dialogue.name;

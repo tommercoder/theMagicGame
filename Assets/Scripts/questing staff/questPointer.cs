@@ -31,7 +31,7 @@ public class questPointer : MonoBehaviour
             float maxY = Screen.height - minY;
 
 
-            Vector2 pos = Camera.main.WorldToScreenPoint(target.position + offset);
+            Vector2 pos = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().WorldToScreenPoint(target.position + offset);
 
 
             if (Vector3.Dot((target.position - transform.position), transform.forward) < 0)

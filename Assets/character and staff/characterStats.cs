@@ -85,7 +85,7 @@ public class characterStats : MonoBehaviour, ISaveable
         allNPCS = FindObjectsOfType<NPCinteraction>().ToList();
         for (int i = 0; i < allNPCS.Count; i++)
         {
-            allNpcQuests.Add(null);
+            allNpcQuests.Add(allNPCS[i].quest);
         }
         //for (int i = 0; i < allNPCS.Count; i++)
         //{
