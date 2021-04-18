@@ -61,7 +61,7 @@ public class inventoryManager : MonoBehaviour//,ISaveable
     {
         Debug.Log("Updating UI");
         damageText.text = "";
-        damageText.text = "current damage is: " + weaponInteract.instance.damage;
+        damageText.text = "current damage is: " + playerSword.instance.currentSword.swordDamage;
         
         for (int i = 0; i < slots.Length; i++)
             {
@@ -83,7 +83,7 @@ public class inventoryManager : MonoBehaviour//,ISaveable
     public void openInventory()
     {
         damageText.text = "";
-        damageText.text = "current damage is: " + weaponInteract.instance.damage;
+        damageText.text = "current damage is: " + playerSword.instance.currentSword.swordDamage;
         inventoryUi.SetActive(!inventoryUi.activeSelf);
         if (inventoryOpened)
         {

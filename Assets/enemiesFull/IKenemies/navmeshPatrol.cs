@@ -56,13 +56,14 @@ public class navmeshPatrol : MonoBehaviour
     }
     void AttackPlayer()
     {
-        //chasing player part is in procedural Leg script
+        //chasing player part is in procedural controller script
         attackingPlayer = true;
         RotateGun();
 
         Vector3 relativePos = player.transform.position - transform.position;
+        relativePos.y = 0;
         Quaternion toRotation = Quaternion.LookRotation(relativePos);
-        transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, Time.deltaTime/3f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime/3f);
         if (Time.time > nextFire)
         {
             GameObject bullet = Instantiate(prefab, projectilePoint.position, Quaternion.identity) as GameObject;

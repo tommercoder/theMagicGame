@@ -94,7 +94,7 @@ public class Inventory : MonoBehaviour,ISaveable
 
         if (itemsGameObjects.Count >= size)
         {
-            Debug.Log("dont have enough space for game object to add");
+            logShow.instance.showText("dont have enough space for game object to add");
             return false;
         }
 

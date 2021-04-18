@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class attacksController : MonoBehaviour
 {
     public static attacksController instanceA;
-    
+
     protected static attacksController s_Instance;
     public static attacksController instance { get { return s_Instance; } }
     public Animator animator;
@@ -20,13 +20,13 @@ public class attacksController : MonoBehaviour
     StateControllerTest controller;
     movement movement;
     public Text errorText;
-   
+
     bool firstPlayed;
     bool secondPlayed;
-    public AbilityMain [] Abilities;
+    public AbilityMain[] Abilities;
     public bool canClick;
     public bool canClickSec;
-   public int noOfClick;
+    public int noOfClick;
     public int noOfClickSecond;
 
     public GameObject dialogBox;
@@ -44,7 +44,7 @@ public class attacksController : MonoBehaviour
     void Start()
     {
         canCast = false;
-        
+
         noOfClick = 0;
         noOfClickSecond = 0;
         canClick = true;
@@ -54,25 +54,25 @@ public class attacksController : MonoBehaviour
         //playerSwordController = GetComponent<playerSword>();
         controller = GetComponent<StateControllerTest>();
         animator = GetComponent<Animator>();
-         movement = GetComponent<movement>();
+        movement = GetComponent<movement>();
         CharacterController = GetComponent<CharacterController>();
-        
+
         isDrawedSwordHash = Animator.StringToHash("isDrawedSword");
-        
+
     }
-  
+
     IEnumerator waitErrorText()
     {
         yield return new WaitForSeconds(3);
         errorText.gameObject.SetActive(false);
     }
-   
+
     // Update is called once per frame
     void Update()
     {
-       
+
         if ((movement.instance.MouseOverInventoryB && inventoryManager.instance.inventoryOpened) || dialogBox.activeSelf
-            || pauseMenu.instance.menuIsOpened)
+            || pauseMenu.instance.menuIsOpened || pauseMenu.instance.pauseOpened)
             return;
         isDrawedSword = animator.GetBool(isDrawedSwordHash);
     
@@ -326,38 +326,54 @@ public class attacksController : MonoBehaviour
     public void firstAttackSoundEffectEvent()
     {
         //FindObjectOfType<audioManager>().Play("attack1");
+        if(!pauseMenu.instance.menuIsOpened && ! pauseMenu.instance.pauseOpened)
        am.Play("swish1");
     }
     public void secondAttackSoundEffectEvent()
     {
-        am.Stop("walk");
-        am.Stop("swordRun");
-        am.Play("swish2");
+        if (!pauseMenu.instance.menuIsOpened && !pauseMenu.instance.pauseOpened)
+        {
+            am.Stop("walk");
+            am.Stop("swordRun");
+            am.Play("swish2");
+        }
     }
     public void thirdAttackSoundEffectEvent()
     {
         // FindObjectOfType<audioManager>().Play("attack2");
-        am.Stop("walk");
-        am.Stop("swordRun");
-        am.Play("swish5");
+        if (!pauseMenu.instance.menuIsOpened && !pauseMenu.instance.pauseOpened)
+        {
+            am.Stop("walk");
+            am.Stop("swordRun");
+            am.Play("swish5");
+        }
     }
     public void firstAttackSecondThingAudioEvent()
     {
-        am.Stop("walk");
-        am.Stop("swordRun");
-        am.Play("swish2");
+        if (!pauseMenu.instance.menuIsOpened && !pauseMenu.instance.pauseOpened)
+        {
+            am.Stop("walk");
+            am.Stop("swordRun");
+            am.Play("swish2");
+        }
     }
     public void secondAttackSecondThingAudioEvent()
     {
-        am.Stop("walk");
-        am.Stop("swordRun");
-        am.Play("swish3");
+        if (!pauseMenu.instance.menuIsOpened && !pauseMenu.instance.pauseOpened)
+        {
+            am.Stop("walk");
+            am.Stop("swordRun");
+            am.Play("swish3");
+        }
     }
     public void thirdAttackSecondThingAudioEvent()
     {
-        am.Stop("walk");
-        am.Stop("swordRun");
-        am.Play("swish4");
+        if (!pauseMenu.instance.menuIsOpened && !pauseMenu.instance.pauseOpened)
+        {
+            am.Stop("walk");
+            am.Stop("swordRun");
+            am.Play("swish4");
+        }
     }
     public void CombatCheck()
     {

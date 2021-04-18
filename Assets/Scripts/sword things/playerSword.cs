@@ -22,7 +22,7 @@ public class playerSword : MonoBehaviour,ISaveable
 
     public Transform sword, swordEquiped, swordUnequiped;
     public swordEquipping currentSword;
-
+    
     public GameObject currentSwordGameObject,temp;
     public bool isEquipedSword = false;
     public Transform spine;

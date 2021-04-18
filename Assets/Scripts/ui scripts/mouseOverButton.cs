@@ -88,6 +88,7 @@ public class mouseOverButton : MonoBehaviour
     }
     public void openGame()
     {
+        changeColorTextAback();
         menuCanvas.SetActive(false);
         mainCanvas.SetActive(true);
         cameraMenu.enabled = false;
