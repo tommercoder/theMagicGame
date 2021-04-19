@@ -10,7 +10,7 @@ public class ProceduralStats : MonoBehaviour,ISaveable
     public string id;
 
 
-    public GameObject[] stepTargets;
+    //public GameObject[] stepTargets;
     public Rigidbody rigidbody;
     public CapsuleCollider[] collider;
     public bool isDead;

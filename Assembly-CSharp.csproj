@@ -81,6 +81,7 @@
     <Compile Include="Assets\character and staff\inventory\Slot.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\navmeshPatrol.cs" />
     <Compile Include="Assets\Scripts\mainElementControlling\resetScriptableObjects.cs" />
+    <Compile Include="Assets\terrainColliderControllerFix.cs" />
     <Compile Include="Assets\enemiesFull\enemies\EnemyStats.cs" />
     <Compile Include="Assets\character and staff\inventory\items(scriptable objects)\potionParticle.cs" />
     <Compile Include="Assets\character and staff\inventory\items(scriptable objects)\potionUse.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Assets\another\Bonehead\Scripts\Utils\SmoothDamp.cs" />
     <Compile Include="Assets\another\Bonehead\Scripts\Gecko\GeckoController_Full.cs" />
     <Compile Include="Assets\another\Bonehead\Scripts\Gecko\GeckoController_Simple.cs" />
+    <Compile Include="Assets\MouseOrbitImproved.cs" />
     <Compile Include="Assets\level design\nature\SCRIPTS\HealthWaterInteract.cs" />
     <Compile Include="Assets\Scripts\plot.cs" />
     <Compile Include="Assets\audio\audioManager.cs" />
@@ -151,8 +153,7 @@
     <Compile Include="Assets\another\AlignInEditor\AlignInEditor.cs" />
     <Compile Include="Assets\character and staff\tooltip\tooltip.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\ProceduralLeg.cs" />
-    <Compile Include="Assets\terrainColliderControllerFix.cs" />
-    <Compile Include="Assets\MouseOrbitImproved.cs" />
+    <Compile Include="Assets\zones.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />

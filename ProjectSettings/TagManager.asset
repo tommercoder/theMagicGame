@@ -15,6 +15,10 @@ TagManager:
   - MainElements
   - itemsOnSceneTag
   - Terrain
+  - npcRobot
+  - air zone forest
+  - 'earth zone '
+  - lakeOfHealth
   layers:
   - Default
   - TransparentFX

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-public enum proceduralType { twoLegsBig, OneLegSmall, twoLegsSmall };
+public enum proceduralType { twoLegsBig, OneLegSmall, twoLegsSmall,npcProcedural};
 public class navmeshPatrol : MonoBehaviour
 {
     public proceduralType type;
@@ -22,7 +22,7 @@ public class navmeshPatrol : MonoBehaviour
     public Transform gun;
     private void Start()
     {
-        
+       
         this.enabled = true;
         projectileSpeed = 60f;
         fireRate = 2f;
@@ -36,9 +36,13 @@ public class navmeshPatrol : MonoBehaviour
         {
             prefab = Resources.Load("projectileTwoLegsSmall") as GameObject;
         }
-        else if(type == proceduralType.OneLegSmall)
+        else if (type == proceduralType.OneLegSmall)
         {
             prefab = Resources.Load("projectileOneLegSmall") as GameObject;
+        }
+        else
+        {
+            prefab = null;
         }
         //projectilePoint = gameObject.transform.Find("projectile point");   
         current = 0;
@@ -109,24 +113,29 @@ public class navmeshPatrol : MonoBehaviour
     {
         if (pauseMenu.instance.menuIsOpened)
             return;
+       
+        
+            
+            if (Vector3.Distance(transform.position, player.transform.position) < 20 &&  type != proceduralType.npcProcedural)
+            { 
+            //this type is for npc robots 
+                
+                    attackingPlayer = true;
 
-        if (Vector3.Distance(transform.position,player.transform.position) < 20)
-        {
-            attackingPlayer = true;
-        }
-        else
-        {
-            Vector3 relativePos = (points[current].transform.position - transform.position).normalized;
-            Quaternion toRotation = Quaternion.LookRotation(new Vector3(relativePos.x, 0, relativePos.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime);
-            // rotation = Quaternion.LookRotation((points[current].position - transform.position).nm);
-            //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime / 3f);
+            }
+            else
+            {
+                Vector3 relativePos = (points[current].transform.position - transform.position).normalized;
+                Quaternion toRotation = Quaternion.LookRotation(new Vector3(relativePos.x, 0, relativePos.z));
+                transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime);
+                // rotation = Quaternion.LookRotation((points[current].position - transform.position).nm);
+                //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime / 3f);
 
-            rotated = true;
-          
-            attackingPlayer = false;
-        }
-        float dot = Vector3.Dot(transform.right, (points[current].position - transform.position).normalized);
+                rotated = true;
+
+                attackingPlayer = false;
+            }
+            float dot = Vector3.Dot(transform.right, (points[current].position - transform.position).normalized);
         
         
         if (!attackingPlayer)

@@ -44,6 +44,11 @@ public class ProceduralLeg : MonoBehaviour
     }
     private void Start()
     {
+        if (GetComponent<navmeshPatrol>() != null)
+        {
+            GetComponent<navmeshPatrol>().enabled = false;
+            GetComponent<navmeshPatrol>().enabled = true;
+        }
         player = GameObject.Find("character");
         //GetComponent<navmeshPatrol>().enabled = false;
         //GetComponent<navmeshPatrol>().enabled = true;
@@ -70,8 +75,7 @@ public class ProceduralLeg : MonoBehaviour
     //test moving
     void moveForward()
     {
-        // transform.position = Vector3.MoveTowards(transform.position, transform.right, Time.deltaTime * 2f);
-        //transform.Translate(Vector3.right * Time.deltaTime*2f);
+       if(GetComponent<navmeshPatrol>().type != proceduralType.npcProcedural)
         if (Vector3.Distance(player.transform.position, transform.position) > 4f && Vector3.Distance(player.transform.position, transform.position) < 25f)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime * 2f);
