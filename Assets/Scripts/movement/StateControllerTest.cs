@@ -43,6 +43,22 @@ public class StateControllerTest : MonoBehaviour
     }
     attacksController attacks;
     // Start is called before the first frame update
+
+    bool isRunning;
+
+
+    bool isIdleSword;
+    bool isDrawedSword;
+    bool isRunningSword;
+
+
+    bool isSneathedSword;
+
+    bool runningPressed;
+    bool walkingBackPressed;
+    bool diPressing;
+    bool aPressed;
+    bool takeSwordPressed;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -58,26 +74,33 @@ public class StateControllerTest : MonoBehaviour
         isSneathedHash = Animator.StringToHash("isSneathed");
 
 
+        //update part
+         
+        
+
     }
 
-    // Update is called once per frame
+
+    
+
     void Update()
     {
+        if(pauseMenu.instance.pauseOpened)
+            return;
 
-        bool isRunning = animator.GetBool(isRunningHash);
+         takeSwordPressed = Input.GetKey(KeyCode.Mouse2);
+        isRunning = animator.GetBool(isRunningHash);
 
-        bool isIdleSword = animator.GetBool(isIdleSwordHash);
-        bool isDrawedSword = animator.GetBool(isDrawedSwordHash);
-        bool isRunningSword = animator.GetBool(isRunningSwordHash);
+        isIdleSword = animator.GetBool(isIdleSwordHash);
+        isDrawedSword = animator.GetBool(isDrawedSwordHash);
+        isRunningSword = animator.GetBool(isRunningSwordHash);
 
-        bool isSneathedSword = animator.GetBool(isSneathedHash);
+        isSneathedSword = animator.GetBool(isSneathedHash);
 
-        bool runningPressed = Input.GetKey("w");
-        bool walkingBackPressed = Input.GetKey("s");
-        bool diPressing = Input.GetKey("d");
-        bool aPressed = Input.GetKey("a");
-        bool takeSwordPressed = Input.GetKey(KeyCode.Mouse2);
-
+        runningPressed = Input.GetKey("w");
+        walkingBackPressed = Input.GetKey("s");
+        diPressing = Input.GetKey("d");
+        aPressed = Input.GetKey("a");
         //stopping player when inventory is opened and mouse is in invenotry tab
         if ((movement.instance.MouseOverInventoryB && inventoryManager.instance.inventoryOpened) ||dialogBox.activeSelf || pauseMenu.instance.menuIsOpened)
         {
