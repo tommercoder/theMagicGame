@@ -84,6 +84,7 @@
     <Compile Include="Assets\terrainColliderControllerFix.cs" />
     <Compile Include="Assets\enemiesFull\enemies\EnemyStats.cs" />
     <Compile Include="Assets\character and staff\inventory\items(scriptable objects)\potionParticle.cs" />
+    <Compile Include="Assets\zones.cs" />
     <Compile Include="Assets\character and staff\inventory\items(scriptable objects)\potionUse.cs" />
     <Compile Include="Assets\Scripts\ui scripts\mouseOverButton.cs" />
     <Compile Include="Assets\character and staff\inventory\items(scriptable objects)\swordEquipping.cs" />
@@ -101,7 +102,7 @@
     <Compile Include="Assets\enemiesFull\IKenemies\MainProceduralController.cs" />
     <Compile Include="Assets\Scripts\abilities\fireballAbility.cs" />
     <Compile Include="Assets\character and staff\characterStats.cs" />
-    <Compile Include="Assets\level design\floatingStone.cs" />
+    <Compile Include="Assets\level design\floatingObject.cs" />
     <Compile Include="Assets\enemiesFull\enemies\EnemyPatrol.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\PlayerMovement.cs" />
     <Compile Include="Assets\character and staff\PlayerInteraction.cs" />
@@ -153,7 +154,6 @@
     <Compile Include="Assets\another\AlignInEditor\AlignInEditor.cs" />
     <Compile Include="Assets\character and staff\tooltip\tooltip.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\ProceduralLeg.cs" />
-    <Compile Include="Assets\zones.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
