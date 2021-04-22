@@ -50,7 +50,7 @@ public class inventoryManager : MonoBehaviour//,ISaveable
         //    }
         //}
         //else
-        if (Input.GetKeyDown(KeyCode.I)) {
+        if (Input.GetKeyDown(KeyCode.I) && !pauseMenu.instance.pauseOpened && !pauseMenu.instance.menuIsOpened) {
             openInventory();
         }
        

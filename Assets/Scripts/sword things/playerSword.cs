@@ -75,8 +75,10 @@ public class playerSword : MonoBehaviour,ISaveable
             temp = currentSwordGameObject;
             currentSwordGameObject.SetActive(true);
             currentSwordGameObject.GetComponent<weaponInteract>().interacting = false;
+        if (currentSwordGameObject.GetComponent<FloatingItem>() != null)
+        {
             currentSwordGameObject.GetComponent<FloatingItem>().Rotating = false;
-
+        }
             sword = currentSwordGameObject.transform;
           
        

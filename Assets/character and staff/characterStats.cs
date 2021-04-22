@@ -122,11 +122,12 @@ public class characterStats : MonoBehaviour, ISaveable
 
 
 
+        
+       // StartCoroutine(waitLoad());
+        LoadJsonData(this);
         lvl = XP / 100;
         damageFromFireball = lvl * 3;
         timeOfSwordAbility = lvl * 3;
-       // StartCoroutine(waitLoad());
-        LoadJsonData(this);
 
     }
     IEnumerator waitLoad()
@@ -143,7 +144,7 @@ public class characterStats : MonoBehaviour, ISaveable
 
     void Update()
     {
-        if (XP % 100 == 0)
+        if (XP % 100 == 0)//maybe need to be another if
         {
 
             lvl = XP / 100;

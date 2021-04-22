@@ -4,15 +4,57 @@ using UnityEngine;
 
 public class zones : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    bool isColliding;
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (isColliding)
+            return;
+        isColliding = true;
+        if (other.CompareTag("air zone forest"))
+        {
+            logShow.instance.showQuestText("YOU ENTERED AIR FOREST");
+        }
+       if (other.CompareTag("earthZone"))
+        {
+            logShow.instance.showQuestText("YOU ENTERED EARTH ZONE");
+        }
+      if (other.CompareTag("lakeOfHealth"))
+        {
+            logShow.instance.showQuestText("YOU ENTERED HEALTH LAKE ZONE");
+        }
+         if (other.CompareTag("fireZone"))
+        {
+            logShow.instance.showQuestText("YOU ENTERED FIRE ZONE");
+        }
+        if (other.CompareTag("waterZone"))
+        {
+            logShow.instance.showQuestText("YOU ENTERED WATER ZONE");
+        }
+      
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit(Collider other)
     {
-        
+        if (other.CompareTag("air zone forest"))
+        {
+            isColliding = false;
+        }
+        if (other.CompareTag("earthZone"))
+        {
+            isColliding = false;
+        }
+        if (other.CompareTag("lakeOfHealth"))
+        {
+            isColliding = false;
+        }
+        if (other.CompareTag("fireZone"))
+        {
+            isColliding = false;
+        }
+        if (other.CompareTag("waterZone"))
+        {
+            isColliding = false;
+        }
     }
+    
 }

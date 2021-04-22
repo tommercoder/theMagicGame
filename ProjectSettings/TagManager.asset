@@ -17,8 +17,10 @@ TagManager:
   - Terrain
   - npcRobot
   - air zone forest
-  - 'earth zone '
   - lakeOfHealth
+  - fireZone
+  - waterZone
+  - earthZone
   layers:
   - Default
   - TransparentFX

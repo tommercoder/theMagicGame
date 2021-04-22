@@ -140,11 +140,11 @@ public class movement : MonoBehaviour
 		if (!speedPotionUsingNow)
 		{
 			if (isRunningSword)
-				playerSpeed = 5;
+				playerSpeed = 15;
 			else if (!isRunningSword)
-				playerSpeed = 4;
+				playerSpeed = 15;
 			else
-				playerSpeed = 3;
+				playerSpeed = 4;
 		}
 		
 

@@ -21,12 +21,12 @@ public class dropItem : MonoBehaviour, IDropHandler
         {
 
 
-            Debug.Log("entered");
+            //Debug.Log("entered");
             RaycastHit hit = new RaycastHit();
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, 20))
+            if (Physics.Raycast(ray, out hit, 40))
             {
-               
+                //Debug.Log("entered2");
                 for (int i = 0; i < inventory.items.Count; i++)
                 {
                    
@@ -54,6 +54,7 @@ public class dropItem : MonoBehaviour, IDropHandler
 
                 for (int k = 0; k < temp.Count; k++)
                 {
+                    //Debug.Log("entered3");
                     if (temp[k].gameObject == Inventory.instance.itemsGameObjects[index])
                     {
                         temp[k].isUsed = false;
