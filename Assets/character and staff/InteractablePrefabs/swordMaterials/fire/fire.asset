@@ -19,5 +19,5 @@ MonoBehaviour:
   description: 
   option: damage is 25
   swordDamage: 25
-  oldDamage: 0
-  savedPosition: {x: 0, y: 0, z: 0}
+  oldDamage: 25
+  savedPosition: {x: 152.4802, y: 3.9261904, z: 302.6202}

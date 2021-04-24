@@ -58,12 +58,14 @@ public class pauseMenu : MonoBehaviour
     }
     public void close()
     {
+        FindObjectOfType<audioManager>().Play("menuClick");
         ui.SetActive(false);
         Time.timeScale = 1f;
         pauseOpened = false;
     }
     public void loadMenu()
     {
+        FindObjectOfType<audioManager>().Play("menuClick");
         Time.timeScale = 1f;
         menuIsOpened = true;
         pauseOpened = false;

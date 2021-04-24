@@ -17,7 +17,7 @@ MonoBehaviour:
   maxStack: 1
   currentStack: 1
   description: power of blue
-  option: damage is 7
-  swordDamage: 7
-  oldDamage: 0
+  option: damage is 10
+  swordDamage: 10
+  oldDamage: 10
   savedPosition: {x: 438.68582, y: 13.683158, z: 443.53064}

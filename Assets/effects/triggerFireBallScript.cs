@@ -18,7 +18,7 @@ public class triggerFireBallScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("ENEMY"))
+        if(other.CompareTag("ENEMY") && characterStats.instance.damageFromFireball>0)
         {
             if (other.GetComponent<ProceduralStats>() != null)
             {

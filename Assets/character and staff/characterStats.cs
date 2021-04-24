@@ -173,7 +173,7 @@ public class characterStats : MonoBehaviour, ISaveable
     {
         //character
         sd.s_XP = XP;
-
+        sd.inZone = zones.instance.isColliding;
         respawnScript.instance.PopulateSaveData(sd);
         sd.s_x = gameObject.transform.position.x;
         sd.s_y = gameObject.transform.position.y;
@@ -252,27 +252,28 @@ public class characterStats : MonoBehaviour, ISaveable
             sd.s_currentQuest = MarieleQuest.instance.currentMarieleQuest;
         }
         //if we ended the game then we write standard data to save file
-        if (plot.instance.endedGame)
-        {
-            var fullPath = Path.Combine(Application.persistentDataPath, "SaveData.dat");
-            var fullPath2 = Path.Combine(Application.persistentDataPath, "newGame.dat");
-            if (File.Exists(fullPath))
-                if (File.ReadAllText(fullPath) != "")
-                    if (FileManager.ClearSaveData("SaveData.dat"))
-                    {
-                        File.WriteAllText(fullPath, File.ReadAllText(fullPath2));
-                    }
+        //if (plot.instance.endedGame)
+        //{
+        //    var fullPath = Path.Combine(Application.persistentDataPath, "SaveData.dat");
+        //    var fullPath2 = Path.Combine(Application.persistentDataPath, "newGame.dat");
+        //    if (File.Exists(fullPath))
+        //        if (File.ReadAllText(fullPath) != "")
+        //            if (FileManager.ClearSaveData("SaveData.dat"))
+        //            {
+        //                File.WriteAllText(fullPath, File.ReadAllText(fullPath2));
+        //            }
 
-        }
+        //}
        
     }
     //interface method
     public void LoadFromSaveData(SaveData sd)
     {
-        if (SceneManager.GetActiveScene().name == "game")
-        {
+        //if (SceneManager.GetActiveScene().name == "game")
+        //{
             //character
             XP = sd.s_XP;
+            zones.instance.isColliding = sd.inZone;
             if (sd.s_HP > 0)
             {
                 playerHealth.instance.LoadFromSaveData(sd);
@@ -416,7 +417,7 @@ public class characterStats : MonoBehaviour, ISaveable
                 enemyData.e_ProcId = id;
                 sd.proceduralEnemyData.Add(enemyData);
             }
-        }
+        //}
     }
     public  void SaveJsonData(characterStats cs)
     {

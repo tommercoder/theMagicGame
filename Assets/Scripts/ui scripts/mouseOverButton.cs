@@ -15,6 +15,7 @@ public class mouseOverButton : MonoBehaviour
     public Button b;
     public Button c;
     public Button d;
+   public audioManager am;
    public void changeColorTextA()
     {
         a.GetComponentInChildren<Text>().color = Color.blue;
@@ -83,18 +84,20 @@ public class mouseOverButton : MonoBehaviour
         //    yield return null;
         //}
         //show loading
-        yield return null;
-        
-    }
-    public void openGame()
-    {
+        yield return new WaitForSeconds(1f);
         changeColorTextAback();
         menuCanvas.SetActive(false);
         mainCanvas.SetActive(true);
         cameraMenu.enabled = false;
         cameraGame.enabled = true;
         pauseMenu.instance.menuIsOpened = false;
-        //StartCoroutine(loadingBar());
+
+    }
+    public void openGame()
+    {
+        am.Play("menuClick");
+        
+        StartCoroutine(loadingBar());
 
         //LoadingGame = true;
         /// SceneManager.LoadScene("game");
@@ -103,6 +106,7 @@ public class mouseOverButton : MonoBehaviour
     }
     public void closeGame()
     {
+        am.Play("menuClick");
         Application.Quit();
     }
     //public void newGame()

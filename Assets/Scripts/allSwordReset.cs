@@ -8,7 +8,7 @@ public class allSwordReset : MonoBehaviour
     private void OnApplicationQuit()
     {
         for(int i = 0;i < swords.Length;i++)
-        if (potionParticle.instance.usingDamagePotionNow && swords[i].swordDamage > swords[i].oldDamage)
+        if (/*potionParticle.instance.usingDamagePotionNow && */swords[i].swordDamage > swords[i].oldDamage)
         {
                 swords[i].swordDamage = swords[i].oldDamage;
         }

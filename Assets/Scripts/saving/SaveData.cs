@@ -13,6 +13,7 @@ public class SaveData
     public float s_x;
     public float s_y;
     public float s_z;
+    public bool inZone;
     //inventory
     public List<Item> s_inventory = new List<Item>();
     public List<GameObject> s_inventoryGO = new List<GameObject>();

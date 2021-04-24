@@ -55,7 +55,7 @@ public class potionParticle : MonoBehaviour
             yield return new WaitForSeconds(time);
             usingDamagePotionNow = false;
             playerSword.instance.currentSword.swordDamage -= playerSword.instance.currentSword.swordDamage * 20 / 100;
-
+            inventoryManager.instance.damageText.text = "current damage is: " + playerSword.instance.currentSword.swordDamage;
             //set damage back
         }
 

@@ -17,7 +17,7 @@ MonoBehaviour:
   maxStack: 1
   currentStack: 2
   description: 
-  option: damage is 10
-  swordDamage: 12
-  oldDamage: 0
+  option: damage is 15
+  swordDamage: 15
+  oldDamage: 15
   savedPosition: {x: 438.4659, y: 14.19117, z: 441.40332}

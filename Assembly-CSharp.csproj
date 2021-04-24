@@ -84,7 +84,7 @@
     <Compile Include="Assets\terrainColliderControllerFix.cs" />
     <Compile Include="Assets\enemiesFull\enemies\EnemyStats.cs" />
     <Compile Include="Assets\character and staff\inventory\items(scriptable objects)\potionParticle.cs" />
-    <Compile Include="Assets\zones.cs" />
+    <Compile Include="Assets\Scripts\zones.cs" />
     <Compile Include="Assets\character and staff\inventory\items(scriptable objects)\potionUse.cs" />
     <Compile Include="Assets\Scripts\ui scripts\mouseOverButton.cs" />
     <Compile Include="Assets\character and staff\inventory\items(scriptable objects)\swordEquipping.cs" />
@@ -153,6 +153,7 @@
     <Compile Include="Assets\another\Bonehead\Scripts\PlayerInput.cs" />
     <Compile Include="Assets\another\AlignInEditor\AlignInEditor.cs" />
     <Compile Include="Assets\character and staff\tooltip\tooltip.cs" />
+    <Compile Include="Assets\Scripts\guideHandler.cs" />
     <Compile Include="Assets\enemiesFull\IKenemies\ProceduralLeg.cs" />
   </ItemGroup>
   <ItemGroup>

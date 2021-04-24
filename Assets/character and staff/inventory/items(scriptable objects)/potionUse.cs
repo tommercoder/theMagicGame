@@ -12,7 +12,7 @@ public class potionUse : Item
     }
     #endregion
     public typeOfItem type;
-    public bool speedPotionUsing = false;
+    //public bool speedPotionUsing = false;
     //public ParticleSystem healthParticle;
     //public ParticleSystem speedParticle;
     //public ParticleSystem damageParticle;
@@ -99,8 +99,13 @@ public class potionUse : Item
                     }
                 }
                 logShow.instance.showText("increased damage by " + playerSword.instance.currentSword.swordDamage * 20 / 100);
+                inventoryManager.instance.damageText.text = "current damage is: " + (playerSword.instance.currentSword.swordDamage+ (playerSword.instance.currentSword.swordDamage * 20 / 100));
                 potionParticle.instance.turn(type);
                 potionParticle.instance.startTimer(60.0f, type);
+            }
+            else
+            {
+                logShow.instance.showText("you can't use damage potion twice,wait until effect is gone");
             }
             //move it to if above
            
@@ -110,7 +115,7 @@ public class potionUse : Item
         if (type == typeOfItem.speedPotion)
         {
             
-            if (movement.instance.playerSpeed == 4 && !movement.instance.speedPotionUsingNow)
+            if ((movement.instance.playerSpeed == 5 || movement.instance.playerSpeed == 6) && !movement.instance.speedPotionUsingNow)
             {
                 waitAfterSpeed();
                 movement.instance.playerSpeed += 2;
@@ -135,6 +140,10 @@ public class potionUse : Item
                 movement.instance.speedPotionUsingNow = true;
                 potionParticle.instance.turn(type);
                 potionParticle.instance.startTimer(120.0f, type);
+            }
+            else
+            {
+                logShow.instance.showText("last speed potions is still in use");
             }
             
             

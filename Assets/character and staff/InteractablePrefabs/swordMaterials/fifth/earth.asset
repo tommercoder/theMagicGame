@@ -19,5 +19,5 @@ MonoBehaviour:
   description: be careful
   option: damage is 20
   swordDamage: 20
-  oldDamage: 0
+  oldDamage: 20
   savedPosition: {x: 0, y: 0, z: 0}
