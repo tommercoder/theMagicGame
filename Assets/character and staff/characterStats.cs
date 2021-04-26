@@ -273,8 +273,10 @@ public class characterStats : MonoBehaviour, ISaveable
         //{
             //character
             XP = sd.s_XP;
-            zones.instance.isColliding = sd.inZone;
-            if (sd.s_HP > 0)
+           
+        zones.instance.isColliding = sd.inZone;
+        Inventory.instance.LoadFromSaveData(sd);
+        if (sd.s_HP > 0)
             {
                 playerHealth.instance.LoadFromSaveData(sd);
             }
@@ -353,7 +355,7 @@ public class characterStats : MonoBehaviour, ISaveable
             }
 
 
-            Inventory.instance.LoadFromSaveData(sd);
+            
             foreach (Slot slot in slotsToSave)
             {
                 slot.LoadFromSaveData(sd);
@@ -366,8 +368,8 @@ public class characterStats : MonoBehaviour, ISaveable
             if (sd.s_allWeaponInteractions.Count > 0)
             {
 
-                //all_swords = sd.s_allWeaponInteractions;
-               // all_swordsGO = sd.s_allWeaponInteractionsGO;
+                all_swords = sd.s_allWeaponInteractions;
+                all_swordsGO = sd.s_allWeaponInteractionsGO;
                 for (int i = 0; i < all_swordsGO.Count; i++)
                 {
                     if (!Inventory.instance.itemsGameObjects.Contains(all_swordsGO[i])

@@ -4,14 +4,14 @@ using UnityEngine;
 /// <summary>
 /// this script is attached to GameManager
 /// </summary>
-public class Inventory : MonoBehaviour,ISaveable
+public class Inventory : MonoBehaviour, ISaveable
 {
     #region Singleton
     public static Inventory instance;
 
-     void Awake()
+    void Awake()
     {
-        if(instance!=null)
+        if (instance != null)
         {
             Debug.LogWarning("instance inventory.cs");
             return;
@@ -21,9 +21,9 @@ public class Inventory : MonoBehaviour,ISaveable
     }
 
     #endregion
-   
+
     public delegate void onItemChanged();
-    public onItemChanged onItemChangedCalled;    
+    public onItemChanged onItemChangedCalled;
     public List<Item> items = new List<Item>();
     [Header("SWORDS CANT BE SAME DURING GAME")]
     public List<GameObject> itemsGameObjects = new List<GameObject>();
@@ -31,33 +31,33 @@ public class Inventory : MonoBehaviour,ISaveable
     public int size = 16;
     public bool add(Item item)
     {
-        for(int i = 0;i < items.Count;i++)
+        for (int i = 0; i < items.Count; i++)
         {
-            if(items[i]==item)//check
+            if (items[i] == item)//check
             {
-               
-               // if(items[i].currentStack < items[i].maxStack)
+
+                // if(items[i].currentStack < items[i].maxStack)
                 //{
-                    
-                    items[i].currentStack++;
-                    Debug.Log(items[i].name + "has more than one item");
-                    
-                    return true;
+
+                items[i].currentStack++;
+                Debug.Log(items[i].name + "has more than one item");
+
+                return true;
                 //}
 
             }
         }
         ///////////////////////
-        if(items.Count >= size)
+        if (items.Count >= size)
         {
             Debug.Log("dont have enough space in inventory");
             return false;
         }
-        
+
         items.Add(item);
-        
-        if(onItemChangedCalled != null)
-        onItemChangedCalled.Invoke();
+
+        if (onItemChangedCalled != null)
+            onItemChangedCalled.Invoke();
         return true;
     }
     public bool addGOforPotions(GameObject item)
@@ -69,8 +69,9 @@ public class Inventory : MonoBehaviour,ISaveable
         //}
         //characterStats.instance.allAddedToInventoryGO.Add(item);
         //check if i can add a potion GO
-        if (item.GetComponent<potionInteraction>() != null) {
-            
+        if (item.GetComponent<potionInteraction>() != null)
+        {
+
             for (int i = 0; i < itemsGameObjects.Count; i++)
             {
                 //if (itemsGameObjects[i].name == item.name)
@@ -83,14 +84,14 @@ public class Inventory : MonoBehaviour,ISaveable
 
                     if (itemsGameObjects[i].GetComponent<potionInteraction>().item.name == item.GetComponent<potionInteraction>().item.name)
                     {
-                       
-                        
+
+
                         return true;
                     }
                 }
                 //}
             }
-    }
+        }
 
         if (itemsGameObjects.Count >= size)
         {
@@ -99,7 +100,7 @@ public class Inventory : MonoBehaviour,ISaveable
         }
 
         itemsGameObjects.Add(item);
-        
+
         if (onItemChangedCalled != null)
             onItemChangedCalled.Invoke();
         return true;
@@ -128,52 +129,55 @@ public class Inventory : MonoBehaviour,ISaveable
     }
     public void LoadFromSaveData(SaveData sd)
     {
-        
+
         for (int i = 0; i < sd.s_inventory.Count; i++)
         {
             if (sd.s_inventory[i] != null)
             {
                 add(sd.s_inventory[i]);
-                
+
             }
         }
         for (int i = 0; i < sd.s_inventoryGO.Count; i++)
         {
             if (sd.s_inventoryGO[i] != null)
             {
-              //  Debug.Log("INVENTORY" + sd.s_inventoryGO[i]);
+                //  Debug.Log("INVENTORY" + sd.s_inventoryGO[i]);
                 addGOforPotions(sd.s_inventoryGO[i]);
                 sd.s_inventoryGO[i].SetActive(false);
             }
-            else
-            {
-                GameObject temp;
-                for(int t = 0;t < characterStats.instance.allInteractableGameObjects.Count;t++)
-                {
+            //else
+            //{
+            //    GameObject temp;
+            //    for (int t = 0; t < characterStats.instance.allInteractableGameObjects.Count; t++)
+            //    {
 
-                    if (characterStats.instance.allInteractableGameObjects[t].GetComponent<potionInteraction>() != null)
-                    {
-                        if (sd.s_inventory[i] == characterStats.instance.allInteractableGameObjects[t].GetComponent<potionInteraction>().item)
+            //        if (characterStats.instance.allInteractableGameObjects[t].GetComponent<potionInteraction>() != null)
+            //        {
+            //            if (sd.s_inventory[i] == characterStats.instance.allInteractableGameObjects[t].GetComponent<potionInteraction>().item)
 
-                        {
-                            addGOforPotions(characterStats.instance.allInteractableGameObjects[t]);
-                            characterStats.instance.allInteractableGameObjects[t].SetActive(false);
-                        }
-                    }
-                    else if (characterStats.instance.allInteractableGameObjects[t].GetComponent<weaponInteract>() != null)
-                    {
-                       // Debug.Log("A" + sd.s_inventory[i]);
-                       // Debug.Log("B" + characterStats.instance.allInteractableGameObjects[t].GetComponent<weaponInteract>().item);
-                        if (sd.s_inventory[i] ==  characterStats.instance.allInteractableGameObjects[t].GetComponent<weaponInteract>().item)
-                        {
-                            addGOforPotions(characterStats.instance.allInteractableGameObjects[t]);
-                            characterStats.instance.allInteractableGameObjects[t].SetActive(false);
-                        }
-                    }
-                }
+            //            {
+            //                addGOforPotions(characterStats.instance.allInteractableGameObjects[t]);
+            //                characterStats.instance.allInteractableGameObjects[t].SetActive(false);
+            //            }
+            //        }
+            //        else if (characterStats.instance.allInteractableGameObjects[t].GetComponent<weaponInteract>() != null)
+            //        {
+            //            // Debug.Log("A" + sd.s_inventory[i]);
+            //            // Debug.Log("B" + characterStats.instance.allInteractableGameObjects[t].GetComponent<weaponInteract>().item);
+            //            if (sd.s_inventory[i] == characterStats.instance.allInteractableGameObjects[t].GetComponent<weaponInteract>().item)
+            //            {
+            //                addGOforPotions(characterStats.instance.allInteractableGameObjects[t]);
+            //                characterStats.instance.allInteractableGameObjects[t].SetActive(false);
+            //            }
+            //        }
+            //    }
 
-            }
+            //}
         }
+
+        /////////////////////////////////////////////////////////
+
         //characterStats.instance.allAddedToInventoryGO = sd.s_allGameObjectInventory;
         //for(int i = 0;i < sd.s_allGameObjectInventory.Count;i++)
         //{

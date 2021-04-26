@@ -18,6 +18,6 @@ MonoBehaviour:
   currentStack: 1
   description: 
   option: damage is 15
-  swordDamage: 15
-  oldDamage: 0
-  savedPosition: {x: 0, y: 0, z: 0}
+  swordDamage: 24
+  oldDamage: 25
+  savedPosition: {x: 260.813, y: 18.062513, z: 643.2771}
