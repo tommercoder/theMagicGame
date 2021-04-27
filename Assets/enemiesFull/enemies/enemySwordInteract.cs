@@ -30,16 +30,20 @@ public class enemySwordInteract : MonoBehaviour
                     //other.GetComponent<attacksController>().canClick = false;
                     //other.GetComponent<attacksController>().canClickSec = false;
                     //herAnimator.SetInteger("attackAnimation",4);
+                    if(Random.Range(0,2)==1)
                     otherAnimator.SetTrigger("hitByEnemy");
                     
 
                 }
 
-                otherController.enabled = false;
-                other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);
+                //otherController.enabled = false;
+               // if (Random.Range(0, 2) == 1)
+               // {
+                   // other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);
+                //}
                 playerHealth.instance.currentHealth -= damage;
 
-                StartCoroutine(turnOffCharacter());
+               // StartCoroutine(turnOffCharacter());
             }
         }
     }

@@ -53,7 +53,7 @@ public class EnemyStats : MonoBehaviour,ISaveable
         collider = GetComponent<CapsuleCollider>();
         rigidbody = GetComponent<Rigidbody>();
 
-        swordRigidbody = GameObject.FindGameObjectsWithTag("interactable object");
+        //swordRigidbody = GameObject.FindGameObjectsWithTag("interactable object");
         player = GameObject.Find("character");
         log = GameObject.Find("error text");
         log.GetComponent<Text>().text = " ";

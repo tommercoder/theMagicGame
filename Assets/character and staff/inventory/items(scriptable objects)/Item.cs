@@ -19,7 +19,10 @@ public class Item : ScriptableObject
     {
         
     }
-    
+    public virtual Item getType()
+    {
+        return this;
+    }
     public void remove()
     {
 

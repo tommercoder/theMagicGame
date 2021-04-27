@@ -273,18 +273,19 @@ public class characterStats : MonoBehaviour, ISaveable
         //{
             //character
             XP = sd.s_XP;
-           
+        
         zones.instance.isColliding = sd.inZone;
         Inventory.instance.LoadFromSaveData(sd);
+        Debug.Log("SD HP" + sd.s_HP);
         if (sd.s_HP > 0)
-            {
-                playerHealth.instance.LoadFromSaveData(sd);
-            }
-            else if (sd.s_HP == 0)
-            {
-                playerHealth.instance.currentHealth = 100;
-            }
-            if (sd.s_respawnObject != null)
+        {
+            playerHealth.instance.LoadFromSaveData(sd);
+        }
+        else if (sd.s_HP == 0)
+        {
+            playerHealth.instance.currentHealth = 100;
+        }
+        if (sd.s_respawnObject != null)
             {
                 respawnScript.instance.LoadFromSaveData(sd);
             }

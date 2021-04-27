@@ -115,6 +115,7 @@ public class EnemyPatrol : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, points[current].position) > 0.7)
             {
+                
                 if (rotated && !WaitOnPoint)
                 {
                     if (pauseMenu.instance.menuIsOpened)
@@ -192,6 +193,7 @@ public class EnemyPatrol : MonoBehaviour
     IEnumerator waitOnPoint()
     {
         WaitOnPoint = true;
+
         animator.SetBool("isWalkingEnemy", false);
         yield return new WaitForSeconds(5f);
         WaitOnPoint = false;

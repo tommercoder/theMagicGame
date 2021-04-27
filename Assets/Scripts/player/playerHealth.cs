@@ -51,7 +51,7 @@ public class playerHealth : MonoBehaviour,ISaveable
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = health;
+        //currentHealth = health;
         healthBar.setMaxHealth(health);
         RagdollActive(false);
 
@@ -100,6 +100,10 @@ public class playerHealth : MonoBehaviour,ISaveable
         abilitiesUI.SetActive(false);
         healthbarUI.SetActive(false);
         canvas.alpha += Time.deltaTime / 2;
+        if (characterStats.instance.XP >= 100)
+        {
+            characterStats.instance.XP -= 100;
+        }
         RagdollActive(true);
         if (canvas.alpha ==1 && isPlayerDead)
             StartCoroutine(PlayText());

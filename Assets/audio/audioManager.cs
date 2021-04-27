@@ -18,9 +18,11 @@ public class audioManager : MonoBehaviour
             s.source.loop = s.loop;
         }
     }
+
+ 
     private void Start()
     {
-        Play("main theme");
+        Play("main menu");
     }
     public void Play(string name)
     {

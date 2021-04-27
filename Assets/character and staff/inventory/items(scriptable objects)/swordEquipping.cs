@@ -22,7 +22,10 @@ public class swordEquipping : Item
     public int swordDamage;
     public int oldDamage;
     public Vector3 savedPosition;
-    
+    public override Item getType()
+    {
+        return this;
+    }
     public override void useFromInventory()
     {
         base.useFromInventory();

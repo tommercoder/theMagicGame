@@ -18,27 +18,32 @@ public class zones : MonoBehaviour
         if (other.CompareTag("air zone forest"))
         {
             isColliding = true;
-            logShow.instance.showQuestText("YOU ARE IN AIR FOREST");
+            logShow.instance.showQuestText("YOU ARE IN THE AIR FOREST");
         }
         else if (other.CompareTag("earthZone"))
         {
             isColliding = true;
-            logShow.instance.showQuestText("YOU ARE IN EARTH ZONE");
+            logShow.instance.showQuestText("YOU ARE IN THE EARTH ZONE");
         }
        else if (other.CompareTag("lakeOfHealth"))
         {
             isColliding = true;
-            logShow.instance.showQuestText("YOU ARE IN HEALTH LAKE ZONE");
+            logShow.instance.showQuestText("YOU ARE IN THE HEALTH LAKE ZONE");
         }
        else if (other.CompareTag("fireZone"))
         {
             isColliding = true;
-            logShow.instance.showQuestText("YOU ARE IN FIRE ZONE");
+            logShow.instance.showQuestText("YOU ARE IN THE FIRE ZONE");
         }
       else  if (other.CompareTag("waterZone"))
         {
             isColliding = true;
-            logShow.instance.showQuestText("YOU ARE IN WATER ZONE");
+            logShow.instance.showQuestText("YOU ARE IN THE WATER ZONE");
+        }
+        else if(other.CompareTag("proceduralilusionValley"))
+        {
+            isColliding = true;
+            logShow.instance.showQuestText("YOU ARE IN ILLUSION VALLEY");
         }
         else
             logShow.instance.showQuestText("");
@@ -67,6 +72,11 @@ public class zones : MonoBehaviour
         if (other.CompareTag("waterZone"))
         {
             isColliding = false;
+        }
+         if (other.CompareTag("proceduralilusionValley"))
+        {
+            isColliding = false;
+            
         }
     }
 

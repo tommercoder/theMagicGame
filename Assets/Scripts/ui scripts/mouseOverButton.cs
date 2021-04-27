@@ -91,14 +91,14 @@ public class mouseOverButton : MonoBehaviour
         cameraMenu.enabled = false;
         cameraGame.enabled = true;
         pauseMenu.instance.menuIsOpened = false;
-
+        am.Play("main theme");
     }
     public void openGame()
     {
         am.Play("menuClick");
-        
+        am.Stop("main menu");
         StartCoroutine(loadingBar());
-
+        
         //LoadingGame = true;
         /// SceneManager.LoadScene("game");
         //LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

@@ -21,6 +21,7 @@ TagManager:
   - fireZone
   - waterZone
   - earthZone
+  - proceduralilusionValley
   layers:
   - Default
   - TransparentFX

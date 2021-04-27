@@ -104,9 +104,10 @@ public class weaponInteract : Interact
 
                             other.gameObject.GetComponent<ProceduralStats>().currentHealth -= item.swordDamage;//this.gameObject.GetComponent<weaponInteract>().item.swordDamage;
                                                                                                                //Debug.Log("interact weapon with " + other.name);
-
-                            other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);//moving enemy back after hit
-                                                                                                                                        //Debug.Log(transform.root.name);
+                            //if (Random.Range(0, 2) == 1)
+                           // {
+                                other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);//moving enemy back after hit
+                           // }                                                                             //Debug.Log(transform.root.name);
 
                         }
                         else if (other.gameObject.GetComponent<EnemyStats>() != null)
@@ -120,12 +121,23 @@ public class weaponInteract : Interact
                             otherAnimator = other.GetComponent<Animator>();
                             otherAnimator.SetBool("isWalkingEnemy", false);
                             otherAnimator.SetBool("isRunningEnemy", false);
-                            otherAnimator.SetTrigger("hitEnemy");
+                            int temp = Random.Range(0, 2);
+                            if (temp == 1)
+                            {
+                                otherAnimator.SetTrigger("hitEnemy");
+                            }
+                             if(temp == 0)
+                            {
+                                otherAnimator.SetTrigger("hitEnemy2");
+                            }
+                            Debug.Log("TEMP + " + temp);
                             //otherAnimator.SetInteger("enemyAttackInteger", 4);
                             EnemyPatrol.instance.canMove = false;
                             otherController.enabled = false;
-                            other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);
-
+                            if (temp == 1)
+                            {
+                                other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);
+                            }
                             //otherAnimator.SetTrigger("hitEnemy");
                             StartCoroutine(waitForSec());
                         }
@@ -138,10 +150,11 @@ public class weaponInteract : Interact
     }
     IEnumerator waitForSec()
     {
+        EnemyPatrol.instance.canMove = true;
         yield return new WaitForSeconds(1f);
         if(otherController !=null)
         otherController.enabled = true;
-        EnemyPatrol.instance.canMove = true;
+        
     }
     IEnumerator Reset()
     {

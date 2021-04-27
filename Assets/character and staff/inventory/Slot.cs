@@ -86,6 +86,7 @@ public class Slot : MonoBehaviour, ISaveable
         
         icon.enabled = true;
         dropButton.interactable = true;
+        if(!(item is swordEquipping))
         countPanel.SetActive(true);
         countText.enabled = true;
         if (onSlotChangedCalled != null)
