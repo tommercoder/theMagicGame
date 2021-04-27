@@ -122,11 +122,11 @@ public class MainProceduralController : MonoBehaviour
                     //temp.y = transform.position.y+0.3f ;
                     //transform.position = temp;
                     
-                    transform.Translate(Vector3.up * 2 * Time.deltaTime);
+                    transform.Translate(Vector3.up * 2 * Time.deltaTime/ 1.6f);
                 }
                 else if(endPos.y <= transform.position.y)
                 {
-                    transform.Translate(Vector3.down * 2 * Time.deltaTime);
+                    transform.Translate(Vector3.down * 2 * Time.deltaTime/ 1.6f);
                 }
                 Quaternion endRot = Quaternion.LookRotation(
                     Vector3.ProjectOnPlane(stepTargets[0].forward, endNormal),
@@ -151,11 +151,11 @@ public class MainProceduralController : MonoBehaviour
                     //Vector3 temp = transform.position;
                     //temp.y = transform.position.y+0.3f ;
                     //transform.position = temp;
-                    transform.Translate(Vector3.up* 2* Time.deltaTime);
+                    transform.Translate(Vector3.up* 2* Time.deltaTime/ 1.6f);
                 }
                 else if (endPos.y <= transform.position.y)
                 {
-                    transform.Translate(Vector3.down * 2 * Time.deltaTime);
+                    transform.Translate(Vector3.down * 2 * Time.deltaTime/1.6f);
                 }
                 Quaternion endRot = Quaternion.LookRotation(
                     Vector3.ProjectOnPlane(stepTargets[1].forward, endNormal),
@@ -242,8 +242,8 @@ public class MainProceduralController : MonoBehaviour
         endPoint += footIKTargets[index].up * 0.2f;
         
         Vector3 centerPoint = (startPoint + endPoint) / 2;
-
-        centerPoint += footIKTargets[index].up * Vector3.Distance(startPoint, endPoint) / 2f;
+        //moves leg up in center point
+        centerPoint += (footIKTargets[index].up * 1.5f) * Vector3.Distance(startPoint, endPoint) / 2f;
 
 
         float timeElapsed = 0;

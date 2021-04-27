@@ -126,10 +126,10 @@ public class navmeshPatrol : MonoBehaviour
             else
             {
                 Vector3 relativePos = (points[current].transform.position - transform.position).normalized;
-                Quaternion toRotation = Quaternion.LookRotation(new Vector3(relativePos.x, 0, relativePos.z));
-                transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime);
-                // rotation = Quaternion.LookRotation((points[current].position - transform.position).nm);
-                //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime / 3f);
+                //Quaternion toRotation = Quaternion.LookRotation(new Vector3(relativePos.x, 0, relativePos.z));
+               // transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, Time.deltaTime/3f);
+                rotation = Quaternion.LookRotation((points[current].position - transform.position).normalized);
+                transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime / 4f);
 
                 rotated = true;
 
