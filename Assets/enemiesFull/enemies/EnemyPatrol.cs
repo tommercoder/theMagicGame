@@ -113,6 +113,7 @@ public class EnemyPatrol : MonoBehaviour
 
         if (!attackingPlayer)
         {
+            Debug.Log("DISTNACE = " + Vector3.Distance(transform.position, points[current].position));
             if (Vector3.Distance(transform.position, points[current].position) > 0.7)
             {
                 
@@ -195,7 +196,7 @@ public class EnemyPatrol : MonoBehaviour
         WaitOnPoint = true;
 
         animator.SetBool("isWalkingEnemy", false);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4f);
         WaitOnPoint = false;
     }
     public void enemyFitstAttackEvent()
