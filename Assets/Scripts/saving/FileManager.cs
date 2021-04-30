@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class FileManager : MonoBehaviour
 {
+    void Start()
+    {
+
+    }
     public static bool WriteBackUP(string a_FileName,string a_FileContents)
     {
         var fullPath = Path.Combine(Application.persistentDataPath, a_FileName);

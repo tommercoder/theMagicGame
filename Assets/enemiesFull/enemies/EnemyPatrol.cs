@@ -85,7 +85,7 @@ public class EnemyPatrol : MonoBehaviour
 
     }
    
-    private void Update()
+    public void Update()
     {
         if (pauseMenu.instance.menuIsOpened)
             return;
@@ -113,7 +113,7 @@ public class EnemyPatrol : MonoBehaviour
 
         if (!attackingPlayer)
         {
-            Debug.Log("DISTNACE = " + Vector3.Distance(transform.position, points[current].position));
+            //Debug.Log("DISTNACE = " + Vector3.Distance(transform.position, points[current].position));
             if (Vector3.Distance(transform.position, points[current].position) > 0.7)
             {
                 
