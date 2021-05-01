@@ -57,6 +57,8 @@ public class mouseOverButton : MonoBehaviour
     public Camera cameraGame;
     public GameObject menuCanvas;
     public GameObject mainCanvas;
+
+    public GameObject DisableMenuCompletely;
     private void Start()
     {
         mainCanvas.SetActive(false);
@@ -92,6 +94,8 @@ public class mouseOverButton : MonoBehaviour
         cameraGame.enabled = true;
         pauseMenu.instance.menuIsOpened = false;
         am.Play("main theme");
+        DisableMenuCompletely.SetActive(false);
+
     }
     public void openGame()
     {

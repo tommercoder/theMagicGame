@@ -10,7 +10,7 @@ public class Slot : MonoBehaviour, ISaveable
         SaveData.SlotsData slotsData = new SaveData.SlotsData();
         slotsData.s_slotItem = item;
         slotsData.s_id = id;
-        Debug.Log("slots data" + slotsData.s_slotItem);
+       // Debug.Log("slots data" + slotsData.s_slotItem);
         //foreach (Sprite s in characterStats.instance.s_icons)
         //{
         //    if (id == slotsData.s_id)

@@ -21,6 +21,8 @@ public class pauseMenu : MonoBehaviour
     public bool menuIsOpened;
     public CanvasGroup canvas;
     public GameObject dialogBox;
+
+    public GameObject enableMenuCompletely;
     private void Start()
     {
         cameraGame.enabled = false;
@@ -49,6 +51,8 @@ public class pauseMenu : MonoBehaviour
                 open();
             }
         }
+
+      
     }
     public void open()
     {
@@ -78,6 +82,10 @@ public class pauseMenu : MonoBehaviour
         //#endif
         mainCanvas.SetActive(false);
         menuCanvas.SetActive(true);
+
+        enableMenuCompletely.SetActive(true);
+
+
         cameraMenu.enabled = true;
 
 

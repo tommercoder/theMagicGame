@@ -118,12 +118,17 @@ public class characterStats : MonoBehaviour, ISaveable
             all_procedural_enemies[i].id = i.ToString();
         }
         //loading
-        
 
 
 
-        
-       // StartCoroutine(waitLoad());
+
+        var fullPath = Path.Combine(Application.persistentDataPath, "SaveData.dat");
+        if (!File.Exists(fullPath))
+        {
+            Debug.Log(fullPath);
+            File.WriteAllText(fullPath, "");
+        }
+        // StartCoroutine(waitLoad());
         LoadJsonData(this);
         lvl = XP / 100;
         damageFromFireball = lvl * 3;
@@ -156,10 +161,10 @@ public class characterStats : MonoBehaviour, ISaveable
         //    LoadJsonData(this);
         //    mouseOverButton.instance.startedNewGame = false;
         //}
-        //if (pauseMenu.instance.pauseOpened)
-        //{
-        //    SaveJsonData(this);
-        //}
+        if (pauseMenu.instance.pauseOpened)
+        {
+            SaveJsonData(this);
+        }
 
     }
     private void OnApplicationQuit()
@@ -273,7 +278,7 @@ public class characterStats : MonoBehaviour, ISaveable
         //{
             //character
             XP = sd.s_XP;
-        
+        Debug.Log("SD HP" + sd.s_HP);
         zones.instance.isColliding = sd.inZone;
         Inventory.instance.LoadFromSaveData(sd);
         Debug.Log("SD HP" + sd.s_HP);
@@ -370,7 +375,8 @@ public class characterStats : MonoBehaviour, ISaveable
             {
 
                 all_swords = sd.s_allWeaponInteractions;
-                all_swordsGO = sd.s_allWeaponInteractionsGO;
+            
+               //all_swordsGO = sd.s_allWeaponInteractionsGO;///check if this works
                 for (int i = 0; i < all_swordsGO.Count; i++)
                 {
                     if (!Inventory.instance.itemsGameObjects.Contains(all_swordsGO[i])
