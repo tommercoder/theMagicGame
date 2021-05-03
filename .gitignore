@@ -3,7 +3,7 @@
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
 	
-/[Ll]ibrary/
+[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
@@ -71,83 +71,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
- Assembly-CSharp-Editor.csproj
-        Assembly-CSharp-firstpass.csproj
-        Assembly-CSharp.csproj
-        Assets/Plugins/Demigiant/DOTween/DOTween.dll.mdb
-        Assets/Plugins/Demigiant/DOTween/DOTween.dll.mdb.meta
-        Assets/Plugins/Demigiant/DOTween/Editor/DOTweenEditor.dll.mdb
-        Assets/Plugins/Demigiant/DOTween/Editor/DOTweenEditor.dll.mdb.meta
-        Library/APIUpdater/project-dependencies.graph
-        Library/AnnotationManager
-        Library/ArtifactDB
-        Library/ArtifactDB-lock
-        Library/AssetImportState
-        Library/BuildPlayer.prefs
-        Library/BuildSettings.asset
-        Library/CurrentLayout-default.dwlt
-        Library/CurrentMaximizeLayout.dwlt
-        Library/EditorOnlyScriptingSettings.json
-        Library/EditorSnapSettings.asset
-        Library/EditorUserBuildSettings.asset
-        Library/InspectorExpandedItems.asset
-        Library/LastSceneManagerSetup.txt
-        Library/LibraryFormatVersion.txt
-        Library/MonoManager.asset
-        Library/SceneVisibilityState.asset
-        Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
-        Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll
-        Library/ScriptAssemblies/Assembly-CSharp.dll
-        Library/ScriptAssemblies/BuiltinAssemblies.stamp
-        Library/ScriptAssemblies/Cinemachine.dll
-        Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll
-        Library/ScriptAssemblies/Unity.Animation.Rigging.Editor.dll
-        Library/ScriptAssemblies/Unity.Animation.Rigging.dll
-        Library/ScriptAssemblies/Unity.Burst.Editor.dll
-        Library/ScriptAssemblies/Unity.Burst.dll
-        Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll
-        Library/ScriptAssemblies/Unity.Mathematics.Editor.dll
-        Library/ScriptAssemblies/Unity.Mathematics.dll
-        Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll
-        Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll
-        Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll
-        Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll
-        Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll
-        Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll
-        Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll
-        Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll
-        Library/ScriptAssemblies/Unity.Rider.Editor.dll
-        Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll
-        Library/ScriptAssemblies/Unity.ShaderGraph.Utilities.dll
-        Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll
-        Library/ScriptAssemblies/Unity.TextMeshPro.dll
-        Library/ScriptAssemblies/Unity.Timeline.Editor.dll
-        Library/ScriptAssemblies/Unity.Timeline.dll
-        Library/ScriptAssemblies/Unity.VSCode.Editor.dll
-        Library/ScriptAssemblies/UnityEditor.TestRunner.dll
-        Library/ScriptAssemblies/UnityEditor.UI.dll
-        Library/ScriptAssemblies/UnityEngine.TestRunner.dll
-        Library/ScriptAssemblies/UnityEngine.UI.dll
-        Library/ScriptAssemblies/com.unity.cinemachine.editor.dll
-        Library/ScriptMapper
-        Library/ShaderCache.db
-        Library/ShaderCache/0/000c5e7e5d8ebaef7858edd9558c7bdd.bin
-        Library/ShaderCache/0/003084e01b01ea5b40afe7407eaf6236.bin
-        Library/ShaderCache/0/0046ce70010fd4854713ee2573fc9cbd.bin
-        Library/ShaderCache/0/006b85a302c88294998e48222ed7282c.bin
-        Library/ShaderCache/0/0089a4c504d0238e97a8e1028dae5a6e.bin
-        Library/ShaderCache/0/00bb86bce77189d6ce19af216d4dfb54.bin
-        Library/ShaderCache/0/00c5e2e9277159eebdf26e517a33d541.bin
-        Library/ShaderCache/0/00d0261cd4a7980ed36f87a703249090.bin
-        Library/ShaderCache/0/00f5e59a98e6497546842efb3dbcf41a.bin
-        Library/ShaderCache/0/01049080fe9a679dcc3adbaf9998d2de.bin
-        Library/ShaderCache/0/0106ebf65e6ec6402d07a58be2bee605.bin
-        Library/ShaderCache/0/0117c4421f6f9b8d4141cd54cac4401e.bin
-        Library/ShaderCache/0/011e556dd1cc3d2afe221347cbdce806.bin
-        Library/ShaderCache/0/014fce98c999f99c55c228e90e21a392.bin
-        Library/ShaderCache/0/0153ec6dfc4fcce6e0adb7fac8bd7e5f.bin
-        Library/ShaderCache/0/015861d76a7e9ea779fa343035aab706.bin
-        Library/ShaderCache/0/0189197f397a615c0e78f112760d8357.bin
-        Library/ShaderCache/0/01a35090a0aff1ee5fa27fe13e063819.bin
-        Library/ShaderCache/0/01b4a9dc0ccb12b0fdd62bf339d5edad.bin
-        Library/ShaderCache/0/01bd72bc3a5433ad26bd48c8
+ 
