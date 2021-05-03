@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 870ce27194f9eed479dd6dad86cbde74, type: 3}
+  m_Name: air
+  m_EditorClassIdentifier: 
+  name: 
+  icon: {fileID: 21300000, guid: 3ef4f5566d80483438137b030a3ba4f7, type: 3}
+  maxStack: 1
+  currentStack: 2
+  description: 
+  option: damage is 15
+  swordDamage: 15
+  oldDamage: 15
+  savedPosition: {x: 438.4659, y: 14.19117, z: 441.40332}

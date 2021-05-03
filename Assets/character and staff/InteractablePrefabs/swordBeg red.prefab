@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &60469404001004048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 836829739425607850}
+  - component: {fileID: 4337775284934491919}
+  - component: {fileID: 2005835671539665861}
+  - component: {fileID: 871373186177859349}
+  - component: {fileID: 871373186177859346}
+  - component: {fileID: 871373186177859351}
+  m_Layer: 0
+  m_Name: swordBeg red
+  m_TagString: interactable object
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &836829739425607850
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60469404001004048}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.57, y: 2.46, z: 0.26}
+  m_LocalScale: {x: 10, y: 10, z: 70}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &4337775284934491919
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60469404001004048}
+  m_Mesh: {fileID: 8680372295329905869, guid: bc7b367b2f4f0fb40ba18e10e2424d5d, type: 3}
+--- !u!23 &2005835671539665861
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60469404001004048}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 4874126678125670354, guid: bc7b367b2f4f0fb40ba18e10e2424d5d, type: 3}
+  - {fileID: -6629797300637803691, guid: bc7b367b2f4f0fb40ba18e10e2424d5d, type: 3}
+  - {fileID: 2100000, guid: 8460c1498e7154742bafcf41f3fc9064, type: 2}
+  - {fileID: 2100000, guid: b54ed0afca4ad8c4cb1f55a2af543ee8, type: 2}
+  - {fileID: -6478536213147159724, guid: bc7b367b2f4f0fb40ba18e10e2424d5d, type: 3}
+  - {fileID: -3846018093981099296, guid: bc7b367b2f4f0fb40ba18e10e2424d5d, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!65 &871373186177859349
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60469404001004048}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.16, y: 0.12, z: 0.030958407}
+  m_Center: {x: -0.000000056810677, y: 0, z: 0.0023804891}
+--- !u!114 &871373186177859346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60469404001004048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9e67808363f57046b64c8f0c51de39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractedText: 
+  interacting: 0
+  manager: {fileID: 0}
+  item: {fileID: 0}
+  animator: {fileID: 0}
+  damage: 0
+  isColliding: 0
+  otherController: {fileID: 0}
+  otherAnimator: {fileID: 0}
+--- !u!114 &871373186177859351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60469404001004048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0d97096638f28f47a00c88b71a5338a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rotating: 1
