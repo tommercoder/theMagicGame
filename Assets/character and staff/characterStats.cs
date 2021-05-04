@@ -161,10 +161,10 @@ public class characterStats : MonoBehaviour, ISaveable
         //    LoadJsonData(this);
         //    mouseOverButton.instance.startedNewGame = false;
         //}
-        if (pauseMenu.instance.pauseOpened)
-        {
-            SaveJsonData(this);
-        }
+        //if (pauseMenu.instance.pauseOpened)
+        //{
+        //    SaveJsonData(this);
+        //}
 
     }
     private void OnApplicationQuit()

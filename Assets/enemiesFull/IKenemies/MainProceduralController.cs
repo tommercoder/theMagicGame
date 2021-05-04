@@ -227,6 +227,7 @@ public class MainProceduralController : MonoBehaviour
         }
    
     } 
+    public float heightOfLegUp = 1.5f;
     //change position of target to position of step target slowly and move leg up
     IEnumerator MoveToPoint(Vector3 endPoint, Quaternion endRot, float moveTime, int index)
     {
@@ -243,7 +244,7 @@ public class MainProceduralController : MonoBehaviour
         
         Vector3 centerPoint = (startPoint + endPoint) / 2;
         //moves leg up in center point
-        centerPoint += (footIKTargets[index].up * 1.5f) * Vector3.Distance(startPoint, endPoint) / 2f;
+        centerPoint += (footIKTargets[index].up * heightOfLegUp) * Vector3.Distance(startPoint, endPoint) / 2f;
 
 
         float timeElapsed = 0;

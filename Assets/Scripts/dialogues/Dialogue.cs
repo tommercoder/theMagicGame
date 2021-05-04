@@ -5,12 +5,14 @@ using UnityEngine;
 public class Dialogue 
 {
     public string name;
-    [Header("NPC DIALOGUE")]
-    [Header("THERE MUST BE AT LEAST ONE SENTENCE")]
+   // [Header("NPC DIALOGUE")]
+   // [Header("THERE MUST BE AT LEAST ONE SENTENCE")]
     [TextArea(3,10)]
     public string[] sentences;
     [TextArea(3, 10)]
     public string[] sentences2;
+
+    //[Header("MAIN WORDS")]
     public string greeting;
     public string goodbye;//npc bye
 
@@ -22,5 +24,5 @@ public class Dialogue
     public string uiText;
 
     public npcName npcEnumName;
-    public enum npcName { magicElf,Keeper }
+    public enum npcName { emotionalSpirit,lifeSpirit,thoughtSpirit,sensibilitySpirit}
 }

@@ -64,15 +64,21 @@ public class EnemyStats : MonoBehaviour,ISaveable
         if(currentHP <= 0)
         {
             Die();
-            if(!addedXP)
+            MarieleQuest.instance.questPointer.SetActive(false);
+            if (!addedXP)
             {
+                //FindObjectOfType<questPointer>().target = null;
+                
+                Debug.Log("QUEST POINTER ACTIVE " + MarieleQuest.instance.questPointer.activeSelf);
                 Quest quest = MarieleQuest.instance.currentMarieleQuest;
                 if (quest.isActive)
                 {
                     quest.goal.EnemyKilled();
+                    
                     if (quest.goal.isReached())
                     {
                         //add reward to inventory
+                        
                         characterStats.instance.XP += quest.XP;
                         quest.complete();
                     }

@@ -52,8 +52,10 @@ public class DialogueManager : MonoBehaviour
         {
             if (dialogBOX.activeSelf && answer1G.activeSelf == false && answer2G.activeSelf == false)
             {
+                Debug.Log("test1" + npcWhoSpeaking.quest.title);
                 if (npcWhoSpeaking.quest!=null && npcWhoSpeaking.quest.title!="" )
                 {
+                    Debug.Log("test2");
                     questButton.SetActive(true);
                     questBool = false;
                 }
@@ -226,12 +228,12 @@ public class DialogueManager : MonoBehaviour
         questUI.SetActive(true);
        
     }
-    public void handleQuest(Quest quest)
+    public void handleQuest(Quest quest,NPCinteraction npc)
     {
-        questTitle.text = quest.title;
-        questDesc.text = quest.description;
-        questReward.text = quest.rewardText;
-        forHandle = quest;
+        questTitle.text = npc.quest.title;
+        questDesc.text = npc.quest.description;
+        questReward.text = npc.quest.rewardText;
+        forHandle = npc.quest;
     }
     public void acceptQuest()
     {

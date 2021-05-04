@@ -22,6 +22,7 @@ TagManager:
   - waterZone
   - earthZone
   - proceduralilusionValley
+  - questPointer
   layers:
   - Default
   - TransparentFX

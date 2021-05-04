@@ -6,41 +6,41 @@ public class ProceduralLeg : MonoBehaviour
 {
     //with this script also using dontmovewithparent.cs
     [Header("OBJECTS")]
-    
+
     public Transform targetLeft = null;
 
     public GameObject player;
-    
+
     public LayerMask mask;
     [Header("STEP SETTINGS")]
     public bool Moving;
     public Transform stepTargetLeft;
-   
+
     public List<Transform> stepTargets = new List<Transform>(1);
     public float wantStepAtDistance = 0.45f;
     public float timeToMakeStep = 0.125f;
-    
+
     public bool waited = false;
     [SerializeField, Range(0, 1)] float stepOvershootFraction = 0.8f;
-    
-    
+
+
     public DontMoveWithParent dontMoveWithParentLeft;
     public Transform target;
     private List<Transform> footIKTargets = new List<Transform>(1);
-    
+
     //enable when collide
     private void OnCollisionEnter(Collision collision)
     {
         //when collide they are visible
         stepTargetLeft.gameObject.GetComponent<Renderer>().enabled = true;
-        
+
     }
     //hide in game steptargets
     private void Awake()
     {
         //for not to see target spheres on game menu
         stepTargetLeft.gameObject.GetComponent<Renderer>().enabled = false;
-        
+
     }
     private void Start()
     {
@@ -54,14 +54,14 @@ public class ProceduralLeg : MonoBehaviour
         //GetComponent<navmeshPatrol>().enabled = true;
         //adding targets and targets to lists;
         footIKTargets.Add(targetLeft);
-        
+
 
         stepTargets.Add(stepTargetLeft);
-        
 
-      
-        
-        
+
+
+
+
     }
 
     //time to make step
@@ -72,16 +72,32 @@ public class ProceduralLeg : MonoBehaviour
         yield return new WaitForSeconds(timeToMakeStep);
         waited = true;
     }
+    public bool attackingPlayer = false;
+    float distanceA;
     //test moving
     void moveForward()
     {
-       if(GetComponent<navmeshPatrol>().type != proceduralType.npcProcedural)
-        if (Vector3.Distance(player.transform.position, transform.position) > 4f && Vector3.Distance(player.transform.position, transform.position) < 25f)
+        distanceA = Vector3.Distance(player.transform.position, transform.position);
+        if (GetComponent<navmeshPatrol>().type != proceduralType.npcProcedural)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime * 2f);
-            Vector3 relativePos = player.transform.position - transform.position;
-            Quaternion toRotation = Quaternion.LookRotation(relativePos);
-            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, Time.deltaTime);
+            if (distanceA > 4f && distanceA < 25f)
+            {
+
+                transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime * 1f);
+                Vector3 relativePos = player.transform.position - transform.position;
+                Quaternion toRotation = Quaternion.LookRotation(relativePos);
+                transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, Time.deltaTime);
+                attackingPlayer = true;
+                if (GetComponent<ProceduralLeg>() != null)
+                {
+                    GetComponent<ProceduralLeg>().enabled = false;
+                    GetComponent<ProceduralLeg>().enabled = true;
+                }
+            }
+            else
+            {
+                attackingPlayer = false;
+            }
         }
 
     }
@@ -92,21 +108,34 @@ public class ProceduralLeg : MonoBehaviour
             return;
         //function to check ground for targets
         stepTargetIk(0);
-        
+
         //distance between target and step target
-       
+
         float distance = Vector3.Distance(footIKTargets[0].position, stepTargets[0].position);
         //make step with right foot
-       
+
         //make step with left foot
-        if (distance > wantStepAtDistance )
+        if (distance > wantStepAtDistance)
         {
             
+
             if (GetGroundedEndPosition(out Vector3 endPos, out Vector3 endNormal, 0))
             {
                 if (endPos.y >= transform.position.y)
                 {
-                    transform.Translate(Vector3.up* 3* Time.deltaTime);
+                    //Vector3 temp = transform.position;
+                    //temp.y = transform.position.y+0.3f ;
+                    //transform.position = temp;
+                    transform.Translate(Vector3.up * 2 * Time.deltaTime / 1.6f);
+                }
+                else if (endPos.y <= transform.position.y)
+                {
+                    transform.Translate(Vector3.down * 2 * Time.deltaTime / 1.6f);
+                }
+                Debug.Log("DISTANCE > WANTSTEPATDISTANCE");
+                if (endPos.y >= transform.position.y)
+                {
+                    transform.Translate(Vector3.up * 3 * Time.deltaTime);
                 }
                 else if (endPos.y <= transform.position.y)
                 {
@@ -122,12 +151,13 @@ public class ProceduralLeg : MonoBehaviour
                 StartCoroutine(wait());
             }
         }
-       
+
+
         moveForward();
 
     }
 
-    
+
     //where i can stand after step
     bool GetGroundedEndPosition(out Vector3 position, out Vector3 normal, int index)
     {
@@ -149,7 +179,7 @@ public class ProceduralLeg : MonoBehaviour
         ))
         {
             position = hit.point;
-           
+
             normal = hit.normal;
             return true;
         }
@@ -180,21 +210,21 @@ public class ProceduralLeg : MonoBehaviour
 
             stepTargets[index].position = targetLocation;
         }
-   
-    } 
+
+    }
     //change position of target to position of step target slowly and move leg up
     IEnumerator MoveToPoint(Vector3 endPoint, Quaternion endRot, float moveTime, int index)
     {
         Moving = true;
-        if(index == 0)
+        if (index == 0)
             dontMoveWithParentLeft.dontMoveWithParent = false;
-       
+
 
         Vector3 startPoint = footIKTargets[index].position;//target.position;
         Quaternion startRot = footIKTargets[index].rotation;
 
         endPoint += footIKTargets[index].up * 0.2f;
-        
+
         Vector3 centerPoint = (startPoint + endPoint) / 2;
 
         centerPoint += footIKTargets[index].up * Vector3.Distance(startPoint, endPoint) / 2f;
@@ -222,7 +252,7 @@ public class ProceduralLeg : MonoBehaviour
                 );
 
             footIKTargets[0].rotation = Quaternion.Slerp(startRot, endRot, normalizedTime);
-            
+
 
             // Wait for one frame
             yield return null;
@@ -236,11 +266,11 @@ public class ProceduralLeg : MonoBehaviour
             dontMoveWithParentLeft.dontMoveWithParent = true;
 
         }
-        
+
     }
-   
-    
-    
+
+
+
     /*void Update()
     {
         //works

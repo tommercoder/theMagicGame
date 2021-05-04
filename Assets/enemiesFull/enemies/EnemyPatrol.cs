@@ -50,7 +50,7 @@ public class EnemyPatrol : MonoBehaviour
 
     void chasePlayer()
     {
-        if (pauseMenu.instance.menuIsOpened)
+        if (pauseMenu.instance.menuIsOpened || playerHealth.instance.currentHealth <=0)
             return;
         Debug.Log("chasePlayer called");
         //attackingPlayer = true;
@@ -84,12 +84,12 @@ public class EnemyPatrol : MonoBehaviour
 
 
     }
-   
+    float distance;
     public void Update()
     {
-        if (pauseMenu.instance.menuIsOpened)
+        if (pauseMenu.instance.menuIsOpened || playerHealth.instance.currentHealth <= 0)
             return;
-        float distance = Vector3.Distance(transform.position, player.transform.position);
+         distance = Vector3.Distance(transform.position, player.transform.position);
         //Debug.Log("distance " + distance);
         
         if (Vector3.Distance(transform.position, player.transform.position) < 20)
@@ -98,51 +98,59 @@ public class EnemyPatrol : MonoBehaviour
         }
         else
         {
-            Vector3 relativePos = (points[current].transform.position- transform.position).normalized;
-            Quaternion toRotation = Quaternion.LookRotation(new Vector3(relativePos.x, 0, relativePos.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime);
-            //rotation = Quaternion.LookRotation(points[current].position - transform.position);
-            //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime);
-            rotated = true;
-            
+           // if (points.Length > 0)
+           // {
+                Vector3 relativePos = (points[current].transform.position - transform.position).normalized;
+                Quaternion toRotation = Quaternion.LookRotation(new Vector3(relativePos.x, 0, relativePos.z));
+                transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime);
+                //rotation = Quaternion.LookRotation(points[current].position - transform.position);
+                //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime);
+                rotated = true;
+           // }
             attackingPlayer = false;
             
         }
 
 
-
-        if (!attackingPlayer)
-        {
-            //Debug.Log("DISTNACE = " + Vector3.Distance(transform.position, points[current].position));
-            if (Vector3.Distance(transform.position, points[current].position) > 0.7)
+        //if (points.Length > 0)
+        //{
+            if (!attackingPlayer)
             {
-                
-                if (rotated && !WaitOnPoint)
+                //Debug.Log("DISTNACE = " + Vector3.Distance(transform.position, points[current].position));
+                if (Vector3.Distance(transform.position, points[current].position) > 0.7)
                 {
-                    if (pauseMenu.instance.menuIsOpened)
-                        return;
-                    ////transform.position = Vector3.MoveTowards(transform.position, points[current].position, Time.deltaTime * speed);
-                    ///
-                    Vector3 moveVector = points[current].position - transform.position;
-                    controller.Move(moveVector * Time.deltaTime * speed); 
-                   
-                    //Debug.Log("speed " + moveVector * Time.deltaTime * speed); 
-                    if (!animator.GetBool("isWalkingEnemy"))
+
+                    if (rotated && !WaitOnPoint)
                     {
-                        animator.SetBool("isWalkingEnemy", true);
+                        if (pauseMenu.instance.menuIsOpened)
+                            return;
+                        ////transform.position = Vector3.MoveTowards(transform.position, points[current].position, Time.deltaTime * speed);
+                        ///
+                        Vector3 moveVector = points[current].position - transform.position;
+                        controller.Move(moveVector * Time.deltaTime * speed);
+
+                        //Debug.Log("speed " + moveVector * Time.deltaTime * speed); 
+                        if (!animator.GetBool("isWalkingEnemy"))
+                        {
+                            animator.SetBool("isWalkingEnemy", true);
+                        }
+
+
+                        rotated = false;
                     }
 
-                    
-                    rotated = false;
                 }
-
-            }
-            else
-            {
-                current = (current + 1) % points.Length;
-                // if(current > 0)
-                StartCoroutine(waitOnPoint());
-            }
+                else
+                {
+                    current = (current + 1) % points.Length;
+                    // if(current > 0)
+                    StartCoroutine(waitOnPoint());
+                }
+           // }
+           // else
+           // {
+                //idle
+           // }
         }
         else
         {
@@ -160,7 +168,7 @@ public class EnemyPatrol : MonoBehaviour
     }
     void startAttack()
     {
-        if (pauseMenu.instance.menuIsOpened)
+        if (pauseMenu.instance.menuIsOpened || playerHealth.instance.currentHealth <= 0)
             return;
         Debug.Log("start attack called");
         animator.SetBool("isRunningEnemy", false);

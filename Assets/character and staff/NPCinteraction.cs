@@ -20,7 +20,7 @@ public class NPCinteraction : Interact
     private GameObject player;
 
     public Dialogue dialogue;
-
+  
     List<NPCinteraction> allnpc = new List<NPCinteraction>();
     public Quest quest;
     private void Start()
@@ -66,7 +66,7 @@ public class NPCinteraction : Interact
                 }
             }
 
-            if (quest != null && characterStats.instance.loadCompleted && quest.title != "")
+            if (quest != null /*&& characterStats.instance.loadCompleted */ && quest.title != "")
             {
                // Debug.Log("QUEST NOT EQUAL TO NULL");
                 FindObjectOfType<DialogueManager>().questBool = true;
@@ -89,10 +89,13 @@ public class NPCinteraction : Interact
         {
             if (allnpc[i].quest != null)
             {
-                if (FindObjectOfType<DialogueManager>().questUI.activeSelf)
+                if (allnpc[i].interacting && allnpc[i].dialogHappening)
                 {
-                    FindObjectOfType<DialogueManager>().handleQuest(quest);
+                    if (FindObjectOfType<DialogueManager>().questUI.activeSelf)
+                    {
+                        FindObjectOfType<DialogueManager>().handleQuest(quest, allnpc[i]);
 
+                    }
                 }
             }
         }

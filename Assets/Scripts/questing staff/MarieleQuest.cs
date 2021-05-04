@@ -33,14 +33,14 @@ public class MarieleQuest : MonoBehaviour
     {
         if(currentMarieleQuest!=null && currentMarieleQuest.title!="")
         {
-            if (!questPointer.activeSelf)
+            if (!questPointer.activeSelf/* || questPointer.activeSelf*/)
             {
                 enemies = FindObjectsOfType<EnemyPatrol>().ToList();
                 pEnemies = FindObjectsOfType<navmeshPatrol>().ToList();
                 allnpc = FindObjectsOfType<NPCinteraction>().ToList();
                 if (currentMarieleQuest.goal.goalType == goalType.killEnemyQuest)
                 {
-
+                   // Debug.Log(findNearestEnemy());
                     GameObject.FindObjectOfType<questPointer>().target = findNearestEnemy();
                     questPointer.SetActive(true);
                 }

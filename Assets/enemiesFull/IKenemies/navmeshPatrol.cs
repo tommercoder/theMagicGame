@@ -54,9 +54,12 @@ public class navmeshPatrol : MonoBehaviour
     }
     void RotateGun()
     {
-        Vector3 relativePos = player.transform.position - transform.position;
-        Quaternion toRotation = Quaternion.LookRotation(relativePos);
-        gun.rotation = Quaternion.Lerp(gun.rotation, toRotation, Time.deltaTime);
+        if (gun != null)
+        {
+            Vector3 relativePos = player.transform.position - transform.position;
+            Quaternion toRotation = Quaternion.LookRotation(relativePos);
+            gun.rotation = Quaternion.Lerp(gun.rotation, toRotation, Time.deltaTime);
+        }
     }
     void AttackPlayer()
     {
@@ -111,7 +114,7 @@ public class navmeshPatrol : MonoBehaviour
 
     private void Update()
     {
-        if (pauseMenu.instance.menuIsOpened)
+        if (pauseMenu.instance.menuIsOpened || playerHealth.instance.currentHealth <= 0)
             return;
        
         
@@ -121,6 +124,7 @@ public class navmeshPatrol : MonoBehaviour
             //this type is for npc robots 
                 
                     attackingPlayer = true;
+            
 
             }
             else
