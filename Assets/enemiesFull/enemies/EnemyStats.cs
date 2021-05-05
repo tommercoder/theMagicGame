@@ -53,7 +53,7 @@ public class EnemyStats : MonoBehaviour,ISaveable
         collider = GetComponent<CapsuleCollider>();
         rigidbody = GetComponent<Rigidbody>();
 
-        //swordRigidbody = GameObject.FindGameObjectsWithTag("interactable object");
+        swordRigidbody = GameObject.FindGameObjectsWithTag("interactable object");
         player = GameObject.Find("character");
         log = GameObject.Find("error text");
         log.GetComponent<Text>().text = " ";
@@ -63,25 +63,28 @@ public class EnemyStats : MonoBehaviour,ISaveable
     {
         if(currentHP <= 0)
         {
-            Die();
             MarieleQuest.instance.questPointer.SetActive(false);
+            Die();
+            
             if (!addedXP)
             {
                 //FindObjectOfType<questPointer>().target = null;
                 
-                Debug.Log("QUEST POINTER ACTIVE " + MarieleQuest.instance.questPointer.activeSelf);
+                //Debug.Log("QUEST POINTER ACTIVE " + MarieleQuest.instance.questPointer.activeSelf);
                 Quest quest = MarieleQuest.instance.currentMarieleQuest;
                 if (quest.isActive)
                 {
                     quest.goal.EnemyKilled();
-                    
                     if (quest.goal.isReached())
                     {
                         //add reward to inventory
-                        
+
                         characterStats.instance.XP += quest.XP;
                         quest.complete();
                     }
+                   
+                    
+                    
                 }
                 characterStats.instance.dead_enemies_ids.Add(id);
                 logShow.instance.showText("+" + " " + XPforDeath + "xp");

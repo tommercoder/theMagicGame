@@ -14,15 +14,17 @@ public class NPCinteraction : Interact
         instance = this;
     }
     public Camera camera;
-
+    
     public bool dialogHappening;
     public GameObject textName;
     private GameObject player;
-
+   
     public Dialogue dialogue;
-  
+
     List<NPCinteraction> allnpc = new List<NPCinteraction>();
     public Quest quest;
+
+   
     private void Start()
     {
         allnpc = GameObject.FindObjectsOfType<NPCinteraction>().ToList();
@@ -60,20 +62,22 @@ public class NPCinteraction : Interact
                         resetText();
 
                         //dialogue
-
+                        if (allnpc[i].quest != null && characterStats.instance.loadCompleted && (allnpc[i].quest.title != "" || allnpc[i].quest.title != " "))
+                        {
+                            Debug.Log("QUEST NOT EQUAL TO NULL" + allnpc[i].name);
+                            FindObjectOfType<DialogueManager>().questBool = true;
+                           // logShow.instance.showText("before ending of dialog you will be able to get the quest");
+                        }
                         FindObjectOfType<DialogueManager>().StartDialog(dialogue,allnpc[i]);
+                       
                     }
                 }
+                
+                // dialogHappening = true;
+                textName.GetComponent<TextMesh>().text = dialogue.name;
+
             }
 
-            if (quest != null /*&& characterStats.instance.loadCompleted */ && quest.title != "")
-            {
-               // Debug.Log("QUEST NOT EQUAL TO NULL");
-                FindObjectOfType<DialogueManager>().questBool = true;
-                logShow.instance.showText("before ending of dialog you will be able to get the quest");
-            }
-            // dialogHappening = true;
-            textName.GetComponent<TextMesh>().text = dialogue.name;
 
             for (int i = 0; i < allnpc.Count; i++)
             {
@@ -123,7 +127,7 @@ public class NPCinteraction : Interact
         }
 
         //floating name and text
-        if (Vector3.Distance(transform.position, player.transform.position) < 5)
+        if (Vector3.Distance(transform.position, player.transform.position) < 8)
         {
             if (!dialogHappening)
                 textName.GetComponent<TextMesh>().text = dialogue.uiText;

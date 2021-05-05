@@ -23,6 +23,7 @@ TagManager:
   - earthZone
   - proceduralilusionValley
   - questPointer
+  - enemy sword object
   layers:
   - Default
   - TransparentFX

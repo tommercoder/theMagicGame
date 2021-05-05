@@ -28,6 +28,9 @@ public class dashAbility : AbilityMain
     attacksController attacksController;
     public AbilityUI AbilityUI;
     public  bool hitHitted = false;
+
+    //public swordEquipping water;
+   // public swordEquipping earth;
     private void Start()
     {
         controller = GetComponent<CharacterController>();

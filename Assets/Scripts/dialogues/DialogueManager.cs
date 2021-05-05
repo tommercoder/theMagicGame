@@ -55,15 +55,12 @@ public class DialogueManager : MonoBehaviour
                 Debug.Log("test1" + npcWhoSpeaking.quest.title);
                 if (npcWhoSpeaking.quest!=null && npcWhoSpeaking.quest.title!="" )
                 {
-                    Debug.Log("test2");
+                    Debug.Log("test2" + npcWhoSpeaking.quest.title);
                     questButton.SetActive(true);
                     questBool = false;
                 }
             }
         }
-
-        
-
 
     }
     Dialogue forhandleD;
@@ -235,9 +232,11 @@ public class DialogueManager : MonoBehaviour
         questReward.text = npc.quest.rewardText;
         forHandle = npc.quest;
     }
+    List<NPCinteraction> allNpc;
     public void acceptQuest()
     {
-        if (MarieleQuest.instance.currentMarieleQuest.isActive == false)
+        
+        if (string.IsNullOrEmpty(MarieleQuest.instance.currentMarieleQuest.title)/* && MarieleQuest.instance.currentMarieleQuest.isActive == false*/ )
         {
             questUI.SetActive(false);
             questButton.SetActive(false);
@@ -248,13 +247,17 @@ public class DialogueManager : MonoBehaviour
 
             MarieleQuest.instance.currentMarieleQuest = forHandle;
             questBool = false;
-            forHandle = null;
 
-
-
-           
-
-
+            allNpc = FindObjectsOfType<NPCinteraction>().ToList();
+            foreach(NPCinteraction n in allNpc)
+            {
+                if(n.quest == forHandle)
+                {
+                    n.quest = null;
+                    forHandle = null;
+                }
+            }
+           // forHandle = null;
 
         }
         else

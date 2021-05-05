@@ -64,6 +64,7 @@ public class ProceduralStats : MonoBehaviour,ISaveable
         if (currentHealth<=0)
         {
             Die();
+            MarieleQuest.instance.questPointer.SetActive(false);
             if (!addedXP)
             {
                 Quest quest = MarieleQuest.instance.currentMarieleQuest;

@@ -34,6 +34,11 @@ public class attacksController : MonoBehaviour
     public CharacterController CharacterController;
     [SerializeField] public ParticleSystem dashParticle = default;
     public bool isDrawedSword;
+    public swordEquipping fire;
+    public swordEquipping air;
+    public swordEquipping earth;
+    public swordEquipping water;
+    public swordEquipping emotions;
     private void Awake()
     {
         Abilities = GetComponents<AbilityMain>();//mozna dodac jeszcze abilities ille chcę
@@ -96,22 +101,28 @@ public class attacksController : MonoBehaviour
                     && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
             {
                 Abilities[1].TriggerAbility();
-                
-                if (!Abilities[1].dashStarted)
+                if (playerSword.instance.currentSword == water || playerSword.instance.currentSword == earth || playerSword.instance.currentSword == emotions)
                 {
-                    //errorText.gameObject.SetActive(true);
-                    // errorText.text = "you can't use dash here";
-                    logShow.instance.showText("you can't use dash here");
-                    //StartCoroutine(waitErrorText());
-                    
-                    return;
-                }
-                canClick = false;
-                canClickSec = false;
-                FindObjectOfType<audioManager>().Play("dashSound");
-                dashParticle.Play();
+                    if (!Abilities[1].dashStarted)
+                    {
+                        //errorText.gameObject.SetActive(true);
+                        // errorText.text = "you can't use dash here";
+                        logShow.instance.showText("you can't use dash here");
+                        //StartCoroutine(waitErrorText());
+
+                        return;
+                    }
+                    canClick = false;
+                    canClickSec = false;
+                    FindObjectOfType<audioManager>().Play("dashSound");
+                    dashParticle.Play();
                     controller.timeRemaining = 5;
                     controller.timerIsRunning = true;
+                }
+                else
+                {
+                    logShow.instance.showText("dash can be used only with WATER or EARTH sword or EMOTIONS sword");
+                }
                 
                 //random damage and effects here
             }
@@ -124,20 +135,26 @@ public class attacksController : MonoBehaviour
                     && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
                     && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
             {
-               if(characterStats.instance.damageFromFireball==0)
+                if (playerSword.instance.currentSword == fire || playerSword.instance.currentSword == air)
                 {
-                    logShow.instance.showText("now your fireball damage is 0(get some XP)");
-                }
-                movement.canMove = false;
+                    if (characterStats.instance.damageFromFireball == 0)
+                    {
+                        logShow.instance.showText("now your fireball damage is 0(get some XP)");
+                    }
+                    movement.canMove = false;
                     animator.SetInteger("attackAnimation", 21);
-                canClick = false;
-                canClickSec = false;
-                Abilities[0].TriggerAbility();
-                am.Play("fireball");
+                    canClick = false;
+                    canClickSec = false;
+                    Abilities[0].TriggerAbility();
+                    am.Play("fireball");
                     canCast = false;
                     controller.timeRemaining = 5;
                     controller.timerIsRunning = true;
-                
+                }
+                else
+                {
+                    logShow.instance.showText("fireball can be used only with AIR or FIRE sword or EMOTIONS sword");
+                }
 
             }
             if(swordSlashAbilityPressed && Abilities[2].canUse)

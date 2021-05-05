@@ -19,12 +19,12 @@ public class MarieleQuest : MonoBehaviour
     public Text reward;
     public GameObject questPointer;
     List<EnemyPatrol> enemies = new List<EnemyPatrol>();
-    List<navmeshPatrol> pEnemies = new List<navmeshPatrol>();
+    List<ProceduralStats> pEnemies = new List<ProceduralStats>();
     List<NPCinteraction> allnpc = new List<NPCinteraction>();
     private void Start()
     {
         enemies = FindObjectsOfType<EnemyPatrol>().ToList();
-        pEnemies = FindObjectsOfType<navmeshPatrol>().ToList();
+        pEnemies = FindObjectsOfType<ProceduralStats>().ToList();
         allnpc = FindObjectsOfType<NPCinteraction>().ToList();
       
     }
@@ -36,7 +36,7 @@ public class MarieleQuest : MonoBehaviour
             if (!questPointer.activeSelf/* || questPointer.activeSelf*/)
             {
                 enemies = FindObjectsOfType<EnemyPatrol>().ToList();
-                pEnemies = FindObjectsOfType<navmeshPatrol>().ToList();
+                pEnemies = FindObjectsOfType<ProceduralStats>().ToList();
                 allnpc = FindObjectsOfType<NPCinteraction>().ToList();
                 if (currentMarieleQuest.goal.goalType == goalType.killEnemyQuest)
                 {
@@ -46,17 +46,19 @@ public class MarieleQuest : MonoBehaviour
                 }
                 if (currentMarieleQuest.goal.goalType == goalType.killPEnemyQuest)
                 {
-                    shortestDistance = Vector3.Distance(transform.position, pEnemies[0].transform.position);
-                    for (int i = 0; i < pEnemies.Count; i++)
-                    {
-                        float distance = Vector3.Distance(transform.position, pEnemies[i].transform.position);
-                        if (distance < shortestDistance)
-                        {
-                            shortestDistance = distance;
 
-                            GameObject.FindObjectOfType<questPointer>().target = pEnemies[i].transform;
-                        }
-                    }
+                    //shortestDistance = Vector3.Distance(transform.position, pEnemies[0].transform.position);
+                    //for (int i = 0; i < pEnemies.Count; i++)
+                    //{
+                    //    float distance = Vector3.Distance(transform.position, pEnemies[i].transform.position);
+                    //    if (distance < shortestDistance)
+                    //    {
+                    //        shortestDistance = distance;
+
+                    //        GameObject.FindObjectOfType<questPointer>().target = pEnemies[i].transform;
+                    //    }
+                    //}
+                    GameObject.FindObjectOfType<questPointer>().target = findNearestPEnemy();
                     questPointer.SetActive(true);
                 }
                 if (currentMarieleQuest.goal.goalType == goalType.speakQuest)
@@ -99,7 +101,7 @@ public class MarieleQuest : MonoBehaviour
                     minDist = distance;
 
                     
-                    Debug.Log("ENEMIES QUEST " + enemies[i].transform.name);
+                   // Debug.Log("ENEMIES QUEST " + enemies[i].transform.name);
                 }
 
             }
@@ -109,8 +111,24 @@ public class MarieleQuest : MonoBehaviour
 
         Transform findNearestPEnemy()
         {
+            Transform tMin = null;
+            float minDist = Mathf.Infinity;
+            Vector3 currentPos = transform.position;
+            for (int i = 0; i < pEnemies.Count; i++)
+            {
+                float distance = Vector3.Distance(transform.position, pEnemies[i].transform.position);
+                if (distance < minDist)
+                {
+                    tMin = pEnemies[i].transform;
+                    minDist = distance;
+
+
+                    // Debug.Log("ENEMIES QUEST " + enemies[i].transform.name);
+                }
+
+            }
             //write as above
-            return null;
+            return tMin;
         }
         
         if(Input.GetKeyDown(KeyCode.P))
@@ -123,9 +141,12 @@ public class MarieleQuest : MonoBehaviour
             else
             {
                 questWindow.SetActive(true);
-                title.text = currentMarieleQuest.title;
-                description.text = currentMarieleQuest.description;
-                reward.text = currentMarieleQuest.rewardText;
+                if (currentMarieleQuest != null && currentMarieleQuest.title != "")
+                {
+                    title.text = currentMarieleQuest.title;
+                    description.text = currentMarieleQuest.description;
+                    reward.text = currentMarieleQuest.rewardText;
+                }
             }
         }
     }
