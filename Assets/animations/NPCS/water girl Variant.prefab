@@ -1,0 +1,302 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1856936967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1856936968}
+  - component: {fileID: 1856936970}
+  - component: {fileID: 1856936969}
+  m_Layer: 0
+  m_Name: name
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1856936968
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856936967}
+  m_LocalRotation: {x: -0, y: 0.99996233, z: -0, w: -0.008680731}
+  m_LocalPosition: {x: 0, y: 3.01, z: 0.18}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_Children: []
+  m_Father: {fileID: 1285504487439888217}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 180.995, z: 0}
+--- !u!23 &1856936970
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856936967}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 10cb2b1c1bb52054e91ae6025193affb, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!102 &1856936969
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856936967}
+  m_Text: state of mind
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 0
+  m_TabSize: 0
+  m_FontSize: 64
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: 10cb2b1c1bb52054e91ae6025193affb, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294938624
+--- !u!65 &2011336546
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917644115159692771}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3.1173906, z: 1.2936558}
+  m_Center: {x: -3.3977754e-10, y: 1.0586953, z: 0.41091338}
+--- !u!65 &2011336547
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917644115159692771}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.553337, y: 3.0919223, z: 2.5745327}
+  m_Center: {x: -0.08758032, y: 1.2724526, z: 0.78726655}
+--- !u!114 &2011336544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917644115159692771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e8ffbc903cc48b448c6a76d2c6c23ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractedText: 
+  interacting: 0
+  isUsed: 0
+  camera: {fileID: 0}
+  dialogHappening: 0
+  textName: {fileID: 1856936967}
+  dialogue:
+    name: state of mind
+    sentences:
+    - there is water spirit in near house,i thing he should know something,just ask
+      him
+    sentences2:
+    - i can tell that you are not for the first time here,but i completely sure you
+      don't remember anything,help me at first,get quest
+    greeting: great to see you again
+    goodbye: good luck
+    answer: what's happening here?
+    answer2: but what you can tell me?
+    answerBye: ok,thank you
+    uiText: hey come here Mariele
+    npcEnumName: 1
+  quest:
+    isActive: 0
+    title: kill bot near water zone
+    description: 'there is bot near water zone,go kill him '
+    XP: 50
+    rewardText: 50 exp
+    rewardSword: {fileID: 0}
+    swordGameObjectReward: {fileID: 0}
+    rewardPotion: {fileID: 0}
+    potionGameObjectReward: {fileID: 0}
+    goal:
+      goalType: 2
+      requiredAmount: 1
+      currentAmount: 0
+    npcEnumName: 0
+--- !u!1001 &1611654215199557810
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -145.90865
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.706353
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 42.71078
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.72949034
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6839911
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 86.313
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4329289492758230510, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ab57d4ebda38b24f9ee12d7d1218ed8, type: 2}
+    - target: {fileID: -4329289492758230510, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d2d871faa8cda745961de4f3207e61b, type: 2}
+    - target: {fileID: -4329289492758230510, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d2d871faa8cda745961de4f3207e61b, type: 2}
+    - target: {fileID: -4329289492758230510, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[5]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d2d871faa8cda745961de4f3207e61b, type: 2}
+    - target: {fileID: -4329289492758230510, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[6]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d2d871faa8cda745961de4f3207e61b, type: 2}
+    - target: {fileID: 919132149155446097, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_Name
+      value: water girl
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_TagString
+      value: interactable object
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0aa331a3c471ba0419e9972ec2a073be, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8a5f22a0f3e80ec4f94639345dbab3a9, type: 3}
+--- !u!1 &1917644115159692771 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1611654215199557810}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1285504487439888217 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8a5f22a0f3e80ec4f94639345dbab3a9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1611654215199557810}
+  m_PrefabAsset: {fileID: 0}

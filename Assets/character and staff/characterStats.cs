@@ -65,7 +65,8 @@ public class characterStats : MonoBehaviour, ISaveable
     //quests
     public List<NPCinteraction> allNPCS = new List<NPCinteraction>();
     public List<Quest> allNpcQuests = new List<Quest>();
-    
+
+    public bool gameEnded = false;
     void Start()
     {
         //Debug.Log("Start");
@@ -156,6 +157,22 @@ public class characterStats : MonoBehaviour, ISaveable
             damageFromFireball = lvl * 3;
             timeOfSwordAbility = lvl * 3;
         }
+
+
+        if (Inventory.instance.items.Contains(attacksController.instance.water)
+            && Inventory.instance.items.Contains(attacksController.instance.air) &&
+            Inventory.instance.items.Contains(attacksController.instance.earth)
+            && Inventory.instance.items.Contains(attacksController.instance.fire) && all_enemies.Count == 0 && all_procedural_enemies.Count==0)
+        {
+            gameEnded = true;
+            if(gameEnded)
+            {
+                logShow.instance.showQuestText("congratulations , game is over , hope you had fun");
+
+            }
+        }
+
+
         //if(mouseOverButton.instance.startedNewGame)
         //{
         //    LoadJsonData(this);

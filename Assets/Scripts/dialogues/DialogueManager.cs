@@ -55,6 +55,24 @@ public class DialogueManager : MonoBehaviour
                 Debug.Log("test1" + npcWhoSpeaking.quest.title);
                 if (npcWhoSpeaking.quest!=null && npcWhoSpeaking.quest.title!="" )
                 {
+                   
+                        Debug.Log("FORHANDLE != null");
+                        Quest quest = MarieleQuest.instance.currentMarieleQuest;
+                        if (quest != null)
+                            if (quest.isActive && forhandleD.npcEnumName.ToString() == quest.npcEnumName.ToString())
+                            {
+                                quest.goal.SpokeToAnotherNPC();
+                                if (quest.goal.isReached())
+                                {
+                                    //add reward to inventory
+                                    characterStats.instance.XP += quest.XP;
+                                    quest.complete();
+                                }
+                            }
+                    
+
+
+
                     Debug.Log("test2" + npcWhoSpeaking.quest.title);
                     questButton.SetActive(true);
                     questBool = false;
@@ -144,12 +162,14 @@ public class DialogueManager : MonoBehaviour
 
         DisplayNext();
         answer1G.SetActive(false);
+        
     }
     public void answer2Click()
     {
 
         displayNext2();
         answer2G.SetActive(false);
+       
     }
     public void answerByeClick()
     {

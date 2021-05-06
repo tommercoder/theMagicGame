@@ -100,7 +100,7 @@ public class attacksController : MonoBehaviour
                     && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
                     && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
             {
-                Abilities[1].TriggerAbility();
+                
                 if (playerSword.instance.currentSword == water || playerSword.instance.currentSword == earth || playerSword.instance.currentSword == emotions)
                 {
                     if (!Abilities[1].dashStarted)
@@ -112,6 +112,7 @@ public class attacksController : MonoBehaviour
 
                         return;
                     }
+                    Abilities[1].TriggerAbility();
                     canClick = false;
                     canClickSec = false;
                     FindObjectOfType<audioManager>().Play("dashSound");

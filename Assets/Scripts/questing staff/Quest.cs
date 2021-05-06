@@ -1,4 +1,5 @@
 ﻿
+using System.Linq;
 using UnityEngine;
 [System.Serializable]
 public class Quest 
@@ -20,6 +21,7 @@ public class Quest
     public npcName npcEnumName;
     public void complete()
     {
+
         isActive = false;
         logShow.instance.showQuestText("quest " + title + " is completed");
         logShow.instance.showText("+" + XP);
@@ -43,4 +45,4 @@ public class Quest
 
     }
 }
-public enum npcName {None, magicElf,Keeper }
+public enum npcName { simpleNPC, waterGirl, airGirl, earthGirl, fireGirl, emotionalSpirit, lifeSpirit, thoughtSpirit, sensibilitySpirit }
