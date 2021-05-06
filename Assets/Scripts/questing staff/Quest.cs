@@ -23,9 +23,13 @@ public class Quest
     {
 
         isActive = false;
+
+        MarieleQuest.instance.currentMarieleQuest.title = ""; 
+        MarieleQuest.instance.currentMarieleQuest = null;
+        
         logShow.instance.showQuestText("quest " + title + " is completed");
         logShow.instance.showText("+" + XP);
-        MarieleQuest.instance.currentMarieleQuest = null;
+        
         //also clear quest in P window
         MarieleQuest.instance.clearPWindow();
         //save it to completed quests

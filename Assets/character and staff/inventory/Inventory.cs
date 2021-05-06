@@ -80,7 +80,7 @@ public class Inventory : MonoBehaviour, ISaveable
 
                 if (itemsGameObjects[i].GetComponent<potionInteraction>() != null)
                 {
-                    Debug.Log("game object item :" + itemsGameObjects[i].GetComponent<potionInteraction>().item.name + "\nitem name " + item.GetComponent<potionInteraction>().item.name);
+                    //Debug.Log("game object item :" + itemsGameObjects[i].GetComponent<potionInteraction>().item.name + "\nitem name " + item.GetComponent<potionInteraction>().item.name);
 
                     if (itemsGameObjects[i].GetComponent<potionInteraction>().item.name == item.GetComponent<potionInteraction>().item.name)
                     {

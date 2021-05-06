@@ -40,9 +40,13 @@ public class MarieleQuest : MonoBehaviour
                 allnpc = FindObjectsOfType<NPCinteraction>().ToList();
                 if (currentMarieleQuest.goal.goalType == goalType.killEnemyQuest)
                 {
-                   // Debug.Log(findNearestEnemy());
-                    GameObject.FindObjectOfType<questPointer>().target = findNearestEnemy();
-                    questPointer.SetActive(true);
+                    // Debug.Log(findNearestEnemy());
+                    if (GameObject.FindObjectOfType<questPointer>().target != findNearestEnemy())
+                    {
+                        GameObject.FindObjectOfType<questPointer>().target = findNearestEnemy();
+                        questPointer.SetActive(true);
+                    }
+                   
                 }
                 if (currentMarieleQuest.goal.goalType == goalType.killPEnemyQuest)
                 {
@@ -58,8 +62,12 @@ public class MarieleQuest : MonoBehaviour
                     //        GameObject.FindObjectOfType<questPointer>().target = pEnemies[i].transform;
                     //    }
                     //}
-                    GameObject.FindObjectOfType<questPointer>().target = findNearestPEnemy();
-                    questPointer.SetActive(true);
+                    if (GameObject.FindObjectOfType<questPointer>().target != findNearestPEnemy())
+                    {
+                        GameObject.FindObjectOfType<questPointer>().target = findNearestPEnemy();
+                        questPointer.SetActive(true);
+                    }
+                    
                 }
                 if (currentMarieleQuest.goal.goalType == goalType.speakQuest)
                 {

@@ -64,11 +64,14 @@ public class ProceduralStats : MonoBehaviour,ISaveable
         if (currentHealth<=0)
         {
             Die();
-            MarieleQuest.instance.questPointer.SetActive(false);
+            if (GameObject.FindObjectOfType<questPointer>().target != null && transform == GameObject.FindObjectOfType<questPointer>().target)
+            {
+                MarieleQuest.instance.questPointer.SetActive(false);
+            }
             if (!addedXP)
             {
                 Quest quest = MarieleQuest.instance.currentMarieleQuest;
-                if (quest.isActive)
+                if (quest!=null && quest.isActive)
                 {
                     quest.goal.ProceduralEnemyKilled();
                     if (quest.goal.isReached())
@@ -80,6 +83,7 @@ public class ProceduralStats : MonoBehaviour,ISaveable
                 }
                 // log.gameObject.SetActive(true);
                 // log.GetComponent<Text>().text = "+" + " " + XPforDeath + "xp";
+                characterStats.instance.all_procedural_ids.Add(id);
                 logShow.instance.showText("+" + " " + XPforDeath + "xp");
                 player.GetComponent<characterStats>().XP += XPforDeath;
                 addedXP = true;

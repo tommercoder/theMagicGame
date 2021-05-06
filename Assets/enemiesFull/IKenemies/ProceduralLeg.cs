@@ -132,7 +132,7 @@ public class ProceduralLeg : MonoBehaviour
                 {
                     transform.Translate(Vector3.down * 2 * Time.deltaTime / 1.6f);
                 }
-                Debug.Log("DISTANCE > WANTSTEPATDISTANCE");
+                //Debug.Log("DISTANCE > WANTSTEPATDISTANCE");
                 if (endPos.y >= transform.position.y)
                 {
                     transform.Translate(Vector3.up * 3 * Time.deltaTime);

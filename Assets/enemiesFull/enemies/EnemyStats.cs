@@ -63,16 +63,23 @@ public class EnemyStats : MonoBehaviour,ISaveable
     {
         if(currentHP <= 0)
         {
-            MarieleQuest.instance.questPointer.SetActive(false);
+            if (GameObject.FindObjectOfType<questPointer>().target !=null && transform == GameObject.FindObjectOfType<questPointer>().target )
+            {
+                MarieleQuest.instance.questPointer.SetActive(false);
+            }
             Die();
             
             if (!addedXP)
             {
                 //FindObjectOfType<questPointer>().target = null;
-                
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().SetInteger("attackAnimation", 4);
+                attacksController.instance.noOfClick = 0;
+                attacksController.instance.noOfClickSecond = 0;
+                attacksController.instance.canClick = true;
+                attacksController.instance.canClickSec = true;
                 //Debug.Log("QUEST POINTER ACTIVE " + MarieleQuest.instance.questPointer.activeSelf);
                 Quest quest = MarieleQuest.instance.currentMarieleQuest;
-                if (quest.isActive)
+                if (quest!=null && quest.isActive)
                 {
                     quest.goal.EnemyKilled();
                     if (quest.goal.isReached())

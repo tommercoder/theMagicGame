@@ -18,7 +18,7 @@ public class enemySwordInteract : MonoBehaviour
     public int damage;
       public void OnTriggerEnter(Collider other)
      {
-         Debug.Log("Hitting player");
+        // Debug.Log("Hitting player");
          if (animator.GetCurrentAnimatorStateInfo(0).IsName("swordCast") || animator.GetCurrentAnimatorStateInfo(0).IsName("fastSwordSlash")
              || animator.GetCurrentAnimatorStateInfo(0).IsName("bottomSwordSlash"))
          {
@@ -30,15 +30,26 @@ public class enemySwordInteract : MonoBehaviour
                  otherController = other.GetComponent<CharacterController>();
                  otherAnimator = other.GetComponent<Animator>();
                  if (attacksController.instance.isDrawedSword)
-                 {
-                     //other.GetComponent<attacksController>().noOfClick = 0;
-                     //other.GetComponent<attacksController>().noOfClickSecond = 0;
-                     //other.GetComponent<attacksController>().canClick = false;
-                     //other.GetComponent<attacksController>().canClickSec = false;
-                     //herAnimator.SetInteger("attackAnimation",4);
-                     if(Random.Range(0,2)==1)
-                     otherAnimator.SetTrigger("hitByEnemy");
+                {
+                    otherAnimator.SetInteger("attackAnimation", 4);
+                    attacksController.instance.noOfClick = 0;
+                    attacksController.instance.noOfClickSecond = 0;
+                    attacksController.instance.canClick = true;
+                    attacksController.instance.canClickSec = true;
 
+                    //other.GetComponent<attacksController>().noOfClick = 0;
+                    //other.GetComponent<attacksController>().noOfClickSecond = 0;
+                    //other.GetComponent<attacksController>().canClick = false;
+                    //other.GetComponent<attacksController>().canClickSec = false;
+                    //herAnimator.SetInteger("attackAnimation",4);
+                    if (Random.Range(0, 2) == 1)
+                    {
+                        //otherAnimator.SetTrigger("hitByEnemy");
+                        
+
+
+
+                    }
 
                  }
 

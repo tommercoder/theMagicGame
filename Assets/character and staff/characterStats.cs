@@ -150,25 +150,22 @@ public class characterStats : MonoBehaviour, ISaveable
 
     void Update()
     {
-        if (XP % 100 == 0)//maybe need to be another if
-        {
-
             lvl = XP / 100;
-            damageFromFireball = lvl * 3;
-            timeOfSwordAbility = lvl * 3;
-        }
-
+            
+        
+        damageFromFireball = lvl * 3;
+        timeOfSwordAbility = lvl * 3;
 
         if (Inventory.instance.items.Contains(attacksController.instance.water)
             && Inventory.instance.items.Contains(attacksController.instance.air) &&
             Inventory.instance.items.Contains(attacksController.instance.earth)
-            && Inventory.instance.items.Contains(attacksController.instance.fire) && all_enemies.Count == 0 && all_procedural_enemies.Count==0)
+            && Inventory.instance.items.Contains(attacksController.instance.fire))
         {
             gameEnded = true;
             if(gameEnded)
             {
-                logShow.instance.showQuestText("congratulations , game is over , hope you had fun");
-
+                logShow.instance.showQuestText("congratulations you've got all swords, game is over , hope you had fun");
+                gameEnded = false;
             }
         }
 
@@ -295,15 +292,15 @@ public class characterStats : MonoBehaviour, ISaveable
         //{
             //character
             XP = sd.s_XP;
-        Debug.Log("SD HP" + sd.s_HP);
+        //Debug.Log("SD HP" + sd.s_HP);
         zones.instance.isColliding = sd.inZone;
         Inventory.instance.LoadFromSaveData(sd);
-        Debug.Log("SD HP" + sd.s_HP);
+        //Debug.Log("SD HP" + sd.s_HP);
         if (sd.s_HP > 0)
         {
             playerHealth.instance.LoadFromSaveData(sd);
         }
-        else if (sd.s_HP == 0)
+        else if (sd.s_HP <= 0)
         {
             playerHealth.instance.currentHealth = 100;
         }

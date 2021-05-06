@@ -103,6 +103,7 @@ public class attacksController : MonoBehaviour
                 
                 if (playerSword.instance.currentSword == water || playerSword.instance.currentSword == earth || playerSword.instance.currentSword == emotions)
                 {
+                    Abilities[1].TriggerAbility();
                     if (!Abilities[1].dashStarted)
                     {
                         //errorText.gameObject.SetActive(true);
@@ -112,7 +113,7 @@ public class attacksController : MonoBehaviour
 
                         return;
                     }
-                    Abilities[1].TriggerAbility();
+                    
                     canClick = false;
                     canClickSec = false;
                     FindObjectOfType<audioManager>().Play("dashSound");
@@ -136,7 +137,7 @@ public class attacksController : MonoBehaviour
                     && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
                     && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
             {
-                if (playerSword.instance.currentSword == fire || playerSword.instance.currentSword == air)
+                if (playerSword.instance.currentSword == fire || playerSword.instance.currentSword == air || playerSword.instance.currentSword==emotions)
                 {
                     if (characterStats.instance.damageFromFireball == 0)
                     {
@@ -204,10 +205,10 @@ public class attacksController : MonoBehaviour
         }
 
         #region stopattacksSHIFT
-        if ((animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
+        if (Input.GetKey(KeyCode.LeftShift) &&(animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
                 || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
                 || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack"))
-                && Input.GetKey(KeyCode.LeftShift))
+                )
             {
 
                 animator.SetInteger("attackAnimation", 4);
@@ -215,10 +216,10 @@ public class attacksController : MonoBehaviour
                 canClick = true;
                 noOfClick = 0; noOfClickSecond = 0;
         }
-            else if ((animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
+            else if (Input.GetKey(KeyCode.LeftShift) &&(animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
                 || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
                 || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
-                && Input.GetKey(KeyCode.LeftShift))
+               )
             {
                 canClickSec = true;
                 noOfClickSecond = 0; noOfClick = 0;

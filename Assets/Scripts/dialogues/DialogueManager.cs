@@ -52,11 +52,11 @@ public class DialogueManager : MonoBehaviour
         {
             if (dialogBOX.activeSelf && answer1G.activeSelf == false && answer2G.activeSelf == false)
             {
-                Debug.Log("test1" + npcWhoSpeaking.quest.title);
+                //Debug.Log("test1" + npcWhoSpeaking.quest.title);
                 if (npcWhoSpeaking.quest!=null && npcWhoSpeaking.quest.title!="" )
                 {
                    
-                        Debug.Log("FORHANDLE != null");
+                        //Debug.Log("FORHANDLE != null");
                         Quest quest = MarieleQuest.instance.currentMarieleQuest;
                         if (quest != null)
                             if (quest.isActive && forhandleD.npcEnumName.ToString() == quest.npcEnumName.ToString())
@@ -73,7 +73,7 @@ public class DialogueManager : MonoBehaviour
 
 
 
-                    Debug.Log("test2" + npcWhoSpeaking.quest.title);
+                    //Debug.Log("test2" + npcWhoSpeaking.quest.title);
                     questButton.SetActive(true);
                     questBool = false;
                 }
@@ -86,7 +86,7 @@ public class DialogueManager : MonoBehaviour
     {
         npcWhoSpeaking = temp;
         forhandleD = dialogue;
-        Debug.Log("forhandleD" + forhandleD.npcEnumName);
+        //Debug.Log("forhandleD" + forhandleD.npcEnumName);
         dialogBOX.SetActive(true);
         anim.SetBool("dialogOpen", true);
         nameText.text = dialogue.name;
@@ -255,35 +255,37 @@ public class DialogueManager : MonoBehaviour
     List<NPCinteraction> allNpc;
     public void acceptQuest()
     {
+        Debug.Log(MarieleQuest.instance.currentMarieleQuest);
         
-        if (string.IsNullOrEmpty(MarieleQuest.instance.currentMarieleQuest.title)/* && MarieleQuest.instance.currentMarieleQuest.isActive == false*/ )
-        {
-            questUI.SetActive(false);
-            questButton.SetActive(false);
-
-            EndDialogue();
-            logShow.instance.showText("you got new quest,for details press P");
-            forHandle.isActive = true;
-
-            MarieleQuest.instance.currentMarieleQuest = forHandle;
-            questBool = false;
-
-            allNpc = FindObjectsOfType<NPCinteraction>().ToList();
-            foreach(NPCinteraction n in allNpc)
+            if (string.IsNullOrEmpty(MarieleQuest.instance.currentMarieleQuest.title)/* && MarieleQuest.instance.currentMarieleQuest.isActive == false*/ )
             {
-                if(n.quest == forHandle)
-                {
-                    n.quest = null;
-                    forHandle = null;
-                }
-            }
-           // forHandle = null;
+                questUI.SetActive(false);
+                questButton.SetActive(false);
 
-        }
-        else
-        {
-            logShow.instance.showText("You can have one quest at time only");
-        }
+                EndDialogue();
+                logShow.instance.showText("you got new quest,for details press P");
+                forHandle.isActive = true;
+
+                MarieleQuest.instance.currentMarieleQuest = forHandle;
+                questBool = false;
+
+                allNpc = FindObjectsOfType<NPCinteraction>().ToList();
+                foreach (NPCinteraction n in allNpc)
+                {
+                    if (n.quest == forHandle)
+                    {
+                        n.quest = null;
+                        forHandle = null;
+                    }
+                }
+                // forHandle = null;
+
+            }
+            else
+            {
+                logShow.instance.showText("You can have one quest at time only");
+            }
+        
     }
     public void declineQuest()
     {

@@ -48,6 +48,8 @@ public class playerHealth : MonoBehaviour,ISaveable
     public GameObject abilitiesUI;
     public GameObject healthbarUI;
     public GameObject[] swordRigidbody;
+
+    public bool minusXP = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -78,6 +80,15 @@ public class playerHealth : MonoBehaviour,ISaveable
         if(currentHealth <= 0)
         {
             Die();
+            if(!minusXP)
+            {
+                if (characterStats.instance.XP >= 30)
+                {
+                    characterStats.instance.XP -= 30;
+                    logShow.instance.showText("-30xp");
+                }
+                minusXP = true;
+            }
         }
         else if(currentHealth > 0)
         {
@@ -100,10 +111,7 @@ public class playerHealth : MonoBehaviour,ISaveable
         abilitiesUI.SetActive(false);
         healthbarUI.SetActive(false);
         canvas.alpha += Time.deltaTime / 2;
-        if (characterStats.instance.XP >= 100)
-        {
-            characterStats.instance.XP -= 100;
-        }
+        
         RagdollActive(true);
         if (canvas.alpha ==1 && isPlayerDead)
             StartCoroutine(PlayText());
