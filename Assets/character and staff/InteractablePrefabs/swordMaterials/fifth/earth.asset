@@ -16,7 +16,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: b0df369a1fe18f944a222e954b13430c, type: 3}
   maxStack: 1
   currentStack: 1
-  description: be careful
+  description: 
   option: damage is 20
   swordDamage: 20
   oldDamage: 20

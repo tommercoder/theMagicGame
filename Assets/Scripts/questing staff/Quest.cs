@@ -21,7 +21,13 @@ public class Quest
     public npcName npcEnumName;
     public void complete()
     {
-
+        if (Inventory.instance.items.Contains(attacksController.instance.water)
+          && Inventory.instance.items.Contains(attacksController.instance.air) &&
+          Inventory.instance.items.Contains(attacksController.instance.earth)
+          && Inventory.instance.items.Contains(attacksController.instance.fire))
+        {
+            characterStats.instance.gameEnded = true;
+        }
         isActive = false;
 
         MarieleQuest.instance.currentMarieleQuest.title = ""; 

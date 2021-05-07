@@ -16,6 +16,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 923f8896ffcac2d43b849327d63be602, type: 3}
   maxStack: 4
   currentStack: 1
-  description: makes you live longer
+  description: 
   option: increase your health by 20
   type: 0

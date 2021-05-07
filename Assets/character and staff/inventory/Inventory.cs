@@ -31,7 +31,8 @@ public class Inventory : MonoBehaviour, ISaveable
     public int size = 16;
     public bool add(Item item)
     {
-        for (int i = 0; i < items.Count; i++)
+       
+            for (int i = 0; i < items.Count; i++)
         {
             if (items[i] == item)//check
             {

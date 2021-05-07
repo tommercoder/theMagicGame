@@ -156,18 +156,14 @@ public class characterStats : MonoBehaviour, ISaveable
         damageFromFireball = lvl * 3;
         timeOfSwordAbility = lvl * 3;
 
-        if (Inventory.instance.items.Contains(attacksController.instance.water)
-            && Inventory.instance.items.Contains(attacksController.instance.air) &&
-            Inventory.instance.items.Contains(attacksController.instance.earth)
-            && Inventory.instance.items.Contains(attacksController.instance.fire))
-        {
-            gameEnded = true;
+       
+            
             if(gameEnded)
             {
                 logShow.instance.showQuestText("congratulations you've got all swords, game is over , hope you had fun");
                 gameEnded = false;
             }
-        }
+        
 
 
         //if(mouseOverButton.instance.startedNewGame)

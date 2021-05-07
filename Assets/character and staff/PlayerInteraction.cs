@@ -14,7 +14,7 @@ public class PlayerInteraction : MonoBehaviour
     public respawnScript respawnScript;
     private void Awake()
     {
-        respawnScript = GameObject.Find("MainElements").GetComponent<respawnScript>();
+        respawnScript = GameObject.Find("MainElementsHandler").GetComponent<respawnScript>();
         instance = this;
     }
 

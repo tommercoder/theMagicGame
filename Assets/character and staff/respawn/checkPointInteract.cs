@@ -8,7 +8,7 @@ public class checkPointInteract : Interact
     public inventoryManager manager;
     private void Awake()
     {
-        respawnScript = GameObject.Find("MainElements").GetComponent<respawnScript>();
+        respawnScript = GameObject.Find("MainElementsHandler").GetComponent<respawnScript>();
        
     }
     public override void InteractWith()
