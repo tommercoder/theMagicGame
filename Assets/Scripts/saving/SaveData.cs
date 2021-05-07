@@ -38,7 +38,7 @@ public class SaveData
     {
         public Item s_slotItem;
         public string s_id;
-        //public Sprite s_icon ;
+       
     }
     public List<SlotsData> s_slots = new List<SlotsData>();
     

@@ -18,10 +18,9 @@ public class dashAbility : AbilityMain
     [SerializeField] public Transform player;
     [SerializeField] private CinemachineFreeLook originalCam = default;
     public LayerMask groundMask;
-   // [SerializeField] private MeleeWeapon weapon = default;
-   // [SerializeField] private Damageable damageable = default;
+   
     [Header("Visuals")]
-    //[SerializeField] private Renderer skinnedMesh = default;
+    
     [SerializeField] private ParticleSystem dashParticle = default;
  
     public CharacterController controller;
@@ -29,8 +28,7 @@ public class dashAbility : AbilityMain
     public AbilityUI AbilityUI;
     public  bool hitHitted = false;
 
-    //public swordEquipping water;
-   // public swordEquipping earth;
+    
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -67,17 +65,15 @@ public class dashAbility : AbilityMain
         Debug.DrawRay(transform.position + Vector3.up * 2.5f, forward, Color.blue);
         Debug.DrawRay(transform.position + Vector3.up*1.5f, forward, Color.blue);
     }
-    //[SerializeField] private Volume dashVolume = default;
+
     public override void Ability()
     {
-        //DOTween.Init();
+        
         Debug.Log("checkIfDashCanBeCasted(); " + checkIfDashCanBeCasted());
         if (checkIfDashCanBeCasted())
         {
             dashStarted = true;
-            //dashParticle.Play();
-            //if (!StateControllerTest.instance.enemiesAround)
-            //{
+            
             controller.enabled = false;
             animator.SetInteger("attackAnimation", 20);
             transform.DOMove(transform.position + (transform.forward * 5), .2f);
@@ -85,14 +81,7 @@ public class dashAbility : AbilityMain
 
             DOVirtual.Float(40, 50, .1f, SetCameraFOV)
                 .OnComplete(() => DOVirtual.Float(50, 40, .5f, SetCameraFOV));
-            //}
-            //else
-            //{
-            //    controller.enabled = false;
-            //    transform.DOMove(transform.position + (transform.forward * 5), .2f);
-            //    .AppendCallback(() => dashParticle.Stop());
-            //    StartCoroutine(checker());
-            //}
+            
 
             AbilityUI.ShowCoolDown(cooldownTime);
             dashParticle.Stop();
@@ -102,12 +91,12 @@ public class dashAbility : AbilityMain
         {
             dashStarted = false;
             abilityDone = false;
-            //attacksController.instanceA.dashParticle.Stop();
+           
             
-            //dashParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            
             Debug.Log("RETURN" + attacksController.instanceA.dashParticle.isStopped);
            
-           // return;//should i keep it????
+           
         }
 
 
@@ -115,11 +104,7 @@ public class dashAbility : AbilityMain
 
 
     }
-    IEnumerator checker()
-    {
-        yield return new WaitForSeconds(0.5f);
-        controller.enabled = true; 
-    }
+   
     public void dashEndedEvent()//animation event
     {
         controller.enabled = true;

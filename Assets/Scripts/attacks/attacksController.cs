@@ -14,9 +14,7 @@ public class attacksController : MonoBehaviour
     int isDrawedSwordHash;
     public audioManager am;
     public bool attackState = false;
-    //bool isFullEnergyBar = false;
-    //playerSword playerSwordController;
-    //List<int> possibleAttacks = Enumerable.Range(1, 3).ToList();
+   
     StateControllerTest controller;
     movement movement;
     public Text errorText;
@@ -45,7 +43,7 @@ public class attacksController : MonoBehaviour
         instanceA = this;
         s_Instance = this;
     }
-    // Start is called before the first frame update
+    
     void Start()
     {
         canCast = false;
@@ -56,7 +54,7 @@ public class attacksController : MonoBehaviour
         canClickSec = true;
         firstPlayed = false;
         secondPlayed = false;
-        //playerSwordController = GetComponent<playerSword>();
+        
         controller = GetComponent<StateControllerTest>();
         animator = GetComponent<Animator>();
         movement = GetComponent<movement>();
@@ -72,7 +70,7 @@ public class attacksController : MonoBehaviour
         errorText.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
 
@@ -106,10 +104,9 @@ public class attacksController : MonoBehaviour
                     Abilities[1].TriggerAbility();
                     if (!Abilities[1].dashStarted)
                     {
-                        //errorText.gameObject.SetActive(true);
-                        // errorText.text = "you can't use dash here";
+                        
                         logShow.instance.showText("you can't use dash here");
-                        //StartCoroutine(waitErrorText());
+                        
 
                         return;
                     }
@@ -143,7 +140,7 @@ public class attacksController : MonoBehaviour
                     {
                         logShow.instance.showText("now your fireball damage is 0(get some XP)");
                     }
-                    movement.canMove = false;
+                   // movement.canMove = false;
                     animator.SetInteger("attackAnimation", 21);
                     canClick = false;
                     canClickSec = false;
@@ -172,8 +169,7 @@ public class attacksController : MonoBehaviour
                     controller.timeRemaining = 10;
                     controller.timerIsRunning = true;
                 }
-                //noOfClick = 0;
-                //noOfClickSecond = 0;
+                
             }
             
         }
@@ -212,7 +208,7 @@ public class attacksController : MonoBehaviour
             {
 
                 animator.SetInteger("attackAnimation", 4);
-                movement.canMove = true;
+              //  movement.canMove = true;
                 canClick = true;
                 noOfClick = 0; noOfClickSecond = 0;
         }
@@ -224,23 +220,29 @@ public class attacksController : MonoBehaviour
                 canClickSec = true;
                 noOfClickSecond = 0; noOfClick = 0;
             animator.SetInteger("attackAnimation", 4);
-                movement.canMove = true;
+              //  movement.canMove = true;
                 
             }
         #endregion
-       // Debug.Log(noOfClick + " " + noOfClickSecond);
+       
+        
+        
+        if(noOfClick > 3 || noOfClickSecond > 3)
+        {
+            noOfClick = 0;
+            noOfClickSecond = 0;
+        }
         if(animator.GetCurrentAnimatorStateInfo(3).IsName("Great Sword Impact"))
         {
-            //noOfClick = 0;
-           // noOfClickSecond = 0;
-            //canClick = false;
-            //canClickSec = false;
+            noOfClick = 0;
+            noOfClickSecond = 0;
+            canClick = false;
+            canClickSec = false;
         }
     }
     public void endImpactEvent()
     {
-        //canClick = true;
-        //canClickSec = true;
+        
         Debug.Log("impact event called");
     }
     public void startFireballEvent()
@@ -265,22 +267,22 @@ public class attacksController : MonoBehaviour
     }
     void ComboStarterSecond()
     {
-        if(canClickSec && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash"))
+        if(canClickSec && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast"))
         {
             noOfClickSecond++;
         }
-        if(noOfClickSecond == 1 && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash"))
+        if(noOfClickSecond == 1 && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast"))
         {
             animator.SetInteger("attackAnimation", 11);
         }
     }
     void ComboStarter()
     {
-        if(canClick && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash"))
+        if(canClick && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast"))
         {
             noOfClick++;
         }
-        if(noOfClick == 1 && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash"))
+        if(noOfClick == 1 && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast"))
         {
             animator.SetInteger("attackAnimation", 1);
         }
@@ -289,7 +291,7 @@ public class attacksController : MonoBehaviour
     {
         canClickSec = false;
         
-        if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing") && noOfClickSecond == 1)
+        if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing") && (noOfClickSecond == 1 || noOfClickSecond == 0))
         {
             
             animator.SetInteger("attackAnimation", 4);
@@ -334,7 +336,8 @@ public class attacksController : MonoBehaviour
         else
         {
             animator.SetInteger("attackAnimation", 4);
-            noOfClickSecond = 0; noOfClick = 0;
+            noOfClickSecond = 0; 
+            noOfClick = 0;
             canClickSec = true;
             movement.canMove = true;
         }
@@ -343,12 +346,13 @@ public class attacksController : MonoBehaviour
         controller.timeRemaining = 5;
         controller.timerIsRunning = true;
         movement.canMove = true;
+        canClickSec = true;
      
     }
     //sound effects
     public void firstAttackSoundEffectEvent()
     {
-        //FindObjectOfType<audioManager>().Play("attack1");
+    
         if(!pauseMenu.instance.menuIsOpened && ! pauseMenu.instance.pauseOpened)
        am.Play("swish1");
     }
@@ -363,7 +367,7 @@ public class attacksController : MonoBehaviour
     }
     public void thirdAttackSoundEffectEvent()
     {
-        // FindObjectOfType<audioManager>().Play("attack2");
+        
         if (!pauseMenu.instance.menuIsOpened && !pauseMenu.instance.pauseOpened)
         {
             am.Stop("walk");
@@ -403,7 +407,7 @@ public class attacksController : MonoBehaviour
         canClick = false;
 
         
-        if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack") && noOfClick == 1)
+        if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack") && (noOfClick == 1 || noOfClick == 0))
         {
             
             animator.SetInteger("attackAnimation", 4);
@@ -447,73 +451,22 @@ public class attacksController : MonoBehaviour
          
             movement.canMove = true;
         }
+        else
+        {
+            animator.SetInteger("attackAnimation", 4);
+            noOfClick = 0;
+            noOfClickSecond = 0;
+            canClick = true;
+            canClickSec = true;
+        }
        
         firstPlayed = true;
         controller.timeRemaining = 5;
         controller.timerIsRunning = true;
         movement.canMove = true;
+        canClick = true;
        
     }
-    /*public void firstDoneEvent()
-    {
-        firstPlayed = true;
-    }
-    public void secondDoneEvent()
-    {
-        secondPlayed = true;
-    }*/
-    //public void checkEnergyAttackFunc()
-    //{
-         
-    //    //isEnergyAttackDone = true;
-       
-    //    movement.canMove = true;
-    //    noOfClick = 0;
-    //    noOfClickSecond = 0;
-    //}
-    /*public void checkIfCanMoveEvent()
-    {
-        movement.canMove = true;
-    }*/
-    //int randomAttack()
-    //{
-    //    int number = 0;
-
-        
-    //    if (possibleAttacks.Count == 3)
-    //    {
-    //        int index = Random.Range(0, 3);
-    //        number = possibleAttacks[index];
-    //        possibleAttacks.RemoveAt(index);
-    //    }
-    //    else if(possibleAttacks.Count == 2)
-    //    {
-    //        int index = Random.Range(0, 2);
-    //        number = possibleAttacks[index];
-    //        possibleAttacks.RemoveAt(index);
-    //    }
-    //    else if(possibleAttacks.Count == 1)
-    //    {
-    //        int index = Random.Range(0, 1);
-    //        number = possibleAttacks[index];
-    //        possibleAttacks.RemoveAt(index);
-    //    }
-    //    else if (possibleAttacks.Count == 0)
-    //    {
-    //        possibleAttacks = Enumerable.Range(1, 3).ToList();
-
-    //        int index = Random.Range(0, 3);
-    //        number = possibleAttacks[index];
-    //        possibleAttacks.RemoveAt(index);
-    //    }
-
-       
-
-
-    //    // int number = Random.Range(1, 4);
-
-    //    return number;
-    //}
-
+    
 }
 

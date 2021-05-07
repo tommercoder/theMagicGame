@@ -20,10 +20,7 @@ public class checkPointInteract : Interact
             InteractedText += "Set new spawn point";
             interacting = true;
         }
-        else
-        {
-            logShow.instance.showText("this checkpoint is alredy set");
-        }
+        
     }
 
     private void Update()

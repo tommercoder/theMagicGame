@@ -12,17 +12,14 @@ public class resetScriptableObjects : MonoBehaviour
     }
     #endregion
     public List<Item> scriptableObjects = new List<Item>();
-    // Start is called before the first frame update
+    
     void Start()
     {
         
-        //for(int i = 0;i< scriptableObjects.Count;i++)
-        //{
-        //    
-        //}
+        
     }
    
-    // Update is called once per frame
+  
     void Update()
     {
         

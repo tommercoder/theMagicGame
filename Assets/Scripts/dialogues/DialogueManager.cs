@@ -52,11 +52,11 @@ public class DialogueManager : MonoBehaviour
         {
             if (dialogBOX.activeSelf && answer1G.activeSelf == false && answer2G.activeSelf == false)
             {
-                //Debug.Log("test1" + npcWhoSpeaking.quest.title);
+                
                 if (npcWhoSpeaking.quest!=null && npcWhoSpeaking.quest.title!="" )
                 {
                    
-                        //Debug.Log("FORHANDLE != null");
+                      
                         Quest quest = MarieleQuest.instance.currentMarieleQuest;
                         if (quest != null)
                             if (quest.isActive && forhandleD.npcEnumName.ToString() == quest.npcEnumName.ToString())
@@ -69,11 +69,7 @@ public class DialogueManager : MonoBehaviour
                                     quest.complete();
                                 }
                             }
-                    
-
-
-
-                    //Debug.Log("test2" + npcWhoSpeaking.quest.title);
+                 
                     questButton.SetActive(true);
                     questBool = false;
                 }
@@ -86,7 +82,7 @@ public class DialogueManager : MonoBehaviour
     {
         npcWhoSpeaking = temp;
         forhandleD = dialogue;
-        //Debug.Log("forhandleD" + forhandleD.npcEnumName);
+        
         dialogBOX.SetActive(true);
         anim.SetBool("dialogOpen", true);
         nameText.text = dialogue.name;
@@ -129,16 +125,10 @@ public class DialogueManager : MonoBehaviour
         answerByeG.GetComponentInChildren<Text>().text = answerBye;
 
         dialogueText.text = greeting;
-        //greeting
+        
     }
     public void DisplayNext()
     {
-        //if (sentences.Count == 0 && sentences2.Count == 0 )
-        //{
-
-        //    EndDialogue();
-        //    return;
-        //}
 
         string sentence = sentences.Dequeue();
 
@@ -176,8 +166,7 @@ public class DialogueManager : MonoBehaviour
         
         StopAllCoroutines();
         Quest quest = MarieleQuest.instance.currentMarieleQuest;
-        //Debug.Log("A" + forhandleD.npcEnumName.ToString());
-        // Debug.Log("B" + quest.npcEnumName.ToString());
+       
         if(quest!=null)
         if (quest.isActive && forhandleD.npcEnumName.ToString() == quest.npcEnumName.ToString())
         {
@@ -221,17 +210,11 @@ public class DialogueManager : MonoBehaviour
         dialogBOX.SetActive(false);
         List<NPCinteraction> temp = new List<NPCinteraction>();
         temp = GameObject.FindObjectsOfType<NPCinteraction>().ToList();
-        //for(int i = 0;i < temp.Count;i++)
-        //{
-        //    if(temp[i].interacting==true)
-        //    {
-        //        temp[i].dialogHappening = false;
-        //    }    
-        //}
+        
         
         NPCinteraction.instance.dialogHappening = false;
 
-        //NPCinteraction.instance.dialogEnded = true;
+       
 
     }
 
@@ -257,7 +240,7 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log(MarieleQuest.instance.currentMarieleQuest);
         
-            if (string.IsNullOrEmpty(MarieleQuest.instance.currentMarieleQuest.title)/* && MarieleQuest.instance.currentMarieleQuest.isActive == false*/ )
+            if (string.IsNullOrEmpty(MarieleQuest.instance.currentMarieleQuest.title) && MarieleQuest.instance.currentMarieleQuest.isActive == false )
             {
                 questUI.SetActive(false);
                 questButton.SetActive(false);
@@ -278,7 +261,7 @@ public class DialogueManager : MonoBehaviour
                         forHandle = null;
                     }
                 }
-                // forHandle = null;
+                
 
             }
             else

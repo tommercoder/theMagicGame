@@ -25,7 +25,7 @@ public class logShow : MonoBehaviour
     }
     IEnumerator waitToHide1()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
         questBigText.text = " ";
 
     }

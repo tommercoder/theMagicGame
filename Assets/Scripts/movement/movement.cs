@@ -37,26 +37,25 @@ public class movement : MonoBehaviour
 	private Vector3 moveVector;
 	public float playerSpeed;
 	bool isRunningSword;
+
 	public bool canMove;
 	attacksController attacks;
 	public bool MouseOverInventoryB;//setting in event of entering ui
 	public bool speedPotionUsingNow = false;
+	
 	public float jumpSpeed = 8.0F;
 	public float gravity = 20.0F;
 	public GameObject dialogBox;
 	public audioManager am;
-	//private Vector3 moveDirection = Vector3.zero;
-	//private Vector3 playerVelocity;
-	//private float jumpHeight = 10.0f;
-	//private float gravityValue = -9.81f;
+	
 	public Rigidbody rb;
 
-	// Use this for initialization
+	
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
 		anim = this.GetComponent<Animator>();
-		//cam = Camera.main;
+		
 		cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 		controller = this.GetComponent<CharacterController>();
 		canMove = true;
@@ -78,23 +77,9 @@ public class movement : MonoBehaviour
 		MouseOverInventoryB = false;
 
 	}
-	public void StopJumpEvent()
-    {
-		//desiredMoveDirection.y = 3f;
-		//Debug.Log("move" + desiredMoveDirection);
-		
-		//controller.Move(desiredMoveDirection);
-
-		//anim.ResetTrigger("isJumpingTrigger");
-		
-	}
-	public void StartJumpEvent()
-    {
-		
-		
-		
-    }
-	// Update is called once per frame
+	
+	
+	
 	void Update()
 	{
 		
@@ -105,35 +90,7 @@ public class movement : MonoBehaviour
         {
 			MouseOutInventory();
         }
-		//stop camera when inventory is open;
-		//if (EventSystem.current.IsPointerOverGameObject())
-		//{
-		//	Debug.Log("entered");
-		//	cam.GetComponent<CinemachineBrain>().enabled = false;
-		//	return;
-		//}
-		//else
-		//      {
-		//	cam.GetComponent<CinemachineBrain>().enabled = true;
-		//}
-
-		//if (controller.isGrounded && Input.GetKey(KeyCode.Space))
-		//{
-		//	anim.SetTrigger("isJumpingTrigger");
-		//	controller.enabled = false;
-		//	GetComponent<CapsuleCollider>().enabled = true;
-
-		//	rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
-
-		//	Debug.Log("fLying away");
-
-		//}
-
 		
-		
-
-
-
 		InputMagnitude();
 		isRunningSword = anim.GetBool("isRunningSword");
 
@@ -155,35 +112,15 @@ public class movement : MonoBehaviour
 		if (isGrounded)
 		{
 			desiredMoveDirection += Physics.gravity * Time.deltaTime;
-			//verticalVel -= 0;
+			
 		}
 		else
 		{
 			desiredMoveDirection += Physics.gravity * Time.deltaTime;
-			//verticalVel -= 2;
+			
 		}
 		
-		//moveVector = new Vector3(0, verticalVel, 0);
 		
-		
-		//controller.Move(moveVector);
-		//jumping part
-		//if (controller.isGrounded && Input.GetKey(KeyCode.Space))
-  //      {
-		//	//GetComponent<movement>().enabled = false;
-		//	if (!anim.GetBool("isRunning"))
-		//	{
-		//		anim.SetTrigger("isJumpingTrigger");
-		//	}
-		//	else if(anim.GetBool("isRunning"))
-  //          {
-		//		anim.SetBool("isRunning", false);
-		//		anim.SetTrigger("isJumpingTrigger");
-		//	}
-			
-			
-		//}
-	
 
 	}
 	
@@ -204,21 +141,16 @@ public class movement : MonoBehaviour
 
 		forward.Normalize();
 		right.Normalize();
-		//if (Input.GetKey(KeyCode.Space) && isGrounded)
-		//{
-		//	desiredMoveDirection.y += jumpHeight * Time.deltaTime;
-		//	Debug.Log("desired =" + desiredMoveDirection.y);
-		//}
-		//moveDirection.y -= gravity * Time.deltaTime;
+		
 		desiredMoveDirection = forward * InputZ + right * InputX;
-		desiredMoveDirectionBack = -forwardP *  -InputZ + rightP*InputX;// forward * InputZ + right * InputX;
+		desiredMoveDirectionBack = -forwardP *  -InputZ + rightP*InputX;
 		
 		if (isDrawedSword && MouseattackPressed)
         {
-			canMove = false;
+			//canMove = false;
 
         }
-		//Debug.Log("can move ?" + canMove);
+		
 		if (blockRotationPlayer == false && canMove)
 		{
 			
@@ -226,26 +158,7 @@ public class movement : MonoBehaviour
 			if(controller.enabled)
 			controller.Move(desiredMoveDirection * Time.deltaTime * playerSpeed);
 			
-			/*if (attacks.enemiesAround && attacks.attackState && isDrawedSword)
-			{
-				if (InputZ > 0.0f)
-				{
-					transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
-					controller.Move(desiredMoveDirection * Time.deltaTime * playerSpeed);
-					
-				}
-				else
-                {
-					//transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirectionBack), desiredRotationSpeed);
-					controller.Move(desiredMoveDirectionBack * Time.deltaTime * playerSpeed);
-				}
-			}*/
-			//else
-			//{
-
-
-			//}
-
+			
 		}
 					
 		
@@ -287,67 +200,19 @@ public class movement : MonoBehaviour
 		//Physically move player
 		if (Speed > allowPlayerRotation)
 		{
-			
-			//anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
 			if (canMove )
 			{
 				
 				PlayerMoveAndRotation();
-				//if(!attacks.enemiesAround)
+				
 				anim.SetBool("isRunning", true);
 				
 			}
 		}
 		else if (Speed < allowPlayerRotation)
 		{
-		
-			
-			//anim.SetFloat("InputMagnitude", Speed, 0.0f, Time.deltaTime);
-			
 
 		}
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*public CharacterController controller;
-    public Transform cam;
-	
-    public float speed = 6f;
-    public float turnTime = 0.1f;
-    float turnVelocity;
-    // Update is called once per frame
-    void Update()
-    {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-
-        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-
-        if(direction.magnitude >= 0.1f)
-        {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnVelocity, turnTime);
-
-
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDirection.normalized * speed * Time.deltaTime);
-        }
-    }*/
 }

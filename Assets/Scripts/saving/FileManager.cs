@@ -23,7 +23,7 @@ public class FileManager : MonoBehaviour
         try
         {
             File.WriteAllText(fullPath, a_FileContents);
-           // WriteBackUP("BackUp.dat", a_FileContents);
+           
             return true;
         }
         catch(Exception e)
@@ -47,7 +47,7 @@ public class FileManager : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError($"Failed to read from {fullPath} with Exception {e}");
-            //result = File.ReadAllText(backUpcopy);
+            
             result = "";
             return false;
         }

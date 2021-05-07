@@ -21,6 +21,7 @@ public class Quest
     public npcName npcEnumName;
     public void complete()
     {
+        logShow.instance.showQuestText("quest " + title + " is completed");
         if (Inventory.instance.items.Contains(attacksController.instance.water)
           && Inventory.instance.items.Contains(attacksController.instance.air) &&
           Inventory.instance.items.Contains(attacksController.instance.earth)
@@ -33,7 +34,7 @@ public class Quest
         MarieleQuest.instance.currentMarieleQuest.title = ""; 
         MarieleQuest.instance.currentMarieleQuest = null;
         
-        logShow.instance.showQuestText("quest " + title + " is completed");
+        
         logShow.instance.showText("+" + XP);
         
         //also clear quest in P window

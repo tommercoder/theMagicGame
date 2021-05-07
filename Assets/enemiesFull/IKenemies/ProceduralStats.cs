@@ -78,7 +78,9 @@ public class ProceduralStats : MonoBehaviour,ISaveable
                     {
                         //add reward to inventory
                         characterStats.instance.XP += quest.XP;
+                        //logShow.instance.showQuestText("quest " + MarieleQuest.instance.currentMarieleQuest.title + " is completed");
                         quest.complete();
+                        
                     }
                 }
                 // log.gameObject.SetActive(true);

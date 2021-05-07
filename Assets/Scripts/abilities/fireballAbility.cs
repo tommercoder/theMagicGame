@@ -37,38 +37,28 @@ public class fireballAbility : AbilityMain
     public override void Ability()
     {
 
-        //if (canCast)
-        //{
-           
-           
-                //projectile.SetActive(true);
-                
-                fireball();
-                canCast = false;
-                AbilityUI.ShowCoolDown(cooldownTime);
+        fireball();
+        canCast = false;
+        AbilityUI.ShowCoolDown(cooldownTime);
 
-        // }
+        
         abilityDone = true;
     }
-    IEnumerator destruction()
-    {
-        yield return new WaitForSeconds(2f);
-        
-    }
+    
     public void fireball()
     {
 
         Debug.Log("FIREBALL FUNC");
         projectile.transform.position = hand.transform.position;
-        
-         fireballGO = Instantiate(projectile, projectile.transform.position,Quaternion.identity);
-        
-        //fireball.transform.position = hand.transform.position;
-        
+
+        fireballGO = Instantiate(projectile, projectile.transform.position, Quaternion.identity);
+
+       
+
         Rigidbody rb = fireballGO.GetComponent<Rigidbody>();
         rb.velocity = transform.forward * speed;
 
-        
+
 
 
     }
@@ -77,7 +67,7 @@ public class fireballAbility : AbilityMain
         if (triggered)
         {
             Destroy(fireballGO);
-            Debug.Log("destroyed fireball and damage done");
+           
             triggered = false;
         }
         else

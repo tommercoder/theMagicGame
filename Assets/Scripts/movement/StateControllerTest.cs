@@ -42,18 +42,11 @@ public class StateControllerTest : MonoBehaviour
         }
     }
     attacksController attacks;
-    // Start is called before the first frame update
-
     bool isRunning;
-
-
     bool isIdleSword;
     bool isDrawedSword;
     bool isRunningSword;
-
-
     bool isSneathedSword;
-
     bool runningPressed;
     bool walkingBackPressed;
     bool diPressing;
@@ -72,11 +65,6 @@ public class StateControllerTest : MonoBehaviour
         isRunningSwordHash = Animator.StringToHash("isRunningSword");
         isRunningHash = Animator.StringToHash("isRunning");
         isSneathedHash = Animator.StringToHash("isSneathed");
-
-
-        //update part
-         
-        
 
     }
 
@@ -124,8 +112,7 @@ public class StateControllerTest : MonoBehaviour
             Transform sword = playerSwordController.sword.transform;
             if (sword.gameObject.transform.childCount > 0)
                 sword.GetChild(0).gameObject.SetActive(false);
-            //sword.GetChild(1).gameObject.SetActive(true);
-            //Debug.Log("sword = " + sword.gameObject.name);
+          
 
         }
         else
@@ -153,7 +140,7 @@ public class StateControllerTest : MonoBehaviour
                 animator.SetBool(isIdleSwordHash, false);
             }
         }
-        //hide the sword
+     
 
 
 
@@ -174,7 +161,7 @@ public class StateControllerTest : MonoBehaviour
             animator.SetBool(isIdleSwordHash, true);
         }
 
-        if (runningPressed && isDrawedSword && !takeSwordPressed /*&& !attacks.enemiesAround*/)
+        if (runningPressed && isDrawedSword && !takeSwordPressed)
         {
             animator.SetBool(isIdleSwordHash, false);
             animator.SetBool(isRunningSwordHash, true);
@@ -205,7 +192,7 @@ public class StateControllerTest : MonoBehaviour
             animator.SetBool(isIdleSwordHash, true);
         }
         //if idle sword and pressed back run back with sword
-        if (isDrawedSword && walkingBackPressed && !takeSwordPressed /*&& !attacks.enemiesAround*/)
+        if (isDrawedSword && walkingBackPressed && !takeSwordPressed)
         {
             animator.SetBool(isRunningSwordHash, true);
         }
@@ -223,7 +210,7 @@ public class StateControllerTest : MonoBehaviour
         {
             animator.SetBool(isIdleSwordHash, true);
         }
-        if (isDrawedSword && diPressing && !takeSwordPressed /*&& !attacks.enemiesAround*/)
+        if (isDrawedSword && diPressing && !takeSwordPressed)
         {
             animator.SetBool(isRunningSwordHash, true);
         }
@@ -241,7 +228,7 @@ public class StateControllerTest : MonoBehaviour
         {
             animator.SetBool(isIdleSwordHash, true);
         }
-        if (isDrawedSword && aPressed && !takeSwordPressed /*&& !attacks.enemiesAround*/)
+        if (isDrawedSword && aPressed && !takeSwordPressed)
         {
             animator.SetBool(isRunningSwordHash, true);
         }
@@ -276,17 +263,7 @@ public class StateControllerTest : MonoBehaviour
 
 
                     }
-                    /*if (isDrawedSword && isRunningSwordBack)
-                    {
-
-                        animator.SetBool(isSneathedHash, true);
-                        animator.SetBool(isRunningBackSwordHash, false);
-                        animator.SetBool(isWalkingBackHash, true);
-                        playerSwordController.swordUnequipMethod();
-
-                    }*/
-
-
+                  
                     timeRemaining = 0;
                     timerIsRunning = false;
 

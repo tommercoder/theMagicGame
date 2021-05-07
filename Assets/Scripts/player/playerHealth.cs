@@ -41,8 +41,7 @@ public class playerHealth : MonoBehaviour,ISaveable
     public Rigidbody[] rigidbodies;
     public FootIK legScript;
     public Animator animator;
-   // public CapsuleCollider collider;
-   // public Rigidbody rigidbody;
+
     public CharacterController controller;
 
     public GameObject abilitiesUI;
@@ -50,15 +49,13 @@ public class playerHealth : MonoBehaviour,ISaveable
     public GameObject[] swordRigidbody;
 
     public bool minusXP = false;
-    // Start is called before the first frame update
+  
     void Start()
     {
-        //currentHealth = health;
+       
         healthBar.setMaxHealth(health);
         RagdollActive(false);
 
-
-        //swordRigidbody.detectCollisions = true;
         swordRigidbody = GameObject.FindGameObjectsWithTag("interactable object");
         foreach (GameObject b in swordRigidbody)
         {
@@ -73,13 +70,12 @@ public class playerHealth : MonoBehaviour,ISaveable
         }
 
     }
-    //public GameObject[] swordRigidbody;
-    // Update is called once per frame
+    
     void Update()
     {
         
         healthBar.setHealth(currentHealth);
-        //testing
+        
         if(currentHealth <= 0)
         {
             Die();
@@ -101,20 +97,15 @@ public class playerHealth : MonoBehaviour,ISaveable
         {
             isPlayerDead = false;
         }
-        //if(Input.GetKeyDown(KeyCode.P))
-        //{
-        //    //test
-        //    takeDamage(20);
-            
-        //}
+       
     }
    
     public void Die()
     {
-        //Debug.Log("player is dead");
+       
         isPlayerDead = true;
         
-       // canvas.enabled = true;
+
         abilitiesUI.SetActive(false);
         healthbarUI.SetActive(false);
         canvas.alpha += Time.deltaTime / 2;
@@ -151,12 +142,8 @@ public class playerHealth : MonoBehaviour,ISaveable
         
 
         animator.enabled = !active;
-        //rigidbody.detectCollisions = !active;
-       
-        
-
-
-
+      
+     
     }
     IEnumerator PlayText()
     {
@@ -165,9 +152,7 @@ public class playerHealth : MonoBehaviour,ISaveable
         {
             text.text += c;
             yield return null;
-            //yield return new WaitForSeconds(0.25f);
-
-
+      
         }
     }
 

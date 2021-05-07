@@ -160,8 +160,7 @@ public class characterStats : MonoBehaviour, ISaveable
             
             if(gameEnded)
             {
-                logShow.instance.showQuestText("congratulations you've got all swords, game is over , hope you had fun");
-                gameEnded = false;
+            StartCoroutine(waitToShowEndLog());
             }
         
 
@@ -176,6 +175,13 @@ public class characterStats : MonoBehaviour, ISaveable
         //    SaveJsonData(this);
         //}
 
+    }
+
+    IEnumerator waitToShowEndLog()
+    {
+        yield return new WaitForSeconds(5f);
+        logShow.instance.showQuestText("congratulations you've got all swords, game is over , hope you had fun");
+        gameEnded = false;
     }
     private void OnApplicationQuit()
     {

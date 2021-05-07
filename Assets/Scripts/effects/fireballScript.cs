@@ -15,7 +15,7 @@ public class fireballScript : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         one = false;
-       // projectile.SetActive(false);
+      
    
     }
 
@@ -26,7 +26,7 @@ public class fireballScript : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.X) && animator.GetBool("isDrawedSword"))
             {
-                //projectile.SetActive(true);
+                
                 fireball();
                 one = false;
             }

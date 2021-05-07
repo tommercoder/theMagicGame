@@ -25,17 +25,17 @@ public class zones : MonoBehaviour
             isColliding = true;
             logShow.instance.showQuestText("YOU ARE IN THE EARTH ZONE");
         }
-       else if (other.CompareTag("lakeOfHealth"))
+        else if (other.CompareTag("lakeOfHealth"))
         {
             isColliding = true;
             logShow.instance.showQuestText("YOU ARE IN THE HEALTH LAKE ZONE");
         }
-       else if (other.CompareTag("fireZone"))
+        else if (other.CompareTag("fireZone"))
         {
             isColliding = true;
             logShow.instance.showQuestText("YOU ARE IN THE FIRE ZONE");
         }
-      else  if (other.CompareTag("waterZone"))
+        else  if (other.CompareTag("waterZone"))
         {
             isColliding = true;
             logShow.instance.showQuestText("YOU ARE IN THE WATER ZONE");
@@ -45,8 +45,8 @@ public class zones : MonoBehaviour
             isColliding = true;
             logShow.instance.showQuestText("YOU ARE IN ILLUSION VALLEY");
         }
-        else
-            logShow.instance.showQuestText("");
+        //else
+           // logShow.instance.showQuestText("");
 
 
     }

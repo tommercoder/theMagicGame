@@ -59,9 +59,16 @@ public class inventoryManager : MonoBehaviour//,ISaveable
 
     public void updateUI()
     {
-        Debug.Log("Updating UI");
-        damageText.text = "";
-        damageText.text = "current damage is: " + playerSword.instance.currentSword.swordDamage;
+        if (!potionParticle.instance.usingDamagePotionNow)
+        {
+            Debug.Log("Updating UI");
+            damageText.text = "";
+            damageText.text = "current damage is: " + playerSword.instance.currentSword.swordDamage;
+        }
+        else
+        {
+            damageText.text = "current damage is: " + (playerSword.instance.currentSword.swordDamage + (playerSword.instance.currentSword.swordDamage * 20 / 100));
+        }
         
         for (int i = 0; i < slots.Length; i++)
             {
