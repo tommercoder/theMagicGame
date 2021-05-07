@@ -31,11 +31,13 @@ public class enemySwordInteract : MonoBehaviour
                  otherAnimator = other.GetComponent<Animator>();
                  if (attacksController.instance.isDrawedSword)
                 {
-                    otherAnimator.SetInteger("attackAnimation", 4);
-                    attacksController.instance.noOfClick = 0;
-                    attacksController.instance.noOfClickSecond = 0;
-                    attacksController.instance.canClick = true;
-                    attacksController.instance.canClickSec = true;
+                    //movement.instance.canMove = true;
+                    //otherAnimator.SetInteger("attackAnimation", 4);
+
+                    //attacksController.instance.noOfClick = 0;
+                    //attacksController.instance.noOfClickSecond = 0;
+                    //attacksController.instance.canClick = true;
+                    //attacksController.instance.canClickSec = true;
 
                     //other.GetComponent<attacksController>().noOfClick = 0;
                     //other.GetComponent<attacksController>().noOfClickSecond = 0;

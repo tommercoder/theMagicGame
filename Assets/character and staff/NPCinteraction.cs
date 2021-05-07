@@ -56,7 +56,7 @@ public class NPCinteraction : Interact
                 {
                     if (!allnpc[i].dialogHappening)
                     {
-                        //Debug.Log("allnpc[i]" + allnpc[i]);
+                        
                         camera.GetComponent<CinemachineBrain>().enabled = false;
                         inventoryManager.instance.hidePanel();
                         resetText();
@@ -64,16 +64,16 @@ public class NPCinteraction : Interact
                         //dialogue
                         if (allnpc[i].quest != null && characterStats.instance.loadCompleted && (allnpc[i].quest.title != "" || allnpc[i].quest.title != " "))
                         {
-                            //Debug.Log("QUEST NOT EQUAL TO NULL" + allnpc[i].name);
+                            
                             FindObjectOfType<DialogueManager>().questBool = true;
-                           // logShow.instance.showText("before ending of dialog you will be able to get the quest");
+                           
                         }
                         FindObjectOfType<DialogueManager>().StartDialog(dialogue,allnpc[i]);
                        
                     }
                 }
                 
-                // dialogHappening = true;
+                
                 textName.GetComponent<TextMesh>().text = dialogue.name;
 
             }
@@ -147,7 +147,7 @@ public class NPCinteraction : Interact
     }
 
 
-    //questing
+    
 
 
 

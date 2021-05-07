@@ -294,6 +294,7 @@ public class attacksController : MonoBehaviour
             
             animator.SetInteger("attackAnimation", 4);
             canClickSec = true;
+
             noOfClickSecond = 0; 
             noOfClick = 0;
             movement.canMove = true;

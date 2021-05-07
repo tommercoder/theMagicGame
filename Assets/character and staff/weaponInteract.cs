@@ -130,7 +130,7 @@ public class weaponInteract : Interact
                             {
                                 otherAnimator.SetTrigger("hitEnemy2");
                             }
-                            Debug.Log("TEMP + " + temp);
+                            
                             //otherAnimator.SetInteger("enemyAttackInteger", 4);
                             EnemyPatrol.instance.canMove = false;
                             otherController.enabled = false;

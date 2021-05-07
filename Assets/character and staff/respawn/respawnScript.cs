@@ -33,13 +33,16 @@ public class respawnScript : MonoBehaviour,ISaveable
     {
         if (playerHealth.instance.isPlayerDead)
         {
+            
+            playerHealth.instance.minusXP = false;
+
             attacksController.instance.animator.SetInteger("attackAnimation", 4);
             movement.instance.canMove = true;
             attacksController.instance.canClick = true;
             attacksController.instance.canClickSec = true;
             attacksController.instance.noOfClick = 0;
             attacksController.instance.noOfClickSecond = 0;
-            //characterStats.instance.LoadJsonData(characterStats.instance);
+           
             playerHealth.instance.currentHealth = playerHealth.instance.health;
             playerHealth.instance.isPlayerDead = false;
            
@@ -54,7 +57,7 @@ public class respawnScript : MonoBehaviour,ISaveable
                 playerHealth.instance.textSTR = " ";
                 if (canvas.alpha < 0.3f)
                 {
-                    //canvas.enabled = false;
+                    
                     abilitiesUI.SetActive(true);
                     healthbarUI.SetActive(true);
                  
@@ -63,17 +66,8 @@ public class respawnScript : MonoBehaviour,ISaveable
             }
             player.transform.position = checkPoint.transform.position;
             playerHealth.instance.RagdollActive(false);
-
-            ////changed 
-            //foreach (GameObject b in playerHealth.instance.swordRigidbody)
-            //{
-            //    if (b.GetComponent<Rigidbody>() != null)
-            //    {
-            //        Rigidbody rb = b.GetComponent<Rigidbody>();
-            //        rb.detectCollisions = true;
-            //    }
-
-            //}
+            playerSword.instance.currentSwordGameObject.GetComponent<Rigidbody>().detectCollisions = true;
+           
         }
     }
     public void PopulateSaveData(SaveData sd)

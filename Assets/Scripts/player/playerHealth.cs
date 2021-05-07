@@ -59,10 +59,13 @@ public class playerHealth : MonoBehaviour,ISaveable
 
 
         //swordRigidbody.detectCollisions = true;
+        swordRigidbody = GameObject.FindGameObjectsWithTag("interactable object");
         foreach (GameObject b in swordRigidbody)
         {
+            Debug.Log(b.name);
             if (b.GetComponent<Rigidbody>() != null)
             {
+                
                 Rigidbody rb = b.GetComponent<Rigidbody>();
                 rb.detectCollisions = true;
             }
@@ -70,7 +73,7 @@ public class playerHealth : MonoBehaviour,ISaveable
         }
 
     }
-   
+    //public GameObject[] swordRigidbody;
     // Update is called once per frame
     void Update()
     {
@@ -80,12 +83,16 @@ public class playerHealth : MonoBehaviour,ISaveable
         if(currentHealth <= 0)
         {
             Die();
-            if(!minusXP)
+            playerSword.instance.currentSwordGameObject.GetComponent<Rigidbody>().detectCollisions = true;
+            if (!minusXP)
             {
                 if (characterStats.instance.XP >= 30)
                 {
                     characterStats.instance.XP -= 30;
                     logShow.instance.showText("-30xp");
+
+                    
+
                 }
                 minusXP = true;
             }
@@ -104,7 +111,7 @@ public class playerHealth : MonoBehaviour,ISaveable
    
     public void Die()
     {
-        Debug.Log("player is dead");
+        //Debug.Log("player is dead");
         isPlayerDead = true;
         
        // canvas.enabled = true;

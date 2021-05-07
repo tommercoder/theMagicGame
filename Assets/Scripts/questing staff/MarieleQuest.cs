@@ -51,17 +51,7 @@ public class MarieleQuest : MonoBehaviour
                 if (currentMarieleQuest.goal.goalType == goalType.killPEnemyQuest)
                 {
 
-                    //shortestDistance = Vector3.Distance(transform.position, pEnemies[0].transform.position);
-                    //for (int i = 0; i < pEnemies.Count; i++)
-                    //{
-                    //    float distance = Vector3.Distance(transform.position, pEnemies[i].transform.position);
-                    //    if (distance < shortestDistance)
-                    //    {
-                    //        shortestDistance = distance;
-
-                    //        GameObject.FindObjectOfType<questPointer>().target = pEnemies[i].transform;
-                    //    }
-                    //}
+                    
                     if (GameObject.FindObjectOfType<questPointer>().target != findNearestPEnemy())
                     {
                         GameObject.FindObjectOfType<questPointer>().target = findNearestPEnemy();
@@ -71,18 +61,12 @@ public class MarieleQuest : MonoBehaviour
                 }
                 if (currentMarieleQuest.goal.goalType == goalType.speakQuest)
                 {
-                    //shortestDistance = Vector3.Distance(transform.position, allnpc[0].transform.position);
+                    
                     for (int i = 0; i < allnpc.Count; i++)
                     {
                         if(allnpc[i].dialogue.npcEnumName.ToString()==currentMarieleQuest.npcEnumName.ToString())
                             GameObject.FindObjectOfType<questPointer>().target = allnpc[i].transform;
-                        //float distance = Vector3.Distance(transform.position, allnpc[i].transform.position);
-                        // if (distance < shortestDistance)
-                        // {
-                        //    shortestDistance = distance;
-
-
-                        // }
+                        
                     }
                     questPointer.SetActive(true);
                 }
@@ -95,8 +79,7 @@ public class MarieleQuest : MonoBehaviour
         Transform findNearestEnemy()
         {
 
-            //shortestDistance = Vector3.Distance(transform.position, enemies[0].transform.position);
-            // Debug.Log("SHORTEST DISTANCE " + shortestDistance);
+            
             Transform tMin = null;
             float minDist = Mathf.Infinity;
             Vector3 currentPos = transform.position;
@@ -109,7 +92,7 @@ public class MarieleQuest : MonoBehaviour
                     minDist = distance;
 
                     
-                   // Debug.Log("ENEMIES QUEST " + enemies[i].transform.name);
+                   
                 }
 
             }
@@ -131,17 +114,17 @@ public class MarieleQuest : MonoBehaviour
                     minDist = distance;
 
 
-                    // Debug.Log("ENEMIES QUEST " + enemies[i].transform.name);
+                    
                 }
 
             }
-            //write as above
+            
             return tMin;
         }
         
         if(Input.GetKeyDown(KeyCode.P))
         {
-           // questWindow.SetActive(!questWindow.activeSelf);
+          
             if (questWindow.activeSelf)
             {
                 questWindow.SetActive(false);

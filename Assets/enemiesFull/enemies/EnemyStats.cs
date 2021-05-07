@@ -72,9 +72,10 @@ public class EnemyStats : MonoBehaviour,ISaveable
             if (!addedXP)
             {
                 //FindObjectOfType<questPointer>().target = null;
-                GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().SetInteger("attackAnimation", 4);
+                movement.instance.canMove = true;
+                //GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().SetInteger("attackAnimation", 4);
                 attacksController.instance.noOfClick = 0;
-                attacksController.instance.noOfClickSecond = 0;
+               attacksController.instance.noOfClickSecond = 0;
                 attacksController.instance.canClick = true;
                 attacksController.instance.canClickSec = true;
                 //Debug.Log("QUEST POINTER ACTIVE " + MarieleQuest.instance.questPointer.activeSelf);
