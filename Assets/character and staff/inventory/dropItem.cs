@@ -21,12 +21,12 @@ public class dropItem : MonoBehaviour, IDropHandler
         {
 
 
-            //Debug.Log("entered");
+            
             RaycastHit hit = new RaycastHit();
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 40))
             {
-                //Debug.Log("entered2");
+                
                 for (int i = 0; i < inventory.items.Count; i++)
                 {
                    
@@ -38,10 +38,9 @@ public class dropItem : MonoBehaviour, IDropHandler
                         break;
                     }
                 }
-               // Vector3 position = Inventory.instance.itemsGameObjects[index].transform.position;
+         
                 Inventory.instance.itemsGameObjects[index].transform.rotation = Quaternion.identity;
-              //  position.y = swordEquipping.instance.savedPosition.y;
-               // Inventory.instance.itemsGameObjects[index].transform.position = position;
+          
 
 
 
@@ -54,16 +53,14 @@ public class dropItem : MonoBehaviour, IDropHandler
 
                 for (int k = 0; k < temp.Count; k++)
                 {
-                    //Debug.Log("entered3");
+                   
                     if (temp[k].gameObject == Inventory.instance.itemsGameObjects[index])
                     {
                         temp[k].isUsed = false;
-                        //Debug.Log("LOG" + temp);
+                      
                     }
                 }
-                //characterStats.instance.allPotionInteractionO[index].isUsed = false;
-                // characterStats.instance.allPotionsIsUsed[index] = false;
-                ////
+              
                 inventory.removeGOitem(inventory.itemsGameObjects[index]);//usuwam z pierwszej listy 
                 inventory.removeItem(gameObject.GetComponentInParent<Slot>().item);//usuwam z drugiej listy
                     

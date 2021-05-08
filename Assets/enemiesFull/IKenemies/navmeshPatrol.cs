@@ -44,7 +44,7 @@ public class navmeshPatrol : MonoBehaviour
         {
             prefab = null;
         }
-        //projectilePoint = gameObject.transform.Find("projectile point");   
+         
         current = 0;
         rotation = transform.rotation;
     }
@@ -77,38 +77,11 @@ public class navmeshPatrol : MonoBehaviour
             projectileDirection = (player.transform.position + Vector3.up*2 - projectilePoint.transform.position).normalized * projectileSpeed;
             bullet.GetComponent<Rigidbody>().velocity = new Vector3(projectileDirection.x, projectileDirection.y, projectileDirection.z);
             FindObjectOfType<audioManager>().Play("proceduralShooting");
-            //if (bullet.GetComponent<destroyProjectile>() != null && gameObject.GetComponent<ProceduralStats>() != null)
-            //{
-            //    Debug.Log("@2@@@" + bullet.GetComponent<destroyProjectile>().triggered);
-            //    //StartCoroutine(wait());
-                
-            //    if (bullet.GetComponent<destroyProjectile>().triggered == true)
-            //    {
-                    
-                    
-            //        playerHealth.instance.currentHealth -= gameObject.GetComponent<ProceduralStats>().damage;
-            //        bullet.GetComponent<destroyProjectile>().triggered = false;
-            //    }
-            //}
-            // bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 10);
+            
             nextFire = Time.time + fireRate;
         }
 
-            //GameObject projectileBB = Instantiate(prefab) as GameObject;
-            //projectileBB.transform.position = projectilePoint.transform.position + Vector3.forward;
-            //Rigidbody rbBB = projectileBB.GetComponent<Rigidbody>();
-            //rbBB.velocity = transform.forward;
-        
-        //RaycastHit hit;
-        
-        //if (Physics.Raycast(laser.transform.position, player.transform.localPosition, out hit))
-        //{
-        //    if (hit.collider)
-        //    {
-        //        laser.SetPosition(1, hit.point);
-        //    }
-        //}
-        //else laser.SetPosition(1, player.transform.localPosition);
+            
     }
 
 
@@ -130,8 +103,7 @@ public class navmeshPatrol : MonoBehaviour
             else
             {
                 Vector3 relativePos = (points[current].transform.position - transform.position).normalized;
-                //Quaternion toRotation = Quaternion.LookRotation(new Vector3(relativePos.x, 0, relativePos.z));
-               // transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, Time.deltaTime/3f);
+               
                 rotation = Quaternion.LookRotation((points[current].position - transform.position).normalized);
                 transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime / 4f);
 

@@ -71,14 +71,14 @@ public class EnemyStats : MonoBehaviour,ISaveable
             
             if (!addedXP)
             {
-                //FindObjectOfType<questPointer>().target = null;
+                
                 movement.instance.canMove = true;
-                //GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().SetInteger("attackAnimation", 4);
+                
                 attacksController.instance.noOfClick = 0;
                attacksController.instance.noOfClickSecond = 0;
                 attacksController.instance.canClick = true;
                 attacksController.instance.canClickSec = true;
-                //Debug.Log("QUEST POINTER ACTIVE " + MarieleQuest.instance.questPointer.activeSelf);
+                
                 Quest quest = MarieleQuest.instance.currentMarieleQuest;
                 if (quest!=null && quest.isActive)
                 {
@@ -106,18 +106,11 @@ public class EnemyStats : MonoBehaviour,ISaveable
        
         Debug.Log("DIE");
         RagdollActive(true);
-        //StartCoroutine(waitDeath());
+        
        Destroy(this.gameObject, 1f);
 
     }
-    IEnumerator waitDeath()
-    {
-        yield return new WaitForSeconds(4f);
-        addedXP = false;
-        //log.GetComponent<Text>().text = " ";
-       // log.gameObject.SetActive(false);
-        Destroy(this.gameObject);
-    }
+    
     public void RagdollActive(bool active)
     {
         
@@ -133,9 +126,9 @@ public class EnemyStats : MonoBehaviour,ISaveable
         }
 
         //root
-        //this.enabled = !active;
+        
         patrolScript.enabled = !active;
-        //footScript.enabled = !active;
+        
         
 
         animator.enabled = !active;

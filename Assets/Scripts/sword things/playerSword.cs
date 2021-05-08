@@ -27,7 +27,7 @@ public class playerSword : MonoBehaviour,ISaveable
     public bool isEquipedSword = false;
     public Transform spine;
     public Transform itemsOnScene;
-    //public Item item = null;
+
 
     public void PopulateSaveData(SaveData sd)
     {
@@ -46,10 +46,7 @@ public class playerSword : MonoBehaviour,ISaveable
         
         temp.transform.SetParent(itemsOnScene.transform);
         temp.SetActive(false);
-        //Debug.Log(sd.s_sword);
-        //Debug.Log(sd.s_currentSword);
-        //Debug.Log(sd.s_currentSwordGO);
-        //Debug.Log(sd.s_temp);
+        
         sword = sd.s_sword;
         temp = sd.s_temp;
         currentSwordGameObject = sd.s_currentSwordGO;
@@ -71,7 +68,7 @@ public class playerSword : MonoBehaviour,ISaveable
     private void Update()
     {
 
-        //temp = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/" + currentSwordGameObject.name);
+        
             temp = currentSwordGameObject;
             currentSwordGameObject.SetActive(true);
             currentSwordGameObject.GetComponent<weaponInteract>().interacting = false;

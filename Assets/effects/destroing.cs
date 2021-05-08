@@ -9,15 +9,12 @@ public class destroing : MonoBehaviour
     {
         if (other.gameObject.tag == "enemy")
         {
-            //TODO: damage
+            
             Destroy(gameObject);
         }
         else
             StartCoroutine(destruction());
-            //Destroy(gameObject, 2f);
-        
-        
-        //Instantiate(explosion, transform.position, transform.rotation);
+      
           
 
     }

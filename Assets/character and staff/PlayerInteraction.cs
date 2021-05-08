@@ -36,7 +36,7 @@ public class PlayerInteraction : MonoBehaviour
         }
          if(other.CompareTag("interactable object") && other.GetComponent<Interact>()!=null )
         {
-            //Debug.Log("interacting with" + other.name);
+            
             other.GetComponent<Interact>().InteractWith();
             panelShow.showPanel("Press E to " + other.GetComponent<Interact>().InteractedText);
             

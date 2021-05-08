@@ -44,9 +44,7 @@ public class weaponInteract : Interact
          //pickup weapon
         if (Input.GetKeyDown(KeyCode.E) && interacting)
         {
-            //Debug.Log("picking up " + item.name) ;
-
-
+      
             pickUp();
             
         }
@@ -63,7 +61,7 @@ public class weaponInteract : Interact
             Debug.Log("added weapon");
             
             Inventory.instance.itemsGameObjects.Add(gameObject);
-            //characterStats.instance.allAddedToInventoryGO.Add(gameObject);
+            
             manager.hidePanel();
             interacting = false;
 
@@ -72,7 +70,7 @@ public class weaponInteract : Interact
                 gameObject.GetComponent<FloatingItem>().Rotating = true;
             }
             gameObject.SetActive(false);
-            //Destroy(gameObject);
+        
         }
     }
     //damage 
@@ -102,21 +100,20 @@ public class weaponInteract : Interact
                         if (other.gameObject.GetComponent<ProceduralStats>() != null)
                         {
 
-                            other.gameObject.GetComponent<ProceduralStats>().currentHealth -= item.swordDamage;//this.gameObject.GetComponent<weaponInteract>().item.swordDamage;
-                                                                                                               //Debug.Log("interact weapon with " + other.name);
-                            //if (Random.Range(0, 2) == 1)
-                           // {
+                            other.gameObject.GetComponent<ProceduralStats>().currentHealth -= item.swordDamage;
+                         
+                         
                                 other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);//moving enemy back after hit
-                           // }                                                                             //Debug.Log(transform.root.name);
+                                                                                                     
 
                         }
                         else if (other.gameObject.GetComponent<EnemyStats>() != null)
                         {
-                            // Debug.Log("hittinhg" + other.name);
+                           
                             //damage
                             other.gameObject.GetComponent<EnemyStats>().currentHP -= item.swordDamage;
                             //logic
-                            // Debug.Log("interact weapon with " + other.name);
+                          
                             otherController = other.GetComponent<CharacterController>();
                             otherAnimator = other.GetComponent<Animator>();
                             otherAnimator.SetBool("isWalkingEnemy", false);
@@ -131,14 +128,14 @@ public class weaponInteract : Interact
                                 otherAnimator.SetTrigger("hitEnemy2");
                             }
                             
-                            //otherAnimator.SetInteger("enemyAttackInteger", 4);
+                        
                             EnemyPatrol.instance.canMove = false;
                             otherController.enabled = false;
                             if (temp == 1)
                             {
                                 other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);
                             }
-                            //otherAnimator.SetTrigger("hitEnemy");
+                           
                             StartCoroutine(waitForSec());
                         }
                     }

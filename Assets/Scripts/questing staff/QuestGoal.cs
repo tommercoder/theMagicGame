@@ -13,6 +13,9 @@ public class QuestGoal
     {
         questPointer.instance.target = null;
         MarieleQuest.instance.questPointer.SetActive(false);
+
+
+       
         return (currentAmount >= requiredAmount);
     }
 

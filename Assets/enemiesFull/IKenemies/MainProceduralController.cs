@@ -49,11 +49,9 @@ public class MainProceduralController : MonoBehaviour
         {
             GetComponentInParent<navmeshPatrol>().enabled = false;
             GetComponentInParent<navmeshPatrol>().enabled = true;
-            //Debug.Log("reset for" + transform.parent.name);
+           
         }
-        //GetComponent<navmeshPatrol>().enabled = false;
-        //GetComponent<navmeshPatrol>().enabled = true;
-        //adding targets and targets to lists;
+        
         footIKTargets.Add(targetLeft);
         footIKTargets.Add(targetRight);
 
@@ -70,15 +68,13 @@ public class MainProceduralController : MonoBehaviour
     {
         //czekam krok
         waited = false;
-        //FindObjectOfType<audioManager>().Play("bigProceduralSound");
+        
         yield return new WaitForSeconds(timeToMakeStep);
         waited = true;
     }
     //test moving
     void moveForward()
     {
-       // transform.position = Vector3.MoveTowards(transform.position, transform.right, Time.deltaTime * 2f);
-      //  baksBot.Translate(Vector3.right * Time.deltaTime*2f);
        
     }
    
@@ -89,18 +85,7 @@ public class MainProceduralController : MonoBehaviour
         Vector3 down = transform.TransformDirection(Vector3.down) * 3;
         
         RaycastHit hit;
-        if(Physics.Raycast(head.position+Vector3.down/2, down, out hit,10, mask))
-        {
-            //Debug.Log(Vector3.Distance(head.position, hit.point));
-            if (Vector3.Distance(head.position,hit.point) < 3.0f)
-            {
-                //Vector3 temp = transform.position;
-                //temp.y = headPosition.y-2;
-                //transform.position = temp;
-                
-            }
-            //transform.position = Vector3.zero;
-        }
+        
         Debug.DrawRay(head.position + Vector3.down/2, down, Color.red);
         //function to check ground for targets
         stepTargetIk(0);
@@ -114,13 +99,9 @@ public class MainProceduralController : MonoBehaviour
            
             if (GetGroundedEndPosition(out Vector3 endPos, out Vector3 endNormal, 0))
             {
-                //Debug.Log("end pos " + endPos.y);
-               // Debug.Log("trans pos " + transform.position.y);
+                
                 if (endPos.y >= transform.position.y)
                 {
-                    //Vector3 temp = transform.position;
-                    //temp.y = transform.position.y+0.3f ;
-                    //transform.position = temp;
                     
                     transform.Translate(Vector3.up * 2 * Time.deltaTime/ 1.6f);
                 }
@@ -148,9 +129,7 @@ public class MainProceduralController : MonoBehaviour
             {
                 if (endPos.y >= transform.position.y)
                 {
-                    //Vector3 temp = transform.position;
-                    //temp.y = transform.position.y+0.3f ;
-                    //transform.position = temp;
+                   
                     transform.Translate(Vector3.up* 2* Time.deltaTime/ 1.6f);
                 }
                 else if (endPos.y <= transform.position.y)
@@ -208,10 +187,10 @@ public class MainProceduralController : MonoBehaviour
 
         float distance = 100f;
         Ray ray = new Ray(stepTargets[index].position, -stepTargets[index].up);
-        //works
+       
         RaycastHit hit;
 
-        // Debug.DrawRay(stepTarget.position, Vector3.down, Color.red);
+        
         if (Physics.Raycast(stepTargets[index].position, Vector3.down, out hit, distance, mask))
         {
 

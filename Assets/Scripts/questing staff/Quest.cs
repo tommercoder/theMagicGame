@@ -22,15 +22,9 @@ public class Quest
     public void complete()
     {
         logShow.instance.showQuestText("quest " + title + " is completed");
-        if (Inventory.instance.items.Contains(attacksController.instance.water)
-          && Inventory.instance.items.Contains(attacksController.instance.air) &&
-          Inventory.instance.items.Contains(attacksController.instance.earth)
-          && Inventory.instance.items.Contains(attacksController.instance.fire))
-        {
-            characterStats.instance.gameEnded = true;
-        }
+        
         isActive = false;
-
+        MarieleQuest.instance.hasQuest = false;
         MarieleQuest.instance.currentMarieleQuest.title = ""; 
         MarieleQuest.instance.currentMarieleQuest = null;
         
@@ -54,6 +48,38 @@ public class Quest
             potionGameObjectReward.SetActive(false);
         }
 
-    }
+
+        if (playerSword.instance.currentSword == attacksController.instance.air && Inventory.instance.items.Contains(attacksController.instance.water) &&
+         Inventory.instance.items.Contains(attacksController.instance.earth)
+         && Inventory.instance.items.Contains(attacksController.instance.fire))
+        {
+            characterStats.instance.gameEnded = true;
+        }
+        else if (playerSword.instance.currentSword == attacksController.instance.fire && Inventory.instance.items.Contains(attacksController.instance.water) &&
+       Inventory.instance.items.Contains(attacksController.instance.earth)
+       && Inventory.instance.items.Contains(attacksController.instance.air))
+        {
+            characterStats.instance.gameEnded = true;
+        }
+        else if (playerSword.instance.currentSword == attacksController.instance.water && Inventory.instance.items.Contains(attacksController.instance.air) &&
+       Inventory.instance.items.Contains(attacksController.instance.earth)
+       && Inventory.instance.items.Contains(attacksController.instance.fire))
+        {
+            characterStats.instance.gameEnded = true;
+        }
+        else if (playerSword.instance.currentSword == attacksController.instance.earth && Inventory.instance.items.Contains(attacksController.instance.water) &&
+       Inventory.instance.items.Contains(attacksController.instance.air)
+       && Inventory.instance.items.Contains(attacksController.instance.fire))
+        {
+            characterStats.instance.gameEnded = true;
+        }
+        else if (Inventory.instance.items.Contains(attacksController.instance.earth) && Inventory.instance.items.Contains(attacksController.instance.water) &&
+       Inventory.instance.items.Contains(attacksController.instance.air)
+       && Inventory.instance.items.Contains(attacksController.instance.fire))
+            {
+                characterStats.instance.gameEnded = true;
+            }
+        }
+    
 }
 public enum npcName { simpleNPC, waterGirl, airGirl, earthGirl, fireGirl, emotionalSpirit, lifeSpirit, thoughtSpirit, sensibilitySpirit }

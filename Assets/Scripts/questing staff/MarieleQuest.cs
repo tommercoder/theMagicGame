@@ -11,6 +11,7 @@ public class MarieleQuest : MonoBehaviour
     {
         instance = this;
     }
+    public bool hasQuest = false;
     public Quest currentMarieleQuest;
 
     public GameObject questWindow;

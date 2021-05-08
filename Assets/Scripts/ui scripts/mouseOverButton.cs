@@ -48,11 +48,10 @@ public class mouseOverButton : MonoBehaviour
     {
         c.GetComponentInChildren<Text>().color = Color.white;
     }
-    //public float delayBeforeLoading = 10f;
+   
     public bool LoadingGame = false;
     public bool startedNewGame = false;
-    //public string name = "game";
-   // public float timeElapsed;
+   
     public Camera cameraMenu;
     public Camera cameraGame;
     public GameObject menuCanvas;
@@ -64,27 +63,10 @@ public class mouseOverButton : MonoBehaviour
         mainCanvas.SetActive(false);
         menuCanvas.SetActive(true);
     }
-    private void Update()
-    {
-        //timeElapsed += Time.deltaTime;
-        //if (timeElapsed > delayBeforeLoading)
-        //{
-        //    
-        //}
-        //else
-        //    LoadingGame = false;
-
-    }
+   
     public IEnumerator loadingBar()
     {
-        //AsyncOperation operation = SceneManager.LoadSceneAsync(name);
-
-        //while (!operation.isDone)
-        //{
-        //    float progress = Mathf.Clamp01(operation.progress / .9f);
-
-        //    yield return null;
-        //}
+        
         //show loading
         yield return new WaitForSeconds(1f);
         changeColorTextAback();
@@ -103,40 +85,12 @@ public class mouseOverButton : MonoBehaviour
         am.Stop("main menu");
         StartCoroutine(loadingBar());
         
-        //LoadingGame = true;
-        /// SceneManager.LoadScene("game");
-        //LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        //characterStats.instance.LoadJsonData(characterStats.instance);
+        
     }
     public void closeGame()
     {
         am.Play("menuClick");
         Application.Quit();
     }
-    //public void newGame()
-    //{
-    //    var fullPath = Path.Combine(Application.persistentDataPath, "SaveData.dat");
-    //    var fullPath2= Path.Combine(Application.persistentDataPath, "newGame.dat");
-    //    if (File.Exists(fullPath))
-    //    if(File.ReadAllText(fullPath)!="")
-    //    if (FileManager.ClearSaveData("SaveData.dat"))
-    //    {
-    //                File.WriteAllText(fullPath, File.ReadAllText(fullPath2));
-    //                Debug.Log(File.ReadAllText(fullPath2));
-    //                //if (FileManager.LoadFromFile("newGame.dat", out var json))
-    //                //{
-    //                //    SaveData sd = new SaveData();
-
-    //                //    sd.LoadFromJson(json);
-
-    //                //    characterStats.instance.LoadFromSaveData(sd);
-    //                //    Debug.Log("Load complete");
-    //                //    characterStats.instance.loadCompleted = true;
-    //                //}
-    //                //Application.Quit();
-    //                //startedNewGame = true;
-                    
-    //    }
-
-    //}
+    
 }

@@ -68,19 +68,13 @@ public class EnemyPatrol : MonoBehaviour
             if(controller.enabled)
             controller.Move(moveVector * Time.deltaTime);
         }
-        //Debug.Log(moveVector * Time.deltaTime);
+      
 
 
 
 
 
 
-        //if (Time.time > nextFire)
-        //{
-
-
-        //    nextFire = Time.time + fireRate;
-        //}
 
 
     }
@@ -90,7 +84,7 @@ public class EnemyPatrol : MonoBehaviour
         if (pauseMenu.instance.menuIsOpened || playerHealth.instance.currentHealth <= 0)
             return;
          distance = Vector3.Distance(transform.position, player.transform.position);
-        //Debug.Log("distance " + distance);
+       
         
         if (Vector3.Distance(transform.position, player.transform.position) < 20)
         {
@@ -98,25 +92,22 @@ public class EnemyPatrol : MonoBehaviour
         }
         else
         {
-           // if (points.Length > 0)
-           // {
+           
                 Vector3 relativePos = (points[current].transform.position - transform.position).normalized;
                 Quaternion toRotation = Quaternion.LookRotation(new Vector3(relativePos.x, 0, relativePos.z));
                 transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime);
-                //rotation = Quaternion.LookRotation(points[current].position - transform.position);
-                //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime);
+                
                 rotated = true;
-           // }
+           
             attackingPlayer = false;
             
         }
 
 
-        //if (points.Length > 0)
-        //{
+      
             if (!attackingPlayer)
             {
-                //Debug.Log("DISTNACE = " + Vector3.Distance(transform.position, points[current].position));
+                
                 if (Vector3.Distance(transform.position, points[current].position) > 0.7)
                 {
 
@@ -124,12 +115,11 @@ public class EnemyPatrol : MonoBehaviour
                     {
                         if (pauseMenu.instance.menuIsOpened)
                             return;
-                        ////transform.position = Vector3.MoveTowards(transform.position, points[current].position, Time.deltaTime * speed);
-                        ///
+                        
                         Vector3 moveVector = points[current].position - transform.position;
                         controller.Move(moveVector * Time.deltaTime * speed);
 
-                        //Debug.Log("speed " + moveVector * Time.deltaTime * speed); 
+                        
                         if (!animator.GetBool("isWalkingEnemy"))
                         {
                             animator.SetBool("isWalkingEnemy", true);
@@ -143,14 +133,10 @@ public class EnemyPatrol : MonoBehaviour
                 else
                 {
                     current = (current + 1) % points.Length;
-                    // if(current > 0)
+                   
                     StartCoroutine(waitOnPoint());
                 }
-           // }
-           // else
-           // {
-                //idle
-           // }
+          
         }
         else
         {
@@ -179,11 +165,7 @@ public class EnemyPatrol : MonoBehaviour
 
         
         animator.SetInteger("enemyAttackInteger", pickAttack());
-        //if (!animator.GetCurrentAnimatorStateInfo(1).IsName("bottomSwordSlash") && !animator.GetCurrentAnimatorStateInfo(1).IsName("swordCast")
-        //    && !animator.GetCurrentAnimatorStateInfo(1).IsName("fastSwordSlash"))
-        //{
-        //    animator.SetInteger("enemyAttackInteger", 4);
-        //}
+        
 
         
 
@@ -210,7 +192,7 @@ public class EnemyPatrol : MonoBehaviour
     public void enemyFitstAttackEvent()
     {
         am.Play("swish5");
-        //FindObjectOfType<audioManager>().Play("enemyGr1");
+       
 
     }
     public void secondAttackEvent()
@@ -220,7 +202,7 @@ public class EnemyPatrol : MonoBehaviour
     public void thirdEnemyAttackEvent()
     {
         am.Play("swish3");
-        //FindObjectOfType<audioManager>().Play("enemyGr2");
+     
     }
     public void enemyRunSoundEvent()
     {

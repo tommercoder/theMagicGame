@@ -13,8 +13,7 @@ public class tooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     private void Update()
     {
-        // if (gameObject.GetComponent<Slot>().onSlotChangedCalled!=null)
-        //{
+      
         //otrzymuje dane z slotu na ktorym jest myszka
         if (gameObject.GetComponent<Slot>().item != null)
         {
@@ -26,8 +25,7 @@ public class tooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 description = gameObject.GetComponent<Slot>().item.description;
             }
             icon = gameObject.GetComponent<Slot>().item.icon;
-            //Debug.Log("item.icon " + gameObject.GetComponent<Slot>().item.icon);
-            //}
+            
         }
         
         if (!inventoryManager.instance.inventoryOpened)

@@ -48,7 +48,7 @@ public class swordEquipping : Item
                 Inventory.instance.itemsGameObjects.Remove(Inventory.instance.itemsGameObjects[i]);
                 Inventory.instance.removeItem(Inventory.instance.items[i]);
 
-                //Inventory.instance.removeGOitem(Inventory.instance.itemsGameObjects[i]);    
+               
 
                 //put new game object instead of old
                 playerSword.instance.currentSwordGameObject.GetComponent<weaponInteract>().isCurrentSword = true;
@@ -63,8 +63,7 @@ public class swordEquipping : Item
                 
 
                 //setting back values everytime
-                //playerSword.instance.temp= GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/" + Inventory.instance.itemsGameObjects[i].name);
-                //playerSword.instance.currentSwordGameObject= GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/" + Inventory.instance.itemsGameObjects[i].name);
+                
             }
         }
         //equip sword
@@ -73,5 +72,5 @@ public class swordEquipping : Item
         
         
     }
-    //create swap function
+ 
 }

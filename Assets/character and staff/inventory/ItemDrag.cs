@@ -25,15 +25,15 @@ public class ItemDrag : MonoBehaviour, IDragHandler, IEndDragHandler
     {
       
         item = transform.GetComponentInParent<Slot>().item;
-        //item.name = transform.GetComponentInParent<Slot>().item.name;
+        
         transform.position = Input.mousePosition;
        
-        //Debug.Log("dragging " + item);
+       
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         transform.localPosition = Vector3.zero;
-        //item = null;
+      
     }
 }

@@ -29,7 +29,7 @@ public class pauseMenu : MonoBehaviour
         cameraMenu.enabled = true;
         menuIsOpened = true;
     }
-    // Update is called once per frame
+  
     void Update()
     {
         if(menuIsOpened)
@@ -73,13 +73,7 @@ public class pauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         menuIsOpened = true;
         pauseOpened = false;
-        //SceneManager.UnloadSceneAsync("game");'
-
-        //#if UNITY_EDITOR
-        //        UnityEditor.EditorApplication.isPlaying = false;
-        //#else
-        //        Application.Quit();
-        //#endif
+        
         mainCanvas.SetActive(false);
         menuCanvas.SetActive(true);
 
@@ -90,9 +84,7 @@ public class pauseMenu : MonoBehaviour
 
 
 
-       // canvas.alpha = 0;
-       // playerHealth.instance.currentHealth = playerHealth.instance.health;
-        //playerHealth.instance.isPlayerDead = false;
+      
         if (inventoryManager.instance.inventoryOpened)
         {
 
@@ -102,8 +94,7 @@ public class pauseMenu : MonoBehaviour
         {
             pauseCanvas.SetActive(false);
         }
-        //SceneManager.LoadScene("main menu");
-        //characterStats.instance.SaveJsonData(characterStats.instance);
+       
     }
 
 

@@ -50,9 +50,7 @@ public class ProceduralLeg : MonoBehaviour
             GetComponent<navmeshPatrol>().enabled = true;
         }
         player = GameObject.Find("character");
-        //GetComponent<navmeshPatrol>().enabled = false;
-        //GetComponent<navmeshPatrol>().enabled = true;
-        //adding targets and targets to lists;
+
         footIKTargets.Add(targetLeft);
 
 
@@ -123,16 +121,14 @@ public class ProceduralLeg : MonoBehaviour
             {
                 if (endPos.y >= transform.position.y)
                 {
-                    //Vector3 temp = transform.position;
-                    //temp.y = transform.position.y+0.3f ;
-                    //transform.position = temp;
+                  
                     transform.Translate(Vector3.up * 2 * Time.deltaTime / 1.6f);
                 }
                 else if (endPos.y <= transform.position.y)
                 {
                     transform.Translate(Vector3.down * 2 * Time.deltaTime / 1.6f);
                 }
-                //Debug.Log("DISTANCE > WANTSTEPATDISTANCE");
+                
                 if (endPos.y >= transform.position.y)
                 {
                     transform.Translate(Vector3.up * 3 * Time.deltaTime);
@@ -193,10 +189,10 @@ public class ProceduralLeg : MonoBehaviour
 
         float distance = 100f;
         Ray ray = new Ray(stepTargets[index].position, -stepTargets[index].up);
-        //works
+     
         RaycastHit hit;
 
-        // Debug.DrawRay(stepTarget.position, Vector3.down, Color.red);
+       
         if (Physics.Raycast(stepTargets[index].position, Vector3.down, out hit, distance, mask))
         {
 
@@ -271,20 +267,5 @@ public class ProceduralLeg : MonoBehaviour
 
 
 
-    /*void Update()
-    {
-        //works
-        RaycastHit hit;
-        
-        if (Physics.Raycast(stepTarget.position, Vector3.down, out hit, distance,mask))
-        {
-            
-            Vector3 targetLocation = hit.point;
-            var slopeRotation = Quaternion.FromToRotation(stepTarget.up, hit.normal);
-            stepTarget.rotation = Quaternion.Slerp(stepTarget.rotation, slopeRotation * stepTarget.rotation, 10 * Time.deltaTime);
-            targetLocation += new Vector3(0, stepTarget.localScale.y / 4, 0);
-            
-            stepTarget.position = targetLocation;
-        }
-    }*/
+   
 }

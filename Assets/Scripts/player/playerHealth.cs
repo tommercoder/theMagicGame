@@ -59,7 +59,6 @@ public class playerHealth : MonoBehaviour,ISaveable
         swordRigidbody = GameObject.FindGameObjectsWithTag("interactable object");
         foreach (GameObject b in swordRigidbody)
         {
-            Debug.Log(b.name);
             if (b.GetComponent<Rigidbody>() != null)
             {
                 

@@ -13,7 +13,7 @@ public class Item : ScriptableObject
 
     public string description;
     public string option;
-    //public bool isDefaultItem = false;
+    
     
     public virtual void useFromInventory()//set to onClick
     {

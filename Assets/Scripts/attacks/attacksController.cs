@@ -179,16 +179,34 @@ public class attacksController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && isDrawedSword && !firstPlayed )  
         {
             ComboStarter();
+            if (noOfClick > 6)
+            {
+                animator.SetInteger("attackAnimation", 4);
+                
+                noOfClick = 0;
+
+                canClick = true;
+            }
             controller.timeRemaining = 5;
             controller.timerIsRunning = true;
+           
         }
         if(firstPlayed && Input.GetMouseButtonDown(0) && isDrawedSword)  
         {
             ComboStarterSecond();
-            
+            if (noOfClickSecond > 6)
+            {
+                animator.SetInteger("attackAnimation", 4);
+                noOfClickSecond = 0;
+             
+                canClickSec = true;
+              
+            }
             controller.timeRemaining = 10;
-            controller.timerIsRunning = true;  
+            controller.timerIsRunning = true;
+            
         }
+        
         if(firstPlayed && secondPlayed)
         {
             firstPlayed = false;
@@ -219,26 +237,62 @@ public class attacksController : MonoBehaviour
             {
                 canClickSec = true;
                 noOfClickSecond = 0; noOfClick = 0;
-            animator.SetInteger("attackAnimation", 4);
+                animator.SetInteger("attackAnimation", 4);
               //  movement.canMove = true;
                 
             }
+
+        
         #endregion
-       
-        
-        
-        if(noOfClick > 3 || noOfClickSecond > 3)
-        {
-            noOfClick = 0;
-            noOfClickSecond = 0;
-        }
-        if(animator.GetCurrentAnimatorStateInfo(3).IsName("Great Sword Impact"))
+
+
+        //#region try
+        //if (((animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
+        //        || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
+        //        || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack")) && noOfClick == 0)
+        //        )
+        //{
+        //    StartCoroutine(waitSec());
+
+        //}
+        //else if ((animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
+        //    || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
+        //    || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing")) && noOfClickSecond==0)
+
+        //{
+        //    StartCoroutine(waitSec2());
+        //    //  movement.canMove = true;
+
+        //}
+
+        //#endregion
+        //if (noOfClick > 3 || noOfClickSecond > 3)
+        //{
+        //    noOfClick = 0;
+        //    noOfClickSecond = 0;
+        //}
+        if (animator.GetCurrentAnimatorStateInfo(3).IsName("Great Sword Impact"))
         {
             noOfClick = 0;
             noOfClickSecond = 0;
             canClick = false;
             canClickSec = false;
         }
+    }
+    IEnumerator waitSec()
+    {
+        yield return new WaitForSeconds(1f);
+        animator.SetInteger("attackAnimation", 4);
+        //  movement.canMove = true;
+        canClick = true;
+        noOfClick = 0; //noOfClickSecond = 0;
+    }
+    IEnumerator waitSec2()
+    {
+        yield return new WaitForSeconds(1f);
+        canClickSec = true;
+        noOfClickSecond = 0; //noOfClick = 0;
+        animator.SetInteger("attackAnimation", 4);
     }
     public void endImpactEvent()
     {
@@ -267,31 +321,36 @@ public class attacksController : MonoBehaviour
     }
     void ComboStarterSecond()
     {
-        if(canClickSec && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast"))
+        
+        if (canClickSec && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast"))
         {
             noOfClickSecond++;
+           
         }
         if(noOfClickSecond == 1 && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast"))
         {
             animator.SetInteger("attackAnimation", 11);
         }
+        
     }
     void ComboStarter()
     {
         if(canClick && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast"))
         {
             noOfClick++;
+            
         }
         if(noOfClick == 1 && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast"))
         {
             animator.SetInteger("attackAnimation", 1);
         }
+        
     }    
     public void secondCombatCheck()//animation event
     {
         canClickSec = false;
         
-        if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing") && (noOfClickSecond == 1 || noOfClickSecond == 0))
+        if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing") && noOfClickSecond == 1 )
         {
             
             animator.SetInteger("attackAnimation", 4);
@@ -300,6 +359,7 @@ public class attacksController : MonoBehaviour
             noOfClickSecond = 0; 
             noOfClick = 0;
             movement.canMove = true;
+           
         }
         else if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing") && noOfClickSecond >= 2)
         {
@@ -307,7 +367,7 @@ public class attacksController : MonoBehaviour
             animator.SetInteger("attackAnimation", 12);
             canClickSec = true;
         }
-        else if (animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing") && noOfClickSecond == 2)
+        else if (animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing") && noOfClickSecond == 2 )
         {
 
             animator.SetInteger("attackAnimation", 4);
@@ -335,13 +395,46 @@ public class attacksController : MonoBehaviour
         }
         else
         {
+
             animator.SetInteger("attackAnimation", 4);
-            noOfClickSecond = 0; 
+
+            movement.canMove = true;
+            noOfClickSecond = 0;
             noOfClick = 0;
             canClickSec = true;
-            movement.canMove = true;
         }
+        //if(noOfClickSecond > 3 || noOfClick > 3)
+        //{
+        //    animator.SetInteger("attackAnimation", 4);
+        //    noOfClickSecond = 0; 
+        //    noOfClick = 0;
+        //    canClickSec = true;
+        //    movement.canMove = true;
+        //}
+        //if (Input.GetMouseButtonDown(0) && (noOfClick > 3 || noOfClickSecond > 3) && isDrawedSword && (!animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
+        //       && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
+        //       && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack"))
+        //       )
+        //{
+        //    Debug.Log("SUUUUUUUUUUUUUUUKA");
+        //    animator.SetInteger("attackAnimation", 4);
+        //    //  movement.canMove = true;
+        //    canClick = true; canClickSec = true;
+        //    noOfClick = 0; noOfClickSecond = 0;
+        //}
+        //else if (Input.GetMouseButtonDown(0) && (noOfClick > 3 || noOfClickSecond > 3) && isDrawedSword && (!animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
+        //    && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
+        //    && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
+        //   )
+        //{
+        //    Debug.Log("SUUUUUUUUUUUUUUUKA");
+        //    canClickSec = true;
+        //    canClick = true;
+        //    noOfClickSecond = 0; noOfClick = 0;
+        //    animator.SetInteger("attackAnimation", 4);
+        //    //  movement.canMove = true;
 
+        //}
         secondPlayed = true;
         controller.timeRemaining = 5;
         controller.timerIsRunning = true;
@@ -407,17 +500,17 @@ public class attacksController : MonoBehaviour
         canClick = false;
 
         
-        if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack") && (noOfClick == 1 || noOfClick == 0))
+        if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack") &&noOfClick == 1 )
         {
             
             animator.SetInteger("attackAnimation", 4);
             canClick = true;
             noOfClick = 0; 
             noOfClickSecond = 0;
-          
+            
             movement.canMove = true;
         }
-        else if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack") && noOfClick >= 2)
+        else if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack") && noOfClick >= 2 )
         {
            
             animator.SetInteger("attackAnimation", 2);
@@ -432,11 +525,19 @@ public class attacksController : MonoBehaviour
             noOfClickSecond = 0;
             movement.canMove = true;
         }
-        else if(animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack") && noOfClick >= 3)
+        else if(animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack") && noOfClick >= 3 )
         {
            
             animator.SetInteger("attackAnimation", 3);
             canClick = true;
+
+
+            if(noOfClick==0)
+            {
+                animator.SetInteger("attackAnimation", 4);
+                canClick = true;
+
+            }
             //noOfClick = 0;
         }
         else if(animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack"))
@@ -459,7 +560,39 @@ public class attacksController : MonoBehaviour
             canClick = true;
             canClickSec = true;
         }
-       
+        //if(noOfClick > 3 || noOfClickSecond > 3)
+        //{
+        //    animator.SetInteger("attackAnimation", 4);
+        //    noOfClick = 0;
+        //    noOfClickSecond = 0;
+        //    canClick = true;
+        //    canClickSec = true;
+        //}
+        //if (Input.GetMouseButtonDown(0) && (noOfClick > 3 || noOfClickSecond > 3) && isDrawedSword && (!animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
+        //        && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
+        //        && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack"))
+        //        )
+        //{
+        //    Debug.Log("SUUUUUUUUUUUUUUUKA");
+        //    animator.SetInteger("attackAnimation", 4);
+        //    //  movement.canMove = true;
+        //    canClick = true; canClickSec = true;
+        //    noOfClick = 0; noOfClickSecond = 0;
+        //}
+        //else if (Input.GetMouseButtonDown(0) && (noOfClick > 3 || noOfClickSecond > 3) && isDrawedSword && (!animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
+        //    && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
+        //    && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
+        //   )
+        //{
+        //    animator.SetInteger("attackAnimation", 4);
+        //    Debug.Log("SUUUUUUUUUUUUUUUKA");
+        //    canClickSec = true;
+        //    canClick = true;
+        //    noOfClickSecond = 0; noOfClick = 0;
+            
+        //    //  movement.canMove = true;
+
+        //}
         firstPlayed = true;
         controller.timeRemaining = 5;
         controller.timerIsRunning = true;

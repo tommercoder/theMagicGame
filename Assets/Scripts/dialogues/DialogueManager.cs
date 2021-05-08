@@ -238,9 +238,9 @@ public class DialogueManager : MonoBehaviour
     List<NPCinteraction> allNpc;
     public void acceptQuest()
     {
-        Debug.Log(MarieleQuest.instance.currentMarieleQuest);
         
-            if (string.IsNullOrEmpty(MarieleQuest.instance.currentMarieleQuest.title) && MarieleQuest.instance.currentMarieleQuest.isActive == false )
+        
+            if (MarieleQuest.instance.hasQuest == false )
             {
                 questUI.SetActive(false);
                 questButton.SetActive(false);
@@ -251,7 +251,7 @@ public class DialogueManager : MonoBehaviour
 
                 MarieleQuest.instance.currentMarieleQuest = forHandle;
                 questBool = false;
-
+                MarieleQuest.instance.hasQuest = true;
                 allNpc = FindObjectsOfType<NPCinteraction>().ToList();
                 foreach (NPCinteraction n in allNpc)
                 {
