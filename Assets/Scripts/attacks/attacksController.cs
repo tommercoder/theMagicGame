@@ -64,11 +64,6 @@ public class attacksController : MonoBehaviour
 
     }
 
-    IEnumerator waitErrorText()
-    {
-        yield return new WaitForSeconds(3);
-        errorText.gameObject.SetActive(false);
-    }
 
     
     void Update()
@@ -88,33 +83,31 @@ public class attacksController : MonoBehaviour
         if (isDrawedSword)
         {
 
-            
+            //dash ability
+            //sprawdzam wcisknięcie klawiszy "C",czy ta zdolność może być uruchomiona i czy nie jest włączona jaka inna animacja z atak albo zdolności
             if(castPressed && Abilities[1].canUse && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast") && noOfClick==0 && noOfClickSecond==0
                &&  !animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
                 && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
                 && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack")
-               
-              && !animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
+                 && !animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
                     && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
                     && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
             {
-                
+                //ograniczenie miecze z którymi może być włączony dash
                 if (playerSword.instance.currentSword == water || playerSword.instance.currentSword == earth || playerSword.instance.currentSword == emotions)
                 {
+                    //ta funkcja włącza ParticleSystem i za pomocą DoTween przesuwa gracza w przód
                     Abilities[1].TriggerAbility();
                     if (!Abilities[1].dashStarted)
                     {
-                        
                         logShow.instance.showText("you can't use dash here");
-                        
-
                         return;
-                    }
-                    
+                    }   
                     canClick = false;
                     canClickSec = false;
                     FindObjectOfType<audioManager>().Play("dashSound");
                     dashParticle.Play();
+                    //timer z StateControllerTest.cs który odpowiada za chowanie miecza
                     controller.timeRemaining = 5;
                     controller.timerIsRunning = true;
                 }
@@ -123,9 +116,9 @@ public class attacksController : MonoBehaviour
                     logShow.instance.showText("dash can be used only with WATER or EARTH sword or EMOTIONS sword");
                 }
                 
-                //random damage and effects here
+                
             }
-            
+            //te same sprawdzenia 
             if (ballCastPressed && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast")  && Abilities[0].canUse && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && noOfClick== 0 && noOfClickSecond== 0
                 &&  !animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
                 && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
@@ -176,31 +169,31 @@ public class attacksController : MonoBehaviour
         #endregion
       
         //attacks
+        //sprawdzenie wcisknięcia środkowej klawiszy myszy
         if (Input.GetMouseButtonDown(0) && isDrawedSword && !firstPlayed )  
         {
+            //funkcja która włącza pierwsza animację ataki
             ComboStarter();
-            if (noOfClick > 6)
+            //jeśli liczba kliknięć jest większa niż 3 to animacje atak zostają wyłączone
+            if (noOfClick > 3)
             {
                 animator.SetInteger("attackAnimation", 4);
-                
                 noOfClick = 0;
-
                 canClick = true;
             }
             controller.timeRemaining = 5;
             controller.timerIsRunning = true;
            
         }
+        //to samo tylko dla drugiego "combo"
         if(firstPlayed && Input.GetMouseButtonDown(0) && isDrawedSword)  
         {
             ComboStarterSecond();
-            if (noOfClickSecond > 6)
+            if (noOfClickSecond > 3)
             {
                 animator.SetInteger("attackAnimation", 4);
-                noOfClickSecond = 0;
-             
+                noOfClickSecond = 0;     
                 canClickSec = true;
-              
             }
             controller.timeRemaining = 10;
             controller.timerIsRunning = true;
@@ -246,31 +239,6 @@ public class attacksController : MonoBehaviour
         #endregion
 
 
-        //#region try
-        //if (((animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
-        //        || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
-        //        || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack")) && noOfClick == 0)
-        //        )
-        //{
-        //    StartCoroutine(waitSec());
-
-        //}
-        //else if ((animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
-        //    || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
-        //    || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing")) && noOfClickSecond==0)
-
-        //{
-        //    StartCoroutine(waitSec2());
-        //    //  movement.canMove = true;
-
-        //}
-
-        //#endregion
-        //if (noOfClick > 3 || noOfClickSecond > 3)
-        //{
-        //    noOfClick = 0;
-        //    noOfClickSecond = 0;
-        //}
         if (animator.GetCurrentAnimatorStateInfo(3).IsName("Great Sword Impact"))
         {
             noOfClick = 0;
@@ -279,26 +247,7 @@ public class attacksController : MonoBehaviour
             canClickSec = false;
         }
     }
-    IEnumerator waitSec()
-    {
-        yield return new WaitForSeconds(1f);
-        animator.SetInteger("attackAnimation", 4);
-        //  movement.canMove = true;
-        canClick = true;
-        noOfClick = 0; //noOfClickSecond = 0;
-    }
-    IEnumerator waitSec2()
-    {
-        yield return new WaitForSeconds(1f);
-        canClickSec = true;
-        noOfClickSecond = 0; //noOfClick = 0;
-        animator.SetInteger("attackAnimation", 4);
-    }
-    public void endImpactEvent()
-    {
-        
-        Debug.Log("impact event called");
-    }
+  
     public void startFireballEvent()
     {
         canCast = true;
@@ -335,12 +284,14 @@ public class attacksController : MonoBehaviour
     }
     void ComboStarter()
     {
-        if(canClick && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast"))
+        //jeśli mogę klikać i nie są uruchomione żadne zdolności to liczba kliknięć powiększa się o 1
+        if (canClick && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast"))
         {
             noOfClick++;
             
         }
-        if(noOfClick == 1 && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast"))
+        //włączam pierwszą animacje(czyli ten warunek działa kiedy noOfClick jest jeden,dale logika właczęnia animacji idzie do "animation event"
+        if (noOfClick == 1 && !animator.GetCurrentAnimatorStateInfo(2).IsName("dash") && !animator.GetCurrentAnimatorStateInfo(2).IsName("ballcast"))
         {
             animator.SetInteger("attackAnimation", 1);
         }
@@ -403,38 +354,7 @@ public class attacksController : MonoBehaviour
             noOfClick = 0;
             canClickSec = true;
         }
-        //if(noOfClickSecond > 3 || noOfClick > 3)
-        //{
-        //    animator.SetInteger("attackAnimation", 4);
-        //    noOfClickSecond = 0; 
-        //    noOfClick = 0;
-        //    canClickSec = true;
-        //    movement.canMove = true;
-        //}
-        //if (Input.GetMouseButtonDown(0) && (noOfClick > 3 || noOfClickSecond > 3) && isDrawedSword && (!animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
-        //       && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
-        //       && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack"))
-        //       )
-        //{
-        //    Debug.Log("SUUUUUUUUUUUUUUUKA");
-        //    animator.SetInteger("attackAnimation", 4);
-        //    //  movement.canMove = true;
-        //    canClick = true; canClickSec = true;
-        //    noOfClick = 0; noOfClickSecond = 0;
-        //}
-        //else if (Input.GetMouseButtonDown(0) && (noOfClick > 3 || noOfClickSecond > 3) && isDrawedSword && (!animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
-        //    && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
-        //    && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
-        //   )
-        //{
-        //    Debug.Log("SUUUUUUUUUUUUUUUKA");
-        //    canClickSec = true;
-        //    canClick = true;
-        //    noOfClickSecond = 0; noOfClick = 0;
-        //    animator.SetInteger("attackAnimation", 4);
-        //    //  movement.canMove = true;
-
-        //}
+        
         secondPlayed = true;
         controller.timeRemaining = 5;
         controller.timerIsRunning = true;
@@ -497,9 +417,11 @@ public class attacksController : MonoBehaviour
     }
     public void CombatCheck()
     {
+        //nie mogę klikać podczas animacji
         canClick = false;
 
-        
+        //sprawdzam ilość kliknięć i "current state" animacji,czyli czy pierwsza animacja uruchomiona funkcją "ComboStarter()" jest włączona,
+        //dalsze instrukcje warunkowe są takie same tylko dla innej liczby kliknięć i animacji
         if (animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack") &&noOfClick == 1 )
         {
             
@@ -538,7 +460,7 @@ public class attacksController : MonoBehaviour
                 canClick = true;
 
             }
-            //noOfClick = 0;
+            
         }
         else if(animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack"))
         {
@@ -560,39 +482,7 @@ public class attacksController : MonoBehaviour
             canClick = true;
             canClickSec = true;
         }
-        //if(noOfClick > 3 || noOfClickSecond > 3)
-        //{
-        //    animator.SetInteger("attackAnimation", 4);
-        //    noOfClick = 0;
-        //    noOfClickSecond = 0;
-        //    canClick = true;
-        //    canClickSec = true;
-        //}
-        //if (Input.GetMouseButtonDown(0) && (noOfClick > 3 || noOfClickSecond > 3) && isDrawedSword && (!animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
-        //        && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
-        //        && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack"))
-        //        )
-        //{
-        //    Debug.Log("SUUUUUUUUUUUUUUUKA");
-        //    animator.SetInteger("attackAnimation", 4);
-        //    //  movement.canMove = true;
-        //    canClick = true; canClickSec = true;
-        //    noOfClick = 0; noOfClickSecond = 0;
-        //}
-        //else if (Input.GetMouseButtonDown(0) && (noOfClick > 3 || noOfClickSecond > 3) && isDrawedSword && (!animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
-        //    && !animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
-        //    && !animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
-        //   )
-        //{
-        //    animator.SetInteger("attackAnimation", 4);
-        //    Debug.Log("SUUUUUUUUUUUUUUUKA");
-        //    canClickSec = true;
-        //    canClick = true;
-        //    noOfClickSecond = 0; noOfClick = 0;
-            
-        //    //  movement.canMove = true;
-
-        //}
+      
         firstPlayed = true;
         controller.timeRemaining = 5;
         controller.timerIsRunning = true;

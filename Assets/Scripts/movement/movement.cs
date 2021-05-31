@@ -24,42 +24,30 @@ public class movement : MonoBehaviour
 	public float InputX;
 	public float InputZ;
 	public Vector3 desiredMoveDirection;
-	public Vector3 desiredMoveDirectionBack;
-	public bool blockRotationPlayer;
 	public float desiredRotationSpeed;
 	public Animator anim;
 	public float Speed;
-	public float allowPlayerRotation;
+	public float allowPlayerMove;
 	public Camera cam;
 	public CharacterController controller;
 	public bool isGrounded;
-	private float verticalVel;
-	private Vector3 moveVector;
 	public float playerSpeed;
 	bool isRunningSword;
-
 	public bool canMove;
-	attacksController attacks;
 	public bool MouseOverInventoryB;//setting in event of entering ui
 	public bool speedPotionUsingNow = false;
-	
-	public float jumpSpeed = 8.0F;
-	public float gravity = 20.0F;
 	public GameObject dialogBox;
 	public audioManager am;
-	
-	public Rigidbody rb;
 
-	
 	void Start()
 	{
-		rb = GetComponent<Rigidbody>();
+	
 		anim = this.GetComponent<Animator>();
 		
 		cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 		controller = this.GetComponent<CharacterController>();
 		canMove = true;
-		attacks = GetComponent<attacksController>();
+		
 	}
 	//EVENT FOR MOUSE ENTERING INVENTORY UI
 	public void MouseOverInventory()
@@ -103,21 +91,16 @@ public class movement : MonoBehaviour
 			else
 				playerSpeed = 5;
 		}
-		
-
-		bool isDrawedSword = anim.GetBool("isDrawedSword");
-		bool sPressed = Input.GetKey("s");
+		//bool isGrounded
 		isGrounded = controller.isGrounded;
-		//gravity applying below
+		//gravity applying 
 		if (isGrounded)
 		{
 			desiredMoveDirection += Physics.gravity * Time.deltaTime;
-			
 		}
 		else
 		{
 			desiredMoveDirection += Physics.gravity * Time.deltaTime;
-			
 		}
 		
 		
@@ -126,52 +109,47 @@ public class movement : MonoBehaviour
 	
 	void PlayerMoveAndRotation()
 	{
+		//otrzymanie danych z wektorów wejściowych
 		InputX = Input.GetAxis("Horizontal");
 		InputZ = Input.GetAxis("Vertical");
-		bool MouseattackPressed = Input.GetMouseButtonDown(0);
-		bool isDrawedSword = anim.GetBool("isDrawedSword");
-		var camera = Camera.main;
-		var forward = cam.transform.forward;
-		var right = cam.transform.right;
-		var forwardP = transform.forward;
-		var rightP = transform.right;
-
+		
+		Vector3 forward = cam.transform.forward;
+		Vector3 right = cam.transform.right;
+		//ograniczanie poruszania i obracania po y
 		forward.y = 0f;
+		//ograniczanie poruszania i obracania po y
 		right.y = 0f;
 
+		//robię tak żę wektory mają długość 1.0 dlatego że Input jest od 0 do 1 i nie ma sensu mieć większe znaczenia
 		forward.Normalize();
 		right.Normalize();
-		
+		//w zależności od tego jaki wektory wejściowy jest != 0 wyznaczam kierunek poruszania
 		desiredMoveDirection = forward * InputZ + right * InputX;
-		desiredMoveDirectionBack = -forwardP *  -InputZ + rightP*InputX;
 		
-		if (isDrawedSword && MouseattackPressed)
-        {
-			//canMove = false;
-
-        }
-		
-		if (blockRotationPlayer == false && canMove)
+		if (canMove)
 		{
-			
+			//funkcja Slerp powoli się obraca transform od aktualnej rotacji do pożądanej z szybkością desiredRotationSpeed
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
-			if(controller.enabled)
-			controller.Move(desiredMoveDirection * Time.deltaTime * playerSpeed);
-			
-			
-		}
-					
-		
+			//sprawdzam czy CharacterContoller jest włączony
+			if (controller.enabled)
+			{
+				//poruszam Controller funkcjią Move do żądanej pozycji z szybkościa Time.deltaTime * playerSpeed 
+				controller.Move(desiredMoveDirection * Time.deltaTime * playerSpeed);
+			}
+		}		
 	}
 	public void runningAudioEvent()//animation event
     {
-	if( !anim.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
-				&& !anim.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
-				&& !anim.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack")
-			  && !anim.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
-					&& !anim.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
-					&& !anim.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
-		am.Play("walk");
+		if (!anim.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
+					&& !anim.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
+					&& !anim.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack")
+				  && !anim.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
+						&& !anim.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
+						&& !anim.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
+		{
+			//włączam dzwięk poruszania w animacji poruszania się bez miecza
+			am.Play("walk");
+		}
     }
 	public void swordRunningAudioEvent()//animation event
 	{
@@ -181,37 +159,31 @@ public class movement : MonoBehaviour
 			  && !anim.GetCurrentAnimatorStateInfo(2).IsName("firstAttackSecondThing")
 					&& !anim.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
 					&& !anim.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing"))
+		{
+			//włączam dzwięk poruszania w animacji poruszania się z mieczem
 			am.Play("swordRun");
+		}
     }
 	
 	void InputMagnitude()
 	{
-		bool isDrawedSword = anim.GetBool("isDrawedSword");
-		//Calculate Input Vectors
+		
+		//Input wektory
 		InputX = Input.GetAxis("Horizontal");
 		InputZ = Input.GetAxis("Vertical");
-
-		anim.SetFloat("InputZ", InputZ, 0.0f, Time.deltaTime * 2f);
-		anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2f);
-		
-		//Calculate the Input Magnitude
+		//Oblicz szybkość wejściową
 		Speed = new Vector2(InputX, InputZ).sqrMagnitude;
-		
-		//Physically move player
-		if (Speed > allowPlayerRotation)
+		//przesuwanie za pomocą animacji i funkcji PlayerMoveAndRotation(); w przypadku jeśli wejśiowe dane > 0
+		if (Speed > allowPlayerMove)
 		{
-			if (canMove )
-			{
-				
-				PlayerMoveAndRotation();
-				
-				anim.SetBool("isRunning", true);
-				
+			//sprawdzenie czy mogę presuwać się
+			if (canMove)
+			{	
+				//funkcja dla presuwania i obracania
+				PlayerMoveAndRotation();	
+				//zmieniam animacje w animatorze
+				anim.SetBool("isRunning", true);		
 			}
-		}
-		else if (Speed < allowPlayerRotation)
-		{
-
 		}
 	}
 

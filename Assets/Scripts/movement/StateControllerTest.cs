@@ -25,28 +25,14 @@ public class StateControllerTest : MonoBehaviour
     public float acceleration = 0.1f;
     public float decceleration = 0.5f;
     int isRunningHash, isDrawedSwordHash, isIdleSwordHash, isRunningSwordHash, isSneathedHash;
-    public bool enemiesAround = false;
+   
     public GameObject dialogBox;
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            enemiesAround = true;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            enemiesAround = false;
-        }
-    }
-    attacksController attacks;
+    
+    
     bool isRunning;
     bool isIdleSword;
     bool isDrawedSword;
     bool isRunningSword;
-    bool isSneathedSword;
     bool runningPressed;
     bool walkingBackPressed;
     bool diPressing;
@@ -57,8 +43,6 @@ public class StateControllerTest : MonoBehaviour
         animator = GetComponent<Animator>();
         playerSwordController = GetComponent<playerSword>();
         timerIsRunning = true;
-
-        attacks = GetComponent<attacksController>();
 
         isDrawedSwordHash = Animator.StringToHash("isDrawedSword");
         isIdleSwordHash = Animator.StringToHash("isIdleSword");
@@ -75,20 +59,20 @@ public class StateControllerTest : MonoBehaviour
     {
         if(pauseMenu.instance.pauseOpened)
             return;
-
-         takeSwordPressed = Input.GetKey(KeyCode.Mouse2);
+        //ten "region" odpowiada za sprawdzanie wcisknięcia przycisków
+        #region ButtonsEvents
+        takeSwordPressed = Input.GetKey(KeyCode.Mouse2);
         isRunning = animator.GetBool(isRunningHash);
-
+        //"Hash" zmienne znaczą że już jest znana animacja informację o której chcę otrzymać,czyli ona jest zdefiniowana na początku i nie muszę ciągle szukać jej w animatorze
         isIdleSword = animator.GetBool(isIdleSwordHash);
         isDrawedSword = animator.GetBool(isDrawedSwordHash);
         isRunningSword = animator.GetBool(isRunningSwordHash);
-
-        isSneathedSword = animator.GetBool(isSneathedHash);
 
         runningPressed = Input.GetKey("w");
         walkingBackPressed = Input.GetKey("s");
         diPressing = Input.GetKey("d");
         aPressed = Input.GetKey("a");
+        #endregion
         //stopping player when inventory is opened and mouse is in invenotry tab
         if ((movement.instance.MouseOverInventoryB && inventoryManager.instance.inventoryOpened) ||dialogBox.activeSelf || pauseMenu.instance.menuIsOpened)
         {
@@ -106,15 +90,19 @@ public class StateControllerTest : MonoBehaviour
 
 
 
-        ///trail setting
+        
+        //jeśli miecz jest wzięty "trail" zostaje wyłączony
         if (isDrawedSword)
         {
+            
             Transform sword = playerSwordController.sword.transform;
+            //sprawdzanie czy miecz ma "trail" jako GameObject
             if (sword.gameObject.transform.childCount > 0)
+            {
                 sword.GetChild(0).gameObject.SetActive(false);
-          
-
+            }
         }
+        //w innym przypadku kiedy miecz jest z tyłu włączam się ten "trail" i wyłaczam drugi "trail" który jest wykorzystywany w zdolnościach gracza
         else
         {
             Transform sword = playerSwordController.sword.transform;
@@ -127,6 +115,7 @@ public class StateControllerTest : MonoBehaviour
             movement.canMove = true;
 
         }
+        //jeśli żaden przycisk nie jest wciśnięty to sprawdzam czy miecz jest wzięty i wracam do animacji "idle" z mieczem,albo w innym przypadku bez niego
         if (!runningPressed && !walkingBackPressed && !diPressing && !aPressed)
         {
             if (isDrawedSword)
@@ -143,9 +132,10 @@ public class StateControllerTest : MonoBehaviour
      
 
 
-
+        //sprawdzenia różnych możliwości(w tym przypadku czy poruszamy się i wciskamy "wzięcie miecza"
         if (runningPressed && !isDrawedSword && takeSwordPressed && !animator.GetCurrentAnimatorStateInfo(1).IsName("sneathSword"))
         {
+
             animator.SetBool(isDrawedSwordHash, true);
             animator.SetBool(isRunningSwordHash, true);
             animator.SetBool(isSneathedHash, false);
@@ -232,26 +222,30 @@ public class StateControllerTest : MonoBehaviour
         {
             animator.SetBool(isRunningSwordHash, true);
         }
-        //when we are running with sword and there are no enemies around
+
+        //jeśli miecz jest w rękach
         if (isDrawedSword)
         {
 
-
-            if (timerIsRunning && !enemiesAround)
+            //timer służy do chowania miecza automatycznie
+            if (timerIsRunning)
             {
+                //timerIsRunning=true tylko wtedy kiedy miecz jest w rękach
                 if (timeRemaining > 0 && isDrawedSword)
                 {
                     timeRemaining -= Time.deltaTime;
                 }
                 else
                 {
+                    //w przypadku kiedy czas minął chowamy miecz,ale przed tym sprawdzamy warunki
                     if (isDrawedSword && isRunningSword)
                     {
-                        animator.SetBool("isSneathed", true);//idzie animacja sneath sword
+                        animator.SetBool("isSneathed", true);//uruchamia się animacja sneath sword
                         animator.SetBool(isRunningHash, true);
                         animator.SetBool("isDrawedSword", false);
                         animator.SetBool(isRunningSwordHash, false);
-                        playerSwordController.swordUnequipMethod();//wstawiam sword na back
+                        //ta funckaj zmienia pozycje miecza pod czas aniamcji chowanie miecza i wstawia go do tylu
+                        playerSwordController.swordUnequipMethod();//wstawiam miecz do tylu
                     }
                     if (isDrawedSword && isIdleSword)
                     {
