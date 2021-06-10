@@ -11,7 +11,7 @@ public class tooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public Sprite icon;
     public string description;
 
-    private void Update()
+    public void Update()
     {
       
         //otrzymuje dane z slotu na ktorym jest myszka
@@ -29,18 +29,18 @@ public class tooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
         
         if (!inventoryManager.instance.inventoryOpened)
-            tooltipManager.hideTooltip();
+            tooltipManager.instance.hideTooltip();
     }
     //what we pointed with mouse
     public void OnPointerEnter(PointerEventData eventData)
     {
         
         if(gameObject.GetComponent<Slot>().item!=null )//check if there is item in slot
-        tooltipManager.showTooltip(name,whatDo,icon,description);
+        tooltipManager.instance.showTooltip(name,whatDo,icon,description);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        tooltipManager.hideTooltip();
+        tooltipManager.instance.hideTooltip();
     }
 }

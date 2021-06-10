@@ -19,24 +19,23 @@ public class weaponInteract : Interact
     public bool isCurrentSword;
     public CharacterController otherController;
     public Animator otherAnimator;
-    private void Start()
+    public void Start()
     {
         damage = item.swordDamage;
         if (transform.parent.name == "character")
+        {
             animator = GetComponentInParent<Animator>();
+        }
         else
+        {
             animator = GameObject.Find("character").GetComponent<Animator>();
+        }
     }
     public override void InteractWith()
     {
-       
-       
         resetText();
         InteractedText += "pick up weapon";
         interacting = true;
-   
-       
-        
     }
 
     private void Update()
@@ -44,24 +43,19 @@ public class weaponInteract : Interact
          //pickup weapon
         if (Input.GetKeyDown(KeyCode.E) && interacting)
         {
-      
             pickUp();
-            
         }
     }
     void pickUp()
     {
-
-
-        //add to inventory
+        //dodaje do ekwipunku
         bool added = Inventory.instance.add(item);
         
         if (added)
         {
-            Debug.Log("added weapon");
-            
+            //dodaje GameObject do ekwipunku
             Inventory.instance.itemsGameObjects.Add(gameObject);
-            
+            //chowa panel interakcji
             manager.hidePanel();
             interacting = false;
 
@@ -69,6 +63,7 @@ public class weaponInteract : Interact
             {
                 gameObject.GetComponent<FloatingItem>().Rotating = true;
             }
+            //wyłącza objekt na scenie
             gameObject.SetActive(false);
         
         }
@@ -80,11 +75,8 @@ public class weaponInteract : Interact
         {
             if (!gameObject.GetComponent<FloatingItem>().Rotating)
             {
-
                 if (isColliding)
                     return;
-
-
                 if ((animator.GetCurrentAnimatorStateInfo(2).IsName("firstAttack")
                         || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttack")
                         || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttack") ||
@@ -92,33 +84,29 @@ public class weaponInteract : Interact
                         || animator.GetCurrentAnimatorStateInfo(2).IsName("secondAttackSecondThing")
                         || animator.GetCurrentAnimatorStateInfo(2).IsName("thirdAttackSecondThing")))
                 {
-
+                    //w przypadku interakcji miecza z wrogiem
                     if (other.gameObject.CompareTag("ENEMY"))
                     {
                         isColliding = true;
-
                         if (other.gameObject.GetComponent<ProceduralStats>() != null)
                         {
-
+                            //odejmuje zdrownie wroga
                             other.gameObject.GetComponent<ProceduralStats>().currentHealth -= item.swordDamage;
-                         
-                         
-                                other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);//moving enemy back after hit
-                                                                                                     
-
+                            //odsuwa go w kierunku miecza po uderzeniu
+                            other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);//moving enemy back after hit
                         }
                         else if (other.gameObject.GetComponent<EnemyStats>() != null)
                         {
-                           
-                            //damage
+                            //odejmuje zdrownie wroga
                             other.gameObject.GetComponent<EnemyStats>().currentHP -= item.swordDamage;
                             //logic
-                          
                             otherController = other.GetComponent<CharacterController>();
                             otherAnimator = other.GetComponent<Animator>();
+                            //zmienia animacje 
                             otherAnimator.SetBool("isWalkingEnemy", false);
                             otherAnimator.SetBool("isRunningEnemy", false);
                             int temp = Random.Range(0, 2);
+                            //w przypadku losowych liczb włącza animacje otrzymania uderzenia
                             if (temp == 1)
                             {
                                 otherAnimator.SetTrigger("hitEnemy");
@@ -127,15 +115,14 @@ public class weaponInteract : Interact
                             {
                                 otherAnimator.SetTrigger("hitEnemy2");
                             }
-                            
-                        
                             EnemyPatrol.instance.canMove = false;
                             otherController.enabled = false;
                             if (temp == 1)
                             {
+                                //odsuwa go w kierunku miecza po uderzeniu
                                 other.gameObject.transform.DOMove(other.gameObject.transform.position + (transform.root.forward * 4), 0.2f);
                             }
-                           
+                           //czeka i włącza wroga z powrotem
                             StartCoroutine(waitForSec());
                         }
                     }
@@ -143,7 +130,6 @@ public class weaponInteract : Interact
                 }
             }
         }
-
     }
     IEnumerator waitForSec()
     {

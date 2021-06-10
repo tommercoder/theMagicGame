@@ -9,9 +9,7 @@ public class Quest
     public string description;
     public int XP;
     public string rewardText;
-
-
-    //maybe item reward
+    //możliwe nagrody
     public swordEquipping rewardSword;
     public GameObject swordGameObjectReward;
     public potionUse rewardPotion;
@@ -19,11 +17,13 @@ public class Quest
 
     public QuestGoal goal;
     public npcName npcEnumName;
+    //funkcja wywołana po zakonczeniu zadania
     public void complete()
     {
         logShow.instance.showQuestText("quest " + title + " is completed");
         
         isActive = false;
+        //resetowanie aktualnego zadania
         MarieleQuest.instance.hasQuest = false;
         MarieleQuest.instance.currentMarieleQuest.title = ""; 
         MarieleQuest.instance.currentMarieleQuest = null;
@@ -33,7 +33,8 @@ public class Quest
         
         //also clear quest in P window
         MarieleQuest.instance.clearPWindow();
-        //save it to completed quests
+        //dodanie nagrody do ekwipunku
+        
         if (rewardSword != null && swordGameObjectReward != null)
         {
             Inventory.instance.add(rewardSword);
@@ -48,7 +49,7 @@ public class Quest
             potionGameObjectReward.SetActive(false);
         }
 
-
+        //w jakimś z przypadków mając wszystkie 5 mieczy gra jest skończona
         if (playerSword.instance.currentSword == attacksController.instance.air && Inventory.instance.items.Contains(attacksController.instance.water) &&
          Inventory.instance.items.Contains(attacksController.instance.earth)
          && Inventory.instance.items.Contains(attacksController.instance.fire))
@@ -82,4 +83,5 @@ public class Quest
         }
     
 }
+//imię npc
 public enum npcName { simpleNPC, waterGirl, airGirl, earthGirl, fireGirl, emotionalSpirit, lifeSpirit, thoughtSpirit, sensibilitySpirit }

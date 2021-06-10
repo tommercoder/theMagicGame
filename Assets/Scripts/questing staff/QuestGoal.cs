@@ -8,31 +8,28 @@ public class QuestGoal
     
     public int requiredAmount;
     public int currentAmount;
-
+    //jeśli cel zadania jest wykonana
     public bool isReached()
     {
         questPointer.instance.target = null;
         MarieleQuest.instance.questPointer.SetActive(false);
-
-
-       
         return (currentAmount >= requiredAmount);
     }
-
+    //jeśli celą jest zabić wroga to powiększa liczba nieżyjących wrogów
     public void EnemyKilled()
     {
         if (goalType == goalType.killEnemyQuest)
         {
-
-            currentAmount++;
-
+           currentAmount++;
         }
     }
+    //jeśli celą jest zabić wroga proceduralnego to powiększa liczba nieżyjących wrogów proceduralnych
     public void ProceduralEnemyKilled()
     {
         if (goalType == goalType.killPEnemyQuest)
             currentAmount++;
     }
+    //jeśli celą jest porozmawiać z innym npc
     public void SpokeToAnotherNPC()
     {
         if(goalType==goalType.speakQuest)
@@ -42,14 +39,8 @@ public class QuestGoal
             currentAmount++;
         }
     }
-    public void gotSomeStaffToComplete()
-    {
-        if(goalType==goalType.gatheringQuest)
-        {
-            currentAmount++;
-        }
-    }
+    
 }
 
-public enum goalType {None, killEnemyQuest,killPEnemyQuest, gatheringQuest , speakQuest};
+public enum goalType {None, killEnemyQuest,killPEnemyQuest , speakQuest};
 

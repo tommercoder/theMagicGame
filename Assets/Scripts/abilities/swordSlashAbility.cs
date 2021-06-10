@@ -5,24 +5,21 @@ using UnityEngine;
 public class swordSlashAbility : AbilityMain
 {
     public AbilityUI AbilityUI;
-    public playerSword swordController;
-    public Transform sword;
     public float waitToTurnOffSlash;
  
     void Start()
     {
-        
-        swordController = GetComponent<playerSword>();
-        
+    
     }
     public override void Ability()
     {
-      
+        //włacza się drugi trail na mieczu
         playerSword.instance.sword.GetChild(1).gameObject.SetActive(true);
         AbilityUI.ShowCoolDown(cooldownTime);
         abilityDone = true;
-        
+        //zmienia obrażenie miecza
         playerSword.instance.currentSword.swordDamage += playerSword.instance.currentSword.swordDamage * 20 / 100;
+        //czeka na wyłączenie effektu
         StartCoroutine(waitOff());
     }
 

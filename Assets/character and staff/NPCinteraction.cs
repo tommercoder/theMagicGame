@@ -25,7 +25,7 @@ public class NPCinteraction : Interact
     public Quest quest;
 
    
-    private void Start()
+    public void Start()
     {
         allnpc = GameObject.FindObjectsOfType<NPCinteraction>().ToList();
         player = GameObject.Find("character");
@@ -46,8 +46,9 @@ public class NPCinteraction : Interact
 
 
     }
-    private void Update()
+    public void Update()
     {
+        //przy interakcji z npc i włączoną rozmową
         if (Input.GetKey(KeyCode.E) && (interacting || DialogueManager.instance.dialogBOX.activeSelf)) //&& !dialogEnded)
         {
             for (int i = 0; i < allnpc.Count; i++)
@@ -56,29 +57,30 @@ public class NPCinteraction : Interact
                 {
                     if (!allnpc[i].dialogHappening)
                     {
-                        
+                        //wyłączamy kamerę
                         camera.GetComponent<CinemachineBrain>().enabled = false;
                         inventoryManager.instance.hidePanel();
                         resetText();
 
-                        //dialogue
+                        //szukamy npc który ma zadanie i mówimy że s tym npc jesteśmy w interakcji
                         if (allnpc[i].quest != null && characterStats.instance.loadCompleted && (allnpc[i].quest.title != "" || allnpc[i].quest.title != " "))
                         {
                             
                             FindObjectOfType<DialogueManager>().questBool = true;
                            
                         }
+                        //zaczyna się dialog
                         FindObjectOfType<DialogueManager>().StartDialog(dialogue,allnpc[i]);
                        
                     }
                 }
                 
-                
+                //wstawia się imie npc do paneli rozmowy
                 textName.GetComponent<TextMesh>().text = dialogue.name;
 
             }
 
-
+            //mówi że ten npc ma dialog z graczem
             for (int i = 0; i < allnpc.Count; i++)
             {
                 if (allnpc[i].name == name && allnpc[i].interacting)
@@ -97,6 +99,7 @@ public class NPCinteraction : Interact
                 {
                     if (FindObjectOfType<DialogueManager>().questUI.activeSelf)
                     {
+                        //oddaje informacje do klasy DialogueManager o zadaniu i npc z którym rozmawiamy
                         FindObjectOfType<DialogueManager>().handleQuest(quest, allnpc[i]);
 
                     }

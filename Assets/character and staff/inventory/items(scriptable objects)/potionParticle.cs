@@ -20,6 +20,7 @@ public class potionParticle : MonoBehaviour
         
         StartCoroutine(turnOnParticle(type));
     }
+    //włącza particle system na przydzieloną ilośc czasu
     public IEnumerator turnOnParticle(typeOfItem type)
     {
         if(type == typeOfItem.damagePotion)
@@ -61,11 +62,8 @@ public class potionParticle : MonoBehaviour
                     s.swordDamage = s.oldDamage;
                 }
             }
-            //playerSword.instance.currentSword.swordDamage -= playerSword.instance.currentSword.swordDamage * 20 / 100;
             inventoryManager.instance.damageText.text = "current damage is: " + playerSword.instance.currentSword.swordDamage;
-            //set damage back
         }
-
         if (type == typeOfItem.speedPotion)
         {
             yield return new WaitForSeconds(time);
@@ -73,17 +71,5 @@ public class potionParticle : MonoBehaviour
             movement.instance.speedPotionUsingNow = false;
         }
     }
-    public void potionTimer(float givenTime)
-    {
-
-        givenTime -= Time.deltaTime;
-
-
-        if (givenTime <= 0.0f)
-        {
-           
-        }
-
-
-    }
+  
 }

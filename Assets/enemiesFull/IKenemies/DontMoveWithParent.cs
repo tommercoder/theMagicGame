@@ -8,18 +8,16 @@ public class DontMoveWithParent : MonoBehaviour
 {
     public Vector3 savedPosition;
 
-    [Tooltip("When DontMoveWithParent is on, Ctrl+Z doesn't work for movement changes on this GameObject.")]
+    
     public bool dontMoveWithParent = true;
     bool lastDontMoveWithParent = true;
 
-    Vector3 parentLastPos;
-
-    private void Update()
+    public void Update()
     {
         
         if (transform.hasChanged  && savedPosition != transform.position)
         {
-            
+            //zapisuje pozycje objektu
             savedPosition = transform.position;
             transform.hasChanged = false;
         }
@@ -30,7 +28,7 @@ public class DontMoveWithParent : MonoBehaviour
         lastDontMoveWithParent = dontMoveWithParent;
     }
 
-    private void LateUpdate()
+    public void LateUpdate()
     {
         if (dontMoveWithParent)
         {
@@ -41,6 +39,7 @@ public class DontMoveWithParent : MonoBehaviour
 
             if (transform.parent.hasChanged)
             {
+                //wstawia tą pozycje z powrotem w objekt
                 transform.position = savedPosition;
                 transform.parent.hasChanged = false;
             }

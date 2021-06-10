@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1467582979603395767}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 113.3777, y: 3.2392824, z: 747.25323}
+  m_LocalPosition: {x: 590.0512, y: 18.246181, z: 301.55997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,12 +52,15 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 30
+      - m_Value: 30.81
         m_Name: trails spawn rate
         m_Overridden: 1
       - m_Value: 1
         m_Name: trail lifetime
-        m_Overridden: 0
+        m_Overridden: 1
+      - m_Value: 1
+        m_Name: size
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -66,7 +69,7 @@ VisualEffect:
       m_Array:
       - m_Value: {x: 18.755064, y: 7.0331497, z: 1.6308752, w: 0}
         m_Name: New Color
-        m_Overridden: 0
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:

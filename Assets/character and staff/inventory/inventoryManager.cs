@@ -25,38 +25,19 @@ public class inventoryManager : MonoBehaviour//,ISaveable
     public Transform itemsParent;
     public tooltipManager tooltipManager;
     public Slot[] slots;
-    private void Start()
+    public void Start()
     {
         inventory = Inventory.instance;
-        
-
         slots = itemsParent.GetComponentsInChildren<Slot>();
         //updating ui
-        inventory.onItemChangedCalled += updateUI;
+        inventory.onItemChangedCalled += updateUI;  
     }
-    void Update()
+    public void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.Escape))
-        //{
-           
-        //}
-        ////opening inventory
-        //if (inventoryOpened)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Escape))
-        //    {
-        //        openInventory();
-                
-        //    }
-        //}
-        //else
         if (Input.GetKeyDown(KeyCode.I) && !pauseMenu.instance.pauseOpened && !pauseMenu.instance.menuIsOpened) {
             openInventory();
         }
-       
-        
     }
-
     public void updateUI()
     {
         
@@ -70,18 +51,13 @@ public class inventoryManager : MonoBehaviour//,ISaveable
                 if (i < inventory.items.Count)
                 {
                     slots[i].add(inventory.items[i]);
-                ///
-                
-
-                //slots[i].countText.text = slots[i].itemsInSlot.Count.ToString();
-            }
+                }
                 else
                 {
                     slots[i].clearSlot();
                 }
             }
-        }
-        
+        }      
     public void openInventory()
     {
         damageText.text = "";
@@ -97,7 +73,6 @@ public class inventoryManager : MonoBehaviour//,ISaveable
         }
         else if (!inventoryOpened)
         {
-            //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineBrain>().enabled = false;
             inventoryOpened = true;
 
         }
@@ -105,16 +80,13 @@ public class inventoryManager : MonoBehaviour//,ISaveable
     //showing pickup panel
     public void showPanel(string text)
     {
-
         textPanel.gameObject.SetActive(true);
         textPanel.text = text;
     }
     //closing pickup panel
     public void hidePanel()
-    {
-        
+    {    
         textPanel.gameObject.SetActive(false);
-       
     }
 
     

@@ -9,8 +9,6 @@ public class ProceduralStats : MonoBehaviour,ISaveable
     [Header("PROCEDURAL ID")]
     public string id;
 
-
-    //public GameObject[] stepTargets;
     public Rigidbody rigidbody;
     public CapsuleCollider[] collider;
     public bool isDead;
@@ -27,50 +25,49 @@ public class ProceduralStats : MonoBehaviour,ISaveable
     public GameObject player;
     public int XPforDeath;
     bool addedXP = false;
-   // public GameObject log;
-    // Start is called before the first frame update
-    private void Awake()
+    
+    public void Awake()
     {
         currentHealth = health;
         animator = GetComponentInChildren<Animator>();
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponents<CapsuleCollider>();
-        if(GetComponent<ProceduralLeg>()!=null)
-        legScript = GetComponent<ProceduralLeg>();
+        if (GetComponent<ProceduralLeg>() != null)
+        {
+            legScript = GetComponent<ProceduralLeg>();
+        }
         if (GetComponentInChildren<MainProceduralController>() != null)
+        {
             mainScript = GetComponentInChildren<MainProceduralController>();
+        }
 
         patrolScript = GetComponent<navmeshPatrol>();
-
-
         colliders = GetComponentsInChildren<Collider>();
         rigidbodies = GetComponentsInChildren<Rigidbody>();
         player = GameObject.Find("character");
-       // log = GameObject.Find("error text");
-       ///log.GetComponent<Text>().text = " ";
     }
-    void Start()
+   public void Start()
     {
+        //Wyłącza ragdoll.
         RagdollActive(false);
         
     }
-    private void Update()
+    public void Update()
     {
-        //for (int i = 0; i < stepTargets.Length; i++)
-        //{
-        //    stepTargets[i].GetComponent<SphereCollider>().enabled = true;
-        //    stepTargets[i].GetComponent<MeshRenderer>().enabled = true;
-        //}
+        //Jeśli zdrowie jest < 0.
         if (currentHealth<=0)
         {
             Die();
+            //Jeśli jest zadanie i wkaźnik jest na tym wrogu wskażnik się wyłącza.
             if (GameObject.FindObjectOfType<questPointer>().target != null && transform == GameObject.FindObjectOfType<questPointer>().target)
             {
                 MarieleQuest.instance.questPointer.SetActive(false);
             }
+            //Dodaje doświadczenie.
             if (!addedXP)
             {
                 Quest quest = MarieleQuest.instance.currentMarieleQuest;
+                //Sprawdza czy zadanie istnieje i czy zostało wykonane.
                 if (quest!=null && quest.isActive)
                 {
                     quest.goal.ProceduralEnemyKilled();
@@ -78,18 +75,16 @@ public class ProceduralStats : MonoBehaviour,ISaveable
                     {
                         //add reward to inventory
                         characterStats.instance.XP += quest.XP;
-                        //logShow.instance.showQuestText("quest " + MarieleQuest.instance.currentMarieleQuest.title + " is completed");
                         quest.complete();
                         
                     }
                 }
-                // log.gameObject.SetActive(true);
-                // log.GetComponent<Text>().text = "+" + " " + XPforDeath + "xp";
+                //Dodaje do listy zabitych wrogów dla zapisywania informacji.
                 characterStats.instance.all_procedural_ids.Add(id);
                 logShow.instance.showText("+" + " " + XPforDeath + "xp");
                 player.GetComponent<characterStats>().XP += XPforDeath;
                 addedXP = true;
-                Debug.Log("added xp");
+                
             }
         }
     }
@@ -97,43 +92,42 @@ public class ProceduralStats : MonoBehaviour,ISaveable
     void Die()
     {
         isDead = true;
-        
-        //ragdoll physics (using character joints and rigidbodies)
+        //Włącza ragdoll.
         RagdollActive(true);
-        //StartCoroutine(waitDeath());
+        //Wyłącza trigger dla kolizji z ziemią.
         for (int i = 0;i < collider.Length; i++) {
             collider[i].isTrigger = false;
             collider[i].enabled = true;
         }
-        
+        //Usuwa objekt.
         Destroy(this.gameObject, 1f);
     }
-    IEnumerator waitDeath()
-    {
-        yield return new WaitForSeconds(4f);
-        addedXP = false;
-       // log.GetComponent<Text>().text = " ";
-       // log.gameObject.SetActive(false);
-        Destroy(this.gameObject);
-    }
+ 
     public void RagdollActive(bool active)
     {
-        //children
+        //Włącza/wyłącza kolizje.
         foreach (var collider in colliders)
+        {
             collider.enabled = active;
+        }
+        //Włącza/wyłącza rigidbody.
         foreach (var rigidbody in rigidbodies)
         {
             rigidbody.detectCollisions = active;
             rigidbody.isKinematic = !active;
         }
 
-        //root
+        
         this.enabled = !active;
         patrolScript.enabled = !active;
-        if(GetComponent<ProceduralLeg>()!=null)
-        legScript.enabled = !active;
-        if(GetComponentInChildren<MainProceduralController>()!=null)
-        mainScript.enabled = !active;
+        if (GetComponent<ProceduralLeg>() != null)
+        {
+            legScript.enabled = !active;
+        }
+        if (GetComponentInChildren<MainProceduralController>() != null)
+        {
+            mainScript.enabled = !active;
+        }
 
         animator.enabled = !active;
         rigidbody.detectCollisions = !active;

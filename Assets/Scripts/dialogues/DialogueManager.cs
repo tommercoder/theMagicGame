@@ -24,39 +24,35 @@ public class DialogueManager : MonoBehaviour
     public Text dialogueText;
     public Animator anim;
     public GameObject dialogBOX;
-
     public GameObject answer1G;
     public GameObject answer2G;
     public GameObject answerByeG;
     public GameObject questButton;
     public bool questBool;
     public NPCinteraction npcWhoSpeaking;
-    
-    private void Start()
+    public GameObject questUI;
+    public Text questTitle;
+    public Text questDesc;
+    public Text questReward;
+    Quest forHandle;
+    Dialogue forhandleD;
+    public void Start()
     {
         sentences = new Queue<string>();
         sentences2 = new Queue<string>();
-
         answer1G.SetActive(false);
         answer2G.SetActive(false);
         answerByeG.SetActive(false);
-
-        
-
-
     }
 
-    private void Update()
+    public void Update()
     {
         if (questBool)
         {
             if (dialogBOX.activeSelf && answer1G.activeSelf == false && answer2G.activeSelf == false)
-            {
-                
+            {            
                 if (npcWhoSpeaking.quest!=null && npcWhoSpeaking.quest.title!="" )
                 {
-                   
-                      
                         Quest quest = MarieleQuest.instance.currentMarieleQuest;
                         if (quest != null)
                             if (quest.isActive && forhandleD.npcEnumName.ToString() == quest.npcEnumName.ToString())
@@ -64,12 +60,10 @@ public class DialogueManager : MonoBehaviour
                                 quest.goal.SpokeToAnotherNPC();
                                 if (quest.goal.isReached())
                                 {
-                                    //add reward to inventory
                                     characterStats.instance.XP += quest.XP;
                                     quest.complete();
                                 }
                             }
-                 
                     questButton.SetActive(true);
                     questBool = false;
                 }
@@ -77,7 +71,7 @@ public class DialogueManager : MonoBehaviour
         }
 
     }
-    Dialogue forhandleD;
+ 
     public void StartDialog(Dialogue dialogue,NPCinteraction temp)
     {
         npcWhoSpeaking = temp;
@@ -116,7 +110,6 @@ public class DialogueManager : MonoBehaviour
             answerByeG.transform.position = answer2G.transform.position;
         }
 
-
         greeting = dialogue.greeting;
         goodbye = dialogue.goodbye;
 
@@ -125,16 +118,12 @@ public class DialogueManager : MonoBehaviour
         answerByeG.GetComponentInChildren<Text>().text = answerBye;
 
         dialogueText.text = greeting;
-        
     }
     public void DisplayNext()
     {
-
         string sentence = sentences.Dequeue();
-
         StopAllCoroutines();
         StartCoroutine(type(sentence));
-
     }
     public void displayNext2()
     {
@@ -143,7 +132,6 @@ public class DialogueManager : MonoBehaviour
         {
             sentence2 = sentences2.Dequeue();
         }
-
         StopAllCoroutines();
         StartCoroutine(type(sentence2));
     }
@@ -152,7 +140,6 @@ public class DialogueManager : MonoBehaviour
 
         DisplayNext();
         answer1G.SetActive(false);
-        
     }
     public void answer2Click()
     {
@@ -209,20 +196,9 @@ public class DialogueManager : MonoBehaviour
         anim.SetBool("dialogOpen", false);
         dialogBOX.SetActive(false);
         List<NPCinteraction> temp = new List<NPCinteraction>();
-        temp = GameObject.FindObjectsOfType<NPCinteraction>().ToList();
-        
-        
+        temp = GameObject.FindObjectsOfType<NPCinteraction>().ToList();    
         NPCinteraction.instance.dialogHappening = false;
-
-       
-
     }
-
-    public GameObject questUI;
-    public Text questTitle;
-    public Text questDesc;
-    public Text questReward;
-    Quest forHandle;
     public  void openQuestWindow()
     {
         questUI.SetActive(true);
@@ -238,17 +214,13 @@ public class DialogueManager : MonoBehaviour
     List<NPCinteraction> allNpc;
     public void acceptQuest()
     {
-        
-        
-            if (MarieleQuest.instance.hasQuest == false )
+            if (MarieleQuest.instance.hasQuest == false)
             {
                 questUI.SetActive(false);
                 questButton.SetActive(false);
-
                 EndDialogue();
                 logShow.instance.showText("you got new quest,for details press P");
                 forHandle.isActive = true;
-
                 MarieleQuest.instance.currentMarieleQuest = forHandle;
                 questBool = false;
                 MarieleQuest.instance.hasQuest = true;
@@ -261,14 +233,11 @@ public class DialogueManager : MonoBehaviour
                         forHandle = null;
                     }
                 }
-                
-
             }
             else
             {
                 logShow.instance.showText("You can have one quest at time only");
-            }
-        
+            }  
     }
     public void declineQuest()
     {

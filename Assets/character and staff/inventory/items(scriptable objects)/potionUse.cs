@@ -12,10 +12,7 @@ public class potionUse : Item
     }
     #endregion
     public typeOfItem type;
-    //public bool speedPotionUsing = false;
-    //public ParticleSystem healthParticle;
-    //public ParticleSystem speedParticle;
-    //public ParticleSystem damageParticle;
+
     public override void useFromInventory()
     {
         base.useFromInventory();
@@ -37,6 +34,7 @@ public class potionUse : Item
                     }
                     else
                     {
+                        //usuwa wykorzystaną miksturę z ekwipunku w przypadku jeśli został tylko jeden objekt
                         for (int i = 0; i < Inventory.instance.items.Count; i++)
                         {
                             if (Inventory.instance.items[i] == this)
@@ -46,6 +44,7 @@ public class potionUse : Item
                             }
                         }
                     }
+                    //włącza particle system z danym typem
                     potionParticle.instance.turn(type);
                     #endregion
                     return;
@@ -73,16 +72,15 @@ public class potionUse : Item
                 potionParticle.instance.turn(type);
                 
             }
-           
-            Debug.Log("using healthPotion" + name);
         }
+        //działa tak samo
         if (type == typeOfItem.damagePotion)
         {
 
             if (!potionParticle.instance.usingDamagePotionNow)
             {
+                //powiększa obrażenia miecza o 20%
                 playerSword.instance.currentSword.swordDamage += playerSword.instance.currentSword.swordDamage * 20 / 100;
-                Debug.Log("name " + playerSword.instance.currentSword.name);
                 if (this.currentStack > 1)
                 {
                     this.currentStack -= 1;
@@ -107,10 +105,7 @@ public class potionUse : Item
             {
                 logShow.instance.showText("you can't use damage potion twice,wait until effect is gone");
             }
-            //move it to if above
-           
-            //set the damage plus for player for given amount of time;
-            Debug.Log("using damagePotion" + name);
+
         }
         if (type == typeOfItem.speedPotion)
         {
@@ -145,9 +140,7 @@ public class potionUse : Item
             {
                 logShow.instance.showText("last speed potions is still in use");
             }
-            
-            
-            Debug.Log("using speedPotion" + name);
+   
         }
      
     }
@@ -158,4 +151,4 @@ public class potionUse : Item
     
     
 }
-public enum typeOfItem { healthPotion, speedPotion, damagePotion}//etc
+public enum typeOfItem { healthPotion, speedPotion, damagePotion}

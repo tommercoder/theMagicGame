@@ -12,16 +12,14 @@ public class PlayerInteraction : MonoBehaviour
     public inventoryManager panelShow;
 
     public respawnScript respawnScript;
-    private void Awake()
+    public void Awake()
     {
         respawnScript = GameObject.Find("MainElementsHandler").GetComponent<respawnScript>();
         instance = this;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        
-        
+    public void OnTriggerEnter(Collider other)
+    { 
         //dlatego zeby nie wyswietlac pick up panel kiedy mam sword u siebie wziety
         if(other.GetComponent<weaponInteract>()!= null)
         {
@@ -46,7 +44,7 @@ public class PlayerInteraction : MonoBehaviour
         }
 
     }
-    private void OnTriggerExit(Collider other)
+    public void OnTriggerExit(Collider other)
     {
         if(other.tag=="interactable object")
         { 

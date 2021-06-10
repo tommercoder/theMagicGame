@@ -32,17 +32,10 @@ public class Slot : MonoBehaviour, ISaveable
     }
 
         
-    
-
-
-
-    
     [Header("SLOT ID")]
     public string id;
     public Item item;
-
-
-
+    //ta metoda wykorzystuje się na przypadek żeby wiedzieć że coż z "slotem" zostało zmienione
     public delegate void onSlotChangedCallback();
     public onSlotChangedCallback onSlotChangedCalled;
     public GameObject countPanel;
@@ -51,6 +44,7 @@ public class Slot : MonoBehaviour, ISaveable
     public Button dropButton;
     public Sprite savedIcon;
     public Transform character;
+    //funkcja służy do dodania objekty item do inventory
     public void add(Item item)
      {
 
@@ -63,13 +57,13 @@ public class Slot : MonoBehaviour, ISaveable
         
         icon.enabled = true;
         dropButton.interactable = true;
+        //tak jak mieczy nie może być jednakowych,to nie ma sensu włączać ilość pod mieczem w ekwipunku
         if(!(item is swordEquipping))
         countPanel.SetActive(true);
         countText.enabled = true;
+
         if (onSlotChangedCalled != null)
             onSlotChangedCalled.Invoke();
-
-
     }
     private void Update()
     {
@@ -78,7 +72,7 @@ public class Slot : MonoBehaviour, ISaveable
     }
     public void clearSlot()
     {
-      
+      //wyczyścia wszystkie dane z kwadracika "slot"
         item = null;
         icon.sprite = null;
         icon.enabled = false;
@@ -89,11 +83,11 @@ public class Slot : MonoBehaviour, ISaveable
         if (onSlotChangedCalled != null)
             onSlotChangedCalled.Invoke();
     }
+    //służy do wykorzystania objektów
     public void useItem()
     {
         if (item != null)
         {
-
             item.useFromInventory();
             if (onSlotChangedCalled != null)
                 onSlotChangedCalled.Invoke();
@@ -108,34 +102,27 @@ public class Slot : MonoBehaviour, ISaveable
         {
             if (Inventory.instance.items[i] == item)
             {
-
-                Vector3 dropPosition = character.position + Vector3.up * 3;
-               
+                //wyznacza pozycje gdzie upuszcić objekt
+               Vector3 dropPosition = character.position + Vector3.up * 3;       
                 Inventory.instance.itemsGameObjects[i].transform.rotation = Quaternion.identity;
-               
-
-
                 Inventory.instance.itemsGameObjects[i].transform.position = dropPosition + (-(transform.forward * 2));
                 Inventory.instance.itemsGameObjects[i].SetActive(true);
-                Inventory.instance.itemsGameObjects[i].GetComponent<FloatingItem>().Rotating = true;
-                
-                
+                Inventory.instance.itemsGameObjects[i].GetComponent<FloatingItem>().Rotating = true;      
                  temp = GameObject.FindObjectsOfType<potionInteraction>().ToList();
-
                 for (int k = 0;k < temp.Count;k++ )
                 {
                     if(temp[k].gameObject == Inventory.instance.itemsGameObjects[i])
                     {
+                        //wstawia że objekt nie jest więcej wykorzystywany
                         temp[k].isUsed = false;
                         //Debug.Log("LOG" + temp);
                     }
-                }
-                
-                Inventory.instance.removeGOitem(Inventory.instance.itemsGameObjects[i]);
-                
-                
+                }          
+                //usuwa GameObject z ekwipunku
+                Inventory.instance.removeGOitem(Inventory.instance.itemsGameObjects[i]);  
             }
         }
+        //usuwa z ekwipunku objekt Item
         Inventory.instance.removeItem(item);
         
     }

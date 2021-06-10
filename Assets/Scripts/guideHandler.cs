@@ -9,12 +9,9 @@ public class guideHandler : MonoBehaviour
     public void openGuide()
     {
         FindObjectOfType<audioManager>().Play("menuClick");
-        mouseOverButton.instance.changeColorTextBback();
+        MainMenuHandler.instance.changeColorTextBback();
         menuUiHide.SetActive(false);
         guideUiShow.SetActive(true);
-
-
-
     }
     public void closeGuide()
     {

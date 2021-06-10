@@ -7,54 +7,37 @@ public class enemySwordInteract : MonoBehaviour
     public CharacterController otherController;
     public Animator otherAnimator;
     public Animator animator;
-    private void Awake()
-    {
-        
-    }
-    private void Start()
+
+    public void Start()
     {
         animator = GetComponentInParent<Animator>();
     }
     public int damage;
-      public void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
      {
-       
+         //jeśli gra jakaś animacja ataki
          if (animator.GetCurrentAnimatorStateInfo(0).IsName("swordCast") || animator.GetCurrentAnimatorStateInfo(0).IsName("fastSwordSlash")
              || animator.GetCurrentAnimatorStateInfo(0).IsName("bottomSwordSlash"))
          {
-
+            //jeśli jest trigger z bohaterem
              if (other.CompareTag("Player"))
              {
-
 
                  otherController = other.GetComponent<CharacterController>();
                  otherAnimator = other.GetComponent<Animator>();
                  if (attacksController.instance.isDrawedSword)
-                {
-                    
+                 { 
                     attacksController.instance.noOfClick = 0;
                     attacksController.instance.noOfClickSecond = 0;
                     attacksController.instance.canClick = true;
                     attacksController.instance.canClickSec = true;
-
-                    
-                    if (Random.Range(0, 2) == 1)
-                    {
-                      
-
-
-                    }
-
                  }
-
-                 
+                 //zmniejsza się zdrowie == obrażeniu
                  playerHealth.instance.currentHealth -= damage;
-
              }
          }
      }
 
-  
 
     IEnumerator turnOffCharacter()
     {

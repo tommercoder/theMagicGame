@@ -7,8 +7,9 @@ public class audioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
-    private void Awake()
+    public void Awake()
     {
+        //Bierze wszystkie dżwięki w tablice o wstawia dla nich komponent "AudioSouce",także zapisuje właściwości w ten komponent
         foreach(Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -19,8 +20,7 @@ public class audioManager : MonoBehaviour
         }
     }
 
- 
-    private void Start()
+    public void Start()
     {
         Play("main menu");
     }

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 [System.Serializable]
 public class SaveData
 {
-   
     //character saving
     public int s_XP;
     public GameObject s_respawnObject;
@@ -18,7 +17,6 @@ public class SaveData
     public List<Item> s_inventory = new List<Item>();
     public List<GameObject> s_inventoryGO = new List<GameObject>();
     public List<GameObject> s_allGameObjectInventory = new List<GameObject>();
-    
     public List<GameObject> s_allInteractableObjects = new List<GameObject>();
     public List<potionInteraction> s_allPotionInteractions = new List<potionInteraction>();
     public List<weaponInteract> s_allWeaponInteractions = new List<weaponInteract>();
@@ -63,10 +61,12 @@ public class SaveData
         public string e_ProcId;
     }
     public List<ProceduralEnemyData> proceduralEnemyData = new List<ProceduralEnemyData>();
+    //konwersja danych w ".json"
     public string toJson()
     {
         return JsonUtility.ToJson(this);
     }
+    //Konwersja z ".json" do typów danych 
     public void LoadFromJson(string json)
     {
 
@@ -75,6 +75,7 @@ public class SaveData
 
 
 }
+//Interfejs implementujący metody dla zapisania i wpisania danych.
 public interface ISaveable
 {
     void PopulateSaveData(SaveData data);

@@ -23,14 +23,14 @@ public class pauseMenu : MonoBehaviour
     public GameObject dialogBox;
 
     public GameObject enableMenuCompletely;
-    private void Start()
+    public void Start()
     {
         cameraGame.enabled = false;
         cameraMenu.enabled = true;
         menuIsOpened = true;
     }
-  
-    void Update()
+
+    public void Update()
     {
         if(menuIsOpened)
         {
@@ -79,15 +79,10 @@ public class pauseMenu : MonoBehaviour
 
         enableMenuCompletely.SetActive(true);
 
-
         cameraMenu.enabled = true;
 
-
-
-      
         if (inventoryManager.instance.inventoryOpened)
         {
-
             inventoryManager.instance.openInventory();
         }
         if(pauseCanvas.activeSelf)

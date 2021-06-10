@@ -34,7 +34,7 @@ public class StateControllerTest : MonoBehaviour
     bool isDrawedSword;
     bool isRunningSword;
     bool runningPressed;
-    bool walkingBackPressed;
+    bool sPressed;
     bool diPressing;
     bool aPressed;
     bool takeSwordPressed;
@@ -69,11 +69,12 @@ public class StateControllerTest : MonoBehaviour
         isRunningSword = animator.GetBool(isRunningSwordHash);
 
         runningPressed = Input.GetKey("w");
-        walkingBackPressed = Input.GetKey("s");
+        sPressed = Input.GetKey("s");
         diPressing = Input.GetKey("d");
         aPressed = Input.GetKey("a");
         #endregion
-        //stopping player when inventory is opened and mouse is in invenotry tab
+     
+        //jeśli ekwipunek czy dialog czy menu jest otwarte to poruszać się nie można
         if ((movement.instance.MouseOverInventoryB && inventoryManager.instance.inventoryOpened) ||dialogBox.activeSelf || pauseMenu.instance.menuIsOpened)
         {
             if (isRunning)
@@ -116,7 +117,7 @@ public class StateControllerTest : MonoBehaviour
 
         }
         //jeśli żaden przycisk nie jest wciśnięty to sprawdzam czy miecz jest wzięty i wracam do animacji "idle" z mieczem,albo w innym przypadku bez niego
-        if (!runningPressed && !walkingBackPressed && !diPressing && !aPressed)
+        if (!runningPressed && !sPressed && !diPressing && !aPressed)
         {
             if (isDrawedSword)
             {
@@ -167,7 +168,7 @@ public class StateControllerTest : MonoBehaviour
             playerSwordController.swordEquipMethod();
         }
         //if walking back and pressed sword draw then run back with sword
-        if (walkingBackPressed && !isDrawedSword && takeSwordPressed && !animator.GetCurrentAnimatorStateInfo(1).IsName("sneathSword"))
+        if (sPressed && !isDrawedSword && takeSwordPressed && !animator.GetCurrentAnimatorStateInfo(1).IsName("sneathSword"))
         {
             animator.SetBool(isDrawedSwordHash, true);
             animator.SetBool(isRunningSwordHash, true);
@@ -177,12 +178,12 @@ public class StateControllerTest : MonoBehaviour
             playerSwordController.swordEquipMethod();
         }
         //if we are not already running back then go to idle sword
-        if (!walkingBackPressed && isDrawedSword && !takeSwordPressed)
+        if (!sPressed && isDrawedSword && !takeSwordPressed)
         {
             animator.SetBool(isIdleSwordHash, true);
         }
         //if idle sword and pressed back run back with sword
-        if (isDrawedSword && walkingBackPressed && !takeSwordPressed)
+        if (isDrawedSword && sPressed && !takeSwordPressed)
         {
             animator.SetBool(isRunningSwordHash, true);
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 //all abilities are called and used in "attackController.cs"
+//klasa abstrakcyjna 
 public abstract class AbilityMain : MonoBehaviour
 {
     #region Singleton
@@ -12,8 +13,8 @@ public abstract class AbilityMain : MonoBehaviour
         instance = this;
     }
     #endregion
-    public class MyFloatEvent : UnityEvent<float> { }
-    public MyFloatEvent OnAbilityUse = new MyFloatEvent();
+    //public class MyFloatEvent : UnityEvent<float> { }
+    //public MyFloatEvent OnAbilityUse = new MyFloatEvent();
     [Header("Ability Info")]
     public string title;
     public Sprite icon;
@@ -21,6 +22,7 @@ public abstract class AbilityMain : MonoBehaviour
     public bool canUse = true;
     public bool dashStarted;
     public bool abilityDone;
+    //metoda która uruchamia zdolność,włącza czas jej odnowienia
     public void TriggerAbility()
     {
         if (canUse)
@@ -28,12 +30,13 @@ public abstract class AbilityMain : MonoBehaviour
             Ability();
             if (abilityDone)
             {
-                OnAbilityUse.Invoke(cooldownTime);
                 StartCooldown();
             }
         }  
     }
+    //logika zdolności
     public abstract void Ability();
+    //czekam podaną ilość czasu na odnowienie zdolności
     public void StartCooldown()
     {
         StartCoroutine(Cooldown());

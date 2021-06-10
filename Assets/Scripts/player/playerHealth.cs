@@ -52,8 +52,9 @@ public class playerHealth : MonoBehaviour,ISaveable
   
     void Start()
     {
-       
+       //spoczątku wstawia się maksymalna liczba zdrowia
         healthBar.setMaxHealth(health);
+        //wyłącza się ragdoll
         RagdollActive(false);
 
         swordRigidbody = GameObject.FindGameObjectsWithTag("interactable object");
@@ -61,7 +62,6 @@ public class playerHealth : MonoBehaviour,ISaveable
         {
             if (b.GetComponent<Rigidbody>() != null)
             {
-                
                 Rigidbody rb = b.GetComponent<Rigidbody>();
                 rb.detectCollisions = true;
             }
@@ -74,11 +74,12 @@ public class playerHealth : MonoBehaviour,ISaveable
     {
         
         healthBar.setHealth(currentHealth);
-        
+        //w przypadku gdy zdrowie < 0 bohater umiera
         if(currentHealth <= 0)
         {
             Die();
             playerSword.instance.currentSwordGameObject.GetComponent<Rigidbody>().detectCollisions = true;
+            //odejmuje się doświadczenie
             if (!minusXP)
             {
                 if (characterStats.instance.XP >= 30)
@@ -107,6 +108,7 @@ public class playerHealth : MonoBehaviour,ISaveable
 
         abilitiesUI.SetActive(false);
         healthbarUI.SetActive(false);
+        //pokazuje "dead menu"
         canvas.alpha += Time.deltaTime / 2;
         
         RagdollActive(true);
@@ -120,13 +122,11 @@ public class playerHealth : MonoBehaviour,ISaveable
        
         
     }
-
+    //włącza/wyłącza ragdoll  w zależności od parametru
     public void RagdollActive(bool active)
     {
 
         controller.enabled = !active;
-
-        //children
         foreach (var collider in colliders)
             collider.enabled = active;
         foreach (var rigidbody in rigidbodies)
@@ -135,25 +135,19 @@ public class playerHealth : MonoBehaviour,ISaveable
             rigidbody.isKinematic = !active;
         }
 
-        //root
-        
          legScript.enabled = !active;
-        
-
-        animator.enabled = !active;
-      
-     
+         animator.enabled = !active;
+  
     }
-    IEnumerator PlayText()
-    {
-        text.text = " ";
-        foreach (char c in textSTR.ToCharArray())
+        IEnumerator PlayText()
         {
-            text.text += c;
-            yield return null;
-      
+            text.text = " ";
+            foreach (char c in textSTR.ToCharArray())
+            {
+                text.text += c;
+                yield return null;   
+            }
         }
-    }
 
     public void PopulateSaveData(SaveData sd)
     {

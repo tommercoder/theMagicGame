@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 using Cinemachine;
-using UnityEngine.Rendering;
-using System.Collections.Generic;
-using System.Collections;
 public class dashAbility : AbilityMain
 {
     #region Singleton
@@ -24,7 +21,6 @@ public class dashAbility : AbilityMain
     [SerializeField] private ParticleSystem dashParticle = default;
  
     public CharacterController controller;
-    attacksController attacksController;
     public AbilityUI AbilityUI;
     public  bool hitHitted = false;
 
@@ -32,13 +28,16 @@ public class dashAbility : AbilityMain
     private void Start()
     {
         controller = GetComponent<CharacterController>();
-        attacksController = GetComponent<attacksController>();
+        
         
     }
+    //ta funkcja służy do sprawdzenia czy może być ta zdolność uruchomiona,jeśli przed bohaterem jest jakiś objekt, to ta zdolność nie uruchomi się
     bool checkIfDashCanBeCasted()
     {
         RaycastHit hit;
+        //pród od bohatera 
         Vector3 forward = transform.TransformDirection(Vector3.forward) * 8;
+        //Raycast tworzy linię która na swoim końcu sprawdza czy ma jakiś collider,trigger itd
         if (Physics.Raycast(transform.position+Vector3.up,forward,out hit,8,groundMask) 
             || Physics.Raycast(transform.position + Vector3.up*2, forward, out hit, 8, groundMask)
             || Physics.Raycast(transform.position, forward, out hit, 8, groundMask)
@@ -46,19 +45,16 @@ public class dashAbility : AbilityMain
             || Physics.Raycast(transform.position + Vector3.up * 2.5f, forward, out hit, 8, groundMask))
         {
             if (hit.collider != null)
-            {
-                    
-                    return false;
-                
+            {             
+                    return false; 
             }
         }
-       
-       
         return true;
     }
     private void Update()
     {
         Vector3 forward = transform.TransformDirection(Vector3.forward) * 8;
+        //włącząc Gizmosc na scenie czy w grze można zobaczyć jak te Raycasty wyglądają
         Debug.DrawRay(transform.position + Vector3.up * 2, forward, Color.red);
         Debug.DrawRay(transform.position + Vector3.up , forward, Color.red);
         Debug.DrawRay(transform.position, forward, Color.red);
@@ -69,18 +65,18 @@ public class dashAbility : AbilityMain
     public override void Ability()
     {
         
-        Debug.Log("checkIfDashCanBeCasted(); " + checkIfDashCanBeCasted());
+        //Debug.Log("checkIfDashCanBeCasted(); " + checkIfDashCanBeCasted());
         if (checkIfDashCanBeCasted())
         {
             dashStarted = true;
-            
+            //wyłączam CharacterContoller dla możliwości poruszania się gracza za pomocą DoTween    
             controller.enabled = false;
             animator.SetInteger("attackAnimation", 20);
             transform.DOMove(transform.position + (transform.forward * 5), .2f);
 
-
-            DOVirtual.Float(40, 50, .1f, SetCameraFOV)
-                .OnComplete(() => DOVirtual.Float(50, 40, .5f, SetCameraFOV));
+            //powoli porusza kamerę po tyłu i przodu za pomocą funkcji SetCameraFov
+            DOVirtual.Float(40, 55, .1f, SetCameraFOV)
+                .OnComplete(() => DOVirtual.Float(55, 40, .5f, SetCameraFOV));
             
 
             AbilityUI.ShowCoolDown(cooldownTime);
@@ -91,27 +87,17 @@ public class dashAbility : AbilityMain
         {
             dashStarted = false;
             abilityDone = false;
-           
-            
-            
-            Debug.Log("RETURN" + attacksController.instanceA.dashParticle.isStopped);
-           
-           
+          
         }
-
-
-
-
 
     }
    
-    public void dashEndedEvent()//animation event
+    public void dashEndedEvent()//animation event na końcu animacji
     {
         controller.enabled = true;
         
         
     }
-    
 
     void SetCameraFOV(float fov)
     {

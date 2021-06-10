@@ -13,9 +13,9 @@ public class checkPointInteract : Interact
     }
     public override void InteractWith()
     {
+        //w przypadku jeśli ten objekt nie jest równy objektowi aktualnemu
         if (this.gameObject != respawnScript.checkPoint)
         {
-
             resetText();
             InteractedText += "Set new spawn point";
             interacting = true;
@@ -23,7 +23,7 @@ public class checkPointInteract : Interact
         
     }
 
-    private void Update()
+    public void Update()
     {
       
         if(Input.GetKey(KeyCode.E) && interacting)
@@ -33,14 +33,11 @@ public class checkPointInteract : Interact
     }
     void setCheckPoint()
     {
-       
+       //wstawia nowy checkpoint
        respawnScript.checkPoint = this.gameObject;
-
-
         var col = this.gameObject.GetComponentInChildren<ParticleSystem>().colorOverLifetime;
-        
-
         Gradient grad = new Gradient();
+        //wstawia kolor ParticleSystem na inny kolor
         grad.SetKeys(new GradientColorKey[] { new GradientColorKey(Color.blue, 0.0f), new GradientColorKey(Color.blue, 1.0f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) });
 
         col.color = grad;

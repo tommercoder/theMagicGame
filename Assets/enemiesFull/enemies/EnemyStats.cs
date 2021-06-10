@@ -23,25 +23,22 @@ public class EnemyStats : MonoBehaviour,ISaveable
     public int XPforDeath;
     public GameObject player;
     bool addedXP = false;
-    public GameObject log;
+   
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-       
       
-
         RagdollActive(false);
-        //setting rigiddbodies collision for swords
+        //włączam kolizje miecza bo ona jest automatycznie wyłączona przez ragdoll
         foreach (GameObject b in swordRigidbody){
             if (b.GetComponent<Rigidbody>() != null)
             {
                 Rigidbody rb = b.GetComponent<Rigidbody>();
                 rb.detectCollisions = true;
-            }
-                
-            }
+            }   
+          }
         }
-    private void Awake()
+    public void Awake()
     {
         currentHP = maxHP;
         patrolScript = GetComponent<EnemyPatrol>();
@@ -55,30 +52,30 @@ public class EnemyStats : MonoBehaviour,ISaveable
 
         swordRigidbody = GameObject.FindGameObjectsWithTag("interactable object");
         player = GameObject.Find("character");
-        log = GameObject.Find("error text");
-        log.GetComponent<Text>().text = " ";
+      
     }
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if(currentHP <= 0)
         {
+            //jeśli wrog umiera i ma na sobie wskażnik zadania to wyłącza się ten wskażnik
             if (GameObject.FindObjectOfType<questPointer>().target !=null && transform == GameObject.FindObjectOfType<questPointer>().target )
             {
                 MarieleQuest.instance.questPointer.SetActive(false);
             }
             Die();
-            
+            //bohater otrzymuje doświadczenie
             if (!addedXP)
             {
                 
                 movement.instance.canMove = true;
                 
                 attacksController.instance.noOfClick = 0;
-               attacksController.instance.noOfClickSecond = 0;
+                attacksController.instance.noOfClickSecond = 0;
                 attacksController.instance.canClick = true;
                 attacksController.instance.canClickSec = true;
-                
+                //sprawdza się czy jest zadanie,i jeśli jest czy zostało wykonane
                 Quest quest = MarieleQuest.instance.currentMarieleQuest;
                 if (quest!=null && quest.isActive)
                 {
@@ -103,19 +100,13 @@ public class EnemyStats : MonoBehaviour,ISaveable
     }
     void Die()
     {
-       
-        Debug.Log("DIE");
         RagdollActive(true);
-        
-       Destroy(this.gameObject, 1f);
-
+        Destroy(this.gameObject, 1f);
     }
     
     public void RagdollActive(bool active)
     {
         
-
-
         //children
         foreach (var collider in colliders)
             collider.enabled = active;
@@ -128,9 +119,6 @@ public class EnemyStats : MonoBehaviour,ISaveable
         //root
         
         patrolScript.enabled = !active;
-        
-        
-
         animator.enabled = !active;
         rigidbody.detectCollisions = !active;
         rigidbody.isKinematic = !active;

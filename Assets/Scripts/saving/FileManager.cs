@@ -6,18 +6,12 @@ using UnityEngine;
 
 public class FileManager : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
-    public static bool WriteBackUP(string a_FileName,string a_FileContents)
-    {
-        var fullPath = Path.Combine(Application.persistentDataPath, a_FileName);
-        File.WriteAllText(fullPath, a_FileContents);
-        return true;
-    }
+    
+    //Zapisuje się do pliku dane
     public static bool WriteToFile(string a_FileName,string a_FileContents)
     {
+        //persistentDataPath -> Contains the path to a persistent data directory.
+        //C/Users/name/AppData/LocalLow/DefaultCompany/nameOfProject
         var fullPath = Path.Combine(Application.persistentDataPath, a_FileName);
 
         try
@@ -33,11 +27,10 @@ public class FileManager : MonoBehaviour
         }
         return false;
     }
-
+    //Ładuje dane z pliku.
     public static bool LoadFromFile(string a_FileName,out string result)
     {
         var fullPath = Path.Combine(Application.persistentDataPath, a_FileName);
-        var backUpcopy = Path.Combine(Application.persistentDataPath,"BackUp.dat");
         try
         {
             result = File.ReadAllText(fullPath);
@@ -55,7 +48,6 @@ public class FileManager : MonoBehaviour
     }
     public static bool ClearSaveData(string name)
     {
-        
         var fullPath = Path.Combine(Application.persistentDataPath, name);
         if (File.Exists(fullPath))
         {

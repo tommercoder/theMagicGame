@@ -16,7 +16,7 @@ public class characterStats : MonoBehaviour, ISaveable
 
 
 
-        
+
         //DontDestroyOnLoad(gameObject);
         //DontDestroyOnLoad(Camera.main);
         //GameObject[] arr = GameObject.FindGameObjectsWithTag("interactable object");
@@ -39,8 +39,6 @@ public class characterStats : MonoBehaviour, ISaveable
     public bool loadCompleted;
     public bool saveCompleted;
 
-
-
     [Header("LIST OF ALL ENEMIES")]
     public List<EnemyStats> all_enemies = new List<EnemyStats>();
     public List<string> dead_enemies_ids = new List<string>();
@@ -48,14 +46,12 @@ public class characterStats : MonoBehaviour, ISaveable
     public List<string> all_procedural_ids = new List<string>();
 
     public Slot[] slotsToSave;
-    //public List<Sprite> s_icons = new List<Sprite>();
     public List<GameObject> allAddedToInventoryGO = new List<GameObject>();
     public List<GameObject> allInteractableGameObjects = new List<GameObject>();
 
     public List<potionInteraction> allPotionInteractionO = new List<potionInteraction>();
     public List<weaponInteract> all_swords = new List<weaponInteract>();
     public List<GameObject> all_swordsGO = new List<GameObject>();
-    //public List<string> allPotionsOids = new List<string>();
     public List<bool> allPotionsIsUsed = new List<bool>();
     public List<bool> allSwordsBool = new List<bool>();
     //list of items positions and rotation
@@ -67,20 +63,15 @@ public class characterStats : MonoBehaviour, ISaveable
     public List<Quest> allNpcQuests = new List<Quest>();
 
     public bool gameEnded = false;
-    void Start()
+    public void Start()
     {
-        //Debug.Log("Start");
 
-       // Debug.Log(Application.persistentDataPath);
         XP = 50;
         //setting all
         all_enemies = FindObjectsOfType<EnemyStats>().ToList();
         all_procedural_enemies = FindObjectsOfType<ProceduralStats>().ToList();
         slotsToSave = inventoryManager.instance.itemsParent.GetComponentsInChildren<Slot>();
-        //allItemsPositions = GameObject.FindGameObjectsWithTag("interactable object").ToList();
         allInteractableGameObjects = GameObject.FindGameObjectsWithTag("interactable object").ToList();
-       
-
         allPotionInteractionO = GameObject.FindObjectsOfType<potionInteraction>().ToList();
         all_swords = GameObject.FindObjectsOfType<weaponInteract>().ToList();
         //quest
@@ -89,10 +80,6 @@ public class characterStats : MonoBehaviour, ISaveable
         {
             allNpcQuests.Add(allNPCS[i].quest);
         }
-        //for (int i = 0; i < allNPCS.Count; i++)
-        //{
-        //    allNpcQuests[i] = allNPCS[i].quest;
-        //}
         foreach (weaponInteract w in all_swords)
         {
             all_swordsGO.Add(w.gameObject);
@@ -119,62 +106,32 @@ public class characterStats : MonoBehaviour, ISaveable
             all_procedural_enemies[i].id = i.ToString();
         }
         //loading
-
-
-
-
+        //Na początku gry tworzy plik do zapisania
         var fullPath = Path.Combine(Application.persistentDataPath, "SaveData.dat");
         if (!File.Exists(fullPath))
         {
             Debug.Log(fullPath);
             File.WriteAllText(fullPath, "");
         }
-        // StartCoroutine(waitLoad());
+        //Wywołuje funkcje dla ładowania danych z pliku
         LoadJsonData(this);
+        //wstawia statystyki zdolności
         lvl = XP / 100;
         damageFromFireball = lvl * 3;
         timeOfSwordAbility = lvl * 3;
 
     }
-    IEnumerator waitLoad()
+    
+    public void Update()
     {
-        yield return new WaitForEndOfFrame();
-       // Debug.Log("LOAD STARTED");
-        LoadJsonData(this);
-    }
-    private void OnLevelWasLoaded(int level)
-    {
-      //  Debug.Log("OnLevelWasLoaded");
-
-    }
-
-    void Update()
-    {
-            lvl = XP / 100;
-            
-        
+        lvl = XP / 100;
         damageFromFireball = lvl * 3;
         timeOfSwordAbility = lvl * 3;
-
-       
-            
-            if(gameEnded)
-            {
+        //W przypadku skończenia gry pokazuje komunikat funkcją waitToShowEndLog()
+        if (gameEnded)
+        {
             StartCoroutine(waitToShowEndLog());
-            }
-        
-
-
-        //if(mouseOverButton.instance.startedNewGame)
-        //{
-        //    LoadJsonData(this);
-        //    mouseOverButton.instance.startedNewGame = false;
-        //}
-        //if (pauseMenu.instance.pauseOpened)
-        //{
-        //    SaveJsonData(this);
-        //}
-
+        }
     }
 
     IEnumerator waitToShowEndLog()
@@ -185,11 +142,13 @@ public class characterStats : MonoBehaviour, ISaveable
     }
     private void OnApplicationQuit()
     {
+        //przy wyjściu z gry zapisuje dane do pliku
         SaveJsonData(this);
-       
+
     }
-    
+
     //interface method
+    //wstawia istniejące listy z wszystkich skryptów i wywołuje wszystkie metody interfejsu ISaveable z wszystkich klasy.
     public void PopulateSaveData(SaveData sd)
     {
         //character
@@ -209,8 +168,6 @@ public class characterStats : MonoBehaviour, ISaveable
         foreach (Slot slot in slotsToSave)
         {
             slot.PopulateSaveData(sd);
-           // Debug.Log("SLOT " + sd.s_slots);
-
         }
         //enemies
         foreach (EnemyStats enemy in all_enemies)
@@ -223,14 +180,11 @@ public class characterStats : MonoBehaviour, ISaveable
             enemy.PopulateSaveData(sd);
         }
 
-        //sd.s_allItemsPositions = allItemsPositions;
-        //sd.s_allPotionInteractions = GameObject.FindObjectsOfType<potionInteraction>().ToList();
         if (allPotionInteractionO.Count > 0)
         {
-           // Debug.Log("ALL POTIONS COUNT " + allPotionInteractionO[0]);
             sd.s_allPotionInteractions = allPotionInteractionO;
         }
-        
+
         sd.s_allWeaponInteractions = all_swords;
         sd.s_allWeaponInteractionsGO = all_swordsGO;
 
@@ -240,11 +194,7 @@ public class characterStats : MonoBehaviour, ISaveable
         }
         for (int i = 0; i < all_swordsGO.Count; i++)
         {
-            //because some objects can be destroyed thats why im initializing list again
-            //allInteractableGameObjects = GameObject.FindGameObjectsWithTag("interactable object").ToList();
-            // sd.s_allItemsPositions.Add(allInteractableGameObjects[i].transform.position);
             sd.s_allSwordsPositions.Add(all_swordsGO[i].transform.position);
-
         }
         for (int i = 0; i < allPotionInteractionO.Count; i++)
         {
@@ -268,7 +218,7 @@ public class characterStats : MonoBehaviour, ISaveable
             }
         }
         sd.s_allQuests = allNpcQuests;
-        if(MarieleQuest.instance.currentMarieleQuest!=null)
+        if (MarieleQuest.instance.currentMarieleQuest != null)
         {
             sd.s_currentQuest = MarieleQuest.instance.currentMarieleQuest;
         }
@@ -285,19 +235,18 @@ public class characterStats : MonoBehaviour, ISaveable
         //            }
 
         //}
-       
+
     }
     //interface method
     public void LoadFromSaveData(SaveData sd)
     {
-        //if (SceneManager.GetActiveScene().name == "game")
-        //{
-            //character
-            XP = sd.s_XP;
-        //Debug.Log("SD HP" + sd.s_HP);
+       
+        //character
+        XP = sd.s_XP;
+      
         zones.instance.isColliding = sd.inZone;
         Inventory.instance.LoadFromSaveData(sd);
-        //Debug.Log("SD HP" + sd.s_HP);
+       
         if (sd.s_HP > 0)
         {
             playerHealth.instance.LoadFromSaveData(sd);
@@ -307,144 +256,128 @@ public class characterStats : MonoBehaviour, ISaveable
             playerHealth.instance.currentHealth = 100;
         }
         if (sd.s_respawnObject != null)
-            {
-                respawnScript.instance.LoadFromSaveData(sd);
-            }
-            if (sd.s_x != 0 && sd.s_y != 0 && sd.s_z != 0)
-            {
-                gameObject.transform.position = new Vector3(sd.s_x, sd.s_y, sd.s_z);
-            }
-            //sword
-            if (sd.s_sword != null && sd.s_temp != null && sd.s_currentSword != null && sd.s_currentSwordGO != null)
-            {
-                playerSword.instance.LoadFromSaveData(sd);
+        {
+            respawnScript.instance.LoadFromSaveData(sd);
+        }
+        if (sd.s_x != 0 && sd.s_y != 0 && sd.s_z != 0)
+        {
+            gameObject.transform.position = new Vector3(sd.s_x, sd.s_y, sd.s_z);
+        }
+        //sword
+        if (sd.s_sword != null && sd.s_temp != null && sd.s_currentSword != null && sd.s_currentSwordGO != null)
+        {
+            playerSword.instance.LoadFromSaveData(sd);
 
+        }
+        else
+        {
+            playerSword.instance.currentSwordGameObject = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/" + playerSword.instance.currentSwordGameObject.name);
+            playerSword.instance.temp = playerSword.instance.currentSwordGameObject;
+        }
+
+
+        //potions
+        if (sd.s_allPotionsIsUsed.Count > 0)
+        {
+            allPotionsIsUsed = sd.s_allPotionsIsUsed;
+        }
+        //quest
+        if (sd.s_allQuests.Count > 0)
+        {
+            // Debug.Log("SD ALL QUESTS" + sd.s_allQuests);
+            allNpcQuests = sd.s_allQuests;
+        }
+        if (sd.s_allQuests.Count > 0)
+        {
+            for (int i = 0; i < allNPCS.Count; i++)
+            {
+                allNPCS[i].quest = allNpcQuests[i];
+            }
+        }
+        if (sd.s_currentQuest != null)
+        {
+            MarieleQuest.instance.currentMarieleQuest = sd.s_currentQuest;
+        }
+
+
+        if (sd.s_allPotionInteractions.Count > 0)//second pattern in if is changed(FOR REMEMBER)
+        {
+            // Debug.Log("SD ALL POTIONS > 0");
+            if (sd.s_allPotionInteractions[0] != null)
+            {
+                allPotionInteractionO = sd.s_allPotionInteractions;
             }
             else
             {
-                playerSword.instance.currentSwordGameObject = GameObject.Find("character/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/" + playerSword.instance.currentSwordGameObject.name);
-                playerSword.instance.temp = playerSword.instance.currentSwordGameObject;
+                allPotionInteractionO = GameObject.FindObjectsOfType<potionInteraction>().ToList();
             }
+            for (int b = 0; b < allPotionInteractionO.Count; b++)
+            {
+                allPotionInteractionO[b].isUsed = allPotionsIsUsed[b];
+            }
+            for (int i = 0; i < allPotionInteractionO.Count; i++)
+            {
 
-
-            //potions
-            if (sd.s_allPotionsIsUsed.Count > 0)
-            {
-                allPotionsIsUsed = sd.s_allPotionsIsUsed;
-            }
-            //quest
-            if (sd.s_allQuests.Count > 0)
-            {
-               // Debug.Log("SD ALL QUESTS" + sd.s_allQuests);
-                allNpcQuests = sd.s_allQuests;
-            }
-            if (sd.s_allQuests.Count > 0)
-            {
-                for (int i = 0; i < allNPCS.Count; i++)
+                if (allPotionInteractionO[i].isUsed)
                 {
-                    allNPCS[i].quest = allNpcQuests[i];
+                    allPotionInteractionO[i].gameObject.SetActive(false);
                 }
             }
-            if (sd.s_currentQuest != null)
-            {
-                MarieleQuest.instance.currentMarieleQuest = sd.s_currentQuest;
-            }
-          
+        }
+        foreach (Slot slot in slotsToSave)
+        {
+            slot.LoadFromSaveData(sd);
 
-            if (sd.s_allPotionInteractions.Count > 0)//second pattern in if is changed(FOR REMEMBER)
-            {
-               // Debug.Log("SD ALL POTIONS > 0");
-                if (sd.s_allPotionInteractions[0] != null)
-                {
-                    allPotionInteractionO = sd.s_allPotionInteractions;
-                }
-                else
-                {
-                    allPotionInteractionO = GameObject.FindObjectsOfType<potionInteraction>().ToList();
-                }
-                for (int b = 0; b < allPotionInteractionO.Count; b++)
-                {
-                    allPotionInteractionO[b].isUsed = allPotionsIsUsed[b];
-                }
-                for (int i = 0; i < allPotionInteractionO.Count; i++)
-                {
+        }
+        if (sd.s_allWeaponInteractions.Count > 0)
+        {
 
-                    if (allPotionInteractionO[i].isUsed)
-                    {
-                        allPotionInteractionO[i].gameObject.SetActive(false);
-                    }
+            all_swords = sd.s_allWeaponInteractions;
+            for (int i = 0; i < all_swordsGO.Count; i++)
+            {
+                if (!Inventory.instance.itemsGameObjects.Contains(all_swordsGO[i])
+                && all_swordsGO[i] != playerSword.instance.currentSwordGameObject)
+                {
+                    all_swordsGO[i].SetActive(true);
+                    all_swordsGO[i].transform.rotation = sd.s_allSwordsRotation[i];
                 }
             }
-
-
-            
-            foreach (Slot slot in slotsToSave)
+            for (int j = 0; j < sd.s_allSwordsPositions.Count; j++)
             {
-                slot.LoadFromSaveData(sd);
-
+                all_swordsGO[j].transform.position = sd.s_allSwordsPositions[j];
             }
-
-
-
-
-            if (sd.s_allWeaponInteractions.Count > 0)
+            for (int a = 0; a < sd.s_allPotionsPositions.Count; a++)
             {
-
-                all_swords = sd.s_allWeaponInteractions;
-            
-               //all_swordsGO = sd.s_allWeaponInteractionsGO;///check if this works
-                for (int i = 0; i < all_swordsGO.Count; i++)
-                {
-                    if (!Inventory.instance.itemsGameObjects.Contains(all_swordsGO[i])
-                    && all_swordsGO[i] != playerSword.instance.currentSwordGameObject)
-                    {
-                        all_swordsGO[i].SetActive(true);
-
-                        all_swordsGO[i].transform.rotation = sd.s_allSwordsRotation[i];
-
-
-                    }
-                }
-                for (int j = 0; j < sd.s_allSwordsPositions.Count; j++)
-                {
-                    //Debug.Log(sd.s_allItemsPositions[j] + " " + allInteractableGameObjects[j].name);
-                    all_swordsGO[j].transform.position = sd.s_allSwordsPositions[j];
-                    
-                }
-                for(int a = 0;a< sd.s_allPotionsPositions.Count;a++)
-                {
-                    allPotionInteractionO[a].transform.position = sd.s_allPotionsPositions[a];
-                }
+                allPotionInteractionO[a].transform.position = sd.s_allPotionsPositions[a];
             }
-
-            
-            //enemies
-            foreach (EnemyStats enemy in all_enemies)
-            {
-                enemy.LoadFromSaveData(sd);
-            }
-            foreach (string id in dead_enemies_ids)
-            {
-                SaveData.EnemyData enemyData = new SaveData.EnemyData();
-                enemyData.e_Health = 0;
-                enemyData.e_id = id;
-                sd.enemyData.Add(enemyData);
-            }
-            //procedural enemies
-            foreach (ProceduralStats enemy in all_procedural_enemies)
-            {
-                enemy.LoadFromSaveData(sd);
-            }
-            foreach (string id in all_procedural_ids)
-            {
-                SaveData.ProceduralEnemyData enemyData = new SaveData.ProceduralEnemyData();
-                enemyData.e_ProcHealth = 0;
-                enemyData.e_ProcId = id;
-                sd.proceduralEnemyData.Add(enemyData);
-            }
-        //}
+        }
+        //enemies
+        foreach (EnemyStats enemy in all_enemies)
+        {
+            enemy.LoadFromSaveData(sd);
+        }
+        foreach (string id in dead_enemies_ids)
+        {
+            SaveData.EnemyData enemyData = new SaveData.EnemyData();
+            enemyData.e_Health = 0;
+            enemyData.e_id = id;
+            sd.enemyData.Add(enemyData);
+        }
+        //procedural enemies
+        foreach (ProceduralStats enemy in all_procedural_enemies)
+        {
+            enemy.LoadFromSaveData(sd);
+        }
+        foreach (string id in all_procedural_ids)
+        {
+            SaveData.ProceduralEnemyData enemyData = new SaveData.ProceduralEnemyData();
+            enemyData.e_ProcHealth = 0;
+            enemyData.e_ProcId = id;
+            sd.proceduralEnemyData.Add(enemyData);
+        }
+       
     }
-    public  void SaveJsonData(characterStats cs)
+    public void SaveJsonData(characterStats cs)
     {
         SaveData sd = new SaveData();
         cs.PopulateSaveData(sd);
@@ -452,9 +385,8 @@ public class characterStats : MonoBehaviour, ISaveable
         if (FileManager.WriteToFile("SaveData.dat", sd.toJson()))
         {
             Debug.Log("succesful save");
-            
+
         }
-       
     }
     public void LoadJsonData(characterStats cs)
     {

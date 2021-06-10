@@ -81,7 +81,7 @@ public class movement : MonoBehaviour
 		
 		InputMagnitude();
 		isRunningSword = anim.GetBool("isRunningSword");
-
+		//zmiana szybkości w zależności czy korzysta się gracz z mikstury szybkości
 		if (!speedPotionUsingNow)
 		{
 			if (isRunningSword)
@@ -91,20 +91,7 @@ public class movement : MonoBehaviour
 			else
 				playerSpeed = 5;
 		}
-		//bool isGrounded
-		isGrounded = controller.isGrounded;
-		//gravity applying 
-		if (isGrounded)
-		{
-			desiredMoveDirection += Physics.gravity * Time.deltaTime;
-		}
-		else
-		{
-			desiredMoveDirection += Physics.gravity * Time.deltaTime;
-		}
 		
-		
-
 	}
 	
 	void PlayerMoveAndRotation()

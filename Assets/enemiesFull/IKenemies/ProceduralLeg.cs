@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
+
+
 public class ProceduralLeg : MonoBehaviour
 {
+    [Header("DZIAŁA JAK MAINPROCEDURALCONTROLLER.cs TYLKO DLA JEDNEJ NOGI")]
     //with this script also using dontmovewithparent.cs
     [Header("OBJECTS")]
 
@@ -29,20 +31,20 @@ public class ProceduralLeg : MonoBehaviour
     private List<Transform> footIKTargets = new List<Transform>(1);
 
     //enable when collide
-    private void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         //when collide they are visible
         stepTargetLeft.gameObject.GetComponent<Renderer>().enabled = true;
 
     }
     //hide in game steptargets
-    private void Awake()
+    public void Awake()
     {
         //for not to see target spheres on game menu
         stepTargetLeft.gameObject.GetComponent<Renderer>().enabled = false;
 
     }
-    private void Start()
+    public void Start()
     {
         if (GetComponent<navmeshPatrol>() != null)
         {
@@ -50,16 +52,8 @@ public class ProceduralLeg : MonoBehaviour
             GetComponent<navmeshPatrol>().enabled = true;
         }
         player = GameObject.Find("character");
-
         footIKTargets.Add(targetLeft);
-
-
         stepTargets.Add(stepTargetLeft);
-
-
-
-
-
     }
 
     //time to make step
@@ -72,7 +66,7 @@ public class ProceduralLeg : MonoBehaviour
     }
     public bool attackingPlayer = false;
     float distanceA;
-    //test moving
+    //Funkcja dotarcia wroga do bohatera.
     void moveForward()
     {
         distanceA = Vector3.Distance(player.transform.position, transform.position);

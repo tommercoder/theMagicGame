@@ -29,7 +29,7 @@ public class MarieleQuest : MonoBehaviour
         allnpc = FindObjectsOfType<NPCinteraction>().ToList();
       
     }
-    float shortestDistance;
+
     void Update()
     {
         if(currentMarieleQuest!=null && currentMarieleQuest.title!="")
@@ -43,7 +43,7 @@ public class MarieleQuest : MonoBehaviour
                 {
                     
                     if (GameObject.FindObjectOfType<questPointer>().target != findNearestEnemy())
-                    {
+                    {//wstawia wskażnik na najbliższego wroga
                         GameObject.FindObjectOfType<questPointer>().target = findNearestEnemy();
                         questPointer.SetActive(true);
                     }
@@ -51,10 +51,10 @@ public class MarieleQuest : MonoBehaviour
                 }
                 if (currentMarieleQuest.goal.goalType == goalType.killPEnemyQuest)
                 {
-
                     
                     if (GameObject.FindObjectOfType<questPointer>().target != findNearestPEnemy())
                     {
+                        //wstawia wskażnik na najbliższego wroga
                         GameObject.FindObjectOfType<questPointer>().target = findNearestPEnemy();
                         questPointer.SetActive(true);
                     }
@@ -77,51 +77,6 @@ public class MarieleQuest : MonoBehaviour
             
         }
         
-        Transform findNearestEnemy()
-        {
-
-            
-            Transform tMin = null;
-            float minDist = Mathf.Infinity;
-            Vector3 currentPos = transform.position;
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                float distance = Vector3.Distance(transform.position, enemies[i].transform.position);
-                if (distance < minDist)
-                {
-                    tMin = enemies[i].transform;
-                    minDist = distance;
-
-                    
-                   
-                }
-
-            }
-
-            return tMin;
-        }
-
-        Transform findNearestPEnemy()
-        {
-            Transform tMin = null;
-            float minDist = Mathf.Infinity;
-            Vector3 currentPos = transform.position;
-            for (int i = 0; i < pEnemies.Count; i++)
-            {
-                float distance = Vector3.Distance(transform.position, pEnemies[i].transform.position);
-                if (distance < minDist)
-                {
-                    tMin = pEnemies[i].transform;
-                    minDist = distance;
-
-
-                    
-                }
-
-            }
-            
-            return tMin;
-        }
         
         if(Input.GetKeyDown(KeyCode.P))
         {
@@ -141,6 +96,46 @@ public class MarieleQuest : MonoBehaviour
                 }
             }
         }
+    }
+    //znaleźć najbliższych wrogów
+    Transform findNearestEnemy()
+    {
+        Transform tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = transform.position;
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            float distance = Vector3.Distance(transform.position, enemies[i].transform.position);
+            if (distance < minDist)
+            {
+                tMin = enemies[i].transform;
+                minDist = distance;
+            }
+        }
+
+        return tMin;
+    }
+
+    Transform findNearestPEnemy()
+    {
+        Transform tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = transform.position;
+        for (int i = 0; i < pEnemies.Count; i++)
+        {
+            float distance = Vector3.Distance(transform.position, pEnemies[i].transform.position);
+            if (distance < minDist)
+            {
+                tMin = pEnemies[i].transform;
+                minDist = distance;
+
+
+
+            }
+
+        }
+
+        return tMin;
     }
     public void clearPWindow()
     {
